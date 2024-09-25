@@ -2,13 +2,13 @@
   <div
     class="el-select-dropdown el-popper"
     :class="[{ 'is-multiple': $parent.multiple }, popperClass]"
-    :style="{ minWidth: minWidth }">
+    :style="{ minWidth: minWidth, maxWidth: minWidth }">
     <slot></slot>
   </div>
 </template>
 
 <script type="text/babel">
-  import Popper from 'element-ui/src/utils/vue-popper';
+  import Popper from 'iov-design/src/utils/vue-popper';
 
   export default {
     name: 'ElSelectDropdown',
@@ -35,7 +35,7 @@
       },
 
       visibleArrow: {
-        default: true
+        default: false
       },
 
       appendToBody: {

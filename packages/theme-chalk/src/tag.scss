@@ -1,122 +1,185 @@
 @import "mixins/mixins";
 @import "common/var";
 
-@mixin genTheme($backgroundColorWeight, $borderColorWeight, $fontColorWeight, $hoverColorWeight) {
-  background-color: mix($--tag-primary-color, $--color-white, $backgroundColorWeight);
-  border-color: mix($--tag-primary-color, $--color-white, $borderColorWeight);
-  color: mix($--tag-primary-color, $--color-white, $fontColorWeight);
-
+@mixin genTheme($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+  background-color: $backgroundColor;
+  color: $color;
+  border-color: $plainBorderColor;
   @include when(hit) {
-    border-color: $--tag-primary-color;
+    border-color: $borderColor;
   }
-
   .el-tag__close {
-    color: mix($--tag-primary-color, $--color-white, $fontColorWeight);
+    color: $color;
     &:hover {
-      color: $--color-white;
-      background-color: mix($--tag-primary-color, $--color-white, $hoverColorWeight);
+      color: $hoverColor;
     }
   }
-
+}
+@mixin genThemeInfo($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
   &.el-tag--info {
-    background-color: mix($--tag-info-color, $--color-white, $backgroundColorWeight);
-    border-color: mix($--tag-info-color, $--color-white, $borderColorWeight);
-    color: mix($--tag-info-color, $--color-white, $fontColorWeight);
-
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
     @include when(hit) {
-      border-color: $--tag-info-color;
+      border-color: $borderColor;
     }
-
     .el-tag__close {
-      color: mix($--tag-info-color, $--color-white, $fontColorWeight);
+      color: $color;
       &:hover {
-        color: $--color-white;
-        background-color: mix($--tag-info-color, $--color-white, $hoverColorWeight);
+        color: $hoverColor;
       }
     }
   }
-
+}
+@mixin genThemeSuccess($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
   &.el-tag--success {
-    background-color: mix($--tag-success-color, $--color-white, $backgroundColorWeight);
-    border-color: mix($--tag-success-color, $--color-white, $borderColorWeight);
-    color: mix($--tag-success-color, $--color-white, $fontColorWeight);
-
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
     @include when(hit) {
-      border-color: $--tag-success-color;
+      border-color: $borderColor;
     }
-
     .el-tag__close {
-      color: mix($--tag-success-color, $--color-white, $fontColorWeight);
+      color: $color;
       &:hover {
-        color: $--color-white;
-        background-color: mix($--tag-success-color, $--color-white, $hoverColorWeight);
+        color: $hoverColor;
       }
     }
   }
-
+}
+@mixin genThemeWarning($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
   &.el-tag--warning {
-    background-color: mix($--tag-warning-color, $--color-white, $backgroundColorWeight);
-    border-color: mix($--tag-warning-color, $--color-white, $borderColorWeight);
-    color: mix($--tag-warning-color, $--color-white, $fontColorWeight);
-
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
     @include when(hit) {
-      border-color: $--tag-warning-color;
+      border-color: $borderColor;
     }
-
     .el-tag__close {
-      color: mix($--tag-warning-color, $--color-white, $fontColorWeight);
+      color: $color;
       &:hover {
-        color: $--color-white;
-        background-color: mix($--tag-warning-color, $--color-white, $hoverColorWeight);
+        color: $hoverColor;
       }
     }
   }
-
+}
+@mixin genThemeDanger($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
   &.el-tag--danger {
-    background-color: mix($--tag-danger-color, $--color-white, $backgroundColorWeight);
-    border-color: mix($--tag-danger-color, $--color-white, $borderColorWeight);
-    color: mix($--tag-danger-color, $--color-white, $fontColorWeight);
-
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
     @include when(hit) {
-      border-color: $--tag-danger-color;
+      border-color: $borderColor;
     }
-
     .el-tag__close {
-      color: mix($--tag-danger-color, $--color-white, $fontColorWeight);
+      color: $color;
       &:hover {
-        color: $--color-white;
-        background-color: mix($--tag-danger-color, $--color-white, $hoverColorWeight);
+        color: $hoverColor;
+      }
+    }
+  }
+}
+@mixin genThemeGold($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+  &.el-tag--gold {
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
+    @include when(hit) {
+      border-color: $borderColor;
+    }
+    .el-tag__close {
+      color: $color;
+      &:hover {
+        color: $hoverColor;
+      }
+    }
+  }
+}
+@mixin genThemeBlue($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+  &.el-tag--blue {
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
+    @include when(hit) {
+      border-color: $borderColor;
+    }
+    .el-tag__close {
+      color: $color;
+      &:hover {
+        color: $hoverColor;
+      }
+    }
+  }
+}
+@mixin genThemePurple($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+  &.el-tag--purple {
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
+    @include when(hit) {
+      border-color: $borderColor;
+    }
+    .el-tag__close {
+      color: $color;
+      &:hover {
+        color: $hoverColor;
+      }
+    }
+  }
+}
+@mixin genThemePink($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+  &.el-tag--pink {
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
+    @include when(hit) {
+      border-color: $borderColor;
+    }
+    .el-tag__close {
+      color: $color;
+      &:hover {
+        color: $hoverColor;
       }
     }
   }
 }
 
 @include b(tag) {
-  @include genTheme(10%, 20%, 100%, 100%);
+  @include genTheme($--color-primary-1, $--color-primary-2, $--color-primary-6, $--color-primary-7, $--color-primary-1);
+  @include genThemeInfo($--color-fill-2, $--color-line-2, $--color-text-3, $--color-text-4, $--color-fill-2);
+  @include genThemeSuccess($--color-success-1, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-1);
+  @include genThemeWarning($--color-warning-1, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-1);
+  @include genThemeDanger($--color-danger-1, $--color-danger-2, $--color-danger-6, $--color-danger-7, $--color-danger-1);
+  @include genThemeGold($--color-gold-1, $--color-gold-2, $--color-gold-6, $--color-gold-7, $--color-gold-1);
+  @include genThemeBlue($--color-blue-1, $--color-blue-2, $--color-blue-6, $--color-blue-7, $--color-blue-1);
+  @include genThemePurple($--color-purple-1, $--color-purple-2, $--color-purple-6, $--color-purple-7, $--color-purple-1);
+  @include genThemePink($--color-pink-1, $--color-pink-2, $--color-pink-6, $--color-pink-7, $--color-pink-1);
   display: inline-block;
   height: 32px;
   padding: $--tag-padding;
   line-height: 30px;
   font-size: $--tag-font-size;
-  color: $--tag-primary-color;
+  color: $--color-primary-6;
   border-width: 1px;
   border-style: solid;
+  border-color: transparent;
   border-radius: $--tag-border-radius;
   box-sizing: border-box;
   white-space: nowrap;
 
+  @include e(text) {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+  }
+
   .el-icon-close {
+    margin-left: 4px;
     border-radius: 50%;
     text-align: center;
-    position: relative;
     cursor: pointer;
     font-size: 12px;
-    height: 16px;
-    width: 16px;
-    line-height: 16px;
     vertical-align: middle;
-    top: -1px;
-    right: -5px;
 
     &::before {
       display: block;
@@ -124,40 +187,59 @@
   }
 
   @include m(dark) {
-    @include genTheme(100%, 100%, 0, 80%);
+    @include genTheme($--color-primary-6, $--color-primary-6, $--color-white, $--color-white, $--color-primary-6);
+    @include genThemeInfo($--color-text-3, $--color-text-3, $--color-white, $--color-white, $--color-text-3);
+    @include genThemeSuccess($--color-success-6, $--color-success-6, $--color-white, $--color-white, $--color-success-6);
+    @include genThemeWarning($--color-warning-6, $--color-warning-6, $--color-white, $--color-white, $--color-warning-6);
+    @include genThemeDanger($--color-danger-6, $--color-danger-6, $--color-white, $--color-white, $--color-danger-6);
+    @include genThemeGold($--color-gold-6, $--color-gold-6, $--color-white, $--color-white, $--color-gold-6);
+    @include genThemeBlue($--color-blue-6, $--color-blue-6, $--color-white, $--color-white, $--color-blue-6);
+    @include genThemePurple($--color-purple-6, $--color-purple-6, $--color-white, $--color-white, $--color-purple-6);
+    @include genThemePink($--color-pink-6, $--color-pink-6, $--color-white, $--color-white, $--color-pink-6);
   }
 
   @include m(plain) {
-    @include genTheme(0, 40%, 100%, 100%);
+    @include genTheme($--color-white, $--color-primary-2, $--color-primary-6, $--color-primary-7, $--color-primary-6);
+    @include genThemeInfo($--color-white, $--color-line-2, $--color-text-3, $--color-text-4, $--color-text-3);
+    @include genThemeSuccess($--color-white, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-6);
+    @include genThemeWarning($--color-white, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-6);
+    @include genThemeDanger($--color-white, $--color-danger-2, $--color-danger-6, $--color-danger-7, $--color-danger-6);
+    @include genThemeGold($--color-white, $--color-gold-2, $--color-gold-6, $--color-gold-7, $--color-gold-6);
+    @include genThemeBlue($--color-white, $--color-blue-2, $--color-blue-6, $--color-blue-7, $--color-blue-6);
+    @include genThemePurple($--color-white, $--color-purple-2, $--color-purple-6, $--color-purple-7, $--color-purple-6);
+    @include genThemePink($--color-white, $--color-pink-2, $--color-pink-6, $--color-pink-7, $--color-pink-6);
   }
 
   @include m(medium) {
-    height: 28px;
-    line-height: 26px;
+    font-size: $--tag-font-size;
+    height: 30px;
+    border-radius: $--tag-border-radius;
+    line-height: 28px;
 
     .el-icon-close {
-      transform: scale(.8);
+      font-size: 12px;
     }
   }
 
   @include m(small) {
-    height: 24px;
-    padding: 0 8px;
-    line-height: 22px;
+    font-size: $--tag-small-font-size;
+    height: 26px;
+    border-radius: 2px;
+    line-height: 24px;
 
     .el-icon-close {
-      transform: scale(.8);
+      font-size: 10px;
     }
   }
 
   @include m(mini) {
-    height: 20px;
-    padding: 0 5px;
-    line-height: 19px;
+    font-size: $--tag-small-font-size;
+    height: 22px;
+    border-radius: 2px;
+    line-height: 20px;
 
     .el-icon-close {
-      margin-left: -3px;
-      transform: scale(.7);
+      font-size: 10px;
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-select"
-    :class="[selectSize ? 'el-select--' + selectSize : '']"
+    :class="[selectSize ? 'el-select--' + selectSize : '', selectDisabled ? 'is-disabled' : '']"
     @click.stop="toggleMenu"
     v-clickoutside="handleClose">
     <div
@@ -9,7 +9,7 @@
       v-if="multiple"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
-      <span v-if="collapseTags && selected.length">
+      <span class="el-tag__group" v-if="collapseTags && selected.length">
         <el-tag
           :closable="!selectDisabled"
           :size="collapseTagSize"
@@ -28,7 +28,7 @@
           <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
         </el-tag>
       </span>
-      <transition-group @after-leave="resetInputHeight" v-if="!collapseTags">
+      <transition-group class="el-tag__group" @after-leave="resetInputHeight" v-if="!collapseTags">
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
@@ -94,6 +94,9 @@
       @compositionend="handleComposition"
       @mouseenter.native="inputHovering = true"
       @mouseleave.native="inputHovering = false">
+      <template slot="prefixLabel" v-if="$slots.prefixLabel">
+        <slot name="prefixLabel"></slot>
+      </template>
       <template slot="prefix" v-if="$slots.prefix">
         <slot name="prefix"></slot>
       </template>
@@ -136,21 +139,21 @@
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import Focus from 'element-ui/src/mixins/focus';
-  import Locale from 'element-ui/src/mixins/locale';
-  import ElInput from 'element-ui/packages/input';
+  import Emitter from 'iov-design/src/mixins/emitter';
+  import Focus from 'iov-design/src/mixins/focus';
+  import Locale from 'iov-design/src/mixins/locale';
+  import ElInput from 'iov-design/packages/input';
   import ElSelectMenu from './select-dropdown.vue';
   import ElOption from './option.vue';
-  import ElTag from 'element-ui/packages/tag';
-  import ElScrollbar from 'element-ui/packages/scrollbar';
+  import ElTag from 'iov-design/packages/tag';
+  import ElScrollbar from 'iov-design/packages/scrollbar';
   import debounce from 'throttle-debounce/debounce';
-  import Clickoutside from 'element-ui/src/utils/clickoutside';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import scrollIntoView from 'element-ui/src/utils/scroll-into-view';
-  import { getValueByPath, valueEquals, isIE, isEdge } from 'element-ui/src/utils/util';
+  import Clickoutside from 'iov-design/src/utils/clickoutside';
+  import { addResizeListener, removeResizeListener } from 'iov-design/src/utils/resize-event';
+  import scrollIntoView from 'iov-design/src/utils/scroll-into-view';
+  import { getValueByPath, valueEquals, isIE, isEdge } from 'iov-design/src/utils/util';
   import NavigationMixin from './navigation-mixin';
-  import { isKorean } from 'element-ui/src/utils/shared';
+  import { isKorean } from 'iov-design/src/utils/shared';
 
   export default {
     mixins: [Emitter, Locale, Focus('reference'), NavigationMixin],
@@ -233,9 +236,14 @@
       },
 
       collapseTagSize() {
-        return ['small', 'mini'].indexOf(this.selectSize) > -1
-          ? 'mini'
-          : 'small';
+        const sizeMap = {
+          '': 'medium',
+          large: 'medium',
+          medium: 'small',
+          small: 'mini',
+          mini: 'mini'
+        };
+        return sizeMap[this.selectSize];
       },
       propPlaceholder() {
         return typeof this.placeholder !== 'undefined' ? this.placeholder : this.t('el.select.placeholder');
@@ -771,6 +779,7 @@
       },
 
       deleteTag(event, tag) {
+        if (tag.disabled) return;
         let index = this.selected.indexOf(tag);
         if (index > -1 && !this.selectDisabled) {
           const value = this.value.slice();

@@ -52,9 +52,9 @@
 </template>
 
 <script>
-import { on, off } from 'element-ui/src/utils/dom';
-import { rafThrottle, isFirefox } from 'element-ui/src/utils/util';
-import { PopupManager } from 'element-ui/src/utils/popup';
+import { on, off } from 'iov-design/src/utils/dom';
+import { rafThrottle, isFirefox } from 'iov-design/src/utils/util';
+import { PopupManager } from 'iov-design/src/utils/popup';
 
 const Mode = {
   CONTAIN: {

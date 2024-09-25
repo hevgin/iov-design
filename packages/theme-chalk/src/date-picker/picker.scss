@@ -7,32 +7,6 @@
   display: inline-block;
   text-align: left;
 
-  &.el-input,
-  &.el-input__inner {
-    width: 220px;
-  }
-
-  @include m((monthrange)) {
-    &.el-input,
-    &.el-input__inner {
-      width: 300px;
-    }
-  }
-
-  @include m((daterange, timerange)) {
-    &.el-input,
-    &.el-input__inner {
-      width: 350px;
-    }
-  }
-
-  @include m(datetimerange) {
-    &.el-input,
-    &.el-input__inner {
-      width: 400px;
-    }
-  }
-
   @include m(dates) {
     .el-input__inner {
       text-overflow: ellipsis;
@@ -44,12 +18,26 @@
     cursor: pointer;
   }
 
-  .el-range__icon {
+  &.el-input--prefix {
+    .el-input__inner {
+      padding-left: 12px;
+    }
+  }
+
+  .el-input__prefix {
+    transform: none !important;
+    left: auto;
+    right: 1px;
+  }
+
+  .el-input__icon {
+    padding: 0 12px 0 0;
     font-size: 14px;
-    margin-left: -5px;
-    color: $--color-text-placeholder;
-    float: left;
-    line-height: 32px;
+    color: $--input-icon-color;
+    line-height: 36px;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
 
   .el-range-input {
@@ -60,43 +48,38 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    width: 39%;
-    text-align: center;
-    font-size: $--font-size-base;
-    color: $--color-text-regular;
+    width: 100%;
+    font-size: $--input-font-size;
+    color: $--input-font-color;
 
     &::placeholder {
-      color: $--color-text-placeholder;
+      color: $--input-placeholder-color;
     }
   }
 
   .el-range-separator {
-    display: inline-block;
-    height: 100%;
-    padding: 0 5px;
     margin: 0;
+    padding: 0 12px;
+    display: flex;
+    height: 100%;
     text-align: center;
-    line-height: 32px;
-    font-size: 14px;
-    width: 5%;
-    color: $--color-text-primary;
-  }
-
-  .el-range__close-icon {
-    font-size: 14px;
-    color: $--color-text-placeholder;
-    width: 25px;
-    display: inline-block;
-    float: right;
-    line-height: 32px;
+    font-size: $--input-font-size;
+    align-items: center;
+    color: $--input-font-color;
   }
 }
 
 @include b(range-editor) {
+  position: relative;
+  .el-input-group__prefix-label {
+    padding: 0 12px 0 0;
+    font-size: $--input-font-size;
+  }
+
   &.el-input__inner {
     display: inline-flex;
     align-items: center;
-    padding: 3px 10px;
+    padding: 3px 12px;
   }
 
   .el-range-input {
@@ -104,70 +87,65 @@
   }
 
   @include when(active) {
-    border-color: $--color-primary;
+    border-color: $--input-border-color-hover;
+    box-shadow: $--input-box-shadow;
 
     &:hover {
-      border-color: $--color-primary;
+      border-color: $--input-border-color-hover;
     }
   }
 
   @include m(medium) {
+    .el-input-group__prefix-label {
+      padding: 0;
+      font-size: $--input-medium-font-size;
+    }
+    .el-input__icon {
+      height: $--input-medium-height;
+      line-height: $--input-medium-height;
+    }
     &.el-input__inner {
       height: $--input-medium-height;
     }
-
-    .el-range-separator {
-      line-height: 28px;
-      font-size: $--input-medium-font-size;
-    }
-
+    .el-range-separator,
     .el-range-input {
       font-size: $--input-medium-font-size;
-    }
-
-    .el-range__icon,
-    .el-range__close-icon {
-      line-height: 28px;
     }
   }
 
   @include m(small) {
+    .el-input-group__prefix-label {
+      padding: 0;
+      font-size: $--input-small-font-size;
+    }
+    .el-input__icon {
+      height: $--input-small-height;
+      line-height: $--input-small-height;
+    }
     &.el-input__inner {
       height: $--input-small-height;
     }
-
-    .el-range-separator {
-      line-height: 24px;
-      font-size: $--input-small-font-size;
-    }
-
+    .el-range-separator,
     .el-range-input {
       font-size: $--input-small-font-size;
-    }
-
-    .el-range__icon,
-    .el-range__close-icon {
-      line-height: 24px;
     }
   }
 
   @include m(mini) {
+    .el-input-group__prefix-label {
+      padding: 0;
+      font-size: $--input-mini-font-size;
+    }
+    .el-input__icon {
+      height: $--input-mini-height;
+      line-height: $--input-mini-height;
+    }
     &.el-input__inner {
       height: $--input-mini-height;
     }
-
-    .el-range-separator {
-      line-height: 20px;
-      font-size: $--input-mini-font-size;
-    }
-
+    .el-range-separator,
     .el-range-input {
       font-size: $--input-mini-font-size;
-    }
-
-    .el-range__icon,
-    .el-range__close-icon {
-      line-height: 20px;
     }
   }
 

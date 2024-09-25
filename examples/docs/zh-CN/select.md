@@ -8,36 +8,25 @@
 :::demo `v-model`的值为当前被选中的`el-option`的 value 属性值
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-select v-model="value" placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+        options: [
+          {value: '1',label: '黄金糕'},
+          {value: '2',label: '双皮奶'},
+          {value: '3',label: '蚵仔煎'},
+          {value: '4',label: '龙须面'}
+        ],
         value: ''
       }
     }
@@ -51,38 +40,25 @@
 :::demo 在`el-option`中，设定`disabled`值为 true，即可禁用该选项
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value"
-      :disabled="item.disabled">
-    </el-option>
-  </el-select>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-select v-model="value" placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
+      </el-select>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶',
-          disabled: true
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+        options: [
+          {value: '1',label: '黄金糕'},
+          {value: '2',label: '双皮奶', disabled: true},
+          {value: '3',label: '蚵仔煎'},
+          {value: '4',label: '龙须面'}
+        ],
         value: ''
       }
     }
@@ -98,37 +74,32 @@
 :::demo 为`el-select`设置`disabled`属性，则整个选择器不可用
 ```html
 <template>
-  <el-select v-model="value" disabled placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-select v-model="value1" disabled placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value2" disabled placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+  </el-row>
 </template>
-  
+
 <script>
   export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        value: ''
+        options: [
+          {value: '1',label: '黄金糕'},
+          {value: '2',label: '双皮奶'},
+          {value: '3',label: '蚵仔煎'},
+          {value: '4',label: '龙须面'}
+        ],
+        value1: '',
+        value2: '2'
       }
     }
   }
@@ -143,37 +114,83 @@
 :::demo 为`el-select`设置`clearable`属性，则可将选择器清空。需要注意的是，`clearable`属性仅适用于单选。
 ```html
 <template>
-  <el-select v-model="value" clearable placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-select v-model="value" clearable placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+        options: [
+          {value: '1',label: '黄金糕'},
+          {value: '2',label: '双皮奶'},
+          {value: '3',label: '蚵仔煎'},
+          {value: '4',label: '龙须面'}
+        ],
         value: ''
+      }
+    }
+  }
+</script>
+```
+:::
+
+
+### 标签内嵌
+标签内嵌样式的选择器
+:::demo为`el-select`设置`prefixLabel`和`prefix`属性，即可在选项前添加标签。
+```html
+<template>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-select v-model="value1" placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value2" placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+        <template slot="prefixLabel">分类</template>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value3" placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        <template slot="prefixLabel">分类</template>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value4" placeholder="请选择" size="small" disabled>
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        <template slot="prefixLabel">分类</template>
+      </el-select>
+    </el-col>
+  </el-row>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [
+          {value: '1',label: '黄金糕'},
+          {value: '2',label: '双皮奶'},
+          {value: '3',label: '蚵仔煎'},
+          {value: '4',label: '龙须面'}
+        ],
+        value1: '',
+        value2: '',
+        value3: '',
+        value4: ''
       }
     }
   }
@@ -188,51 +205,31 @@
 :::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组。默认情况下选中值会以 Tag 的形式展现，你也可以设置`collapse-tags`属性将它们合并为一段文字。
 ```html
 <template>
-  <el-select v-model="value1" multiple placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-
-  <el-select
-    v-model="value2"
-    multiple
-    collapse-tags
-    style="margin-left: 20px;"
-    placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-select v-model="value1" multiple placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value2" multiple collapse-tags placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
-        value1: [],
+        options: [
+          {value: '1',label: '黄金糕'},
+          {value: '2',label: '双皮奶', disabled: true},
+          {value: '3',label: '蚵仔煎'},
+          {value: '4',label: '龙须面'}
+        ],
+        value1: ['1','2','3'],
         value2: []
       }
     }
@@ -248,41 +245,30 @@
 :::demo 将自定义的 HTML 模板插入`el-option`的 slot 中即可。
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择">
-    <el-option
-      v-for="item in cities"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-      <span style="float: left">{{ item.label }}</span>
-      <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
-    </el-option>
-  </el-select>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-select v-model="value" placeholder="请选择" size="small">
+        <el-option v-for="item in cities" :key="item.value" :label="item.label" :value="item.value">
+          <span style="float: left">{{ item.label }}</span>
+          <span style="float: right; color: #8492a6; font-size: 12px">{{ item.value }}</span>
+        </el-option>
+      </el-select>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        cities: [{
-          value: 'Beijing',
-          label: '北京'
-        }, {
-          value: 'Shanghai',
-          label: '上海'
-        }, {
-          value: 'Nanjing',
-          label: '南京'
-        }, {
-          value: 'Chengdu',
-          label: '成都'
-        }, {
-          value: 'Shenzhen',
-          label: '深圳'
-        }, {
-          value: 'Guangzhou',
-          label: '广州'
-        }],
+        cities: [
+          { label: '上海', value: 'Shanghai'},
+          { label: '北京', value: 'Beijing'},
+          { label: '成都', value: 'Chengdu' },
+          { label: '深圳', value: 'Shenzhen' },
+          { label: '广州', value: 'Guangzhou' },
+          { label: '大连', value: 'Dalian'}
+        ],
         value: ''
       }
     }
@@ -298,51 +284,48 @@
 :::demo 使用`el-option-group`对备选项进行分组，它的`label`属性为分组名
 ```html
 <template>
-  <el-select v-model="value" placeholder="请选择">
-    <el-option-group
-      v-for="group in options"
-      :key="group.label"
-      :label="group.label">
-      <el-option
-        v-for="item in group.options"
-        :key="item.value"
-        :label="item.label"
-        :value="item.value">
-      </el-option>
-    </el-option-group>
-  </el-select>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-select v-model="value1" placeholder="请选择" size="small">
+          <el-option-group v-for="group in options"  :key="group.label" :label="group.label">
+            <el-option v-for="item in group.options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          </el-option-group>
+        </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value2" placeholder="请选择" size="small" multiple>
+          <el-option-group v-for="group in options"  :key="group.label" :label="group.label">
+            <el-option v-for="item in group.options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+          </el-option-group>
+        </el-select>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        options: [{
-          label: '热门城市',
-          options: [{
-            value: 'Shanghai',
-            label: '上海'
-          }, {
-            value: 'Beijing',
-            label: '北京'
-          }]
-        }, {
-          label: '城市名',
-          options: [{
-            value: 'Chengdu',
-            label: '成都'
-          }, {
-            value: 'Shenzhen',
-            label: '深圳'
-          }, {
-            value: 'Guangzhou',
-            label: '广州'
-          }, {
-            value: 'Dalian',
-            label: '大连'
-          }]
-        }],
-        value: ''
+        options: [
+          {
+            label: '热门城市',
+            options: [
+              { label: '上海', value: 'Shanghai'},
+              { label: '北京', value: 'Beijing'}
+            ]
+          },
+          {
+            label: '城市名',
+            options: [
+              { label: '成都', value: 'Chengdu' },
+              { label: '深圳', value: 'Shenzhen' },
+              { label: '广州', value: 'Guangzhou' },
+              { label: '大连', value: 'Dalian'}
+            ]
+          }
+        ],
+        value1: '',
+        value2: ''
       }
     }
   }
@@ -357,36 +340,25 @@
 :::demo 为`el-select`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有`label`属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个`filter-method`来实现。`filter-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
 ```html
 <template>
-  <el-select v-model="value" filterable placeholder="请选择">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-select v-model="value" placeholder="请选择" size="small" filterable>
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        options: [{
-          value: '选项1',
-          label: '黄金糕'
-        }, {
-          value: '选项2',
-          label: '双皮奶'
-        }, {
-          value: '选项3',
-          label: '蚵仔煎'
-        }, {
-          value: '选项4',
-          label: '龙须面'
-        }, {
-          value: '选项5',
-          label: '北京烤鸭'
-        }],
+        options: [
+          {value: '1',label: '黄金糕'},
+          {value: '2',label: '双皮奶'},
+          {value: '3',label: '蚵仔煎'},
+          {value: '4',label: '龙须面'}
+        ],
         value: ''
       }
     }
@@ -401,22 +373,13 @@
 :::demo 为了启用远程搜索，需要将`filterable`和`remote`设置为`true`，同时传入一个`remote-method`。`remote-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。需要注意的是，如果`el-option`是通过`v-for`指令渲染出来的，此时需要为`el-option`添加`key`属性，且其值需具有唯一性，比如此例中的`item.value`。
 ```html
 <template>
-  <el-select
-    v-model="value"
-    multiple
-    filterable
-    remote
-    reserve-keyword
-    placeholder="请输入关键词"
-    :remote-method="remoteMethod"
-    :loading="loading">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-select v-model="value" multiple filterable remote reserve-keyword placeholder="请输入关键词" :remote-method="remoteMethod" :loading="loading" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -477,20 +440,13 @@
 :::demo 使用`allow-create`属性即可通过在输入框中输入文字来创建新的条目。注意此时`filterable`必须为真。本例还使用了`default-first-option`属性，在该属性打开的情况下，按下回车就可以选中当前选项列表中的第一个选项，无需使用鼠标或键盘方向键进行定位。
 ```html
 <template>
-  <el-select
-    v-model="value"
-    multiple
-    filterable
-    allow-create
-    default-first-option
-    placeholder="请选择文章标签">
-    <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
+<el-row :gutter="12">
+  <el-col :span="12">
+    <el-select v-model="value" multiple filterable allow-create default-first-option placeholder="请选择文章标签" size="small">
+      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+    </el-select>
+  </el-col>
+</el-row>
 </template>
 
 <script>
@@ -564,6 +520,7 @@
 |---------|---------|
 |    —    | Option 组件列表 |
 | prefix  | Select 组件头部内容 |
+| prefixLabel  | Select 组件头部标签 |
 | empty | 无选项时的列表 |
 
 ### Option Group Attributes

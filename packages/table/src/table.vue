@@ -4,6 +4,7 @@
       'el-table--fit': fit,
       'el-table--striped': stripe,
       'el-table--border': border || isGroup,
+      'el-table--outer-border': isGroup ? false : outerBorder,
       'el-table--hidden': isHidden,
       'el-table--group': isGroup,
       'el-table--fluid-height': maxHeight,
@@ -213,12 +214,12 @@
 </template>
 
 <script type="text/babel">
-  import ElCheckbox from 'element-ui/packages/checkbox';
+  import ElCheckbox from 'iov-design/packages/checkbox';
   import { debounce, throttle } from 'throttle-debounce';
-  import { addResizeListener, removeResizeListener } from 'element-ui/src/utils/resize-event';
-  import Mousewheel from 'element-ui/src/directives/mousewheel';
-  import Locale from 'element-ui/src/mixins/locale';
-  import Migrating from 'element-ui/src/mixins/migrating';
+  import { addResizeListener, removeResizeListener } from 'iov-design/src/utils/resize-event';
+  import Mousewheel from 'iov-design/src/directives/mousewheel';
+  import Locale from 'iov-design/src/mixins/locale';
+  import Migrating from 'iov-design/src/mixins/migrating';
   import { createStore, mapStates } from './store/helper';
   import TableLayout from './table-layout';
   import TableBody from './table-body';
@@ -261,6 +262,8 @@
       stripe: Boolean,
 
       border: Boolean,
+
+      outerBorder: Boolean,
 
       rowKey: [String, Function],
 

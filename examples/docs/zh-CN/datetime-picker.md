@@ -11,33 +11,37 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 :::demo 通过设置`type`属性为`datetime`，即可在同一个选择器里同时进行日期和时间的选择。快捷选项的使用方法与 Date Picker 相同。
 ```html
 <template>
-  <div class="block">
-    <span class="demonstration">默认</span>
-    <el-date-picker
-      v-model="value1"
-      type="datetime"
-      placeholder="选择日期时间">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">带快捷选项</span>
-    <el-date-picker
-      v-model="value2"
-      type="datetime"
-      placeholder="选择日期时间"
-      align="right"
-      :picker-options="pickerOptions">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">设置默认时间</span>
-    <el-date-picker
-      v-model="value3"
-      type="datetime"
-      placeholder="选择日期时间"
-      default-time="12:00:00">
-    </el-date-picker>
-  </div>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-date-picker
+        v-model="value1"
+        type="datetime"
+        placeholder="选择日期时间">
+        <template slot="prefixLabel">选择时间</template>
+      </el-date-picker>
+    </el-col>
+
+    <el-col :span="12">
+      <el-date-picker
+        v-model="value2"
+        type="datetime"
+        placeholder="选择日期时间"
+        align="right"
+        :picker-options="pickerOptions">
+        <template slot="prefixLabel">快捷选项</template>
+      </el-date-picker>
+    </el-col>
+
+    <el-col :span="12">
+      <el-date-picker
+        v-model="value3"
+        type="datetime"
+        placeholder="选择日期时间"
+        default-time="12:00:00">
+        <template slot="prefixLabel">默认时间</template>
+      </el-date-picker>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -158,6 +162,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
       start-placeholder="开始日期"
       end-placeholder="结束日期"
       :default-time="['12:00:00']">
+      <template slot="prefixLabel">选择时间</template>
     </el-date-picker>
   </div>
   <div class="block">

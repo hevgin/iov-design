@@ -28,14 +28,14 @@
       </transition>
       <el-tooltip effect="dark" :content="langConfig['tooltip-text']" placement="right">
         <transition name="text-slide">
-          <el-button
+          <a
             v-show="hovering || isExpanded"
             size="small"
             type="text"
             class="control-button"
             @click.stop="goCodepen">
             {{ langConfig['button-text'] }}
-          </el-button>
+          </a>
         </transition>
       </el-tooltip>
     </div>
@@ -131,7 +131,7 @@
       color: #d3dce6;
       cursor: pointer;
       position: relative;
-    
+
       &.is-fixed {
         position: fixed;
         bottom: 0;
@@ -166,15 +166,15 @@
         opacity: 0;
         transform: translateX(10px);
       }
-      
+
       .control-button {
         line-height: 26px;
         position: absolute;
-        top: 0;
+        top: 10px;
         right: 0;
         font-size: 14px;
-        padding-left: 5px;
-        padding-right: 25px;
+        padding-left: 12px;
+        padding-right: 20px;
       }
     }
   }

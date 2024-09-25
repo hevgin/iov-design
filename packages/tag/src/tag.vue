@@ -45,7 +45,7 @@
           class={ classes }
           style={{ backgroundColor: this.color }}
           on-click={ this.handleClick }>
-          { this.$slots.default }
+          <span class="el-tag__text">{ this.$slots.default }</span>
           {
             this.closable && <i class="el-tag__close el-icon-close" on-click={ this.handleClose }></i>
           }

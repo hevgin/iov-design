@@ -1,8 +1,8 @@
 {
-  "name": "element-ui",
+  "name": "iov-design",
   "version": "2.15.14",
   "description": "A Component Library for Vue.js.",
-  "main": "lib/element-ui.common.js",
+  "main": "lib/iov-design.common.js",
   "files": [
     "lib",
     "src",
@@ -18,7 +18,7 @@
     "build:utils": "cross-env BABEL_ENV=utils babel src --out-dir lib --ignore src/index.js",
     "build:umd": "node build/bin/build-locale.js",
     "clean": "rimraf lib && rimraf packages/*/lib && rimraf test/**/coverage",
-    "deploy:build": "npm run build:file && cross-env NODE_ENV=production webpack --config build/webpack.demo.js && echo element.eleme.io>>examples/element-ui/CNAME",
+    "deploy:build": "npm run build:file && cross-env NODE_ENV=production webpack --config build/webpack.demo.js && echo element.eleme.io>>examples/iov-design/CNAME",
     "deploy:extension": "cross-env NODE_ENV=production webpack --config build/webpack.extension.js",
     "dev:extension": "rimraf examples/extension/dist && cross-env NODE_ENV=development webpack --watch --config build/webpack.extension.js",
     "dev": "npm run bootstrap && npm run build:file && cross-env NODE_ENV=development webpack-dev-server --config build/webpack.demo.js & node build/bin/template.js",
@@ -37,7 +37,7 @@
     },
     {
       "domain": "element-theme",
-      "public": "examples/element-ui",
+      "public": "examples/iov-design",
       "build": [
         "yarn",
         "npm run deploy:build"
@@ -62,6 +62,7 @@
   "style": "lib/theme-chalk/index.css",
   "web-types": "./web-types.json",
   "dependencies": {
+    "@arco-design/color": "^0.4.0",
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
     "deepmerge": "^1.2.0",

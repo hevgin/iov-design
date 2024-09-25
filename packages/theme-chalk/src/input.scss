@@ -3,7 +3,7 @@
 
 @include b(textarea) {
   position: relative;
-  display: inline-block;
+  display: block;
   width: 100%;
   vertical-align: bottom;
   font-size: $--font-size-base;
@@ -11,7 +11,7 @@
   @include e(inner) {
     display: block;
     resize: vertical;
-    padding: 5px 15px;
+    padding: 5px 12px;
     line-height: 1.5;
     box-sizing: border-box;
     width: 100%;
@@ -34,11 +34,12 @@
     &:focus {
       outline: none;
       border-color: $--input-focus-border;
+      box-shadow: $--input-box-shadow;
     }
   }
 
   & .el-input__count {
-    color: $--color-info;
+    color: $--color-text-1;
     background: $--color-white;
     position: absolute;
     font-size: 12px;
@@ -73,7 +74,7 @@
 @include b(input) {
   position: relative;
   font-size: $--font-size-base;
-  display: inline-block;
+  display: block;
   width: 100%;
   @include scroll-bar;
 
@@ -111,12 +112,12 @@
     border: $--input-border;
     box-sizing: border-box;
     color: $--input-font-color;
-    display: inline-block;
+    display: block;
     font-size: inherit;
     height: $--input-height;
     line-height: $--input-height;
     outline: none;
-    padding: 0 15px;
+    padding: 0 12px;
     transition: $--border-transition-base;
     width: 100%;
 
@@ -135,18 +136,26 @@
     &:focus {
       outline: none;
       border-color: $--input-focus-border;
+      box-shadow: $--input-box-shadow;
     }
   }
 
   @include e(suffix) {
+    padding-left: 8px;
     position: absolute;
-    height: 100%;
-    right: 5px;
-    top: 0;
+    height: calc(100% - 2px);
+    right: 1px;
+    top: 1px;
     text-align: center;
     color: $--input-icon-color;
-    transition: all .3s;
+    border-radius: $--input-border-radius;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    background: $--input-background-color;
     pointer-events: none;
+    z-index: 2;
+    display: flex;
+    align-items: center;
   }
 
   @include e(suffix-inner) {
@@ -154,20 +163,26 @@
   }
 
   @include e(prefix) {
+    padding-left: 8px;
     position: absolute;
-    height: 100%;
-    left: 5px;
-    top: 0;
+    height: calc(100% - 2px);
+    left: 1px;
+    top: 1px;
     text-align: center;
     color: $--input-icon-color;
-    transition: all .3s;
+    border-radius: $--input-border-radius;
+    // background: $--input-background-color;
+    z-index: 2;
+    display: flex;
+    align-items: center;
   }
 
   @include e(icon) {
+    padding-right: 8px;
     height: 100%;
-    width: 25px;
+    width: auto;
+    font-size: 14px;
     text-align: center;
-    transition: all .3s;
     line-height: $--input-height;
 
     &:after {
@@ -194,7 +209,7 @@
     .el-input__inner {
       background-color: $--input-disabled-fill;
       border-color: $--input-disabled-border;
-      color: $--input-disabled-color;
+      color: $--input-color-disabled;
       cursor: not-allowed;
 
       &::placeholder {
@@ -204,6 +219,12 @@
 
     .el-input__icon {
       cursor: not-allowed;
+    }
+    .el-input__prefix,
+    .el-input__suffix,
+    .el-input-group__prefix-label,
+    .el-input-group__suffix-label {
+      background-color: $--input-disabled-fill;
     }
   }
 
@@ -270,84 +291,164 @@
 }
 
 @include b(input-group) {
-  line-height: normal;
-  display: inline-table;
+  display: flex;
+  align-items: stretch;
   width: 100%;
-  border-collapse: separate;
-  border-spacing:0;
 
   > .el-input__inner {
-    vertical-align: middle;
-    display: table-cell;
+    display: block;
+    // border-radius: 0;
   }
-
-  @include e((append, prepend)) {
-    background-color: $--background-color-base;
-    color: $--color-info;
-    vertical-align: middle;
-    display: table-cell;
-    position: relative;
-    border: $--border-base;
-    border-radius: $--input-border-radius;
-    padding: 0 20px;
-    width: 1px;
-    white-space: nowrap;
-
+  .el-input__inner {
+    &:hover {
+      z-index: 1;
+    }
     &:focus {
-      outline: none;
-    }
-
-    .el-select,
-    .el-button {
-      display: inline-block;
-      margin: -10px -20px;
-    }
-
-    button.el-button,
-    div.el-select .el-input__inner,
-    div.el-select:hover .el-input__inner {
-      border-color: transparent;
-      background-color: transparent;
-      color: inherit;
-      border-top: 0;
-      border-bottom: 0;
-    }
-
-    .el-button,
-    .el-input {
-      font-size: inherit;
+      z-index: 2;
     }
   }
-
-  @include e(prepend) {
-    border-right: 0;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-
-  @include e(append) {
-    border-left: 0;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  @include m(prepend) {
-    .el-input__inner {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-    .el-select .el-input.is-focus .el-input__inner {
-      border-color: transparent;
-    }
-  }
-
   @include m(append) {
     .el-input__inner {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
-    .el-select .el-input.is-focus .el-input__inner {
-      border-color: transparent;
+  }
+  @include m(prepend) {
+    .el-input__inner {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+  @include m((prefix-label, suffix-label)) {
+    color: $--input-font-color;
+    background-color: $--input-background-color;
+    background-image: none;
+    border: $--input-border;
+    border-radius: $--input-border-radius;
+    transition: $--border-transition-base;
+    &:hover {
+      border-color: $--input-hover-border;
+      &.is-disabled {
+        border-color: $--input-disabled-border;
+      }
+    }
+    &:focus {
+      outline: none;
+    }
+    &.is-focus {
+      outline: none;
+      border-color: $--input-focus-border;
+      box-shadow: $--input-box-shadow;
+    }
+    &.is-disabled {
+      background-color: $--input-disabled-fill;
+    }
+    .el-input__inner {
+      margin: 0 auto;
+      border: 0 none;
+      box-shadow: none;
+      padding-right: 8px;
+    }
+    .el-input-group__prepend {
+      border: 0 none;
+      border-right: 1px solid $--input-border-color !important;
+    }
+    .el-input-group__append {
+      border: 0 none;
+      border-left: 1px solid $--input-border-color !important;
+    }
+  }
+  @include e((prefix-label, suffix-label)) {
+    color: $--color-text-3;
+    position: relative;
+    padding: 0 0 0 12px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    border-radius: $--input-border-radius;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  @include e(suffix-label) {
+    padding: 0 12px 0 0;
+    display: inline;
+  }
+
+  @include e((append, prepend)) {
+    background-color: $--background-color-base;
+    color: $--color-info;
+    display: block;
+    position: relative;
+    border: $--border-base;
+    border-radius: $--input-border-radius;
+    padding: 0 12px;
+    white-space: nowrap;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+
+    &:focus {
+      outline: none;
+      border-color: $--input-focus-border;
+      box-shadow: $--input-box-shadow;
+    }
+
+    &.has-select,
+    &.has-button {
+      border: 0 none;
+      padding: 0;
+    }
+    &.has-button {
+      z-index: 2;
+    }
+    .is-focus {
+      .el-input__inner {
+        background: #fff;
+        z-index: 2;
+      }
+    }
+  }
+
+  @include e(prepend) {
+    margin-right: -1px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    .el-button {
+      position: relative;
+      border-radius: $--input-border-radius;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    .el-input__inner {
+      padding: 0 12px;
+      position: relative;
+      background: $--color-fill-1;
+      border-radius: $--input-border-radius;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+
+  @include e(append) {
+    margin-left: -1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    .el-button {
+      position: relative;
+      border-radius: $--input-border-radius;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+    .el-input__inner {
+      padding: 0 12px;
+      position: relative;
+      border-radius: $--input-border-radius;
+      background: $--color-fill-1;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
   }
 }

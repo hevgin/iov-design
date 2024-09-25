@@ -157,9 +157,9 @@
         }
       }
 
-      & + .el-checkbox__label {
-        color: $--checkbox-checked-font-color;
-      }
+      // & + .el-checkbox__label {
+      //   color: $--checkbox-checked-font-color;
+      // }
     }
     @include when(focus) { /*focus时 视觉上区分*/
       .el-checkbox__inner {
@@ -213,9 +213,9 @@
       border-left: 0;
       border-top: 0;
       height: 7px;
-      left: 4px;
+      left: 6px;
       position: absolute;
-      top: 1px;
+      top: 2px;
       transform: rotate(45deg) scaleY(0);
       width: 3px;
       transition: transform .15s ease-in .05s;
@@ -235,8 +235,8 @@
 
   @include e(label) {
     display: inline-block;
-    padding-left: 10px;
-    line-height: 19px;
+    padding-left: 8px;
+    line-height: 1;
     font-size: $--checkbox-font-size;
   }
 
@@ -269,7 +269,7 @@
     transition: $--all-transition;
     @include utils-user-select(none);
 
-    @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, 0);
+    @include button-size($--button-height, $--button-padding-horizontal, $--button-font-size, 0);
 
     &:hover {
       color: $--color-primary;
@@ -339,17 +339,17 @@
   }
   @include m(medium) {
     .el-checkbox-button__inner {
-      @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, 0);
+      @include button-size($--button-medium-height, $--button-medium-padding-horizontal, $--button-medium-font-size, 0);
     }
   }
   @include m(small) {
     .el-checkbox-button__inner {
-      @include button-size($--button-small-padding-vertical, $--button-small-padding-horizontal, $--button-small-font-size, 0);
+      @include button-size($--button-small-height, $--button-small-padding-horizontal, $--button-small-font-size, 0);
     }
   }
   @include m(mini) {
     .el-checkbox-button__inner {
-      @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, 0);
+      @include button-size($--button-mini-height, $--button-mini-padding-horizontal, $--button-mini-font-size, 0);
     }
   }
 }

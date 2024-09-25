@@ -1,8 +1,8 @@
-import { arrayFindIndex } from 'element-ui/src/utils/util';
+import { arrayFindIndex } from 'iov-design/src/utils/util';
 import { getCell, getColumnByCell, getRowIdentity, objectEquals } from './util';
-import { getStyle, hasClass, removeClass, addClass } from 'element-ui/src/utils/dom';
-import ElCheckbox from 'element-ui/packages/checkbox';
-import ElTooltip from 'element-ui/packages/tooltip';
+import { getStyle, hasClass, removeClass, addClass } from 'iov-design/src/utils/dom';
+import ElCheckbox from 'iov-design/packages/checkbox';
+import ElTooltip from 'iov-design/packages/tooltip';
 import debounce from 'throttle-debounce/debounce';
 import LayoutObserver from './layout-observer';
 import { mapStates } from './store/helper';

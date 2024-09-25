@@ -1,13 +1,21 @@
 .demo-input {
-  .el-select .el-input {
-    width: 130px;
+  .sub-title {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #8492a6;
   }
-  .el-input {
-    width: 180px;
+  .el-col {
+    margin-bottom: 20px;
   }
-  .el-textarea {
-    width: 414px;
-  }
+
+
+
+
+
+
+
+
+
   .el-input-group {
     width: 100%;
   }
@@ -23,11 +31,6 @@
   .demo-autocomplete {
     text-align: center;
 
-    .sub-title {
-      margin-bottom: 10px;
-      font-size: 14px;
-      color: #8492a6;
-    }
 
     .el-col:not(:last-child) {
       border-right: 1px solid rgba(224, 230, 237, 0.5);

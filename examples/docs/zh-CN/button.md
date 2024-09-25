@@ -18,12 +18,30 @@
 </el-row>
 
 <el-row>
-  <el-button plain>朴素按钮</el-button>
+  <el-button plain>实线按钮</el-button>
   <el-button type="primary" plain>主要按钮</el-button>
   <el-button type="success" plain>成功按钮</el-button>
   <el-button type="info" plain>信息按钮</el-button>
   <el-button type="warning" plain>警告按钮</el-button>
   <el-button type="danger" plain>危险按钮</el-button>
+</el-row>
+
+<el-row>
+  <el-button dashed>虚线按钮</el-button>
+  <el-button type="primary" dashed>主要按钮</el-button>
+  <el-button type="success" dashed>成功按钮</el-button>
+  <el-button type="info" dashed>信息按钮</el-button>
+  <el-button type="warning" dashed>警告按钮</el-button>
+  <el-button type="danger" dashed>危险按钮</el-button>
+</el-row>
+
+<el-row>
+  <el-button ghost>幽灵按钮</el-button>
+  <el-button type="primary" ghost>主要按钮</el-button>
+  <el-button type="success" ghost>成功按钮</el-button>
+  <el-button type="info" ghost>信息按钮</el-button>
+  <el-button type="warning" ghost>警告按钮</el-button>
+  <el-button type="danger" ghost>危险按钮</el-button>
 </el-row>
 
 <el-row>
@@ -53,25 +71,88 @@
 :::demo 你可以使用`disabled`属性来定义按钮是否可用，它接受一个`Boolean`值。
 
 ```html
+
 <el-row>
   <el-button disabled>默认按钮</el-button>
-  <el-button type="primary" disabled>主要按钮</el-button>
-  <el-button type="success" disabled>成功按钮</el-button>
-  <el-button type="info" disabled>信息按钮</el-button>
-  <el-button type="warning" disabled>警告按钮</el-button>
-  <el-button type="danger" disabled>危险按钮</el-button>
+  <el-button disabled type="primary">主要按钮</el-button>
+  <el-button disabled type="success">成功按钮</el-button>
+  <el-button disabled type="info">信息按钮</el-button>
+  <el-button disabled type="warning">警告按钮</el-button>
+  <el-button disabled type="danger">危险按钮</el-button>
 </el-row>
 
 <el-row>
-  <el-button plain disabled>朴素按钮</el-button>
-  <el-button type="primary" plain disabled>主要按钮</el-button>
-  <el-button type="success" plain disabled>成功按钮</el-button>
-  <el-button type="info" plain disabled>信息按钮</el-button>
-  <el-button type="warning" plain disabled>警告按钮</el-button>
-  <el-button type="danger" plain disabled>危险按钮</el-button>
+  <el-button disabled plain>实线按钮</el-button>
+  <el-button disabled type="primary" plain>主要按钮</el-button>
+  <el-button disabled type="success" plain>成功按钮</el-button>
+  <el-button disabled type="info" plain>信息按钮</el-button>
+  <el-button disabled type="warning" plain>警告按钮</el-button>
+  <el-button disabled type="danger" plain>危险按钮</el-button>
+</el-row>
+
+<el-row>
+  <el-button disabled dashed>虚线按钮</el-button>
+  <el-button disabled type="primary" dashed>主要按钮</el-button>
+  <el-button disabled type="success" dashed>成功按钮</el-button>
+  <el-button disabled type="info" dashed>信息按钮</el-button>
+  <el-button disabled type="warning" dashed>警告按钮</el-button>
+  <el-button disabled type="danger" dashed>危险按钮</el-button>
+</el-row>
+
+<el-row>
+  <el-button disabled ghost>幽灵按钮</el-button>
+  <el-button disabled type="primary" ghost>主要按钮</el-button>
+  <el-button disabled type="success" ghost>成功按钮</el-button>
+  <el-button disabled type="info" ghost>信息按钮</el-button>
+  <el-button disabled type="warning" ghost>警告按钮</el-button>
+  <el-button disabled type="danger" ghost>危险按钮</el-button>
+</el-row>
+
+<el-row>
+  <el-button disabled round>圆角按钮</el-button>
+  <el-button disabled type="primary" round>主要按钮</el-button>
+  <el-button disabled type="success" round>成功按钮</el-button>
+  <el-button disabled type="info" round>信息按钮</el-button>
+  <el-button disabled type="warning" round>警告按钮</el-button>
+  <el-button disabled type="danger" round>危险按钮</el-button>
+</el-row>
+
+<el-row>
+  <el-button disabled icon="el-icon-search" circle></el-button>
+  <el-button disabled type="primary" icon="el-icon-edit" circle></el-button>
+  <el-button disabled type="success" icon="el-icon-check" circle></el-button>
+  <el-button disabled type="info" icon="el-icon-message" circle></el-button>
+  <el-button disabled type="warning" icon="el-icon-star-off" circle></el-button>
+  <el-button disabled type="danger" icon="el-icon-delete" circle></el-button>
 </el-row>
 ```
 :::
+
+### Block 按钮
+
+Block 按钮在宽度上充满其所在的父容器（无 padding 和 margin 值。）
+
+:::demo
+```html
+<el-row>
+  <el-button block>blcok按钮</el-button>
+</el-row>
+<el-row>
+  <el-button block type="primary">blcok按钮</el-button>
+</el-row>
+<el-row>
+  <el-button block type="success">blcok按钮</el-button>
+</el-row>
+<el-row>
+  <el-button block type="warning">blcok按钮</el-button>
+</el-row>
+<el-row>
+  <el-button block type="danger">blcok按钮</el-button>
+</el-row>
+<el-row>
+  <el-button block type="text">blcok按钮</el-button>
+</el-row>
+```
 
 ### 文字按钮
 
@@ -79,8 +160,18 @@
 
 :::demo
 ```html
-<el-button type="text">文字按钮</el-button>
-<el-button type="text" disabled>文字按钮</el-button>
+<el-row>
+  <el-button type="text">文字按钮</el-button>
+  <el-button type="text" size="medium">文字按钮</el-button>
+  <el-button type="text" size="small">文字按钮</el-button>
+  <el-button type="text" size="mini">文字按钮</el-button>
+</el-row>
+<el-row>
+  <el-button disabled type="text">文字按钮</el-button>
+  <el-button disabled type="text" size="medium">文字按钮</el-button>
+  <el-button disabled type="text" size="small">文字按钮</el-button>
+  <el-button disabled type="text" size="mini">文字按钮</el-button>
+</el-row>
 ```
 :::
 
@@ -148,6 +239,22 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
   <el-button size="small" round>小型按钮</el-button>
   <el-button size="mini" round>超小按钮</el-button>
 </el-row>
+<el-row>
+  <el-button icon="el-icon-search" circle></el-button>
+  <el-button type="primary" icon="el-icon-edit" circle size="medium"></el-button>
+  <el-button type="success" icon="el-icon-check" circle size="small"></el-button>
+  <el-button type="info" icon="el-icon-message" circle size="small"></el-button>
+  <el-button type="warning" icon="el-icon-star-off" circle size="mini"></el-button>
+  <el-button type="danger" icon="el-icon-delete" circle size="mini"></el-button>
+</el-row>
+<el-row>
+  <el-button icon="el-icon-search"></el-button>
+  <el-button type="primary" icon="el-icon-edit" size="medium"></el-button>
+  <el-button type="success" icon="el-icon-check" size="small"></el-button>
+  <el-button type="info" icon="el-icon-message" size="small"></el-button>
+  <el-button type="warning" icon="el-icon-star-off" size="mini"></el-button>
+  <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+</el-row>
 ```
 :::
 
@@ -159,6 +266,9 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
 | plain     | 是否朴素按钮   | boolean    | — | false   |
 | round     | 是否圆角按钮   | boolean    | — | false   |
 | circle     | 是否圆形按钮   | boolean    | — | false   |
+| ghost     | 是否幽灵按钮   | boolean    | — | false   |
+| dashed     | 是否虚线按钮   | boolean    | — | false   |
+| block     | 是否block按钮   | boolean    | — | false   |
 | loading     | 是否加载中状态   | boolean    | — | false   |
 | disabled  | 是否禁用状态    | boolean   | —   | false   |
 | icon  | 图标类名 | string   |  —  |  —  |

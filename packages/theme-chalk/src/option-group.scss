@@ -2,7 +2,7 @@
 @import "common/var";
 
 @include b(select-group) {
-  $gap: 20px;
+  $gap: 12px;
 
   margin: 0;
   padding: 0;
@@ -13,20 +13,20 @@
     margin: 0;
     padding: 0;
 
-    &:not(:last-of-type) {
-      padding-bottom: 24px;
+    // &:not(:last-of-type) {
+    //   padding-bottom: 24px;
 
-      &::after {
-        content: '';
-        position: absolute;
-        display: block;
-        left: $gap;
-        right: $gap;
-        bottom: 12px;
-        height: 1px;
-        background: $--border-color-light;
-      }
-    }
+    //   &::after {
+    //     content: '';
+    //     position: absolute;
+    //     display: block;
+    //     left: $gap;
+    //     right: $gap;
+    //     bottom: 12px;
+    //     height: 1px;
+    //     background: $--border-color-light;
+    //   }
+    // }
   }
 
   @include e(title) {

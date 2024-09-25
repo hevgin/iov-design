@@ -12,6 +12,10 @@
 <el-tag type="info">标签三</el-tag>
 <el-tag type="warning">标签四</el-tag>
 <el-tag type="danger">标签五</el-tag>
+<el-tag type="gold">标签六</el-tag>
+<el-tag type="blue">标签七</el-tag>
+<el-tag type="purple">标签八</el-tag>
+<el-tag type="pink">标签九</el-tag>
 ```
 :::
 

@@ -10,30 +10,20 @@
   background-color: $--select-dropdown-background;
   box-shadow: $--select-dropdown-shadow;
   box-sizing: border-box;
-  margin: 5px 0;
+  margin: 4px 0;
 
   @include when(multiple) {
-    & .el-select-dropdown__item {
-      padding-right: 40px;
+    & .el-select-dropdown__item
+    .el-checkbox {
+      display: block;
+      font-size: $--font-size-small;
     }
-    & .el-select-dropdown__item.selected {
+    .el-checkbox__label {
+      font-size: $--font-size-small;
+    }
+    &.selected {
       color: $--select-option-selected-font-color;
-      background-color: $--select-dropdown-background;
-
-      &.hover {
-        background-color: $--select-option-hover-background;
-      }
-
-      &::after {
-        position: absolute;
-        right: 20px;
-        font-family: 'element-icons';
-        content: "\e6da";
-        font-size: 12px;
-        font-weight: bold;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
+      background-color: $--select-option-selected-background;
     }
   }
 

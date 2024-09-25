@@ -10,14 +10,15 @@
       'hover': hover
     }">
     <slot>
-      <span>{{ currentLabel }}</span>
+      <el-checkbox v-if="this.select.multiple" :disabled="disabled" v-model="checked">{{ currentLabel }}</el-checkbox>
+      <span v-else>{{ currentLabel }}</span>
     </slot>
   </li>
 </template>
 
 <script type="text/babel">
-  import Emitter from 'element-ui/src/mixins/emitter';
-  import { getValueByPath, escapeRegexpString } from 'element-ui/src/utils/util';
+  import Emitter from 'iov-design/src/mixins/emitter';
+  import { getValueByPath, escapeRegexpString } from 'iov-design/src/utils/util';
 
   export default {
     mixins: [Emitter],
@@ -46,7 +47,8 @@
         groupDisabled: false,
         visible: true,
         hitState: false,
-        hover: false
+        hover: false,
+        checked: false
       };
     },
 
@@ -67,7 +69,8 @@
         if (!this.select.multiple) {
           return this.isEqual(this.value, this.select.value);
         } else {
-          return this.contains(this.select.value, this.value);
+          this.checked = this.contains(this.select.value, this.value);
+          return this.checked;
         }
       },
 

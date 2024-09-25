@@ -7,13 +7,17 @@
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',
+      $slots.default ? '' : 'is-icon-only',
       buttonSize ? 'el-button--' + buttonSize : '',
       {
         'is-disabled': buttonDisabled,
         'is-loading': loading,
         'is-plain': plain,
         'is-round': round,
-        'is-circle': circle
+        'is-circle': circle,
+        'is-dashed': dashed,
+        'is-ghost': ghost,
+        'is-block': block
       }
     ]"
   >
@@ -54,7 +58,10 @@
       plain: Boolean,
       autofocus: Boolean,
       round: Boolean,
-      circle: Boolean
+      circle: Boolean,
+      dashed: Boolean,
+      ghost: Boolean,
+      block: Boolean
     },
 
     computed: {

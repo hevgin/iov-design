@@ -14,7 +14,12 @@ Input 为受控组件，它**总会显示 Vue 绑定值**。
 
 :::demo
 ```html
-<el-input v-model="input" placeholder="请输入内容"></el-input>
+
+<el-row :gutter="12">
+  <el-col :span="12">
+    <el-input v-model="input" placeholder="请输入内容" size="small"></el-input>
+  </el-col>
+</el-row>
 
 <script>
 export default {
@@ -33,17 +38,23 @@ export default {
 
 :::demo 通过 `disabled` 属性指定是否禁用 input 组件
 ```html
-<el-input
-  placeholder="请输入内容"
-  v-model="input"
-  :disabled="true">
-</el-input>
+<el-row :gutter="12">
+  <el-col :span="12">
+    <div class="sub-title">禁用未输入</div>
+    <el-input v-model="input1" placeholder="请输入内容" :disabled="true" size="small" clearable></el-input>
+  </el-col>
+  <el-col :span="12">
+    <div class="sub-title">禁用已输入</div>
+    <el-input v-model="input2" placeholder="请输入内容" :disabled="true" size="small" clearable></el-input>
+  </el-col>
+</el-row>
 
 <script>
 export default {
   data() {
     return {
-      input: ''
+      input1: '',
+      input2: 'Jackson'
     }
   }
 }
@@ -56,17 +67,27 @@ export default {
 :::demo 使用`clearable`属性即可得到一个可清空的输入框
 
 ```html
-<el-input
-  placeholder="请输入内容"
-  v-model="input"
-  clearable>
-</el-input>
+<el-row :gutter="12">
+  <el-col :span="12">
+    <el-input v-model="input1" placeholder="请输入内容" size="small" clearable></el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input v-model="input2" placeholder="请输入内容" size="small" clearable type="text" maxlength="10" show-word-limit></el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input v-model="input3" placeholder="请输入内容" size="small" clearable>
+      <el-button slot="append" size="small" icon="el-icon-search" type="primary"></el-button>
+    </el-input>
+  </el-col>
+</el-row>
 
 <script>
   export default {
     data() {
       return {
-        input: ''
+        input1: '',
+        input2: '',
+        input3: ''
       }
     }
   }
@@ -79,7 +100,11 @@ export default {
 :::demo 使用`show-password`属性即可得到一个可切换显示隐藏的密码框
 
 ```html
-<el-input placeholder="请输入密码" v-model="input" show-password></el-input>
+<el-row :gutter="12">
+  <el-col :span="12">
+    <el-input v-model="input" placeholder="请输入密码" show-password size="small" clearable></el-input>
+  </el-col>
+</el-row>
 
 <script>
   export default {
@@ -99,32 +124,29 @@ export default {
 
 :::demo 可以通过 `prefix-icon` 和 `suffix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
 ```html
-<div class="demo-input-suffix">
-  属性方式：
-  <el-input
-    placeholder="请选择日期"
-    suffix-icon="el-icon-date"
-    v-model="input1">
-  </el-input>
-  <el-input
-    placeholder="请输入内容"
-    prefix-icon="el-icon-search"
-    v-model="input2">
-  </el-input>
-</div>
-<div class="demo-input-suffix">
-  slot 方式：
-  <el-input
-    placeholder="请选择日期"
-    v-model="input3">
-    <i slot="suffix" class="el-input__icon el-icon-date"></i>
-  </el-input>
-  <el-input
-    placeholder="请输入内容"
-    v-model="input4">
-    <i slot="prefix" class="el-input__icon el-icon-search"></i>
-  </el-input>
-</div>
+
+<el-row :gutter="12">
+  <el-col :span="12">
+    <div class="sub-title">属性方式：</div>
+    <el-input placeholder="请选择日期" suffix-icon="el-icon-date" v-model="input1" size="small"></el-input>
+  </el-col>
+  <el-col :span="12">
+    <div class="sub-title">属性方式：</div>
+    <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="input2" size="small"></el-input>
+  </el-col>
+  <el-col :span="12">
+    <div class="sub-title">slot 方式：</div>
+    <el-input placeholder="请选择日期" v-model="input3" size="small">
+      <i slot="suffix" class="el-input__icon el-icon-date"></i>
+    </el-input>
+  </el-col>
+  <el-col :span="12">
+    <div class="sub-title">slot 方式：</div>
+    <el-input placeholder="请输入内容" v-model="input4" size="small">
+      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+    </el-input>
+  </el-col>
+</el-row>
 
 <script>
 export default {
@@ -147,12 +169,11 @@ export default {
 
 :::demo 文本域高度可通过 `rows` 属性控制
 ```html
-<el-input
-  type="textarea"
-  :rows="2"
-  placeholder="请输入内容"
-  v-model="textarea">
-</el-input>
+<el-row :gutter="12">
+  <el-col :span="12">
+    <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="textarea"></el-input>
+  </el-col>
+</el-row>
 
 <script>
 export default {
@@ -167,24 +188,17 @@ export default {
 :::
 
 ### 可自适应文本高度的文本域
-
 通过设置 `autosize` 属性可以使得文本域的高度能够根据文本内容自动进行调整，并且 `autosize` 还可以设定为一个对象，指定最小行数和最大行数。
-
 :::demo
 ```html
-<el-input
-  type="textarea"
-  autosize
-  placeholder="请输入内容"
-  v-model="textarea1">
-</el-input>
-<div style="margin: 20px 0;"></div>
-<el-input
-  type="textarea"
-  :autosize="{ minRows: 2, maxRows: 4}"
-  placeholder="请输入内容"
-  v-model="textarea2">
-</el-input>
+<el-row :gutter="12">
+  <el-col :span="24">
+    <el-input type="textarea" autosize placeholder="请输入内容" v-model="textarea1"></el-input>
+  </el-col>
+  <el-col :span="24">
+    <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="textarea2"></el-input>
+  </el-col>
+</el-row>
 
 <script>
 export default {
@@ -199,40 +213,61 @@ export default {
 ```
 :::
 
-### 复合型输入框
-
-可前置或后置元素，一般为标签或按钮
-
-:::demo 可通过 slot 来指定在 input 中前置或者后置内容。
+### 前置/后置标签
+在输入框前/后图标、文字或其他元素。
+:::demo
 ```html
-<div>
-  <el-input placeholder="请输入内容" v-model="input1">
-    <template slot="prepend">Http://</template>
-  </el-input>
-</div>
-<div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input2">
-    <template slot="append">.com</template>
-  </el-input>
-</div>
-<div style="margin-top: 15px;">
-  <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
-    <el-select v-model="select" slot="prepend" placeholder="请选择">
-      <el-option label="餐厅名" value="1"></el-option>
-      <el-option label="订单号" value="2"></el-option>
-      <el-option label="用户电话" value="3"></el-option>
-    </el-select>
-    <el-button slot="append" icon="el-icon-search"></el-button>
-  </el-input>
-</div>
-<style>
-  .el-select .el-input {
-    width: 130px;
-  }
-  .input-with-select .el-input-group__prepend {
-    background-color: #fff;
-  }
-</style>
+<el-row :gutter="12">
+  <el-col :span="24">
+    <el-input placeholder="请输入内容" v-model="input1" size="small">
+      <template slot="prepend">http://</template>
+      <template slot="append">.com</template>
+    </el-input>
+  </el-col>
+
+  <el-col :span="12">
+    <el-input placeholder="请输入内容" v-model="input2" size="small">
+      <template slot="prepend">http://</template>
+    </el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input placeholder="请输入内容" v-model="input3" size="small">
+      <template slot="append">.com</template>
+    </el-input>
+  </el-col>
+
+  <el-col :span="24">
+    <el-input placeholder="请输入内容" v-model="input4" size="small">
+      <el-select v-model="select1" style="width:80px;" slot="prepend" placeholder="请选择">
+        <el-option label="http://" value="1"></el-option>
+        <el-option label="wss://" value="2"></el-option>
+      </el-select>
+      <el-select v-model="select2" style="width:80px;" slot="append" placeholder="请选择">
+        <el-option label=".com" value="1"></el-option>
+        <el-option label=".cn" value="2"></el-option>
+      </el-select>
+    </el-input>
+  </el-col>
+
+  <el-col :span="12">
+    <el-input placeholder="请输入内容" v-model="input5" size="small">
+      <el-select v-model="select3" style="width:80px;" slot="prepend" placeholder="请选择">
+        <el-option label="+86" value="1"></el-option>
+        <el-option label="+25" value="2"></el-option>
+      </el-select>
+    </el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input placeholder="请输入内容" v-model="input6" size="small">
+      <el-select v-model="select4" style="width:80px;" slot="append" placeholder="请选择">
+        <el-option label="万元" value="1"></el-option>
+        <el-option label="元" value="2"></el-option>
+      </el-select>
+    </el-input>
+  </el-col>
+
+</el-row>
+
 <script>
 export default {
   data() {
@@ -240,7 +275,128 @@ export default {
       input1: '',
       input2: '',
       input3: '',
-      select: ''
+      input4: '',
+      input5: '',
+      input6: '',
+      select1: '1',
+      select2: '1',
+      select3: '1',
+      select4: '1'
+    }
+  }
+}
+</script>
+```
+:::
+
+
+### 标签内嵌
+在输入框内添加图标、文字或其他元素。
+:::demo
+```html
+<el-row :gutter="12">
+  <el-col :span="24">
+    <el-input disabled placeholder="请输入金额" v-model="input1" size="small" clearable>
+      <template slot="prefixLabel">金额</template>
+      <template slot="suffixLabel">元</template>
+    </el-input>
+  </el-col>
+
+  <el-col :span="12">
+    <el-input disabled placeholder="请输入金额" v-model="input2" size="small" clearable>
+      <template slot="prefixLabel">金额</template>
+    </el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input disabled placeholder="请输入金额" v-model="input3" size="small" clearable>
+      <template slot="suffixLabel">元</template>
+    </el-input>
+  </el-col>
+
+  <el-col :span="24">
+    <el-input disabled placeholder="请输入内容" v-model="input4" size="small" clearable>
+      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      <i slot="suffix" class="el-input__icon el-icon-info"></i>
+    </el-input>
+  </el-col>
+
+  <el-col :span="12">
+    <el-input disabled placeholder="请输入内容" v-model="input5" size="small" clearable>
+      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+    </el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input disabled placeholder="请输入内容" v-model="input6" size="small" clearable>
+      <i slot="suffix" class="el-input__icon el-icon-info"></i>
+    </el-input>
+  </el-col>
+
+  <el-col :span="24">
+    <el-input disabled placeholder="请输入内容" v-model="input7" size="small">
+      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      <i slot="suffix" class="el-input__icon el-icon-info"></i>
+      <template slot="prefixLabel">金额</template>
+      <template slot="suffixLabel">元</template>
+    </el-input>
+  </el-col>
+
+</el-row>
+
+<script>
+export default {
+  data() {
+    return {
+      input1: '',
+      input2: '',
+      input3: '',
+      input4: '',
+      input5: '',
+      input6: '',
+      input7: '',
+      select1: '1',
+      select2: '1',
+      select3: '1',
+      select4: '1'
+    }
+  }
+}
+</script>
+```
+:::
+
+
+
+### 前置/后置标签2
+
+带有搜索功能的输入框，用于内容检索。
+
+:::demo
+```html
+<el-row :gutter="12">
+  <el-col :span="12">
+    <el-input placeholder="请输入搜索内容" v-model="input1" size="small">
+      <el-select v-model="select" slot="prepend" placeholder="请选择地区">
+        <el-option label="北京市" value="1"></el-option>
+        <el-option label="上海市" value="2"></el-option>
+      </el-select>
+      <el-button slot="append" icon="el-icon-search" type="primary" size="small"></el-button>
+    </el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input placeholder="请输入搜索内容" v-model="input2" size="small">
+      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      <el-button slot="append" type="primary" size="small">Search</el-button>
+    </el-input>
+  </el-col>
+</el-row>
+
+<script>
+export default {
+  data() {
+    return {
+      select: '1',
+      input1: '',
+      input2: ''
     }
   }
 }
@@ -711,6 +867,8 @@ export default {
 |------|--------|
 | prefix | 输入框头部内容，只对 `type="text"` 有效 |
 | suffix | 输入框尾部内容，只对 `type="text"` 有效 |
+| prefixLabel | 输入框头部标签，只对 `type="text"` 有效 |
+| suffixLabel | 输入框尾部标签，只对 `type="text"` 有效 |
 | prepend | 输入框前置内容，只对 `type="text"` 有效 |
 | append | 输入框后置内容，只对 `type="text"` 有效 |
 
@@ -757,6 +915,8 @@ export default {
 |------|--------|
 | prefix | 输入框头部内容 |
 | suffix | 输入框尾部内容 |
+| prefixLabel | 输入框头部标签 |
+| suffixLabel | 输入框尾部标签 |
 | prepend | 输入框前置内容 |
 | append | 输入框后置内容 |
 

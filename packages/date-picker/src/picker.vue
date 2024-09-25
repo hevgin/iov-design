@@ -19,7 +19,10 @@
     @mouseleave.native="showClose = false"
     :validateEvent="false"
     ref="reference">
-    <i slot="prefix"
+    <template slot="prefixLabel">
+      <slot name="prefixLabel"></slot>
+    </template>
+    <i v-if="!showClose" slot="prefix"
       class="el-input__icon"
       :class="triggerClass"
       @click="handleFocus">
@@ -46,7 +49,9 @@
     ref="reference"
     v-clickoutside="handleClose"
     v-else>
-    <i :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
+    <div class="el-input-group__prefix-label" v-if="$slots.prefixLabel">
+      <slot name="prefixLabel"></slot>
+    </div>
     <input
       autocomplete="off"
       :placeholder="startPlaceholder"
@@ -80,17 +85,18 @@
       :class="[showClose ? '' + clearIcon : '']"
       class="el-input__icon el-range__close-icon">
     </i>
+    <i v-if="!showClose" :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
   </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import Clickoutside from 'element-ui/src/utils/clickoutside';
-import { formatDate, parseDate, isDateObject, getWeekNumber } from 'element-ui/src/utils/date-util';
-import Popper from 'element-ui/src/utils/vue-popper';
-import Emitter from 'element-ui/src/mixins/emitter';
-import ElInput from 'element-ui/packages/input';
-import merge from 'element-ui/src/utils/merge';
+import Clickoutside from 'iov-design/src/utils/clickoutside';
+import { formatDate, parseDate, isDateObject, getWeekNumber } from 'iov-design/src/utils/date-util';
+import Popper from 'iov-design/src/utils/vue-popper';
+import Emitter from 'iov-design/src/mixins/emitter';
+import ElInput from 'iov-design/packages/input';
+import merge from 'iov-design/src/utils/merge';
 
 const NewPopper = {
   props: {

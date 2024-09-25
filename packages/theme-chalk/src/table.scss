@@ -12,7 +12,8 @@
   width: 100%;
   max-width: 100%;
   background-color: $--color-white;
-  font-size: 14px;
+  border-radius: $--table-border-radius;
+  font-size: $--table-font-size;
   color: $--table-font-color;
 
   // 数据为空
@@ -113,6 +114,7 @@
     &.is-group {
       th.el-table__cell {
         background: $--background-color-base;
+        border-bottom: $--table-border;
       }
     }
   }
@@ -150,21 +152,19 @@
 
   @include m(medium) {
     .el-table__cell {
-      padding: 10px 0;
+      padding: 12px 0;
     }
   }
 
   @include m(small) {
-    font-size: 12px;
     .el-table__cell {
-      padding: 8px 0;
+      padding: 10px 0;
     }
   }
 
   @include m(mini) {
-    font-size: 12px;
     .el-table__cell {
-      padding: 6px 0;
+      padding: 8px 0;
     }
   }
 
@@ -176,7 +176,6 @@
     }
   }
 
-  th.el-table__cell.is-leaf,
   td.el-table__cell {
     border-bottom: $--table-border;
   }
@@ -189,14 +188,14 @@
     overflow: hidden;
     user-select: none;
     background-color: $--table-header-background-color;
-
+    font-weight: 500;
     > .cell {
       display: inline-block;
       box-sizing: border-box;
       position: relative;
       vertical-align: middle;
-      padding-left: 10px;
-      padding-right: 10px;
+      padding-left: 16px;
+      padding-right: 16px;
       width: 100%;
 
       &.highlight {
@@ -227,14 +226,14 @@
   }
 
   .cell {
+    padding: 0 16px;
     box-sizing: border-box;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
+    font-weight: 400;
     word-break: break-all;
-    line-height: 23px;
-    padding-left: 10px;
-    padding-right: 10px;
+    line-height: 20px;
 
     &.el-tooltip {
       white-space: nowrap;
@@ -254,39 +253,57 @@
     }
 
     // 表格右部伪 border
-    &::after {
-      @include extend-rule(border-pseudo);
-      top: 0;
-      right: 0;
-      width: 1px;
-      height: 100%;
-    }
+    // &::after {
+    //   @include extend-rule(border-pseudo);
+    //   top: 0;
+    //   right: 0;
+    //   width: 1px;
+    //   height: 100%;
+    // }
   }
 
   // 表格底部伪 border，总是有的
-  &::before {
-    @include extend-rule(border-pseudo);
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-  }
+  // &::before {
+  //   @include extend-rule(border-pseudo);
+  //   left: 0;
+  //   bottom: 0;
+  //   width: 100%;
+  //   height: 1px;
+  // }
 
   // table--border
   @include m(border) {
-    border-right: none;
-    border-bottom: none;
+    // border-right: none;
+    // border-bottom: none;
 
     &.el-loading-parent--relative {
       border-color: transparent;
     }
 
+    .has-gutter {
+      .el-table__cell {
+        border-bottom: 0 none;
+        &:nth-last-child(2) {
+          border-right: 0 none;
+        }
+      }
+    }
+
+    .el-table__row {
+      .el-table__cell {
+        &:last-child {
+          border-right: 0 none;
+        }
+      }
+      &:last-child {
+        .el-table__cell {
+          border-bottom: 0 none;
+        }
+      }
+    }
+
     .el-table__cell {
       border-right: $--table-border;
-
-      &:first-child .cell {
-        padding-left: 10px;
-      }
     }
 
     th.el-table__cell.gutter:last-of-type {
@@ -296,6 +313,13 @@
 
     & th.el-table__cell {
       border-bottom: $--table-border;
+    }
+  }
+
+  @include m(outer-border) {
+    border: $--table-border;
+    .el-table__cell {
+      border-right: 0 none;
     }
   }
 
@@ -349,6 +373,13 @@
     left: 0;
     top: 0;
     z-index: 3;
+    .el-table__header {
+      .el-table__cell {
+        &:last-child {
+          border-right: 0 none;
+        }
+      }
+    }
   }
 
   @include e(fixed-footer-wrapper) {
@@ -483,7 +514,7 @@
     & .el-table__body {
       & tr.el-table__row--striped {
         td.el-table__cell {
-          background: #FAFAFA;
+          background: $--table-current-row-background-color;
         }
 
         &.current-row td.el-table__cell, &.selection-row td.el-table__cell {

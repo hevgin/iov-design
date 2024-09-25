@@ -5,9 +5,12 @@
     {
       'is-disabled': inputDisabled,
       'is-exceed': inputExceed,
-      'el-input-group': $slots.prepend || $slots.append,
+      'el-input-group': $slots.prepend || $slots.append || $slots.prefixLabel || $slots.suffixLabel,
       'el-input-group--append': $slots.append,
       'el-input-group--prepend': $slots.prepend,
+      'el-input-group--prefix-label': $slots.prefixLabel,
+      'el-input-group--suffix-label': $slots.suffixLabel,
+      'is-focus': ($slots.suffixLabel || $slots.prefixLabel) && focused,
       'el-input--prefix': $slots.prefix || prefixIcon,
       'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
     }
@@ -19,6 +22,10 @@
       <!-- 前置元素 -->
       <div class="el-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
+      </div>
+      <!-- 前置标签 -->
+      <div class="el-input-group__prefix-label" v-if="$slots.prefixLabel">
+        <slot name="prefixLabel"></slot>
       </div>
       <input
         :tabindex="tabindex"
@@ -42,42 +49,28 @@
       <!-- 前置内容 -->
       <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
         <slot name="prefix"></slot>
-        <i class="el-input__icon"
-           v-if="prefixIcon"
-           :class="prefixIcon">
-        </i>
+        <i class="el-input__icon" v-if="prefixIcon" :class="prefixIcon"></i>
       </span>
       <!-- 后置内容 -->
-      <span
-        class="el-input__suffix"
-        v-if="getSuffixVisible()">
+      <span class="el-input__suffix" v-if="getSuffixVisible()">
         <span class="el-input__suffix-inner">
+          <i v-if="showClear" class="el-input__icon el-icon-circle-close el-input__clear" @mousedown.prevent @click="clear"></i>
+          <!-- 后置标签 -->
+          <span class="el-input-group__suffix-label" v-if="$slots.suffixLabel">
+            <slot name="suffixLabel"></slot>
+          </span>
           <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
             <slot name="suffix"></slot>
-            <i class="el-input__icon"
-              v-if="suffixIcon"
-              :class="suffixIcon">
-            </i>
+            <i class="el-input__icon" v-if="suffixIcon" :class="suffixIcon"></i>
           </template>
-          <i v-if="showClear"
-            class="el-input__icon el-icon-circle-close el-input__clear"
-            @mousedown.prevent
-            @click="clear"
-          ></i>
-          <i v-if="showPwdVisible"
-            class="el-input__icon el-icon-view el-input__clear"
-            @click="handlePasswordVisible"
-          ></i>
+          <i v-if="showPwdVisible" class="el-input__icon el-icon-view el-input__clear" @click="handlePasswordVisible"></i>
           <span v-if="isWordLimitVisible" class="el-input__count">
             <span class="el-input__count-inner">
               {{ textLength }}/{{ upperLimit }}
             </span>
           </span>
         </span>
-        <i class="el-input__icon"
-          v-if="validateState"
-          :class="['el-input__validateIcon', validateIcon]">
-        </i>
+        <i class="el-input__icon" v-if="validateState" :class="['el-input__validateIcon', validateIcon]"></i>
       </span>
       <!-- 后置元素 -->
       <div class="el-input-group__append" v-if="$slots.append">
@@ -108,11 +101,12 @@
   </div>
 </template>
 <script>
-  import emitter from 'element-ui/src/mixins/emitter';
-  import Migrating from 'element-ui/src/mixins/migrating';
+  import { addClass } from 'iov-design/src/utils/dom';
+  import emitter from 'iov-design/src/mixins/emitter';
+  import Migrating from 'iov-design/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
-  import merge from 'element-ui/src/utils/merge';
-  import {isKorean} from 'element-ui/src/utils/shared';
+  import merge from 'iov-design/src/utils/merge';
+  import {isKorean} from 'iov-design/src/utils/shared';
 
   export default {
     name: 'ElInput',
@@ -372,6 +366,23 @@
       handleChange(event) {
         this.$emit('change', event.target.value);
       },
+      handlePendantCls(place) {
+        const pendantMap = {
+          suffix: 'append',
+          prefix: 'prepend'
+        };
+        const pendant = pendantMap[place];
+        const pendantEl = this.$el.querySelector(`.el-input-group__${pendant}`);
+        if (!pendantEl) return;
+        const isSelect = pendantEl.querySelector('.el-select');
+        const isButton = pendantEl.querySelector('.el-button');
+        if (isSelect) {
+          addClass(pendantEl, 'has-select');
+        }
+        if (isButton) {
+          addClass(pendantEl, 'has-button');
+        }
+      },
       calcIconOffset(place) {
         let elList = [].slice.call(this.$el.querySelectorAll(`.el-input__${place}`) || []);
         if (!elList.length) return;
@@ -387,15 +398,31 @@
           suffix: 'append',
           prefix: 'prepend'
         };
+        const embedMap = {
+          suffix: 'suffixLabel',
+          prefix: 'prefixLabel'
+        };
 
         const pendant = pendantMap[place];
-        if (this.$slots[pendant]) {
-          el.style.transform = `translateX(${place === 'suffix' ? '-' : ''}${this.$el.querySelector(`.el-input-group__${pendant}`).offsetWidth}px)`;
+        const embed = embedMap[place];
+
+        const pendantEl = this.$el.querySelector(`.el-input-group__${pendant}`);
+        const embedEl = this.$el.querySelector(`.el-input-group__${place}-label`);
+
+        if (this.$slots[pendant] && this.$slots[embed]) {
+          el.style.transform = place === 'prefix' ? `translateX(${pendantEl.offsetWidth + embedEl.offsetWidth}px)` : `translateX(-${pendantEl.offsetWidth}px)`;
+        } else if (this.$slots[pendant]) {
+          el.style.transform = place === 'prefix' ? `translateX(${pendantEl.offsetWidth}px)` : `translateX(-${pendantEl.offsetWidth}px)`;
+        } else if (this.$slots[embed]) {
+          el.style.transform = place === 'prefix' ? `translateX(${embedEl.offsetWidth}px)` : '';
         } else {
           el.removeAttribute('style');
         }
       },
       updateIconOffset() {
+        this.handlePendantCls('prefix');
+        this.handlePendantCls('suffix');
+
         this.calcIconOffset('prefix');
         this.calcIconOffset('suffix');
       },
@@ -415,6 +442,7 @@
       },
       getSuffixVisible() {
         return this.$slots.suffix ||
+          this.$slots.suffixLabel ||
           this.suffixIcon ||
           this.showClear ||
           this.showPassword ||

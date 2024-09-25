@@ -69,13 +69,13 @@ For MiniProgram development, we recommend using [MorJS](https://github.com/eleme
 
 ## Install
 ```shell
-npm install element-ui -S
+npm install iov-design -S
 ```
 
 ## Quick Start
 ``` javascript
 import Vue from 'vue'
-import Element from 'element-ui'
+import Element from 'iov-design'
 
 Vue.use(Element)
 
@@ -84,7 +84,7 @@ import {
   Select,
   Button
   // ...
-} from 'element-ui'
+} from 'iov-design'
 
 Vue.component(Select.name, Select)
 Vue.component(Button.name, Button)

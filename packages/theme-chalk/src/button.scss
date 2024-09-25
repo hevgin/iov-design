@@ -18,25 +18,25 @@
   box-sizing: border-box;
   outline: none;
   margin: 0;
-  transition: .1s;
+  transition: all ease .3s;
   font-weight: $--button-font-weight;
   @include utils-user-select(none);
   & + & {
     margin-left: 10px;
   }
 
-  @include button-size($--button-padding-vertical, $--button-padding-horizontal, $--button-font-size, $--button-border-radius);
+  @include button-size($--button-height, $--button-padding-horizontal, $--button-font-size, $--button-border-radius);
 
-  &:hover,
-  &:focus {
-    color: $--color-primary;
-    border-color: $--color-primary-light-7;
-    background-color: $--color-primary-light-9;
+  &:hover {
+    color: $--color-primary-5;
+    border-color: $--color-primary-5;
+    background-color: $--color-primary-1;
   }
 
   &:active {
-    color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-    border-color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
+    color: $--color-primary-7;
+    border-color: $--color-primary-7;
+    background-color: $--color-primary-1;
     outline: none;
   }
 
@@ -46,29 +46,29 @@
 
   & [class*="el-icon-"] {
     & + span {
-      margin-left: 5px;
+      margin-left: 4px;
     }
   }
 
   @include when(plain) {
-    &:hover,
-    &:focus {
-      background: $--color-white;
-      border-color: $--color-primary;
-      color: $--color-primary;
-    }
-
-    &:active {
-      background: $--color-white;
-      border-color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-      color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-      outline: none;
+    background-color: $--color-white;
+    &:hover {
+      background-color: $--color-primary-1;
     }
   }
-
-  @include when(active) {
-    color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-    border-color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
+  @include when(dashed) {
+    background-color: $--color-white;
+    border-style: dashed;
+    &:hover {
+      background-color: $--color-primary-1;
+    }
+  }
+  @include when(ghost) {
+    background: none;
+  }
+  @include when(block) {
+    display: block;
+    width: 100%;
   }
 
   @include when(disabled) {
@@ -115,67 +115,142 @@
   }
   @include when(round) {
     border-radius: 20px;
-    padding: 12px 23px;
+    padding: 0 $--button-padding-horizontal;
   }
   @include when(circle) {
     border-radius: 50%;
-    padding: $--button-padding-vertical;
+    width: $--button-height;
+    padding: 0;
+  }
+  @include when(icon-only) {
+    padding: 0;
+    width: $--button-height;
+    font-size: $--font-size-large;
+  }
+  @include m(default) {
+    @include when(icon-only) {
+      border: 0 none;
+    }
   }
   @include m(primary) {
-    @include button-variant($--button-primary-font-color, $--button-primary-background-color, $--button-primary-border-color);
+    @include button-variant($--button-primary-font-color, $--button-primary-background-color, $--button-primary-background-color-hover, $--button-primary-background-color-active, $--button-primary-background-color-disabled);
+    @include when(plain) {
+      @include button-plain($--color-primary-6, $--color-white, $--color-primary-5, $--color-primary-1, $--color-primary-7, $--color-primary-1, $--color-primary-3, $--color-white)
+    }
+    @include when(dashed) {
+      @include button-dashed($--color-primary-6, $--color-white, $--color-primary-5, $--color-primary-1, $--color-primary-7, $--color-primary-1, $--color-primary-3, $--color-white)
+    }
+    @include when(ghost) {
+      @include button-ghost($--color-primary-6, $--color-primary-5, $--color-primary-7, $--color-primary-3)
+    }
   }
   @include m(success) {
-    @include button-variant($--button-success-font-color, $--button-success-background-color, $--button-success-border-color);
+    @include button-variant($--button-success-font-color, $--button-success-background-color, $--button-success-background-color-hover, $--button-success-background-color-active, $--button-success-background-color-disabled);
+    @include when(plain) {
+      @include button-plain($--color-success-6, $--color-white, $--color-success-5, $--color-success-1, $--color-success-7, $--color-success-1, $--color-success-3, $--color-white)
+    }
+    @include when(dashed) {
+      @include button-dashed($--color-success-6, $--color-white, $--color-success-5, $--color-success-1, $--color-success-7, $--color-success-1, $--color-success-3, $--color-white)
+    }
+    @include when(ghost) {
+      @include button-ghost($--color-success-6, $--color-success-5, $--color-success-7, $--color-success-3)
+    }
   }
   @include m(warning) {
-    @include button-variant($--button-warning-font-color, $--button-warning-background-color, $--button-warning-border-color);
+    @include button-variant($--button-warning-font-color, $--button-warning-background-color, $--button-warning-background-color-hover, $--button-warning-background-color-active, $--button-warning-background-color-disabled);
+    @include when(plain) {
+      @include button-plain($--color-warning-6, $--color-white, $--color-warning-5, $--color-warning-1, $--color-warning-7, $--color-warning-1, $--color-warning-3, $--color-white)
+    }
+    @include when(dashed) {
+      @include button-dashed($--color-warning-6, $--color-white, $--color-warning-5, $--color-warning-1, $--color-warning-7, $--color-warning-1, $--color-warning-3, $--color-white)
+    }
+    @include when(ghost) {
+      @include button-ghost($--color-warning-6, $--color-warning-5, $--color-warning-7, $--color-warning-3)
+    }
   }
   @include m(danger) {
-    @include button-variant($--button-danger-font-color, $--button-danger-background-color, $--button-danger-border-color);
+    @include button-variant($--button-danger-font-color, $--button-danger-background-color, $--button-danger-background-color-hover, $--button-danger-background-color-active, $--button-danger-background-color-disabled);
+    @include when(plain) {
+      @include button-plain($--color-danger-6, $--color-white, $--color-danger-5, $--color-danger-1, $--color-danger-7, $--color-danger-1, $--color-danger-3, $--color-white)
+    }
+    @include when(dashed) {
+      @include button-dashed($--color-danger-6, $--color-white, $--color-danger-5, $--color-danger-1, $--color-danger-7, $--color-danger-1, $--color-danger-3, $--color-white)
+    }
+    @include when(ghost) {
+      @include button-ghost($--color-danger-6, $--color-danger-5, $--color-danger-7, $--color-danger-3)
+    }
   }
   @include m(info) {
-    @include button-variant($--button-info-font-color, $--button-info-background-color, $--button-info-border-color);
+    @include button-variant($--button-info-font-color, $--button-info-background-color, $--button-info-background-color-hover, $--button-info-background-color-active, $--button-info-background-color-disabled);
+    @include when(plain) {
+      @include button-plain($--color-fill-6, $--color-white, $--color-fill-5, $--color-fill-1, $--color-fill-7, $--color-fill-1, $--color-fill-3, $--color-white)
+    }
+    @include when(dashed) {
+      @include button-dashed($--color-fill-6, $--color-white, $--color-fill-5, $--color-fill-1, $--color-fill-7, $--color-fill-1, $--color-fill-3, $--color-white)
+    }
+    @include when(ghost) {
+      @include button-ghost($--color-fill-6, $--color-fill-5, $--color-fill-7, $--color-fill-3)
+    }
   }
   @include m(medium) {
-    @include button-size($--button-medium-padding-vertical, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius);
+    @include button-size($--button-medium-height, $--button-medium-padding-horizontal, $--button-medium-font-size, $--button-medium-border-radius);
     @include when(circle) {
-      padding: $--button-medium-padding-vertical;
+      width: $--button-medium-height;
+    }
+    &.el-button--text {
+      padding: 0 8px;
+    }
+    @include when(icon-only) {
+      font-size: $--button-icon-only-size;
+      width: $--button-medium-height;
     }
   }
   @include m(small) {
-    @include button-size($--button-small-padding-vertical, $--button-small-padding-horizontal, $--button-small-font-size, $--button-small-border-radius);
+    @include button-size($--button-small-height, $--button-small-padding-horizontal, $--button-small-font-size, $--button-small-border-radius);
     @include when(circle) {
-      padding: $--button-small-padding-vertical;
+      width: $--button-small-height;
+    }
+    &.el-button--text {
+      padding: 0 4px;
+    }
+    @include when(icon-only) {
+      font-size: $--button-icon-only-size;
+      width: $--button-small-height;
     }
   }
   @include m(mini) {
-    @include button-size($--button-mini-padding-vertical, $--button-mini-padding-horizontal, $--button-mini-font-size, $--button-mini-border-radius);
+    @include button-size($--button-mini-height, $--button-mini-padding-horizontal, $--button-mini-font-size, $--button-mini-border-radius);
     @include when(circle) {
-      padding: $--button-mini-padding-vertical;
+      width: $--button-mini-height;
+    }
+    &.el-button--text {
+      padding: 0 4px;
+    }
+    @include when(icon-only) {
+      font-size: $--button-icon-only-size;
+      width: $--button-mini-height;
     }
   }
   @include m(text) {
     border-color: transparent;
-    color: $--color-primary;
+    color: $--color-primary-6;
     background: transparent;
-    padding-left: 0;
-    padding-right: 0;
 
-    &:hover,
-    &:focus {
-      color: mix($--color-white, $--color-primary, $--button-hover-tint-percent);
-      border-color: transparent;
-      background-color: transparent;
+    &:hover {
+      color: $--color-primary-6;
+      border-color: $--color-primary-1;
+      background-color: $--color-primary-1;
     }
     &:active {
-      color: mix($--color-black, $--color-primary, $--button-active-shade-percent);
-      border-color: transparent;
-      background-color: transparent;
+      color: $--color-primary-6;
+      border-color: $--color-primary-2;
+      background-color: $--color-primary-2;
     }
 
     &.is-disabled,
     &.is-disabled:hover,
     &.is-disabled:focus {
+      color: $--color-primary-3;
       border-color: transparent;
     }
   }
@@ -236,7 +311,7 @@
       z-index: 1;
     }
   }
-  
+
   & > .el-dropdown {
     & > .el-button {
       border-top-left-radius: 0;

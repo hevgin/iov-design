@@ -16,6 +16,7 @@
       v-model="value1"
       type="date"
       placeholder="选择日期">
+      <template slot="prefixLabel">选择日期</template>
     </el-date-picker>
   </div>
   <div class="block">
@@ -154,29 +155,30 @@
 :::demo 在选择日期范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前月份，可以使用`unlink-panels`属性解除联动。
 ```html
 <template>
-  <div class="block">
-    <span class="demonstration">默认</span>
-    <el-date-picker
-      v-model="value1"
-      type="daterange"
-      range-separator="至"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">带快捷选项</span>
-    <el-date-picker
-      v-model="value2"
-      type="daterange"
-      align="right"
-      unlink-panels
-      range-separator="至"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      :picker-options="pickerOptions">
-    </el-date-picker>
-  </div>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <el-date-picker
+        v-model="value1"
+        type="daterange"
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期">
+        <template slot="prefixLabel">选择日期</template>
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <el-date-picker
+        v-model="value2"
+        type="daterange"
+        align="right"
+        unlink-panels
+        range-separator="至"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        :picker-options="pickerOptions">
+      </el-date-picker>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
