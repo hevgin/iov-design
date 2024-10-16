@@ -97,7 +97,7 @@
 
   @include m(medium) {
     .el-input-group__prefix-label {
-      padding: 0;
+      // padding: 0;
       font-size: $--input-medium-font-size;
     }
     .el-input__icon {
@@ -115,7 +115,7 @@
 
   @include m(small) {
     .el-input-group__prefix-label {
-      padding: 0;
+      // padding: 0;
       font-size: $--input-small-font-size;
     }
     .el-input__icon {
@@ -133,7 +133,7 @@
 
   @include m(mini) {
     .el-input-group__prefix-label {
-      padding: 0;
+      // padding: 0;
       font-size: $--input-mini-font-size;
     }
     .el-input__icon {

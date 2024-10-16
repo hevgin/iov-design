@@ -9,17 +9,21 @@
     }
   }
   @include m(label-top) {
+    .el-form-item {
+      line-height: inherit;
+    }
     & .el-form-item__label {
       float: none;
       display: inline-block;
       text-align: left;
-      padding: 0 0 10px 0;
+      line-height: 1;
+      padding: 0 0 8px 0;
     }
   }
   @include m(inline) {
     & .el-form-item {
       display: inline-block;
-      margin-right: 10px;
+      margin-right: 8px;
       vertical-align: top;
     }
     & .el-form-item__label {
@@ -36,11 +40,16 @@
   }
 }
 @include b(form-item) {
-  margin-bottom: 22px;
+  line-height: $--input-height;
+  margin-bottom: 20px;
   @include utils-clearfix;
 
   & .el-form-item {
     margin-bottom: 0;
+  }
+
+  & .el-form-item__label {
+    font-size: $--input-font-size;
   }
 
   & .el-input__validateIcon {
@@ -48,36 +57,30 @@
   }
 
   @include m(medium) {
+    line-height: $--input-medium-height;
     .el-form-item__label {
-      line-height: 36px;
-    }
-    .el-form-item__content {
-      line-height: 36px;
+      font-size: $--input-medium-font-size;
     }
   }
   @include m(small) {
+    line-height: $--input-small-height;
     .el-form-item__label {
-      line-height: 32px;
-    }
-    .el-form-item__content {
-      line-height: 32px;
+      font-size: $--input-small-font-size;
     }
     &.el-form-item {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     .el-form-item__error {
       padding-top: 2px;
     }
   }
   @include m(mini) {
+    line-height: $--input-mini-height;
     .el-form-item__label {
-      line-height: 28px;
-    }
-    .el-form-item__content {
-      line-height: 28px;
+      font-size: $--input-mini-font-size;
     }
     &.el-form-item {
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     .el-form-item__error {
       padding-top: 1px;
@@ -96,16 +99,14 @@
     text-align: right;
     vertical-align: middle;
     float: left;
-    font-size: $--form-label-font-size;
-    color: $--color-text-regular;
-    line-height: 40px;
+    font-size: $--font-size-base;
+    color: $--color-text-3;
     padding: 0 12px 0 0;
     box-sizing: border-box;
   }
   @include e(content) {
-    line-height: 40px;
     position: relative;
-    font-size: 14px;
+    font-size: $--font-size-base;
     @include utils-clearfix;
 
     .el-input-group {
@@ -113,10 +114,10 @@
     }
   }
   @include e(error) {
-    color: $--color-danger;
+    color: $--color-danger-6;
     font-size: 12px;
     line-height: 1;
-    padding-top: 4px;
+    padding-top: 2px;
     position: absolute;
     top: 100%;
     left: 0;
@@ -135,7 +136,7 @@
       & > .el-form-item__label:before,
       & .el-form-item__label-wrap > .el-form-item__label:before {
         content: '*';
-        color: $--color-danger;
+        color: $--color-danger-6;
         margin-right: 4px;
       }
     }
@@ -145,7 +146,7 @@
     & .el-input__inner,
     & .el-textarea__inner {
       &, &:focus {
-        border-color: $--color-danger;
+        border-color: $--color-danger-6;
       }
     }
     & .el-input-group__append,
@@ -155,7 +156,7 @@
       }
     }
     .el-input__validateIcon {
-      color: $--color-danger;
+      color: $--color-danger-6;
     }
   }
 

@@ -10,7 +10,7 @@
       'hover': hover
     }">
     <slot>
-      <el-checkbox v-if="this.select.multiple" :disabled="disabled" v-model="checked">{{ currentLabel }}</el-checkbox>
+      <el-checkbox style="pointer-events: none;" v-if="this.select.multiple" :disabled="disabled" v-model="checked">{{ currentLabel }}</el-checkbox>
       <span v-else>{{ currentLabel }}</span>
     </slot>
   </li>
