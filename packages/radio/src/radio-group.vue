@@ -35,6 +35,7 @@
       size: String,
       fill: String,
       textColor: String,
+      borderColor: String,
       disabled: Boolean
     },
 

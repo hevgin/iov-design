@@ -85,8 +85,8 @@
       activeStyle() {
         return {
           backgroundColor: this._radioGroup.fill || '',
-          borderColor: this._radioGroup.fill || '',
-          boxShadow: this._radioGroup.fill ? `-1px 0 0 0 ${this._radioGroup.fill}` : '',
+          borderColor: this._radioGroup.borderColor || '',
+          boxShadow: this._radioGroup.borderColor ? `-1px 0 0 0 ${this._radioGroup.borderColor}` : '',
           color: this._radioGroup.textColor || ''
         };
       },
