@@ -12,11 +12,11 @@
     line-height: 1;
     white-space: nowrap;
     vertical-align: middle;
-    background: $--button-default-background-color;
-    border: $--border-base;
-    font-weight: $--button-font-weight;
+    background: $--color-white;
+    border: 1px solid $--color-line-2;
+    font-weight: 400;
     border-left: 0;
-    color: $--button-default-font-color;
+    color: $--color-text-4;
     -webkit-appearance: none;
     text-align: center;
     box-sizing: border-box;
@@ -26,11 +26,11 @@
     cursor: pointer;
     transition: $--all-transition;
 
-    @include button-size($--button-height, $--button-padding-horizontal, $--button-font-size, 0);
+    @include button-size($--button-height, 16px, $--button-font-size, 0);
 
-    &:hover {
-      color: $--color-primary;
-    }
+    // &:hover {
+    //   color: $--color-primary-6;
+    // }
 
     & [class*="el-icon-"] {
       line-height: 0.9;
@@ -43,7 +43,7 @@
 
   &:first-child {
     .el-radio-button__inner {
-      border-left: $--border-base;
+      border-left: 1px solid $--color-line-2;
       border-radius: $--border-radius-base 0 0 $--border-radius-base;
       box-shadow: none !important;
     }
@@ -66,15 +66,17 @@
 
     &:disabled {
       & + .el-radio-button__inner {
-        color: $--button-disabled-font-color;
+        color: $--color-text-2;
         cursor: not-allowed;
         background-image: none;
-        background-color: $--button-disabled-background-color;
-        border-color: $--button-disabled-border-color;
+        background-color: $--color-fill-1;
+        border-color: $--color-line-2;
         box-shadow: none;
       }
       &:checked + .el-radio-button__inner {
-        background-color: $--radio-button-disabled-checked-fill;
+        color: $--color-primary-3;
+        border-color: $--color-primary-3;
+        background-color: $--color-white;
       }
     }
   }
@@ -93,21 +95,21 @@
 
   @include m(medium) {
     & .el-radio-button__inner {
-      @include button-size($--button-medium-height, $--button-medium-padding-horizontal, $--button-medium-font-size, 0);
+      @include button-size($--button-medium-height, 12px, $--button-medium-font-size, 0);
     }
   }
   @include m(small) {
     & .el-radio-button__inner {
-      @include button-size($--button-small-height, $--button-small-padding-horizontal, $--button-small-font-size, 0);
+      @include button-size($--button-small-height, 12px, $--button-small-font-size, 0);
     }
   }
   @include m(mini) {
     & .el-radio-button__inner {
-      @include button-size($--button-mini-height, $--button-mini-padding-horizontal, $--button-mini-font-size, 0);
+      @include button-size($--button-mini-height, 12px, $--button-mini-font-size, 0);
     }
   }
 
-  &:focus:not(.is-focus):not(:active):not(.is-disabled){ /*获得焦点时 样式提醒*/
-    box-shadow: 0 0 2px 2px $--radio-button-checked-border-color;
-  }
+  // &:focus:not(.is-focus):not(:active):not(.is-disabled){ /*获得焦点时 样式提醒*/
+  //   box-shadow: 0 0 2px 2px $--radio-button-checked-border-color;
+  // }
 }

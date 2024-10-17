@@ -2,10 +2,11 @@
   <label
     class="el-radio"
     :class="[
-      border && radioSize ? 'el-radio--' + radioSize : '',
+      (border || button) && radioSize ? 'el-radio--' + radioSize : '',
       { 'is-disabled': isDisabled },
       { 'is-focus': focus },
       { 'is-bordered': border },
+      { 'is-button': button },
       { 'is-checked': model === label }
     ]"
     role="radio"
@@ -15,6 +16,7 @@
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
     <span class="el-radio__input"
+      :style="{display: border || button ? 'none' : ''}"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
@@ -69,6 +71,7 @@
       disabled: Boolean,
       name: String,
       border: Boolean,
+      button: Boolean,
       size: String
     },
 
