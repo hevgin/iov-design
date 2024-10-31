@@ -32,7 +32,7 @@
         <el-tag
           v-for="item in selected"
           :key="getValueKey(item)"
-          :closable="!selectDisabled"
+          :closable="!item.disabled && !selectDisabled"
           :size="collapseTagSize"
           :hit="item.hitState"
           type="info"
