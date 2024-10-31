@@ -126,7 +126,7 @@
 
 ```html
 <template>
-  <el-checkbox-group 
+  <el-checkbox-group
     v-model="checkedCities"
     :min="1"
     :max="2">
@@ -229,7 +229,51 @@
         checked3: false,
         checked4: true,
         checkboxGroup1: [],
-        checkboxGroup2: []
+        checkboxGroup2: ['备选项1']
+      };
+    }
+  }
+</script>
+```
+:::
+
+
+### 带有填充
+:::demo
+```html
+<template>
+  <div>
+    <el-checkbox v-model="checked1" label="备选项1" button></el-checkbox>
+    <el-checkbox v-model="checked2" label="备选项2" button></el-checkbox>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox v-model="checked3" label="备选项1" button size="medium"></el-checkbox>
+    <el-checkbox v-model="checked4" label="备选项2" button size="medium"></el-checkbox>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup1" size="small">
+      <el-checkbox label="备选项1" button></el-checkbox>
+      <el-checkbox label="备选项2" button disabled></el-checkbox>
+    </el-checkbox-group>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkboxGroup2" size="mini" disabled>
+      <el-checkbox label="备选项1" button></el-checkbox>
+      <el-checkbox label="备选项2" button></el-checkbox>
+    </el-checkbox-group>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        checked1: true,
+        checked2: false,
+        checked3: false,
+        checked4: true,
+        checkboxGroup1: [],
+        checkboxGroup2: ['备选项1']
       };
     }
   }
@@ -245,7 +289,8 @@
 | true-label | 选中时的值   | string / number | — |     —    |
 | false-label | 没有选中时的值   | string / number    |      —         |     —    |
 | disabled  | 是否禁用    | boolean   |  — | false   |
-| border  | 是否显示边框  | boolean   | — | false   |
+| border  | 是否显示边框按钮样式	  | boolean   | — | false   |
+| button  | 是否显示填充按钮样式	    | boolean   |  — | false   |
 | size  | Checkbox 的尺寸，仅在 border 为真时有效  | string  | medium / small / mini | — |
 | name | 原生 name 属性 | string    |      —         |     —    |
 | checked  | 当前是否勾选    | boolean   |  — | false   |
@@ -264,8 +309,9 @@
 | disabled  | 是否禁用    | boolean   | — | false   |
 | min     | 可被勾选的 checkbox 的最小数量   | number    |       —        |     —    |
 | max     | 可被勾选的 checkbox 的最大数量   | number    |       —        |     —    |
-| text-color  | 按钮形式的 Checkbox 激活时的文本颜色    | string   | — | #ffffff   |
-| fill  | 按钮形式的 Checkbox 激活时的填充色和边框色    | string   | — | #409EFF   |
+| text-color  | 按钮形式的 Checkbox 激活时的文本颜色    | string   | — | #2F48FF   |
+| border-color  | 按钮形式的 Checkbox 激活时的边框色    | string   | — | #2F48FF   |
+| fill  | 按钮形式的 Checkbox 激活时的填充色    | string   | — | #ffffff   |
 
 ### Checkbox-group Events
 | 事件名称      | 说明    | 回调参数      |

@@ -135,9 +135,9 @@
       activeStyle() {
         return {
           backgroundColor: this._checkboxGroup.fill || '',
-          borderColor: this._checkboxGroup.fill || '',
+          borderColor: this._checkboxGroup.borderColor || '',
           color: this._checkboxGroup.textColor || '',
-          'box-shadow': '-1px 0 0 0 ' + this._checkboxGroup.fill
+          'box-shadow': '-1px 0 0 0 ' + this._checkboxGroup.borderColor
 
         };
       },

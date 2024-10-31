@@ -21,6 +21,7 @@
       max: Number,
       size: String,
       fill: String,
+      borderColor: String,
       textColor: String
     },
 

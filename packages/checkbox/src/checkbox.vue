@@ -2,15 +2,17 @@
   <label
     class="el-checkbox"
     :class="[
-      border && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
+      (border || button) && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
       { 'is-disabled': isDisabled },
       { 'is-bordered': border },
+      { 'is-button': button },
       { 'is-checked': isChecked }
     ]"
     :id="id"
   >
     <span class="el-checkbox__input"
-      :class="{
+        :style="{ display: border || button ? 'none' : '' }"
+        :class="{
         'is-disabled': isDisabled,
         'is-checked': isChecked,
         'is-indeterminate': indeterminate,
@@ -173,6 +175,7 @@
       id: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
       controls: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
       border: Boolean,
+      button: Boolean,
       size: String
     },
 
