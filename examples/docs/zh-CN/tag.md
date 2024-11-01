@@ -19,6 +19,23 @@
 ```
 :::
 
+### 带图标标签
+
+:::demo
+
+```html
+<el-tag icon="el-icon-success">标签一</el-tag>
+<el-tag type="success" icon="el-icon-success">标签二</el-tag>
+<el-tag type="info">标签三</el-tag>
+<el-tag type="warning">标签四</el-tag>
+<el-tag type="danger">标签五</el-tag>
+<el-tag type="gold">标签六</el-tag>
+<el-tag type="blue">标签七</el-tag>
+<el-tag type="purple">标签八</el-tag>
+<el-tag type="pink">标签九</el-tag>
+```
+:::
+
 ### 可移除标签
 
 :::demo 设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`disable-transitions`属性，它接受一个`Boolean`，true 为关闭。
@@ -201,6 +218,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 | hit | 是否有边框描边 | boolean | — | false |
 | color | 背景色 | string | — | — |
 | size | 尺寸 | string | medium / small / mini | — |
+| icon | 图标 | string | - | — |
 | effect | 主题 | string | dark / light / plain | light |
 
 
