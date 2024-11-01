@@ -115,7 +115,6 @@
     display: block;
     font-size: inherit;
     height: $--input-height;
-    line-height: $--input-height;
     outline: none;
     padding: 0 12px;
     transition: $--border-transition-base;
@@ -143,9 +142,9 @@
   @include e(suffix) {
     padding-left: 8px;
     position: absolute;
-    height: calc(100% - 2px);
     right: 1px;
     top: 1px;
+    bottom: 1px;
     text-align: center;
     color: $--input-icon-color;
     border-radius: $--input-border-radius;
@@ -165,9 +164,9 @@
   @include e(prefix) {
     padding-left: 8px;
     position: absolute;
-    height: calc(100% - 2px);
     left: 1px;
     top: 1px;
+    bottom: 1px;
     text-align: center;
     color: $--input-icon-color;
     border-radius: $--input-border-radius;
@@ -257,11 +256,20 @@
 
     @include e(inner) {
       height: $--input-medium-height;
-      line-height: $--input-medium-height;
     }
 
     .el-input__icon {
       line-height: $--input-medium-height;
+    }
+
+    &.el-input-group--prefix-label,
+    &.el-input-group--suffix-label {
+      .el-input__inner {
+        height: $--input-medium-height - 2px;
+      }
+      .el-input__icon {
+        line-height: $--input-medium-height - 2px;
+      }
     }
   }
   @include m(small) {
@@ -269,11 +277,20 @@
 
     @include e(inner) {
       height: $--input-small-height;
-      line-height: $--input-small-height;
     }
 
     .el-input__icon {
       line-height: $--input-small-height;
+    }
+
+    &.el-input-group--prefix-label,
+    &.el-input-group--suffix-label {
+      .el-input__inner {
+        height: $--input-small-height - 2px;
+      }
+      .el-input__icon {
+        line-height: $--input-small-height - 2px;
+      }
     }
   }
   @include m(mini) {
@@ -281,11 +298,20 @@
 
     @include e(inner) {
       height: $--input-mini-height;
-      line-height: $--input-mini-height;
     }
 
     .el-input__icon {
       line-height: $--input-mini-height;
+    }
+
+    &.el-input-group--prefix-label,
+    &.el-input-group--suffix-label {
+      .el-input__inner {
+        height: $--input-mini-height - 2px;
+      }
+      .el-input__icon {
+        line-height: $--input-mini-height - 2px;
+      }
     }
   }
 }
@@ -343,11 +369,15 @@
     &.is-disabled {
       background-color: $--input-disabled-fill;
     }
+    .el-input__icon {
+      line-height: $--input-height - 2px;
+    }
     .el-input__inner {
       margin: 0 auto;
       border: 0 none;
       box-shadow: none;
       padding-right: 8px;
+      height: $--input-height - 2px;
     }
     .el-input-group__prepend {
       border: 0 none;
@@ -400,6 +430,9 @@
     &.has-button {
       border: 0 none;
       padding: 0;
+      .el-input__suffix {
+        background: none;
+      }
     }
     &.has-button {
       z-index: 2;
