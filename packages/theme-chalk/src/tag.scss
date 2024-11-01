@@ -175,6 +175,7 @@
 
   .el-tag-icon {
     margin-right: 4px;
+    font-size: 16px;
   }
 
   .el-icon-close {
@@ -220,6 +221,9 @@
     border-radius: $--tag-border-radius;
     line-height: 28px;
 
+    .el-tag-icon {
+      font-size: 16px;
+    }
     .el-icon-close {
       font-size: 12px;
     }
@@ -231,6 +235,10 @@
     border-radius: 2px;
     line-height: 24px;
 
+    .el-tag-icon {
+      font-size: 12px;
+    }
+
     .el-icon-close {
       font-size: 10px;
     }
@@ -241,6 +249,10 @@
     height: 22px;
     border-radius: 2px;
     line-height: 20px;
+
+    .el-tag-icon {
+      font-size: 12px;
+    }
 
     .el-icon-close {
       font-size: 10px;
