@@ -179,7 +179,11 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
           { type: 'success', label: '标签二' },
           { type: 'info', label: '标签三' },
           { type: 'danger', label: '标签四' },
-          { type: 'warning', label: '标签五' }
+          { type: 'warning', label: '标签五' },
+          { type: 'gold', label: '标签六' },
+          { type: 'blue', label: '标签七' },
+          { type: 'purple', label: '标签八' },
+          { type: 'pink', label: '标签九' }
         ]
       }
     }
