@@ -101,8 +101,8 @@
         <slot name="prefix"></slot>
       </template>
       <template slot="suffix">
-        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'el-icon-' + iconClass]"></i>
-        <i v-if="showClose" class="el-select__caret el-input__icon el-icon-circle-close" @click="handleClearClick"></i>
+        <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'iov-icon-' + iconClass]"></i>
+        <i v-if="showClose" style="padding-right: 0;" class="el-input__icon iov-icon-close-mini el-input__clear" @click="handleClearClick"></i>
       </template>
     </el-input>
     <transition
