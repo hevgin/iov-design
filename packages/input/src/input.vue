@@ -54,7 +54,7 @@
       <!-- 后置内容 -->
       <span class="el-input__suffix" v-if="getSuffixVisible()">
         <span class="el-input__suffix-inner">
-          <i v-if="showClear" class="el-input__icon el-icon-circle-close el-input__clear" @mousedown.prevent @click="clear"></i>
+          <i v-if="showClear" class="el-input__icon iov-icon-close-mini el-input__clear" @mousedown.prevent @click="clear"></i>
           <!-- 后置标签 -->
           <span class="el-input-group__suffix-label" v-if="$slots.suffixLabel">
             <slot name="suffixLabel"></slot>
@@ -63,7 +63,7 @@
             <slot name="suffix"></slot>
             <i class="el-input__icon" v-if="suffixIcon" :class="suffixIcon"></i>
           </template>
-          <i v-if="showPwdVisible" class="el-input__icon el-icon-view el-input__clear" @click="handlePasswordVisible"></i>
+          <i v-if="showPwdVisible" class="el-input__icon" :class="passwordVisible ? 'iov-icon-eye' : 'iov-icon-eye-close'" @click="handlePasswordVisible"></i>
           <span v-if="isWordLimitVisible" class="el-input__count">
             <span class="el-input__count-inner">
               {{ textLength }}/{{ upperLimit }}
@@ -198,9 +198,9 @@
       },
       validateIcon() {
         return {
-          validating: 'el-icon-loading',
-          success: 'el-icon-circle-check',
-          error: 'el-icon-circle-close'
+          validating: 'iov-icon-loading',
+          success: 'iov-icon-circle-success',
+          error: 'iov-icon-circle-fail'
         }[this.validateState];
       },
       textareaStyle() {

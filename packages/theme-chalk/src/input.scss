@@ -79,13 +79,30 @@
   @include scroll-bar;
 
   & .el-input__clear {
-    color: $--input-icon-color;
-    font-size: $--input-font-size;
     cursor: pointer;
-    transition: $--color-transition-base;
+    display: flex;
+    align-items: center;
+
+    &:before {
+      margin-right: -12px;
+      color: $--input-icon-color;
+      font-size: 10px;
+      position: relative;
+    }
+    &:after {
+      border-radius: 100%;
+      width: 14px;
+      height: 14px;
+      background: $--color-fill-3;
+    }
 
     &:hover {
-      color: $--input-clear-hover-color;
+      &:before {
+        color: $--color-white;
+      }
+      &:after {
+        background: $--color-fill-5;
+      }
     }
   }
 
@@ -159,6 +176,8 @@
 
   @include e(suffix-inner) {
     pointer-events: all;
+    display: flex;
+    align-items: center;
   }
 
   @include e(prefix) {
@@ -183,13 +202,10 @@
     font-size: 14px;
     text-align: center;
     line-height: $--input-height;
+    cursor: pointer;
 
     &:after {
       content: '';
-      height: 100%;
-      width: 0;
-      display: inline-block;
-      vertical-align: middle;
     }
   }
 
