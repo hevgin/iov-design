@@ -22,7 +22,7 @@
       :role="indeterminate ? 'checkbox' : false"
       :aria-checked="indeterminate ? 'mixed' : false"
     >
-      <span class="el-checkbox__inner"></span>
+      <span class="el-checkbox__inner" :class="isChecked ? 'iov-icon-success' : ''"></span>
       <input
         v-if="trueLabel || falseLabel"
         class="el-checkbox__original"
