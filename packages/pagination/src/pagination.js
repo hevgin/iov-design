@@ -116,13 +116,14 @@ export default {
         return (
           <button
             type="button"
+            size={ this.$parent.small ? 'mini' : 'small' }
             class="btn-prev"
             disabled={ this.$parent.disabled || this.$parent.internalCurrentPage <= 1 }
             on-click={ this.$parent.prev }>
             {
               this.$parent.prevText
                 ? <span>{ this.$parent.prevText }</span>
-                : <i class="el-icon el-icon-arrow-left"></i>
+                : <i class="iov-icon-arrow-prev"></i>
             }
           </button>
         );
@@ -134,13 +135,14 @@ export default {
         return (
           <button
             type="button"
+            size={ this.$parent.small ? 'mini' : 'small' }
             class="btn-next"
             disabled={ this.$parent.disabled || this.$parent.internalCurrentPage === this.$parent.internalPageCount || this.$parent.internalPageCount === 0 }
             on-click={ this.$parent.next }>
             {
               this.$parent.nextText
                 ? <span>{ this.$parent.nextText }</span>
-                : <i class="el-icon el-icon-arrow-right"></i>
+                : <i class="iov-icon-arrow-next"></i>
             }
           </button>
         );
@@ -174,7 +176,7 @@ export default {
             <el-select
               value={ this.$parent.internalPageSize }
               popperClass={ this.$parent.popperClass || '' }
-              size="mini"
+              size={ this.$parent.small ? 'mini' : 'small' }
               on-input={ this.handleChange }
               disabled={ this.$parent.disabled }>
               {
@@ -253,6 +255,7 @@ export default {
               max={ this.$parent.internalPageCount }
               value={ this.userInput !== null ? this.userInput : this.$parent.internalCurrentPage }
               type="number"
+              size={ this.$parent.small ? 'mini' : 'small' }
               disabled={ this.$parent.disabled }
               nativeOnKeyup={ this.handleKeyup }
               onInput={ this.handleInput }

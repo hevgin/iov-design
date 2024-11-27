@@ -7,7 +7,7 @@
 :::demo 设置`layout`，表示需要显示的内容，用逗号分隔，布局元素会依次显示。`prev`表示上一页，`next`为下一页，`pager`表示页码列表，除此以外还提供了`jumper`和`total`，`sizes`和特殊的布局符号`->`，`->`后的元素会靠右显示，`jumper`表示跳页元素，`total`表示总条目数，`sizes`用于设置每页显示的页码数量。
 ```html
 <div class="block">
-  <span class="demonstration">页数较少时的效果</span>
+  <span>页数较少时的效果</span>
   <el-pagination
     layout="prev, pager, next"
     :total="50">
@@ -59,6 +59,33 @@
   layout="prev, pager, next"
   :total="50">
 </el-pagination>
+<el-pagination
+  small
+  @size-change="handleSizeChange"
+  @current-change="handleCurrentChange"
+  :current-page="currentPage"
+  :page-sizes="[10, 20, 30, 40]"
+  :page-size="10"
+  layout="total, sizes, prev, pager, next, jumper"
+  :total="400">
+</el-pagination>
+<script>
+  export default {
+    methods: {
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      }
+    },
+    data() {
+      return {
+        currentPage: 4
+      };
+    }
+  }
+</script>
 ```
 :::
 
@@ -110,8 +137,8 @@
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       :current-page="currentPage4"
-      :page-sizes="[100, 200, 300, 400]"
-      :page-size="100"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="10"
       layout="total, sizes, prev, pager, next, jumper"
       :total="400">
     </el-pagination>

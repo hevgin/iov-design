@@ -7,7 +7,7 @@
   white-space: nowrap;
   padding: 2px 5px;
   color: $--pagination-font-color;
-  font-weight: bold;
+  font-weight: 500;
   @include utils-clearfix;
 
   span:not([class*=suffix]),
@@ -23,19 +23,11 @@
 
   .el-input__inner {
     text-align: center;
-    -moz-appearance: textfield;
     line-height: normal;
   }
 
-  // pagesize 的下拉 icon
-  .el-input__suffix {
-    right: 0;
-    transform: scale(.8);
-  }
-
   .el-select .el-input {
-    width: 100px;
-    margin: 0 5px;
+    width: 90px;
 
     .el-input__inner {
       padding-right: 25px;
@@ -54,6 +46,7 @@
 
     &:hover {
       color: $--pagination-hover-color;
+      background: $--color-primary-1;
     }
 
     &:disabled {
@@ -65,30 +58,22 @@
 
   .btn-prev,
   .btn-next {
-    background: center center no-repeat;
-    background-size: 16px;
+    margin: 0 0 0 8px;
     background-color: $--pagination-background-color;
     cursor: pointer;
-    margin: 0;
     color: $--pagination-button-color;
+    border-radius: $--pagination-border-radius;
 
-    .el-icon {
+    .iov-icon {
       display: block;
-      font-size: 12px;
-      font-weight: bold;
+      font-size: 14px;
     }
   }
 
-  .btn-prev {
-    padding-right: 12px;
-  }
 
-  .btn-next {
-    padding-left: 12px;    
-  }
 
   .el-pager li.disabled {
-    color: $--color-text-placeholder;
+    color: $--color-fill-4;
     cursor: not-allowed;
   }
 
@@ -99,10 +84,11 @@
     .el-pager li.btn-quicknext,
     .el-pager li.btn-quickprev,
     .el-pager li:last-child {
+      margin-left: 4px;
       border-color: transparent;
       font-size: 12px;
-      line-height: 22px;
-      height: 22px;
+      line-height: 26px;
+      height: 26px;
       min-width: 22px;
     }
 
@@ -112,32 +98,22 @@
 
     .more::before,
     li.more::before {
-      line-height: 24px;
+      line-height: 26px;
     }
 
-    span:not([class*=suffix]),
-    button {
-      height: 22px;
-      line-height: 22px;
-    }
-
-    @include e(editor) {
-      height: 22px;
-      &.el-input .el-input__inner {
-        height: 22px;
-      }
+    span:not([class*=suffix]) {
+      font-size: 12px;
+      height: 26px;
+      line-height: 26px;
     }
   }
 
   @include e(sizes) {
-    margin: 0 10px 0 0;
+    margin-left: 8px;
     font-weight: normal;
-    color: $--color-text-regular;
+    color: $--color-text-6;
 
     .el-input .el-input__inner {
-      font-size: $--pagination-font-size;
-      padding-left: 8px;
-
       &:hover {
         border-color: $--pagination-hover-color;
       }
@@ -145,19 +121,14 @@
   }
 
   @include e(total) {
-    margin-right: 10px;
     font-weight: normal;
-    color: $--color-text-regular;
+    color: $--color-text-6;
   }
 
   @include e(jump) {
-    margin-left: 24px;
+    margin-left: 8px;
     font-weight: normal;
-    color: $--color-text-regular;
-
-    .el-input__inner {
-      padding: 0 3px;
-    }
+    color: $--color-text-6;
   }
 
   @include e(rightwrapper) {
@@ -167,8 +138,7 @@
   @include e(editor) {
     line-height: 18px;
     padding: 0 2px;
-    height: $--pagination-button-height;
-      
+
     text-align: center;
     margin: 0 2px;
     box-sizing: border-box;
@@ -176,10 +146,7 @@
 
     &.el-input {
       width: 50px;
-    }
-
-    &.el-input .el-input__inner {
-      height: $--pagination-button-height;
+      display: inline-block;
     }
 
     .el-input__inner::-webkit-inner-spin-button,
@@ -193,11 +160,11 @@
     .btn-prev,
     .btn-next,
     .el-pager li {
-      margin: 0 5px;
+      margin: 0 0 0 8px;
       background-color: $--color-info-lighter;
-      color: $--color-text-regular;
+      color: $--color-text-6;
       min-width: 30px;
-      border-radius: 2px;
+      border-radius: $--pagination-border-radius;
 
       &.disabled {
         color: $--color-text-placeholder;
@@ -248,6 +215,7 @@
   }
 
   li {
+    margin: 0 0 0 8px;
     padding: 0 4px;
     background: $--pagination-background-color;
     vertical-align: top;
@@ -256,18 +224,17 @@
     min-width: $--pagination-button-width;
     height: $--pagination-button-height;
     line-height: $--pagination-button-height;
+    border-radius: $--pagination-border-radius;
     cursor: pointer;
     box-sizing: border-box;
     text-align: center;
-    margin: 0;
 
     &.btn-quicknext,
     &.btn-quickprev {
-      line-height: 28px;
-      color: $--pagination-button-color;
+      color: $--color-fill-5;
 
       &.disabled {
-        color: $--color-text-placeholder;
+        color: $--color-fill-4;
       }
     }
 
@@ -285,10 +252,12 @@
 
     &:hover {
       color: $--pagination-hover-color;
+      background-color: $--color-primary-1;
     }
 
     &.active {
       color: $--pagination-hover-color;
+      background-color: $--color-primary-1;
       cursor: default;
     }
   }

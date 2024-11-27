@@ -5,11 +5,11 @@
       v-if="pageCount > 0"
       class="number">1</li>
     <li
-      class="el-icon more btn-quickprev"
+      class="more btn-quickprev"
       :class="[quickprevIconClass, { disabled }]"
       v-if="showPrevMore"
       @mouseenter="onMouseenter('left')"
-      @mouseleave="quickprevIconClass = 'el-icon-more'">
+      @mouseleave="quickprevIconClass = 'iov-icon-horizontal-more'">
     </li>
     <li
       v-for="pager in pagers"
@@ -17,11 +17,11 @@
       :class="{ active: currentPage === pager, disabled }"
       class="number">{{ pager }}</li>
     <li
-      class="el-icon more btn-quicknext"
+      class="more btn-quicknext"
       :class="[quicknextIconClass, { disabled }]"
       v-if="showNextMore"
       @mouseenter="onMouseenter('right')"
-      @mouseleave="quicknextIconClass = 'el-icon-more'">
+      @mouseleave="quicknextIconClass = 'iov-icon-horizontal-more'">
     </li>
     <li
       :class="{ active: currentPage === pageCount, disabled }"
@@ -46,11 +46,11 @@
 
     watch: {
       showPrevMore(val) {
-        if (!val) this.quickprevIconClass = 'el-icon-more';
+        if (!val) this.quickprevIconClass = 'iov-icon-horizontal-more';
       },
 
       showNextMore(val) {
-        if (!val) this.quicknextIconClass = 'el-icon-more';
+        if (!val) this.quicknextIconClass = 'iov-icon-horizontal-more';
       }
     },
 
@@ -93,9 +93,9 @@
       onMouseenter(direction) {
         if (this.disabled) return;
         if (direction === 'left') {
-          this.quickprevIconClass = 'el-icon-d-arrow-left';
+          this.quickprevIconClass = 'iov-icon-double-left';
         } else {
-          this.quicknextIconClass = 'el-icon-d-arrow-right';
+          this.quicknextIconClass = 'iov-icon-double-right';
         }
       }
     },
@@ -155,8 +155,8 @@
         current: null,
         showPrevMore: false,
         showNextMore: false,
-        quicknextIconClass: 'el-icon-more',
-        quickprevIconClass: 'el-icon-more'
+        quicknextIconClass: 'iov-icon-horizontal-more',
+        quickprevIconClass: 'iov-icon-horizontal-more'
       };
     }
   };
