@@ -18,6 +18,22 @@
 <el-tag type="pink">标签九</el-tag>
 ```
 :::
+### 是否有边框描边
+
+:::demo
+
+```html
+<el-tag hit>标签一</el-tag>
+<el-tag hit type="success">标签二</el-tag>
+<el-tag hit type="info">标签三</el-tag>
+<el-tag hit type="warning">标签四</el-tag>
+<el-tag hit type="danger">标签五</el-tag>
+<el-tag hit type="gold">标签六</el-tag>
+<el-tag hit type="blue">标签七</el-tag>
+<el-tag hit type="purple">标签八</el-tag>
+<el-tag hit type="pink">标签九</el-tag>
+```
+:::
 
 ### 带图标标签
 
@@ -173,6 +189,16 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
     :key="item.label"
     :type="item.type"
     effect="dark">
+    {{ item.label }}
+  </el-tag>
+</div>
+<div class="tag-group">
+  <span class="tag-group__title">Light</span>
+  <el-tag
+    v-for="item in items"
+    :key="item.label"
+    :type="item.type"
+    effect="light">
     {{ item.label }}
   </el-tag>
 </div>

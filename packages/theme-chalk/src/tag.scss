@@ -145,7 +145,7 @@
 }
 
 @include b(tag) {
-  @include genTheme($--color-primary-1, $--color-primary-2, $--color-primary-6, $--color-primary-7, $--color-primary-1);
+  @include genTheme($--color-primary-1, $--color-primary-2, $--color-primary-6, $--color-primary-7, $--color-primary-2);
   @include genThemeInfo($--color-fill-2, $--color-line-2, $--color-text-3, $--color-text-4, $--color-fill-2);
   @include genThemeSuccess($--color-success-1, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-1);
   @include genThemeWarning($--color-warning-1, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-1);
@@ -156,8 +156,8 @@
   @include genThemePink($--color-pink-1, $--color-pink-2, $--color-pink-6, $--color-pink-7, $--color-pink-1);
   display: inline-block;
   height: 32px;
+  line-height: 32px;
   padding: $--tag-padding;
-  line-height: 30px;
   font-size: $--tag-font-size;
   color: $--color-primary-6;
   border-width: 1px;
@@ -167,10 +167,14 @@
   box-sizing: border-box;
   white-space: nowrap;
 
+  @include e(inner) {
+    display: flex;
+    align-items: center;
+  }
+
   @include e(text) {
     display: inline-block;
     vertical-align: middle;
-    line-height: 1;
   }
 
   .el-tag-icon {

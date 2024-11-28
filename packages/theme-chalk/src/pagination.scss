@@ -167,7 +167,7 @@
       border-radius: $--pagination-border-radius;
 
       &.disabled {
-        color: $--color-text-placeholder;
+        color: $--color-fill-4;
       }
     }
 
@@ -175,7 +175,7 @@
       padding: 0;
 
       &:disabled {
-        color: $--color-text-placeholder;
+        color: $--color-fill-4;
       }
     }
 
@@ -185,7 +185,7 @@
       }
 
       &.active {
-        background-color: $--color-primary;
+        background-color: $--color-primary-6;
         color: $--color-white;
       }
     }

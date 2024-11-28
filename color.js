@@ -3,7 +3,7 @@ const path = require('path');
 const { generate } = require('@arco-design/color');
 
 const colors = {
-  primary: '#2F48FF',
+  primary: '#3F57FF',
   success: '#23B25D',
   warning: '#FF7D00',
   danger: '#F53F3F',
@@ -25,7 +25,7 @@ function generateBaseColor() {
     const list = Array.isArray(colors[name]) ? colors[name] : generate(colors[name], {index: 10, list: true});
     // 蓝色微调
     if (name === 'primary') {
-      list.splice(0, 2, '#F0F4FD', '#E3EBFF');
+      list.splice(0, 3, '#F0F4FD', '#E6ECFE', '#C0CDFF');
     }
     // 绿色微调
     if (name === 'success') {
