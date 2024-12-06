@@ -2,11 +2,11 @@
   <label
     class="el-radio"
     :class="[
-      (border || button) && radioSize ? 'el-radio--' + radioSize : '',
+      (border || button || groupButton) && radioSize ? 'el-radio--' + radioSize : '',
       { 'is-disabled': isDisabled },
       { 'is-focus': focus },
       { 'is-bordered': border },
-      { 'is-button': button },
+      { 'is-button': button || groupButton },
       { 'is-checked': model === label }
     ]"
     role="radio"
@@ -16,7 +16,7 @@
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
     <span class="el-radio__input"
-      :style="{display: border || button ? 'none' : ''}"
+      :style="{display: border || button || groupButton ? 'none' : ''}"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
@@ -114,6 +114,9 @@
         return this.isGroup
           ? this._radioGroup.radioGroupSize || temRadioSize
           : temRadioSize;
+      },
+      groupButton() {
+        return this.isGroup ? this._radioGroup.button : this.button;
       },
       isDisabled() {
         return this.isGroup

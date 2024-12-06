@@ -33,6 +33,7 @@
     props: {
       value: {},
       size: String,
+      button: Boolean,
       fill: String,
       textColor: String,
       borderColor: String,
