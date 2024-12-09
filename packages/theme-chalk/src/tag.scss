@@ -8,6 +8,11 @@
   @include when(hit) {
     border-color: $borderColor;
   }
+  @include when(dot) {
+    .el-tag__text:before {
+      background: $color;
+    }
+  }
   .el-tag__close {
     color: $color;
     &:hover {
@@ -22,6 +27,11 @@
     border-color: $plainBorderColor;
     @include when(hit) {
       border-color: $borderColor;
+    }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
     }
     .el-tag__close {
       color: $color;
@@ -39,6 +49,11 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
+    }
     .el-tag__close {
       color: $color;
       &:hover {
@@ -54,6 +69,11 @@
     border-color: $plainBorderColor;
     @include when(hit) {
       border-color: $borderColor;
+    }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
     }
     .el-tag__close {
       color: $color;
@@ -71,6 +91,11 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
+    }
     .el-tag__close {
       color: $color;
       &:hover {
@@ -86,6 +111,11 @@
     border-color: $plainBorderColor;
     @include when(hit) {
       border-color: $borderColor;
+    }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
     }
     .el-tag__close {
       color: $color;
@@ -103,6 +133,11 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
+    }
     .el-tag__close {
       color: $color;
       &:hover {
@@ -119,6 +154,11 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
+    }
     .el-tag__close {
       color: $color;
       &:hover {
@@ -134,6 +174,11 @@
     border-color: $plainBorderColor;
     @include when(hit) {
       border-color: $borderColor;
+    }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
     }
     .el-tag__close {
       color: $color;
@@ -166,6 +211,25 @@
   border-radius: $--tag-border-radius;
   box-sizing: border-box;
   white-space: nowrap;
+
+
+  @include when(dot) {
+    background: none;
+    border: 0 none;
+    color: $--color-text-6;
+    .el-tag__text {
+      display: flex;
+      align-items: center;
+      &:before {
+        margin-right: 6px;
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: 100%;
+        display: inline-block;
+      }
+    }
+  }
 
   @include e(inner) {
     display: flex;

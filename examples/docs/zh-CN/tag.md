@@ -18,6 +18,23 @@
 <el-tag type="pink">标签九</el-tag>
 ```
 :::
+
+### 状态
+
+:::demo
+
+```html
+<el-tag dot>标签一</el-tag>
+<el-tag dot type="success">标签二</el-tag>
+<el-tag dot type="info">标签三</el-tag>
+<el-tag dot type="warning">标签四</el-tag>
+<el-tag dot type="danger">标签五</el-tag>
+<el-tag dot type="gold">标签六</el-tag>
+<el-tag dot type="blue">标签七</el-tag>
+<el-tag dot type="purple">标签八</el-tag>
+<el-tag dot type="pink">标签九</el-tag>
+```
+:::
 ### 是否有边框描边
 
 :::demo
@@ -242,6 +259,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 | closable | 是否可关闭 | boolean | — | false |
 | disable-transitions | 是否禁用渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
+| dot | 是否展示状态标签 | boolean | — | false |
 | color | 背景色 | string | — | — |
 | size | 尺寸 | string | medium / small / mini | — |
 | icon | 图标 | string | - | — |

@@ -6,6 +6,7 @@
       closable: Boolean,
       type: String,
       hit: Boolean,
+      dot: Boolean,
       disableTransitions: Boolean,
       color: String,
       size: String,
@@ -33,13 +34,14 @@
       }
     },
     render(h) {
-      const { type, tagSize, hit, effect } = this;
+      const { type, tagSize, hit, dot, effect } = this;
       const classes = [
         'el-tag',
         type ? `el-tag--${type}` : '',
         tagSize ? `el-tag--${tagSize}` : '',
         effect ? `el-tag--${effect}` : '',
-        hit && 'is-hit'
+        hit && 'is-hit',
+        dot && 'is-dot'
       ];
       const tagEl = (
         <span
