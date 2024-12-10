@@ -1,8 +1,8 @@
 @font-face {
-  font-family: 'iovfont';  /* Project id 4466910 */
-  src: url('//at.alicdn.com/t/c/font_4466910_ilvmrqn6uj.woff2?t=1733801338456') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4466910_ilvmrqn6uj.woff?t=1733801338456') format('woff'),
-       url('//at.alicdn.com/t/c/font_4466910_ilvmrqn6uj.ttf?t=1733801338456') format('truetype');
+  font-family: 'iconfont';  /* Project id 4466910 */
+  src: url('//at.alicdn.com/t/c/font_4466910_mhllzvh4ge.woff2?t=1733818660601') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4466910_mhllzvh4ge.woff?t=1733818660601') format('woff'),
+       url('//at.alicdn.com/t/c/font_4466910_mhllzvh4ge.ttf?t=1733818660601') format('truetype');
 }
 
 [class^="iov-icon-"], [class*=" iov-icon-"] {
@@ -36,9 +36,92 @@
   }
 }
 
+.iov-icon-parenthesis-left:before {
+  content: "\e6e0";
+}
+
+.iov-icon-symbol-minus:before {
+  content: "\e6e1";
+}
+
+.iov-icon-infinite:before {
+  content: "\e6e2";
+}
+
+.iov-icon-parenthesis-right:before {
+  content: "\e6e3";
+}
+
+.iov-icon-symbol-times:before {
+  content: "\e6e4";
+}
+
+.iov-icon-icon_symbol_plus:before {
+  content: "\e6e5";
+}
+
+.iov-icon-symbol-div:before {
+  content: "\e6e6";
+}
+
+.iov-icon-brace-right:before {
+  content: "\e6de";
+}
+
+.iov-icon-brace-left:before {
+  content: "\e6df";
+}
 
 .iov-icon-left:before {
   content: "\e6dd";
+}
+
+.iov-icon-dollar:before {
+  content: "\e6d9";
+}
+
+.iov-icon-rmb:before {
+  content: "\e6da";
+}
+
+.iov-icon-data-role:before {
+  content: "\e6db";
+}
+
+.iov-icon-tips:before {
+  content: "\e6dc";
+}
+
+.iov-icon-rotate-left:before {
+  content: "\e6d1";
+}
+
+.iov-icon-rotate-right:before {
+  content: "\e6d2";
+}
+
+.iov-icon-batch-listing:before {
+  content: "\e6d3";
+}
+
+.iov-icon-zoom-reset:before {
+  content: "\e6d4";
+}
+
+.iov-icon-delisting:before {
+  content: "\e6d5";
+}
+
+.iov-icon-zoom-in:before {
+  content: "\e6d6";
+}
+
+.iov-icon-fullscreen:before {
+  content: "\e6d7";
+}
+
+.iov-icon-zoom-out:before {
+  content: "\e6d8";
 }
 
 .iov-icon-time:before {
@@ -477,7 +560,7 @@
   content: "\e66a";
 }
 
-.iov-icon-fold:before {
+.iov-icon-menu-fold:before {
   content: "\e66b";
 }
 
