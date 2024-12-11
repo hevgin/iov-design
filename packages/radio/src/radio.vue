@@ -7,7 +7,9 @@
       { 'is-focus': focus },
       { 'is-bordered': border },
       { 'is-button': button || groupButton },
-      { 'is-checked': model === label }
+      { 'is-checked': model === label },
+      { 'is-card': card},
+      { 'is-card-radio': card && radio}
     ]"
     role="radio"
     :aria-checked="model === label"
@@ -16,7 +18,7 @@
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
     <span class="el-radio__input"
-      :style="{display: border || button || groupButton ? 'none' : ''}"
+      :style="{display: border || button || groupButton || card && !radio ? 'none' : ''}"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
@@ -42,6 +44,7 @@
     <span class="el-radio__label" @keydown.stop>
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
+      <p v-if="desc" class="el-radio__desc">{{ desc }}</p>
     </span>
   </label>
 </template>
@@ -71,8 +74,11 @@
       disabled: Boolean,
       name: String,
       border: Boolean,
+      card: Boolean,
+      radio: Boolean,
       button: Boolean,
-      size: String
+      size: String,
+      desc: String
     },
 
     data() {

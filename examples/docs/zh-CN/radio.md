@@ -175,6 +175,49 @@
 :::
 
 
+### 卡片
+
+:::demo 设置`card`属性可以渲染为卡片的单选框。
+```html
+<template>
+  <div>
+    <el-radio v-model="radio1" label="1" card radio desc="这是一段描述文案">主标题文案</el-radio>
+    <el-radio v-model="radio1" label="2" card desc="这是一段描述文案">主标题文案</el-radio>
+  </div>
+  <div style="margin-top: 20px">
+    <el-radio v-model="radio2" label="1" card>主标题文案</el-radio>
+    <el-radio v-model="radio2" label="2" card>主标题文案</el-radio>
+  </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio3">
+      <el-radio label="1" card>备选项1</el-radio>
+      <el-radio label="2" card disabled>备选项2</el-radio>
+    </el-radio-group>
+  </div>
+  <div style="margin-top: 20px">
+    <el-radio-group v-model="radio4" disabled>
+      <el-radio label="1" card desc="这是一段描述文案">主标题文案</el-radio>
+      <el-radio label="2" card desc="这是一段描述文案">主标题文案</el-radio>
+    </el-radio-group>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        radio1: '1',
+        radio2: '1',
+        radio3: '1',
+        radio4: '1'
+      };
+    }
+  }
+</script>
+```
+:::
+
+
 ### 带有填充
 
 :::demo 设置`button`属性可以渲染为带有边框的单选框。
@@ -227,6 +270,9 @@
 | disabled  | 是否禁用    | boolean   | — | false   |
 | border  | 是否显示边框按钮样式  | boolean   | — | false   |
 | button  | 是否显示填充按钮样式  | boolean   | — | false   |
+| card  | 是否显示卡片按钮样式  | boolean   | — | false   |
+| radio  | 卡片按钮是否显示单选按钮样式  | boolean   | — | false   |
+| desc  | 卡片按钮内容描述  | string   | — | -   |
 | size  | Radio 的尺寸，仅在 border 为真时有效  | string  | medium / small / mini | — |
 | name | 原生 name 属性 | string    |      —         |     —    |
 

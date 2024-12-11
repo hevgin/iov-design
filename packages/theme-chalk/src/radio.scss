@@ -56,6 +56,84 @@
       background: $--color-fill-1;
     }
   }
+  @include when(card) {
+    margin-right: 12px;
+    padding: 12px;
+    border-radius: $--border-radius-base;
+    border: 1px solid $--color-line-2;
+    box-sizing: border-box;
+    transition: border-color ease .3s;
+    overflow: hidden;
+    .el-radio__input {
+      float: left;
+      font-size: 0;
+      &.is-checked {
+        & + .el-radio__label {
+          color: $--color-text-6;
+        }
+      }
+    }
+    .el-radio__label {
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 16px;
+      color: $--color-text-6;
+      float: left;
+      overflow: hidden;
+    }
+    .el-radio__desc {
+      margin: 6px 0 0;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 1;
+      color: $--color-text-3;
+    }
+
+    &.is-card-radio {
+      &.is-checked:after {
+        display: none;
+      }
+    }
+
+
+    &.is-disabled {
+      background: $--color-fill-1;
+      border-color: $--color-line-2;
+      .el-radio__label {
+        color: $--color-text-3;
+      }
+      .el-radio__desc {
+        color: $--color-text-2;
+      }
+    }
+
+    &.is-checked {
+      border-color: $--color-primary-6;
+      background: $--color-primary-1;
+      &:after {
+        content: '';
+        width: 26px;
+        height: 24px;
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMjZweCIgaGVpZ2h0PSIyNHB4IiB2aWV3Qm94PSIwIDAgMjYgMjQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8ZyBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNDc2LjAwMDAwMCwgLTYwOS4wMDAwMDApIj4KICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzM4LjAwMDAwMCwgNjA5LjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTM4LjAwMDAwMCwgMC4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICA8cGF0aCBkPSJNMCwwIEwyMiwwIEMyNC4yMDkxMzksMCAyNiwxLjc5MDg2MSAyNiw0IEwyNiwyNCBMMjYsMjQgTDAsMCBaIiBmaWxsPSIjM0Y1N0ZGIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTIuMDAwMDAwLCAzLjAwMDAwMCkiPgogICAgICAgICAgICAgICAgICAgICAgICA8cmVjdCBpZD0iQXJ0Ym9hcmQiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiI+PC9yZWN0PgogICAgICAgICAgICAgICAgICAgICAgICA8ZyBmaWxsPSIjRkZGRkZGIiBmaWxsLXJ1bGU9Im5vbnplcm8iPgogICAgICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTkuODk2MTk5NiwyLjkwNjM0MzY2IEwxMC44NDMyMDQxLDMuODUxMTk5NjYgQzEwLjk0MDk0NiwzLjk0ODcxOTggMTAuOTQxMTI1OCw0LjEwNzAxMDk0IDEwLjg0MzYwNTYsNC4yMDQ3NTI4MyBDMTAuODQzNDcxOSw0LjIwNDg4NjgyIDEwLjg0MzMzODEsNC4yMDUwMjA2NSAxMC44NDMyMDQxLDQuMjA1MTU0MzQgTDUuOTM3NzczMDMsOS4wOTk0NTYyNyBMNS45Mzc3NzMwMyw5LjA5OTQ1NjI3IEw1LjU1MDM2NjU3LDkuNDg1OTgzOCBDNS40MjY1NTAzOCw5LjYwOTUxOTA4IDUuMjI4MzA5MDksOS42MTYzNDU3OSA1LjA5NjI4ODA3LDkuNTAxNjIwNjIgTDQuNjgzMTA4NzMsOS4xNDI1NzExOSBMNC42ODMxMDg3Myw5LjE0MjU3MTE5IEwyLjA5MDYxMzM2LDYuODg5NzE0MTIgTDEuNTg2MDUwMzMsNi40NTEyNTMwMiBDMS40ODE4MzE0Niw2LjM2MDY4NzY4IDEuNDcwNzYzMDksNi4yMDI3ODM4OCAxLjU2MTMyODQyLDYuMDk4NTY1MDEgQzEuNTYxNDUxNCw2LjA5ODQyMzUgMS41NjE1NzQ1NCw2LjA5ODI4MjEyIDEuNTYxNjk3ODMsNi4wOTgxNDA4OCBMMi40NDEyNTExMSw1LjA5MDU3NDUxIEMyLjUzMTkwNjI4LDQuOTg2NzI1MSAyLjY4OTUxNjYsNC45NzU4NTU0NSAyLjc5MzU2OTcxLDUuMDY2Mjc2NzQgTDMuMjk4OTgxODQsNS41MDU0NzU3MSBMMy4yOTg5ODE4NCw1LjUwNTQ3NTcxIEw1LjEyNjczMTMzLDcuMDkzNzk5NDcgQzUuMTkyNzQwODksNy4xNTExNjIxMiA1LjI5MTg2MDY4LDcuMTQ3NzUwMDcgNS4zNTM3Njk0MSw3LjA4NTk4NDAyIEw5LjA2OTE0MzcyLDMuMzc5MTcyNzIgTDkuMDY5MTQzNzIsMy4zNzkxNzI3MiBMOS41NDMwNDc5NSwyLjkwNjM0MzY2IEM5LjY0MDYzMjg5LDIuODA4OTgwMTEgOS43OTg2MTQ2NSwyLjgwODk4MDExIDkuODk2MTk5NiwyLjkwNjM0MzY2IFoiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+Cg==) no-repeat 0 0;
+        background-size: 26px 24px;
+        position: absolute;
+        top: -1px;
+        right: -1px;
+      }
+      &.is-disabled {
+        background: $--color-primary-1;
+        border-color: $--color-primary-2;
+        .el-radio__label {
+          color: $--color-text-3;
+        }
+      }
+    }
+
+    &.is-disabled {
+      cursor: not-allowed;
+      background: $--color-fill-1;
+    }
+  }
   @include when(button) {
     margin-right: 8px;
     color: $--color-text-4;
