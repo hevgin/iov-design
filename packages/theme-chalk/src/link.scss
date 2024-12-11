@@ -36,15 +36,15 @@ $typeMap: (
 
   @include when(disabled) {
     cursor: not-allowed;
-  } 
+  }
 
-  & [class*="el-icon-"] {
+  & [class*="iov-icon-"] {
     & + span {
-      margin-left: 5px;
+      margin-left: 2px;
     }
   }
-    
-    
+
+
   &.el-link--default  {
     color: $--link-default-font-color;
     &:hover {
@@ -77,5 +77,4 @@ $typeMap: (
       }
     }
   }
-    
 }
