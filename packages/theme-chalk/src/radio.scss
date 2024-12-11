@@ -172,6 +172,9 @@
   }
 
   @include m(medium) {
+    .el-radio__label {
+      font-size: $--radio-font-medium-size;
+    }
     &.is-bordered,
     &.is-button {
       padding: $--radio-bordered-medium-padding;
@@ -187,6 +190,9 @@
     }
   }
   @include m(small) {
+    .el-radio__label {
+      font-size: $--radio-font-small-size;
+    }
     &.is-bordered,
     &.is-button {
       padding: $--radio-bordered-small-padding;
@@ -202,6 +208,9 @@
     }
   }
   @include m(mini) {
+    .el-radio__label {
+      font-size: $--radio-font-mini-size;
+    }
     &.is-bordered,
     &.is-button {
       padding: $--radio-bordered-mini-padding;
