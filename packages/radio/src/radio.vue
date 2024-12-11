@@ -2,7 +2,7 @@
   <label
     class="el-radio"
     :class="[
-      (border || button || groupButton) && radioSize ? 'el-radio--' + radioSize : '',
+      radioSize ? 'el-radio--' + radioSize : '',
       { 'is-disabled': isDisabled },
       { 'is-focus': focus },
       { 'is-bordered': border },
