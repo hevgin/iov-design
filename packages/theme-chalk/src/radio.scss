@@ -123,6 +123,9 @@
       &.is-disabled {
         background: $--color-primary-1;
         border-color: $--color-primary-2;
+        &:after {
+          opacity: .25;
+        }
         .el-radio__label {
           color: $--color-text-3;
         }
