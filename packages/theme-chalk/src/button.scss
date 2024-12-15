@@ -51,13 +51,13 @@
   }
 
   @include when(plain) {
-    background-color: $--color-white;
+    background-color: $--color-fill-1;
     &:hover {
       background-color: $--color-primary-1;
     }
   }
   @include when(dashed) {
-    background-color: $--color-white;
+    background-color: $--color-fill-1;
     border-style: dashed;
     &:hover {
       background-color: $--color-primary-1;
@@ -87,7 +87,7 @@
     }
 
     &.is-plain {
-      &,
+      &
       &:hover,
       &:focus {
         background-color: $--color-white;
@@ -135,10 +135,10 @@
   @include m(primary) {
     @include button-variant($--button-primary-font-color, $--button-primary-background-color, $--button-primary-background-color-hover, $--button-primary-background-color-active, $--button-primary-background-color-disabled);
     @include when(plain) {
-      @include button-plain($--color-primary-6, $--color-white, $--color-primary-5, $--color-primary-1, $--color-primary-7, $--color-primary-1, $--color-primary-3, $--color-white)
+      @include button-plain($--color-primary-6, $--color-primary-1, $--color-primary-5, $--color-primary-1, $--color-primary-7, $--color-primary-1, $--color-primary-3, $--color-white)
     }
     @include when(dashed) {
-      @include button-dashed($--color-primary-6, $--color-white, $--color-primary-5, $--color-primary-1, $--color-primary-7, $--color-primary-1, $--color-primary-3, $--color-white)
+      @include button-dashed($--color-primary-6, $--color-primary-1, $--color-primary-5, $--color-primary-1, $--color-primary-7, $--color-primary-1, $--color-primary-3, $--color-white)
     }
     @include when(ghost) {
       @include button-ghost($--color-primary-6, $--color-primary-5, $--color-primary-7, $--color-primary-3)
@@ -147,10 +147,10 @@
   @include m(success) {
     @include button-variant($--button-success-font-color, $--button-success-background-color, $--button-success-background-color-hover, $--button-success-background-color-active, $--button-success-background-color-disabled);
     @include when(plain) {
-      @include button-plain($--color-success-6, $--color-white, $--color-success-5, $--color-success-1, $--color-success-7, $--color-success-1, $--color-success-3, $--color-white)
+      @include button-plain($--color-success-6, $--color-success-1, $--color-success-5, $--color-success-1, $--color-success-7, $--color-success-1, $--color-success-3, $--color-white)
     }
     @include when(dashed) {
-      @include button-dashed($--color-success-6, $--color-white, $--color-success-5, $--color-success-1, $--color-success-7, $--color-success-1, $--color-success-3, $--color-white)
+      @include button-dashed($--color-success-6, $--color-success-1, $--color-success-5, $--color-success-1, $--color-success-7, $--color-success-1, $--color-success-3, $--color-white)
     }
     @include when(ghost) {
       @include button-ghost($--color-success-6, $--color-success-5, $--color-success-7, $--color-success-3)
@@ -159,10 +159,10 @@
   @include m(warning) {
     @include button-variant($--button-warning-font-color, $--button-warning-background-color, $--button-warning-background-color-hover, $--button-warning-background-color-active, $--button-warning-background-color-disabled);
     @include when(plain) {
-      @include button-plain($--color-warning-6, $--color-white, $--color-warning-5, $--color-warning-1, $--color-warning-7, $--color-warning-1, $--color-warning-3, $--color-white)
+      @include button-plain($--color-warning-6, $--color-warning-1, $--color-warning-5, $--color-warning-1, $--color-warning-7, $--color-warning-1, $--color-warning-3, $--color-white)
     }
     @include when(dashed) {
-      @include button-dashed($--color-warning-6, $--color-white, $--color-warning-5, $--color-warning-1, $--color-warning-7, $--color-warning-1, $--color-warning-3, $--color-white)
+      @include button-dashed($--color-warning-6, $--color-warning-1, $--color-warning-5, $--color-warning-1, $--color-warning-7, $--color-warning-1, $--color-warning-3, $--color-white)
     }
     @include when(ghost) {
       @include button-ghost($--color-warning-6, $--color-warning-5, $--color-warning-7, $--color-warning-3)
@@ -171,10 +171,10 @@
   @include m(danger) {
     @include button-variant($--button-danger-font-color, $--button-danger-background-color, $--button-danger-background-color-hover, $--button-danger-background-color-active, $--button-danger-background-color-disabled);
     @include when(plain) {
-      @include button-plain($--color-danger-6, $--color-white, $--color-danger-5, $--color-danger-1, $--color-danger-7, $--color-danger-1, $--color-danger-3, $--color-white)
+      @include button-plain($--color-danger-6, $--color-danger-1, $--color-danger-5, $--color-danger-1, $--color-danger-7, $--color-danger-1, $--color-danger-3, $--color-white)
     }
     @include when(dashed) {
-      @include button-dashed($--color-danger-6, $--color-white, $--color-danger-5, $--color-danger-1, $--color-danger-7, $--color-danger-1, $--color-danger-3, $--color-white)
+      @include button-dashed($--color-danger-6, $--color-danger-1, $--color-danger-5, $--color-danger-1, $--color-danger-7, $--color-danger-1, $--color-danger-3, $--color-white)
     }
     @include when(ghost) {
       @include button-ghost($--color-danger-6, $--color-danger-5, $--color-danger-7, $--color-danger-3)
@@ -183,10 +183,10 @@
   @include m(info) {
     @include button-variant($--button-info-font-color, $--button-info-background-color, $--button-info-background-color-hover, $--button-info-background-color-active, $--button-info-background-color-disabled);
     @include when(plain) {
-      @include button-plain($--color-fill-6, $--color-white, $--color-fill-5, $--color-fill-1, $--color-fill-7, $--color-fill-1, $--color-fill-3, $--color-white)
+      @include button-plain($--color-fill-6, $--color-fill-1, $--color-fill-5, $--color-fill-1, $--color-fill-7, $--color-fill-1, $--color-fill-3, $--color-white)
     }
     @include when(dashed) {
-      @include button-dashed($--color-fill-6, $--color-white, $--color-fill-5, $--color-fill-1, $--color-fill-7, $--color-fill-1, $--color-fill-3, $--color-white)
+      @include button-dashed($--color-fill-6, $--color-fill-1, $--color-fill-5, $--color-fill-1, $--color-fill-7, $--color-fill-1, $--color-fill-3, $--color-white)
     }
     @include when(ghost) {
       @include button-ghost($--color-fill-6, $--color-fill-5, $--color-fill-7, $--color-fill-3)
