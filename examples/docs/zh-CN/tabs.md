@@ -14,7 +14,72 @@
     <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
     <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
     <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth" disabled>定时任务补偿</el-tab-pane>
+  </el-tabs>
+
+
+  <el-tabs v-model="activeName" @tab-click="handleClick" size="medium">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth" disabled>定时任务补偿</el-tab-pane>
+  </el-tabs>
+
+
+  <el-tabs v-model="activeName" @tab-click="handleClick" size="small">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth" disabled>定时任务补偿</el-tab-pane>
+  </el-tabs>
+
+
+  <el-tabs v-model="activeName" @tab-click="handleClick" size="mini">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth" disabled>定时任务补偿</el-tab-pane>
+  </el-tabs>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'second'
+      };
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
+    }
+  };
+</script>
+```
+:::
+
+
+### 带图标的标签页
+:::demo
+
+```html
+<template>
+  <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first">
+      <span slot="label"><i class="el-icon-date"/> 用户管理</span>
+    </el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">
+      <span slot="label"><i class="el-icon-date"/> 配置管理</span>
+      配置管理
+      </el-tab-pane>
+    <el-tab-pane label="角色管理" name="third">
+      <span slot="label"><i class="el-icon-date"/> 角色管理</span>
+      角色管理
+      </el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth" disabled>
+      <span slot="label"><i class="el-icon-date"/> 定时任务补偿</span>
+      定时任务补偿
+      </el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -43,6 +108,27 @@
 ```html
 <template>
   <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+  </el-tabs>
+
+  <el-tabs v-model="activeName" type="card" size="medium" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+  </el-tabs>
+
+  <el-tabs v-model="activeName" type="card" size="small" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+  </el-tabs>
+
+  <el-tabs v-model="activeName" type="card" size="mini" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
     <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
     <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
@@ -190,7 +276,7 @@
               }
             });
           }
-          
+
           this.editableTabsValue = activeName;
           this.editableTabs = tabs.filter(tab => tab.name !== targetName);
         }
@@ -263,7 +349,7 @@
             }
           });
         }
-        
+
         this.editableTabsValue = activeName;
         this.editableTabs = tabs.filter(tab => tab.name !== targetName);
       }

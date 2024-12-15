@@ -10,6 +10,7 @@
 
     props: {
       type: String,
+      size: String,
       activeName: String,
       closable: Boolean,
       addable: Boolean,
@@ -112,6 +113,7 @@
     render(h) {
       let {
         type,
+        size,
         handleTabClick,
         handleTabRemove,
         handleTabAdd,
@@ -164,6 +166,7 @@
         <div class={{
           'el-tabs': true,
           'el-tabs--card': type === 'card',
+          [`el-tabs--${size}`]: size,
           [`el-tabs--${tabPosition}`]: true,
           'el-tabs--border-card': type === 'border-card'
         }}>
@@ -171,7 +174,7 @@
         </div>
       );
     },
-  
+
     created() {
       if (!this.currentName) {
         this.setCurrentName('0');

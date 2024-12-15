@@ -43,8 +43,8 @@
             }
           });
 
-          const transform = `translate${firstUpperCase(sizeDir)}(${offset}px)`;
-          style[sizeName] = tabSize + 'px';
+          const transform = `translate${firstUpperCase(sizeDir)}(${offset + 4}px)`;
+          style[sizeName] = tabSize - 8 + 'px';
           style.transform = transform;
           style.msTransform = transform;
           style.webkitTransform = transform;
