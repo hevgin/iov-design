@@ -132,6 +132,7 @@
     display: block;
     font-size: inherit;
     height: $--input-height;
+    line-height: $--input-height;
     outline: none;
     padding: 0 12px;
     transition: $--border-transition-base;
@@ -172,6 +173,7 @@
     z-index: 2;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
   }
 
   @include e(suffix-inner) {
@@ -193,6 +195,7 @@
     z-index: 2;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
   }
 
   @include e(icon) {
@@ -237,7 +240,7 @@
     }
     .el-input__prefix,
     .el-input__suffix,
-    .el-input-group__prefix-label,
+    // .el-input-group__prefix-label,
     .el-input-group__suffix-label {
       background-color: $--input-disabled-fill;
     }
@@ -278,10 +281,23 @@
       line-height: $--input-medium-height;
     }
 
+    .el-input-group__prepend,
+    .el-input-group__append {
+      height: $--input-medium-height;
+      line-height: $--input-medium-height;
+    }
+    .el-input-group__prefix-label,
+    .el-input-group__suffix-label {
+      height: $--input-medium-height - 2px;
+      line-height: $--input-medium-height - 2px;
+    }
+
     &.el-input-group--prefix-label,
     &.el-input-group--suffix-label {
+      height: $--input-medium-height;
       .el-input__inner {
         height: $--input-medium-height - 2px;
+        line-height: $--input-medium-height - 2px;
       }
       .el-input__icon {
         line-height: $--input-medium-height - 2px;
@@ -299,10 +315,23 @@
       line-height: $--input-small-height;
     }
 
+    .el-input-group__prepend,
+    .el-input-group__append {
+      height: $--input-small-height;
+      line-height: $--input-small-height;
+    }
+    .el-input-group__prefix-label,
+    .el-input-group__suffix-label {
+      height: $--input-small-height - 2px;
+      line-height: $--input-small-height - 2px;
+    }
+
     &.el-input-group--prefix-label,
     &.el-input-group--suffix-label {
+      height: $--input-small-height;
       .el-input__inner {
         height: $--input-small-height - 2px;
+        line-height: $--input-small-height - 2px;
       }
       .el-input__icon {
         line-height: $--input-small-height - 2px;
@@ -320,10 +349,23 @@
       line-height: $--input-mini-height;
     }
 
+    .el-input-group__prepend,
+    .el-input-group__append {
+      height: $--input-mini-height;
+      line-height: $--input-mini-height;
+    }
+    .el-input-group__prefix-label,
+    .el-input-group__suffix-label {
+      height: $--input-mini-height - 2px;
+      line-height: $--input-mini-height - 2px;
+    }
+
     &.el-input-group--prefix-label,
     &.el-input-group--suffix-label {
+      height: $--input-mini-height;
       .el-input__inner {
         height: $--input-mini-height - 2px;
+        line-height: $--input-mini-height - 2px;
       }
       .el-input__icon {
         line-height: $--input-mini-height - 2px;
@@ -334,7 +376,7 @@
 
 @include b(input-group) {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   width: 100%;
 
   > .el-input__inner {
@@ -366,6 +408,7 @@
     background-color: $--input-background-color;
     background-image: none;
     border: $--input-border;
+    box-sizing: border-box;
     border-radius: $--input-border-radius;
     transition: $--border-transition-base;
     &:hover {
@@ -412,6 +455,8 @@
     display: flex;
     align-items: center;
     border-radius: $--input-border-radius;
+    height: $--input-height - 2px;
+    line-height: $--input-height - 2px;
 
     &:focus {
       outline: none;
@@ -465,6 +510,8 @@
     margin-right: -1px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    height: $--input-height;
+    line-height: $--input-height;
     .el-button {
       position: relative;
       border-radius: $--input-border-radius;
@@ -485,6 +532,8 @@
     margin-left: -1px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    height: $--input-height;
+    line-height: $--input-height;
     .el-button {
       position: relative;
       border-radius: $--input-border-radius;
