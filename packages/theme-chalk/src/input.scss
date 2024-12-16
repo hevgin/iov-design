@@ -88,6 +88,7 @@
       color: $--input-icon-color;
       font-size: 10px;
       position: relative;
+      line-height: 1;
     }
     &:after {
       border-radius: 100%;
@@ -384,6 +385,7 @@
     // border-radius: 0;
   }
   .el-input__inner {
+    z-index: 1;
     &:hover {
       z-index: 1;
     }
@@ -431,7 +433,8 @@
     .el-input__icon {
       line-height: $--input-height - 2px;
     }
-    .el-input__inner {
+    .el-input__inner,
+    &:focus {
       margin: 0 auto;
       border: 0 none;
       box-shadow: none;

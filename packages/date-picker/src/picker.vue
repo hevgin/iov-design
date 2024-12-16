@@ -30,7 +30,7 @@
     <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
-      :class="[showClose ? '' + clearIcon : '']"
+      :class="[showClose ? '' + clearIcon + ' el-input__clear' : '']"
       v-if="haveTrigger">
     </i>
   </el-input>
@@ -81,8 +81,7 @@
       class="el-range-input">
     <i
       @click="handleClickIcon"
-      v-if="haveTrigger"
-      :class="[showClose ? '' + clearIcon : '']"
+      :class="[showClose ? '' + clearIcon + ' el-input__clear' : '']"
       class="el-input__icon el-range__close-icon">
     </i>
     <i v-if="!showClose" :class="['el-input__icon', 'el-range__icon', triggerClass]"></i>
@@ -382,7 +381,7 @@ export default {
     prefixIcon: String,
     clearIcon: {
       type: String,
-      default: 'el-icon-circle-close'
+      default: 'iov-icon-close-mini'
     },
     name: {
       default: '',
@@ -506,7 +505,7 @@ export default {
     },
 
     triggerClass() {
-      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'el-icon-time' : 'el-icon-date');
+      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'iov-icon-time' : 'iov-icon-date');
     },
 
     selectionMode() {
