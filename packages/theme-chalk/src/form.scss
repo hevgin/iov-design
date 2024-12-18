@@ -144,19 +144,20 @@
   }
 
   @include when(error) {
-    & .el-input-group--prefix,
-    & .el-input-group--suffix {
-      & {
+    .el-input-group__inner {
+      &.el-input-group--prefix,
+      &.el-input-group--suffix {
         border-color: $--color-danger-6;
-      }
-      &.is-focus {
-        border-color: $--color-danger-6;
-        box-shadow: 0 0 0 2px rgba(245,63,63,0.1);
-      }
-      & .el-input__inner,
-      & .el-input__inner:focus {
-        border-color: transparent;
-        box-shadow: none;
+        z-index: 3;
+        &.is-focus {
+          border-color: $--color-danger-6;
+          box-shadow: 0 0 0 2px rgba(245,63,63,0.1);
+        }
+        .el-input__inner,
+        .el-input__inner:focus {
+          border-color: transparent;
+          box-shadow: none;
+        }
       }
     }
     & .el-input__inner,
@@ -173,7 +174,7 @@
     & .el-input-group__prepend {
       & .el-input__inner,
       & .el-input__inner:focus {
-        border-color: transparent;
+        border-color: $--color-line-2;
         box-shadow: none;
       }
     }
