@@ -144,8 +144,8 @@
   }
 
   @include when(error) {
-    & .el-input-group--prefix-label,
-    & .el-input-group--suffix-label {
+    & .el-input-group--prefix,
+    & .el-input-group--suffix {
       & {
         border-color: $--color-danger-6;
       }

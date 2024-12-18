@@ -293,8 +293,8 @@
       line-height: $--input-medium-height - 2px;
     }
 
-    &.el-input-group--prefix-label,
-    &.el-input-group--suffix-label {
+    .el-input-group--prefix,
+    .el-input-group--suffix {
       height: $--input-medium-height;
       .el-input__inner {
         height: $--input-medium-height - 2px;
@@ -327,8 +327,8 @@
       line-height: $--input-small-height - 2px;
     }
 
-    &.el-input-group--prefix-label,
-    &.el-input-group--suffix-label {
+    .el-input-group--prefix,
+    .el-input-group--suffix {
       height: $--input-small-height;
       .el-input__inner {
         height: $--input-small-height - 2px;
@@ -361,8 +361,8 @@
       line-height: $--input-mini-height - 2px;
     }
 
-    &.el-input-group--prefix-label,
-    &.el-input-group--suffix-label {
+    .el-input-group--prefix,
+    .el-input-group--suffix {
       height: $--input-mini-height;
       .el-input__inner {
         height: $--input-mini-height - 2px;
@@ -384,28 +384,32 @@
     display: block;
     // border-radius: 0;
   }
-  .el-input__inner {
-    z-index: 1;
+  .el-input-group__inner {
+    flex: 1;
+    display: flex;
+    position: relative;
     &:hover {
-      z-index: 1;
+      z-index: 2;
     }
-    &:focus {
+    .el-input__inner:focus {
       z-index: 2;
     }
   }
   @include m(append) {
-    .el-input__inner {
+    .el-input__inner,
+    .el-input-group__inner {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
   }
   @include m(prepend) {
-    .el-input__inner {
+    .el-input__inner,
+    .el-input-group__inner {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
   }
-  @include m((prefix-label, suffix-label)) {
+  @include m((prefix, suffix)) {
     color: $--input-font-color;
     background-color: $--input-background-color;
     background-image: none;
@@ -426,6 +430,7 @@
       outline: none;
       border-color: $--input-focus-border;
       box-shadow: $--input-box-shadow;
+      z-index: 2;
     }
     &.is-disabled {
       background-color: $--input-disabled-fill;
@@ -464,11 +469,26 @@
     &:focus {
       outline: none;
     }
+    .el-select {
+      .el-input.is-focus .el-input__inner {
+        border: 0 none;
+        box-shadow: none;
+      }
+    }
+  }
+
+  @include e(prefix-label) {
+    .el-select {
+      margin-left: -12px;
+    }
   }
 
   @include e(suffix-label) {
     padding: 0 12px 0 0;
     display: inline;
+    .el-select {
+      margin-right: -12px;
+    }
   }
 
   @include e((append, prepend)) {
@@ -490,16 +510,27 @@
       box-shadow: $--input-box-shadow;
     }
 
-    &.has-select,
-    &.has-button {
+    &.is-select,
+    &.is-button {
       border: 0 none;
       padding: 0;
       .el-input__suffix {
         background: none;
       }
-    }
-    &.has-button {
-      z-index: 2;
+      // &:hover {
+      //   z-index: 2;
+      // }
+      // &:hover {
+      //   .el-input {
+      //     z-index: 2;
+      //   }
+      // }
+      // .el-input.is-focus {
+      //   z-index: 2;
+      // }
+      // .el-input__inner:focus {
+      //   z-index: 2;
+      // }
     }
     .is-focus {
       .el-input__inner {

@@ -8,8 +8,6 @@
       'el-input-group': $slots.prepend || $slots.append || $slots.prefixLabel || $slots.suffixLabel,
       'el-input-group--append': $slots.append,
       'el-input-group--prepend': $slots.prepend,
-      'el-input-group--prefix-label': $slots.prefixLabel,
-      'el-input-group--suffix-label': $slots.suffixLabel,
       'is-focus': ($slots.suffixLabel || $slots.prefixLabel) && focused,
       'el-input--prefix': $slots.prefix || prefixIcon,
       'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
@@ -23,55 +21,61 @@
       <div class="el-input-group__prepend" v-if="$slots.prepend">
         <slot name="prepend"></slot>
       </div>
-      <!-- 前置标签 -->
-      <div class="el-input-group__prefix-label" v-if="$slots.prefixLabel">
-        <slot name="prefixLabel"></slot>
-      </div>
-      <input
-        :tabindex="tabindex"
-        v-if="type !== 'textarea'"
-        class="el-input__inner"
-        v-bind="$attrs"
-        :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
-        :disabled="inputDisabled"
-        :readonly="readonly"
-        :autocomplete="autoComplete || autocomplete"
-        ref="input"
-        @compositionstart="handleCompositionStart"
-        @compositionupdate="handleCompositionUpdate"
-        @compositionend="handleCompositionEnd"
-        @input="handleInput"
-        @focus="handleFocus"
-        @blur="handleBlur"
-        @change="handleChange"
-        :aria-label="label"
-      >
-      <!-- 前置内容 -->
-      <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
-        <slot name="prefix"></slot>
-        <i class="el-input__icon" v-if="prefixIcon" :class="prefixIcon"></i>
-      </span>
-      <!-- 后置内容 -->
-      <span class="el-input__suffix" v-if="getSuffixVisible()">
-        <span class="el-input__suffix-inner">
-          <i v-if="showClear" class="el-input__icon iov-icon-close-mini el-input__clear" @mousedown.prevent @click="clear"></i>
-          <!-- 后置标签 -->
-          <span class="el-input-group__suffix-label" v-if="$slots.suffixLabel">
-            <slot name="suffixLabel"></slot>
-          </span>
-          <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
-            <slot name="suffix"></slot>
-            <i class="el-input__icon" v-if="suffixIcon" :class="suffixIcon"></i>
-          </template>
-          <i v-if="showPwdVisible" class="el-input__icon" :class="passwordVisible ? 'iov-icon-eye' : 'iov-icon-eye-close'" @click="handlePasswordVisible"></i>
-          <span v-if="isWordLimitVisible" class="el-input__count">
-            <span class="el-input__count-inner">
-              {{ textLength }}/{{ upperLimit }}
+      <div class="el-input-group__inner" :class="{
+          'el-input-group--prefix': $slots.prefixLabel,
+          'el-input-group--suffix': $slots.suffixLabel,
+          'is-focus': ($slots.suffixLabel || $slots.prefixLabel) && focused
+        }">
+        <!-- 前置标签 -->
+        <div class="el-input-group__prefix-label" v-if="$slots.prefixLabel">
+          <slot name="prefixLabel"></slot>
+        </div>
+        <input
+          :tabindex="tabindex"
+          v-if="type !== 'textarea'"
+          class="el-input__inner"
+          v-bind="$attrs"
+          :type="showPassword ? (passwordVisible ? 'text': 'password') : type"
+          :disabled="inputDisabled"
+          :readonly="readonly"
+          :autocomplete="autoComplete || autocomplete"
+          ref="input"
+          @compositionstart="handleCompositionStart"
+          @compositionupdate="handleCompositionUpdate"
+          @compositionend="handleCompositionEnd"
+          @input="handleInput"
+          @focus="handleFocus"
+          @blur="handleBlur"
+          @change="handleChange"
+          :aria-label="label"
+        >
+        <!-- 前置内容 -->
+        <span class="el-input__prefix" v-if="$slots.prefix || prefixIcon">
+          <slot name="prefix"></slot>
+          <i class="el-input__icon" v-if="prefixIcon" :class="prefixIcon"></i>
+        </span>
+        <!-- 后置内容 -->
+        <span class="el-input__suffix" v-if="getSuffixVisible()">
+          <span class="el-input__suffix-inner">
+            <i v-if="showClear" class="el-input__icon iov-icon-close-mini el-input__clear" @mousedown.prevent @click="clear"></i>
+            <!-- 后置标签 -->
+            <span class="el-input-group__suffix-label" v-if="$slots.suffixLabel">
+              <slot name="suffixLabel"></slot>
+            </span>
+            <template v-if="!showClear || !showPwdVisible || !isWordLimitVisible">
+              <slot name="suffix"></slot>
+              <i class="el-input__icon" v-if="suffixIcon" :class="suffixIcon"></i>
+            </template>
+            <i v-if="showPwdVisible" class="el-input__icon" :class="passwordVisible ? 'iov-icon-eye' : 'iov-icon-eye-close'" @click="handlePasswordVisible"></i>
+            <span v-if="isWordLimitVisible" class="el-input__count">
+              <span class="el-input__count-inner">
+                {{ textLength }}/{{ upperLimit }}
+              </span>
             </span>
           </span>
+          <i class="el-input__icon" v-if="validateState" :class="['el-input__validateIcon', validateIcon]"></i>
         </span>
-        <i class="el-input__icon" v-if="validateState" :class="['el-input__validateIcon', validateIcon]"></i>
-      </span>
+      </div>
       <!-- 后置元素 -->
       <div class="el-input-group__append" v-if="$slots.append">
         <slot name="append"></slot>
@@ -377,10 +381,10 @@
         const isSelect = pendantEl.querySelector('.el-select');
         const isButton = pendantEl.querySelector('.el-button');
         if (isSelect) {
-          addClass(pendantEl, 'has-select');
+          addClass(pendantEl, 'is-select');
         }
         if (isButton) {
-          addClass(pendantEl, 'has-button');
+          addClass(pendantEl, 'is-button');
         }
       },
       calcIconOffset(place) {
@@ -388,7 +392,7 @@
         if (!elList.length) return;
         let el = null;
         for (let i = 0; i < elList.length; i++) {
-          if (elList[i].parentNode === this.$el) {
+          if (elList[i].parentNode.parentNode === this.$el) {
             el = elList[i];
             break;
           }
@@ -410,9 +414,9 @@
         const embedEl = this.$el.querySelector(`.el-input-group__${place}-label`);
 
         if (this.$slots[pendant] && this.$slots[embed]) {
-          el.style.transform = place === 'prefix' ? `translateX(${pendantEl.offsetWidth + embedEl.offsetWidth}px)` : `translateX(-${pendantEl.offsetWidth}px)`;
+          el.style.transform = place === 'prefix' ? `translateX(${pendantEl.offsetWidth + embedEl.offsetWidth}px)` : '';
         } else if (this.$slots[pendant]) {
-          el.style.transform = place === 'prefix' ? `translateX(${pendantEl.offsetWidth}px)` : `translateX(-${pendantEl.offsetWidth}px)`;
+          el.style.transform = place === 'prefix' ? `translateX(${pendantEl.offsetWidth}px)` : '';
         } else if (this.$slots[embed]) {
           el.style.transform = place === 'prefix' ? `translateX(${embedEl.offsetWidth}px)` : '';
         } else {

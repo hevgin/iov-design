@@ -295,44 +295,144 @@ export default {
 :::demo
 ```html
 <el-row :gutter="12">
+  <el-col :span="12">
+    <el-input placeholder="请输入金额" v-model="input1" size="small" clearable>
+      <template slot="prefixLabel">金额</template>
+      <el-select v-model="select1" style="width:80px;" slot="append" placeholder="请选择">
+        <el-option label="万元" value="1"></el-option>
+        <el-option label="元" value="2"></el-option>
+      </el-select>
+    </el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input placeholder="请输入金额" v-model="input1" size="small" clearable>
+      <el-select v-model="select1" style="width:80px;" slot="prefixLabel" placeholder="请选择">
+        <el-option label="万元" value="1"></el-option>
+        <el-option label="元" value="2"></el-option>
+      </el-select>
+      <el-select v-model="select1" style="width:80px;" slot="suffixLabel" placeholder="请选择">
+        <el-option label="万元" value="1"></el-option>
+        <el-option label="元" value="2"></el-option>
+      </el-select>
+      <template slot="append">金额</template>
+    </el-input>
+  </el-col>
+
+  <el-col :span="12">
+    <el-input placeholder="请输入金额" v-model="input1" size="small" clearable>
+      <template slot="prefixLabel">金额</template>
+      <el-select v-model="select1" style="width:80px;" slot="suffixLabel" placeholder="请选择">
+        <el-option label="万元" value="1"></el-option>
+        <el-option label="元" value="2"></el-option>
+      </el-select>
+    </el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input placeholder="请输入金额" v-model="input1" size="small" clearable>
+      <el-select v-model="select1" style="width:80px;" slot="prefixLabel" placeholder="请选择">
+        <el-option label="万元" value="1"></el-option>
+        <el-option label="元" value="2"></el-option>
+      </el-select>
+      <el-select v-model="select1" style="width:80px;" slot="suffixLabel" placeholder="请选择">
+        <el-option label="万元" value="1"></el-option>
+        <el-option label="元" value="2"></el-option>
+      </el-select>
+      <template slot="append">金额</template>
+    </el-input>
+  </el-col>
+
   <el-col :span="24">
-    <el-input disabled placeholder="请输入金额" v-model="input1" size="small" clearable>
+    <el-input placeholder="请输入金额" v-model="input1" size="large" clearable>
+      <template slot="prefixLabel">金额</template>
+      <template slot="suffixLabel">元</template>
+    </el-input>
+  </el-col>
+  <el-col :span="24">
+    <el-input placeholder="请输入金额" v-model="input1" size="medium" clearable>
+      <template slot="prefixLabel">金额</template>
+      <template slot="suffixLabel">元</template>
+    </el-input>
+  </el-col>
+  <el-col :span="24">
+    <el-input placeholder="请输入金额" v-model="input1" size="small" clearable>
+      <template slot="prefixLabel">金额</template>
+      <template slot="suffixLabel">元</template>
+    </el-input>
+  </el-col>
+  <el-col :span="24">
+    <el-input placeholder="请输入金额" v-model="input1" size="mini" clearable>
       <template slot="prefixLabel">金额</template>
       <template slot="suffixLabel">元</template>
     </el-input>
   </el-col>
 
   <el-col :span="12">
-    <el-input disabled placeholder="请输入金额" v-model="input2" size="small" clearable>
+    <el-input placeholder="请输入金额" v-model="input2" size="small" clearable>
       <template slot="prefixLabel">金额</template>
     </el-input>
   </el-col>
   <el-col :span="12">
-    <el-input disabled placeholder="请输入金额" v-model="input3" size="small" clearable>
+    <el-input placeholder="请输入金额" v-model="input3" size="small" clearable>
       <template slot="suffixLabel">元</template>
     </el-input>
   </el-col>
 
   <el-col :span="24">
-    <el-input disabled placeholder="请输入内容" v-model="input4" size="small" clearable>
+    <el-input placeholder="请输入内容large" v-model="input4" size="large" clearable>
       <i slot="prefix" class="el-input__icon el-icon-search"></i>
       <i slot="suffix" class="el-input__icon el-icon-info"></i>
     </el-input>
   </el-col>
 
   <el-col :span="12">
-    <el-input disabled placeholder="请输入内容" v-model="input5" size="small" clearable>
+    <el-input placeholder="请输入内容large" v-model="input5" size="large" clearable>
       <i slot="prefix" class="el-input__icon el-icon-search"></i>
     </el-input>
   </el-col>
   <el-col :span="12">
-    <el-input disabled placeholder="请输入内容" v-model="input6" size="small" clearable>
+    <el-input placeholder="请输入内容large" v-model="input6" size="large" clearable>
       <i slot="suffix" class="el-input__icon el-icon-info"></i>
     </el-input>
   </el-col>
 
   <el-col :span="24">
-    <el-input disabled placeholder="请输入内容" v-model="input7" size="small">
+    <el-input placeholder="请输入内容small" v-model="input4" size="small" clearable>
+      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      <i slot="suffix" class="el-input__icon el-icon-info"></i>
+    </el-input>
+  </el-col>
+
+  <el-col :span="12">
+    <el-input placeholder="请输入内容small" v-model="input5" size="small" clearable>
+      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+    </el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input placeholder="请输入内容small" v-model="input6" size="small" clearable>
+      <i slot="suffix" class="el-input__icon el-icon-info"></i>
+    </el-input>
+  </el-col>
+
+  <el-col :span="24">
+    <el-input placeholder="请输入内容mini" v-model="input4" size="mini" clearable>
+      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      <i slot="suffix" class="el-input__icon el-icon-info"></i>
+    </el-input>
+  </el-col>
+
+  <el-col :span="12">
+    <el-input placeholder="请输入内容mini" v-model="input5" size="mini" clearable>
+      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+    </el-input>
+  </el-col>
+  <el-col :span="12">
+    <el-input placeholder="请输入内容mini" v-model="input6" size="mini" clearable>
+      <i slot="suffix" class="el-input__icon el-icon-info"></i>
+    </el-input>
+  </el-col>
+
+  <el-col :span="24">
+    <el-input placeholder="请输入内容" v-model="input7" size="small">
       <i slot="prefix" class="el-input__icon el-icon-search"></i>
       <i slot="suffix" class="el-input__icon el-icon-info"></i>
       <template slot="prefixLabel">金额</template>
