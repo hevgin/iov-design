@@ -660,6 +660,12 @@
         this.$nextTick(() => {
           if (!this.$refs.reference) return;
           let inputChildNodes = this.$refs.reference.$el.childNodes;
+          // 兼容input组件多加了一层el-input-group__inner
+          Array.from(inputChildNodes).find(child => {
+            if (child && child.classList && child.classList.contains('el-input-group__inner')) {
+              inputChildNodes = child.childNodes;
+            }
+          });
           let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
           const tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
