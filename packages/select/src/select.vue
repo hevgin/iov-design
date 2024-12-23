@@ -8,7 +8,7 @@
       class="el-select__tags"
       v-if="multiple"
       ref="tags"
-      :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%' }">
+      :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%', left: tagsLeft }">
       <span class="el-tag__group" v-if="collapseTags && selected.length">
         <el-tag
           :closable="!selectDisabled"
@@ -338,7 +338,8 @@
         currentPlaceholder: '',
         menuVisibleOnFocus: false,
         isOnComposition: false,
-        isSilentBlur: false
+        isSilentBlur: false,
+        tagsLeft: 0
       };
     },
 
@@ -649,6 +650,19 @@
         }
       },
 
+      resetTagsLeft() {
+        this.$nextTick(() => {
+          const prefixLabel = this.$el.querySelector('.el-input-group__prefix-label');
+          if (prefixLabel) {
+            const style = prefixLabel && window.getComputedStyle(prefixLabel);
+            const width = +(style.width.replace(/px/, ''));
+            const paddingLeft = +(style.paddingLeft.replace(/px/, ''));
+            const paddingRight = +(style.paddingRight.replace(/px/, ''));
+            this.tagsLeft = (width + paddingLeft + paddingRight + 12) + 'px';
+          }
+        });
+      },
+
       resetInputState(e) {
         if (e.keyCode !== 8) this.toggleLastOptionHitState(false);
         this.inputLength = this.$refs.input.value.length * 15 + 20;
@@ -818,7 +832,10 @@
 
       handleResize() {
         this.resetInputWidth();
-        if (this.multiple) this.resetInputHeight();
+        if (this.multiple) {
+          this.resetInputHeight();
+          this.resetTagsLeft();
+        }
       },
 
       checkDefaultFirstOption() {
