@@ -465,6 +465,7 @@
     border-radius: $--input-border-radius;
     height: $--input-height - 2px;
     line-height: $--input-height - 2px;
+    box-sizing: border-box;
 
     &:focus {
       outline: none;
