@@ -658,7 +658,7 @@
             const width = +(style.width.replace(/px/, ''));
             const paddingLeft = +(style.paddingLeft.replace(/px/, ''));
             const paddingRight = +(style.paddingRight.replace(/px/, ''));
-            this.tagsLeft = (width + paddingLeft + paddingRight + 12) + 'px';
+            this.tagsLeft = (width + paddingLeft + paddingRight) + 'px';
           }
         });
       },
