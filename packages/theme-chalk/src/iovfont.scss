@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'iovfont';  /* Project id 4466910 */
-  src: url('//at.alicdn.com/t/c/font_4466910_7yadddpuavp.woff2?t=1733912223052') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4466910_7yadddpuavp.woff?t=1733912223052') format('woff'),
-       url('//at.alicdn.com/t/c/font_4466910_7yadddpuavp.ttf?t=1733912223052') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4466910_g5asesa45u.woff2?t=1735024618979') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4466910_g5asesa45u.woff?t=1735024618979') format('woff'),
+       url('//at.alicdn.com/t/c/font_4466910_g5asesa45u.ttf?t=1735024618979') format('truetype');
 }
 
 [class^="iov-icon-"], [class*=" iov-icon-"] {
@@ -34,6 +34,10 @@
     animation: rotating 2s linear infinite;
     display: inline-block;
   }
+}
+
+.iov-icon-symbol-equal:before {
+  content: "\e6e7";
 }
 
 .iov-icon-parenthesis-left:before {
