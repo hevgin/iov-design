@@ -12,7 +12,10 @@
   <el-link type="success">成功链接</el-link>
   <el-link type="warning">警告链接</el-link>
   <el-link type="danger">危险链接</el-link>
-  <el-link type="info">信息链接</el-link>
+  <el-link type="gold">信息链接</el-link>
+  <el-link type="blue">信息链接</el-link>
+  <el-link type="purple">信息链接</el-link>
+  <el-link type="pink">信息链接</el-link>
 </div>
 ```
 :::
@@ -27,7 +30,10 @@
   <el-link type="success" disabled>成功链接</el-link>
   <el-link type="warning" disabled>警告链接</el-link>
   <el-link type="danger" disabled>危险链接</el-link>
-  <el-link type="info" disabled>信息链接</el-link>
+  <el-link type="gold" disabled>信息链接</el-link>
+  <el-link type="blue" disabled>信息链接</el-link>
+  <el-link type="purple" disabled>信息链接</el-link>
+  <el-link type="pink" disabled>信息链接</el-link>
 </div>
 ```
 :::
@@ -37,8 +43,8 @@
 :::demo
 ```html
 <div>
-  <el-link :underline="false">无下划线</el-link>
-  <el-link>有下划线</el-link>
+  <el-link :underline="true">有下划线</el-link>
+  <el-link>无下划线</el-link>
 </div>
 ```
 :::

@@ -13,7 +13,7 @@
         </span>
         <p class="el-alert__description" v-if="$slots.default && !description"><slot></slot></p>
         <p class="el-alert__description" v-if="description && !$slots.default">{{ description }}</p>
-        <i class="el-alert__closebtn" :class="{ 'is-customed': closeText !== '', 'el-icon-close': closeText === '' }" v-show="closable" @click="close()">{{closeText}}</i>
+        <i class="el-alert__closebtn" :class="{ 'is-customed': closeText !== '', 'iov-icon-close': closeText === '' }" v-show="closable" @click="close()">{{closeText}}</i>
       </div>
     </div>
   </transition>
@@ -21,9 +21,9 @@
 
 <script type="text/babel">
   const TYPE_CLASSES_MAP = {
-    'success': 'el-icon-success',
-    'warning': 'el-icon-warning',
-    'error': 'el-icon-error'
+    'success': 'iov-icon-fill-success',
+    'warning': 'iov-icon-fill-warning',
+    'error': 'iov-icon-fill-fail'
   };
   export default {
     name: 'ElAlert',
@@ -79,7 +79,7 @@
       },
 
       iconClass() {
-        return TYPE_CLASSES_MAP[this.type] || 'el-icon-info';
+        return TYPE_CLASSES_MAP[this.type] || 'iov-icon-fill-explain';
       },
 
       isBigIcon() {

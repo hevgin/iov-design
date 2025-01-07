@@ -1,6 +1,6 @@
 {
   "name": "iov-design",
-  "version": "2.15.18",
+  "version": "2.15.21",
   "description": "A Component Library for Vue.js.",
   "main": "lib/iov-design.common.js",
   "files": [
@@ -12,6 +12,8 @@
   ],
   "typings": "types/index.d.ts",
   "scripts": {
+    "fnm:env": "fnm env --use-on-cd | Out-String | Invoke-Expression",
+    "fnm:use": "fnm use --install-if-missing 8",
     "bootstrap": "yarn || npm i",
     "build:file": "node build/bin/iconInit.js & node build/bin/build-entry.js & node build/bin/i18n.js & node build/bin/version.js",
     "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
