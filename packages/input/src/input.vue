@@ -22,6 +22,7 @@
         <slot name="prepend"></slot>
       </div>
       <div class="el-input-group__inner" :class="{
+          'is-disabled': inputDisabled,
           'el-input-group--prefix': $slots.prefixLabel,
           'el-input-group--suffix': $slots.suffixLabel,
           'is-focus': ($slots.suffixLabel || $slots.prefixLabel) && focused

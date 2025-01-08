@@ -677,14 +677,14 @@
           // 兼容input组件多加了一层el-input-group__inner
           Array.from(inputChildNodes).find(child => {
             if (child && child.classList && child.classList.contains('el-input-group__inner')) {
-              inputChildNodes = child.childNodes;
+              inputChildNodes = child;
             }
           });
-          let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
+          // let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
           const tags = this.$refs.tags;
           const tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
-          const sizeInMap = this.initialInputHeight || 40;
-          input.style.height = this.selected.length === 0
+          const sizeInMap = this.initialInputHeight || 36;
+          inputChildNodes.style.height = this.selected.length === 0
             ? sizeInMap + 'px'
             : Math.max(
               tags ? (tagsHeight + (tagsHeight > sizeInMap ? 6 : 0)) : 0,
@@ -907,11 +907,11 @@
       const reference = this.$refs.reference;
       if (reference && reference.$el) {
         const sizeMap = {
-          medium: 36,
-          small: 32,
-          mini: 28
+          medium: 32,
+          small: 30,
+          mini: 26
         };
-        const input = reference.$el.querySelector('input');
+        const input = reference.$el;
         this.initialInputHeight = input.getBoundingClientRect().height || sizeMap[this.selectSize];
       }
       if (this.remote && this.multiple) {
