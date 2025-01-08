@@ -64,12 +64,13 @@
     box-sizing: border-box;
     transition: border-color ease .3s;
     overflow: hidden;
+    background: #fff;
     .el-radio__input {
       float: left;
       font-size: 0;
       &.is-checked {
         & + .el-radio__label {
-          color: $--color-text-6;
+          color: $--color-primary-6;
         }
       }
     }
@@ -97,8 +98,8 @@
 
 
     &.is-disabled {
-      background: $--color-fill-1;
-      border-color: $--color-line-2;
+      background: $--color-primary-1;
+      border-color: $--color-primary-2;
       .el-radio__label {
         color: $--color-text-3;
       }
@@ -121,13 +122,13 @@
         right: -1px;
       }
       &.is-disabled {
+        border-color: $--color-primary-6;
         background: $--color-primary-1;
-        border-color: $--color-primary-2;
-        &:after {
-          opacity: .25;
-        }
+        // &:after {
+        //   opacity: .25;
+        // }
         .el-radio__label {
-          color: $--color-text-3;
+          color: $--color-primary-6;
         }
       }
     }
