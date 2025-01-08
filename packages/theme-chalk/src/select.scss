@@ -136,6 +136,7 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    pointer-events: none;
   }
 
   @include e(tags-text) {
@@ -176,6 +177,7 @@
     display: flex;
     max-width: 100%;
     align-items: center;
+    pointer-events: auto;
     &.el-tag--info {
       background: $--color-fill-2;
       color: $--color-text-6;

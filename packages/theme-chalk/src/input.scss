@@ -391,6 +391,7 @@
     flex: 1;
     display: flex;
     position: relative;
+    align-items: center;
   }
   @include m(append) {
     .el-input__inner,
