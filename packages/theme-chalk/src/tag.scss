@@ -301,7 +301,7 @@
   @include m(small) {
     font-size: $--tag-small-font-size;
     height: 26px;
-    border-radius: 2px;
+    border-radius: 4px;
     line-height: 24px;
 
     .el-tag-icon {
@@ -316,7 +316,7 @@
   @include m(mini) {
     font-size: $--tag-small-font-size;
     height: 22px;
-    border-radius: 2px;
+    border-radius: 4px;
     line-height: 20px;
 
     .el-tag-icon {
