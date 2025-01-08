@@ -384,16 +384,13 @@
     display: block;
     // border-radius: 0;
   }
+  > .el-input-group__inner {
+    z-index: 1;
+  }
   .el-input-group__inner {
     flex: 1;
     display: flex;
     position: relative;
-    &:hover {
-      z-index: 2;
-    }
-    .el-input__inner:focus {
-      z-index: 2;
-    }
   }
   @include m(append) {
     .el-input__inner,
@@ -417,6 +414,7 @@
     box-sizing: border-box;
     border-radius: $--input-border-radius;
     transition: $--border-transition-base;
+    z-index: 1;
     &:hover {
       border-color: $--input-hover-border;
       &.is-disabled {
@@ -518,20 +516,11 @@
       .el-input__suffix {
         background: none;
       }
-      // &:hover {
-      //   z-index: 2;
-      // }
-      // &:hover {
-      //   .el-input {
-      //     z-index: 2;
-      //   }
-      // }
-      // .el-input.is-focus {
-      //   z-index: 2;
-      // }
-      // .el-input__inner:focus {
-      //   z-index: 2;
-      // }
+      .el-input.is-focus,
+      .el-input:hover,
+      .el-input__inner:focus {
+        z-index: 2;
+      }
     }
     .is-focus {
       .el-input__inner {

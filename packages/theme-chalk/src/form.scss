@@ -148,7 +148,6 @@
       &.el-input-group--prefix,
       &.el-input-group--suffix {
         border-color: $--color-danger-6;
-        z-index: 3;
         &.is-focus {
           border-color: $--color-danger-6;
           box-shadow: 0 0 0 2px rgba(245,63,63,0.1);
@@ -160,8 +159,8 @@
         }
       }
     }
-    & .el-input__inner,
-    & .el-textarea__inner {
+    .el-input__inner,
+    .el-textarea__inner {
       & {
         border-color: $--color-danger-6;
       }
@@ -170,12 +169,20 @@
         box-shadow: 0 0 0 2px rgba(245,63,63,0.1);
       }
     }
-    & .el-input-group__append,
-    & .el-input-group__prepend {
-      & .el-input__inner,
-      & .el-input__inner:focus {
+    .el-input-group__append,
+    .el-input-group__prepend {
+      .el-input__inner {
         border-color: $--color-line-2;
         box-shadow: none;
+      }
+      .el-input__inner:focus {
+        border-color: $--input-focus-border;
+        box-shadow: $--input-box-shadow;
+      }
+      &:hover {
+        .el-input__inner {
+          border-color: $--input-hover-border;
+        }
       }
     }
     .el-input__validateIcon {

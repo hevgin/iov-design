@@ -8,7 +8,7 @@
 
 :::demo 在 Form 组件中，每一个表单域由一个 Form-Item 组件构成，表单域中可以放置各种类型的表单控件，包括 Input、Select、Checkbox、Radio、Switch、DatePicker、TimePicker
 ```html
-<el-form ref="form" :model="form" size="small">
+<el-form ref="form" :model="form" :rules="rule" size="small">
   <el-form-item>
     <el-input v-model="form.name">
       <template slot="prefixLabel">活动名称</template>
@@ -34,6 +34,27 @@
       <template slot="suffixLabel">元</template>
     </el-input>
   </el-form-item>
+  <el-form-item prop="amount">
+    <el-input v-model="form.amount">
+      <template slot="prefixLabel">活动金额</template>
+      <template slot="append">
+        <el-select v-model="form.unit" style="width:60px">
+          <el-option label="元" value="1"></el-option>
+          <el-option label="分" value="2"></el-option>
+        </el-select>
+      </template>
+    </el-input>
+  </el-form-item>
+  <el-form-item prop="amount">
+    <el-input v-model="form.amount">
+      <template slot="append">
+        <el-select v-model="form.unit" style="width:60px">
+          <el-option label="元" value="1"></el-option>
+          <el-option label="分" value="2"></el-option>
+        </el-select>
+      </template>
+    </el-input>
+  </el-form-item>
 </el-form>
 <script>
   export default {
@@ -43,7 +64,12 @@
           name: '',
           region: '',
           prize: ['1', '2'],
-          cost: ''
+          cost: '',
+          amount: '',
+          unit: '1'
+        },
+        rule: {
+          amount: { required: true, message: '字段不能为空', trigger: 'blur' }
         }
       }
     },
