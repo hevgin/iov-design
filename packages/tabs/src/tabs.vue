@@ -133,7 +133,7 @@
             tabindex="0"
             on-keydown={ (ev) => { if (ev.keyCode === 13) { handleTabAdd(); }} }
           >
-            <i class="el-icon-plus"></i>
+            <i class="iov-icon-plus"></i>
           </span>
         )
         : null;
@@ -165,7 +165,9 @@
       return (
         <div class={{
           'el-tabs': true,
+          'el-tabs--normal': !type,
           'el-tabs--card': type === 'card',
+          'el-tabs--capsule': type === 'capsule',
           [`el-tabs--${size}`]: size,
           [`el-tabs--${tabPosition}`]: true,
           'el-tabs--border-card': type === 'border-card'

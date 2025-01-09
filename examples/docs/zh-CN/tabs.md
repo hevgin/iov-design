@@ -152,6 +152,59 @@
 ```
 :::
 
+### 胶囊样式
+
+选项卡样式的标签页。
+
+:::demo 只需要设置 `type` 属性为 `capsule` 就可以使选项卡改变为标签风格。
+
+```html
+<template>
+  <el-tabs v-model="activeName" type="capsule" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third" disabled>角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+  </el-tabs>
+
+  <el-tabs v-model="activeName" type="capsule" size="medium" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third" disabled>角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+  </el-tabs>
+
+  <el-tabs v-model="activeName" type="capsule" size="small" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third" disabled>角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+  </el-tabs>
+
+  <el-tabs v-model="activeName" type="capsule" size="mini" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
+    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
+    <el-tab-pane label="角色管理" name="third" disabled>角色管理</el-tab-pane>
+    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+  </el-tabs>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### 卡片化
 
 卡片化的标签页。
@@ -363,7 +416,7 @@
 | 参数       | 说明     | 类型      | 可选值       | 默认值   |
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model  | 绑定值，选中选项卡的 name  | string   |  —  |  第一个选项卡的 name |
-| type     | 风格类型   | string   | card/border-card  |     —    |
+| type     | 风格类型   | string   | card/border-card/capsule  |     —    |
 | closable  | 标签是否可关闭   | boolean   | — |  false  |
 | addable  | 标签是否可增加   | boolean   | — |  false  |
 | editable  | 标签是否同时可增加和关闭   | boolean   | — |  false  |
