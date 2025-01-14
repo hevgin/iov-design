@@ -52,7 +52,7 @@
             { this.icon && <i class={`${this.icon} el-tag-icon`}></i> }
             <span class="el-tag__text">{ this.$slots.default }</span>
             {
-              this.closable && <i class="el-tag__close el-icon-close" on-click={ this.handleClose }></i>
+              this.closable && <i class="el-tag__close iov-icon-close" on-click={ this.handleClose }></i>
             }
           </span>
         </span>

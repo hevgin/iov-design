@@ -24,18 +24,25 @@
       @focus="handleFocus"
       @blur="handleBlur"
       @input="handleInput">
+      <template slot="prefixLabel" v-if="$slots.prefixLabel">
+        <slot name="prefixLabel"></slot>
+      </template>
+      <template slot="prefix" v-if="$slots.prefix">
+        <slot name="prefix"></slot>
+      </template>
       <template slot="suffix">
         <i
           v-if="clearBtnVisible"
+          style="padding-right: 0;"
           key="clear"
-          class="el-input__icon el-icon-circle-close"
+          class="el-input__icon iov-icon-close-mini el-input__clear"
           @click.stop="handleClear"></i>
         <i
           v-else
           key="arrow-down"
           :class="[
             'el-input__icon',
-            'el-icon-arrow-down',
+            'iov-icon-arrow-up',
             dropDownVisible && 'is-reverse'
           ]"
           @click.stop="toggleDropDownVisible()"></i>
@@ -50,6 +57,7 @@
         :size="tagSize"
         :hit="tag.hitState"
         :closable="tag.closable"
+        :class="{'is-disabled': !tag.closable && tag.key !== -1}"
         disable-transitions
         @close="deleteTag(tag)">
         <span>{{ tag.text }}</span>
@@ -99,7 +107,6 @@
               :tabindex="-1"
               @click="handleSuggestionClick(index)">
               <span>{{ item.text }}</span>
-              <i v-if="item.checked" class="el-icon-check"></i>
             </li>
           </template>
           <slot v-else name="empty">
@@ -528,7 +535,7 @@ export default {
           if (collapseTags) {
             tags.push({
               key: -1,
-              text: `+ ${restCount}`,
+              text: `+${restCount}`,
               closable: false
             });
           } else {

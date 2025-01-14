@@ -8,12 +8,59 @@
 
 :::demo 只需为 Cascader 的`options`属性指定选项数组即可渲染出一个级联选择器。通过`props.expandTrigger`可以定义展开子级菜单的触发方式。
 ```html
-<div class="block">
+
+<el-row :gutter="20" style="width:100%;">
+  <el-col :span="12">
+    默认 click 触发子菜单
+    <el-cascader
+    v-model="value"
+    :options="options"
+    @change="handleChange" clearable>
+      <i slot="prefix" class="el-input__icon iov-icon-search"></i>
+    </el-cascader>
+  </el-col>
+  <el-col :span="12">
+    hover 触发子菜单
+    <el-cascader
+      v-model="value"
+      :options="options"
+      :props="{ expandTrigger: 'hover' }"
+      size="medium"
+      @change="handleChange">
+        <template slot="prefixLabel">分类</template>
+      </el-cascader>
+  </el-col>
+  <el-col :span="24" style="margin-top: 20px">
+    <el-cascader
+    v-model="value"
+    :options="options"
+    size="small"
+    disabled
+    @change="handleChange" clearable>
+      <i slot="prefix" class="el-input__icon iov-icon-search"></i>
+      <template slot="prefixLabel">分类</template>
+    </el-cascader>
+  </el-col>
+  <el-col :span="24" style="margin-top: 20px">
+    <el-cascader
+    v-model="value"
+    :options="options"
+    size="mini"
+    @change="handleChange" clearable>
+      <i slot="prefix" class="el-input__icon iov-icon-search"></i>
+      <template slot="prefixLabel">分类</template>
+    </el-cascader>
+  </el-col>
+</el-row>
+<!-- <div class="block">
   <span class="demonstration">默认 click 触发子菜单</span>
   <el-cascader
     v-model="value"
     :options="options"
-    @change="handleChange"></el-cascader>
+    @change="handleChange" clearable>
+      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      <template slot="prefixLabel">分类</template>
+    </el-cascader>
 </div>
 <div class="block">
   <span class="demonstration">hover 触发子菜单</span>
@@ -22,16 +69,17 @@
     :options="options"
     :props="{ expandTrigger: 'hover' }"
     @change="handleChange"></el-cascader>
-</div>
+</div> -->
 
 <script>
   export default {
     data() {
       return {
-        value: [],
+        value: [ "zhinan", "shejiyuanze", "yizhi" ],
         options: [{
           value: 'zhinan',
           label: '指南',
+          disabled: true,
           children: [{
             value: 'shejiyuanze',
             label: '设计原则',
@@ -888,8 +936,10 @@
 <div class="block">
   <span class="demonstration">默认显示所有Tag</span>
   <el-cascader
+    v-model="value"
     :options="options"
     :props="props"
+    disabled
     clearable></el-cascader>
 </div>
 <div class="block">
@@ -905,6 +955,7 @@
   export default {
     data() {
       return {
+        value: [ [ 1, 2, 3 ], [ 1, 2, 4 ], [ 1, 2, 5 ] ],
         props: { multiple: true },
         options: [{
           value: 1,
@@ -1924,6 +1975,8 @@
 | 名称     | 说明 |
 |---------|-------------|
 | - | 自定义备选项的节点内容，参数为 { node, data }，分别为当前节点的 Node 对象和数据 |
+| prefix  | 组件头部内容 |
+| prefixLabel  | 组件头部标签 |
 | empty  | 无匹配选项时的内容 |
 
 ### CascaderPanel Attributes

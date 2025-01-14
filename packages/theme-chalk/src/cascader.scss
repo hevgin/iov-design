@@ -6,9 +6,9 @@
 @import "./cascader-panel";
 
 @include b(cascader) {
-  display: inline-block;
+  display: block;
   position: relative;
-  font-size: $--font-size-base;
+  font-size: $--input-font-size;
   line-height: $--input-height;
 
   &:not(.is-disabled):hover {
@@ -21,6 +21,9 @@
   .el-input {
     cursor: pointer;
 
+    .el-input__suffix {
+      right: 8px;
+    }
     .el-input__inner {
       text-overflow: ellipsis;
 
@@ -29,12 +32,15 @@
       }
     }
 
-    .el-icon-arrow-down {
+    .iov-icon-arrow-up {
+      padding-right: 0;
+      color: $--select-input-color;
+      font-size: $--select-icon-size;
       transition: transform .3s;
-      font-size: 14px;
+      transform: rotateZ(180deg);
 
       @include when(reverse) {
-        transform: rotateZ(180deg);
+        transform: rotateZ(0deg);
       }
     }
 
@@ -72,12 +78,15 @@
   }
 
   @include e(dropdown) {
-    margin: 5px 0;
+    margin: 4px 0;
     font-size: $--cascader-menu-font-size;
     background: $--cascader-menu-fill;
     border: $--cascader-menu-border;
     border-radius: $--cascader-menu-radius;
     box-shadow: $--cascader-menu-shadow;
+    .popper__arrow {
+      display: none;
+    }
   }
 
   @include e(tags) {
@@ -98,7 +107,12 @@
       max-width: 100%;
       margin: 2px 0 2px 6px;
       text-overflow: ellipsis;
-      background: $--cascader-tag-background;
+      color: $--color-text-6;
+
+      &.is-disabled {
+        color: $--color-text-3;
+        background: $--color-fill-3;
+      }
 
       &:not(.is-hit) {
         border-color: transparent;
@@ -110,14 +124,8 @@
         text-overflow: ellipsis;
       }
 
-      .el-icon-close {
+      .iov-icon-close {
         flex: none;
-        background-color: $--color-text-placeholder;
-        color: $--color-white;
-
-        &:hover {
-          background-color: $--color-text-secondary;
-        }
       }
     }
   }
@@ -129,7 +137,7 @@
   @include e(suggestion-list) {
     max-height: 204px;
     margin: 0;
-    padding: 6px 0;
+    padding: 4px;
     font-size: $--font-size-base;
     color: $--cascader-menu-font-color;
     text-align: center;
@@ -139,11 +147,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 34px;
-    padding: 0 15px;
+    height: 32px;
+    padding: 0 12px;
     text-align: left;
     outline: none;
     cursor: pointer;
+    border-radius: 2px;
 
     &:hover, &:focus {
       background: $--cascader-node-background-hover;
@@ -151,7 +160,8 @@
 
     &.is-checked {
       color: $--cascader-menu-selected-font-color;
-      font-weight: bold;
+      font-weight: 500;
+      background: $--color-primary-1;
     }
 
     > span {
@@ -160,7 +170,7 @@
   }
 
   @include e(empty-text) {
-    margin: 10px 0;
+    margin: 8px 0;
     color: $--cascader-color-empty;
   }
 
@@ -168,7 +178,7 @@
     flex: 1;
     height: 24px;
     min-width: 60px;
-    margin: 2px 0 2px 15px;
+    margin: 2px 0 2px 12px;
     padding: 0;
     color: $--cascader-menu-font-color;
     border: none;
