@@ -1,6 +1,6 @@
 {
   "name": "iov-design",
-  "version": "2.15.24",
+  "version": "2.15.25",
   "description": "A Component Library for Vue.js.",
   "main": "lib/iov-design.common.js",
   "files": [
