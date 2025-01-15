@@ -237,10 +237,9 @@
 
       collapseTagSize() {
         const sizeMap = {
-          '': 'medium',
-          large: 'medium',
-          medium: 'small',
-          small: 'mini',
+          large: '',
+          medium: 'medium',
+          small: 'small',
           mini: 'mini'
         };
         return sizeMap[this.selectSize];
@@ -653,13 +652,11 @@
       resetTagsLeft() {
         this.$nextTick(() => {
           const prefixLabel = this.$el.querySelector('.el-input-group__prefix-label');
-          if (prefixLabel) {
-            const style = prefixLabel && window.getComputedStyle(prefixLabel);
-            const width = +(style.width.replace(/px/, ''));
-            const paddingLeft = +(style.paddingLeft.replace(/px/, ''));
-            const paddingRight = +(style.paddingRight.replace(/px/, ''));
-            this.tagsLeft = (width + paddingLeft + paddingRight) + 'px';
-          }
+          const prefix = this.$el.querySelector('.el-input__prefix');
+          const inputInner = this.$el.querySelector('.el-input__inner');
+          const prefixLabelWidth = prefixLabel && Math.round(prefixLabel.getBoundingClientRect().width) || 0;
+          const inputPaddingLeft = prefixLabel || prefix ? Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) : 0;
+          this.tagsLeft = (prefixLabelWidth + inputPaddingLeft) + 'px';
         });
       },
 
@@ -673,18 +670,13 @@
         if (this.collapseTags && !this.filterable) return;
         this.$nextTick(() => {
           if (!this.$refs.reference) return;
-          let inputChildNodes = this.$refs.reference.$el.childNodes;
-          // 兼容input组件多加了一层el-input-group__inner
-          Array.from(inputChildNodes).find(child => {
-            if (child && child.classList && child.classList.contains('el-input-group__inner')) {
-              inputChildNodes = child;
-            }
-          });
-          // let input = [].filter.call(inputChildNodes, item => item.tagName === 'INPUT')[0];
+          const inputInner = this.$el.querySelector('.el-input__inner');
+          const groupPrefix = this.$el.querySelector('.el-input-group--prefix');
+          const input = groupPrefix || inputInner;
           const tags = this.$refs.tags;
           const tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
           const sizeInMap = this.initialInputHeight || 36;
-          inputChildNodes.style.height = this.selected.length === 0
+          input.style.height = this.selected.length === 0
             ? sizeInMap + 'px'
             : Math.max(
               tags ? (tagsHeight + (tagsHeight > sizeInMap ? 6 : 0)) : 0,

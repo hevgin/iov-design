@@ -175,9 +175,9 @@ const PopperMixin = {
 };
 
 const InputSizeMap = {
-  medium: 36,
-  small: 32,
-  mini: 28
+  medium: 32,
+  small: 30,
+  mini: 26
 };
 
 export default {
@@ -258,9 +258,10 @@ export default {
       return this.size || _elFormItemSize || (this.$ELEMENT || {}).size;
     },
     tagSize() {
-      return ['small', 'mini'].indexOf(this.realSize) > -1
-        ? 'mini'
-        : 'small';
+      return this.realSize;
+      // return ['small', 'mini'].indexOf(this.realSize) > -1
+      //   ? 'mini'
+      //   : 'small';
     },
     isDisabled() {
       return this.disabled || (this.elForm || {}).disabled;
@@ -355,7 +356,7 @@ export default {
   mounted() {
     const { input } = this.$refs;
     if (input && input.$el) {
-      this.inputInitialHeight = input.$el.offsetHeight || InputSizeMap[this.realSize] || 40;
+      this.inputInitialHeight = Math.max(input.$el.offsetHeight, InputSizeMap[this.realSize]) || 36;
     }
 
     if (!this.isEmptyValue(this.value)) {
@@ -641,6 +642,9 @@ export default {
       if (!inputInner) return;
 
       const tags = $el.querySelector('.el-cascader__tags');
+      const groupPrefix = $el.querySelector('.el-input-group--prefix');
+      const prefix = $el.querySelector('.el-input__prefix');
+      const prefixLabel = $el.querySelector('.el-input-group__prefix-label');
       let suggestionPanelEl = null;
 
       if (suggestionPanel && (suggestionPanelEl = suggestionPanel.$el)) {
@@ -650,8 +654,15 @@ export default {
 
       if (tags) {
         const offsetHeight = Math.round(tags.getBoundingClientRect().height);
-        const height = Math.max(offsetHeight + 6, inputInitialHeight) + 'px';
-        inputInner.style.height = height;
+        const height = Math.max(offsetHeight + 4, inputInitialHeight) + 'px';
+        const inputPaddingLeft = groupPrefix || prefix ? Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) : 0;
+        const prefixLabelWidth = prefixLabel && Math.round(prefixLabel.getBoundingClientRect().width) || 0;
+        if (groupPrefix) {
+          groupPrefix.style.height = height;
+        } else {
+          inputInner.style.height = height;
+        }
+        tags.style.left = (prefixLabelWidth + inputPaddingLeft) + 'px';
         if (this.dropDownVisible) {
           this.updatePopper();
         }

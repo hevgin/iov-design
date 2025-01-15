@@ -144,23 +144,6 @@
     text-overflow: ellipsis;
   }
 
-  @include m(large) {
-    .el-tag--medium {
-      height: 28px;
-    }
-  }
-  @include m(medium) {
-    .el-tag--small {
-      height: 24px;
-    }
-  }
-  @include m(mini) {
-    .el-tag--mini {
-      height: 18px;
-    }
-  }
-
-
   &.is-disabled {
     .el-tag {
       &.el-tag--info {
@@ -178,13 +161,31 @@
     max-width: 100%;
     align-items: center;
     pointer-events: auto;
+    height: $--input-height - 8px;
+    line-height: $--input-height - 8px;
     &.el-tag--info {
       background: $--color-fill-2;
       color: $--color-text-6;
       border: 0 none;
     }
-    &.el-tag--medium {
-      height: 28px;
+  }
+
+  @include m(medium) {
+    .el-tag--medium {
+      height: $--input-medium-height - 8px;
+      line-height: $--input-medium-height - 8px;
+    }
+  }
+  @include m(small) {
+    .el-tag--small {
+      height: $--input-small-height - 8px;
+      line-height: $--input-small-height - 8px;
+    }
+  }
+  @include m(mini) {
+    .el-tag--mini {
+      height: $--input-mini-height - 8px;
+      line-height: $--input-mini-height - 8px;
     }
   }
 }

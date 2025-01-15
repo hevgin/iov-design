@@ -55,19 +55,36 @@
     }
   }
 
+  .el-tag {
+    height: $--input-height - 8px;
+    line-height: $--input-height - 8px;
+  }
+
   @include m(medium) {
     font-size: $--input-medium-font-size;
     line-height: $--input-medium-height;
+    .el-tag--medium {
+      height: $--input-medium-height - 8px;
+      line-height: $--input-medium-height - 8px;
+    }
   }
 
   @include m(small) {
     font-size: $--input-small-font-size;
     line-height: $--input-small-height;
+    .el-tag--small {
+      height: $--input-small-height - 8px;
+      line-height: $--input-small-height - 8px;
+    }
   }
 
   @include m(mini) {
     font-size: $--input-mini-font-size;
     line-height: $--input-mini-height;
+    .el-tag--mini {
+      height: $--input-mini-height - 8px;
+      line-height: $--input-mini-height - 8px;
+    }
   }
 
   @include when(disabled) {
@@ -100,6 +117,8 @@
     line-height: normal;
     text-align: left;
     box-sizing: border-box;
+    z-index: 3;
+    pointer-events: none;
 
     .el-tag {
       display: inline-flex;
@@ -108,6 +127,7 @@
       margin: 2px 0 2px 6px;
       text-overflow: ellipsis;
       color: $--color-text-6;
+      pointer-events: auto;
 
       &.is-disabled {
         color: $--color-text-3;

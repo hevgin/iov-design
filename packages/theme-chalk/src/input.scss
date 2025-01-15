@@ -157,7 +157,13 @@
       box-shadow: $--input-box-shadow;
     }
   }
-
+  @include e((prefix, suffix)) {
+    .el-input__icon {
+      line-height: $--input-height - 2px;
+      display: flex;
+      align-items: center;
+    }
+  }
   @include e(suffix) {
     padding-left: 8px;
     position: absolute;
@@ -433,9 +439,6 @@
     }
     &.is-disabled {
       background-color: $--input-disabled-fill;
-    }
-    .el-input__icon {
-      line-height: $--input-height - 2px;
     }
     .el-input__inner,
     &:focus {
