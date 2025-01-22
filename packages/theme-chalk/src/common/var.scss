@@ -854,10 +854,10 @@ $--avatar-small-size: 28px !default;
 
 /* Empty
 -------------------------- */
-$--empty-padding: 40px 0 !default;
+$--empty-padding: 12px 0 16px !default;
 $--empty-image-width: 160px !default;
-$--empty-description-margin-top: 20px !default;
-$--empty-bottom-margin-top: 20px !default;
+$--empty-description-margin-top: 0 !default;
+$--empty-bottom-margin-top: 16px !default;
 
 /* Descriptions
 -------------------------- */
