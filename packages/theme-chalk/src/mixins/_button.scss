@@ -1,19 +1,19 @@
 @import "../common/var";
-@mixin button-plain($color, $background-color, $color-hover, $background-color-hover, $color-active, $background-color-active, $color-disabled, $background-color-disabled) {
+@mixin button-plain($color, $background-color, $border-color, $color-hover, $background-color-hover, $border-color-hover, $color-active, $background-color-active, $border-color-active, $color-disabled, $background-color-disabled, $border-color-disabled) {
   background: $background-color;
-  border-color: $color;
+  border-color: $border-color;
   color: $color;
 
   &:hover {
     background: $background-color-hover;
-    border-color: $color-hover;
+    border-color: $border-color-hover;
     color: $color-hover;
   }
 
   &:active,
   &.is-active {
     background: $background-color-active;
-    border-color: $color-active;
+    border-color: $border-color-active;
     color: $color-active;
     outline: none;
   }
@@ -24,7 +24,7 @@
     &:focus,
     &:active {
       background-color: $background-color-disabled;
-      border-color: $color-disabled;
+      border-color: $border-color-disabled;
       color: $color-disabled;
     }
   }
