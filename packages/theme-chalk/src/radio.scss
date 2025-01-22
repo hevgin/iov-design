@@ -149,6 +149,11 @@
     line-height: $--radio-bordered-height;
     transition: background-color ease .3s;
 
+    &:hover {
+      color: $--color-primary-5;
+      background: $--color-primary-2;
+    }
+
     &.is-checked {
       background: $--color-primary-2;
       .el-radio__label {
