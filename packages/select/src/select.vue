@@ -129,9 +129,7 @@
         </el-scrollbar>
         <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0 ))">
           <slot name="empty" v-if="$slots.empty"></slot>
-          <p class="el-select-dropdown__empty" v-else>
-            {{ emptyText }}
-          </p>
+          <el-empty v-else :description="emptyText" :type="0" image-size="60"></el-empty>
         </template>
       </el-select-menu>
     </transition>
@@ -147,6 +145,7 @@
   import ElOption from './option.vue';
   import ElTag from 'iov-design/packages/tag';
   import ElScrollbar from 'iov-design/packages/scrollbar';
+  import ElEmpty from 'iov-design/packages/empty';
   import debounce from 'throttle-debounce/debounce';
   import Clickoutside from 'iov-design/src/utils/clickoutside';
   import { addResizeListener, removeResizeListener } from 'iov-design/src/utils/resize-event';
@@ -254,7 +253,8 @@
       ElSelectMenu,
       ElOption,
       ElTag,
-      ElScrollbar
+      ElScrollbar,
+      ElEmpty
     },
 
     directives: { Clickoutside },

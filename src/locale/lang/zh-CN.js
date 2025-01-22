@@ -61,7 +61,7 @@ export default {
     select: {
       loading: '加载中',
       noMatch: '无匹配数据',
-      noData: '无数据',
+      noData: '暂无数据',
       placeholder: '请选择'
     },
     cascader: {
@@ -100,7 +100,7 @@ export default {
     },
     transfer: {
       noMatch: '无匹配数据',
-      noData: '无数据',
+      noData: '暂无数据',
       titles: ['列表 1', '列表 2'],
       filterPlaceholder: '请输入搜索内容',
       noCheckedFormat: '共 {total} 项',
