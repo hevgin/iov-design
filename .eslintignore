@@ -10,3 +10,7 @@ coverage
 *.scss
 *.woff
 *.ttf
+*.png
+*.jpg
+*.jpeg
+*.gif

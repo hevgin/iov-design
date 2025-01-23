@@ -61,6 +61,17 @@ module.exports = {
             preserveWhitespace: false
           }
         }
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[hash:8].[ext]'
+            }
+          }
+        ]
       }
     ]
   },
