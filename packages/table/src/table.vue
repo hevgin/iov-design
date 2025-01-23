@@ -51,9 +51,11 @@
         class="el-table__empty-block"
         ref="emptyBlock"
         :style="emptyBlockStyle">
-        <span class="el-table__empty-text" >
-          <slot name="empty">{{ emptyText || t('el.table.emptyText') }}</slot>
-        </span>
+        <div class="el-table__empty-text" >
+          <slot name="empty">
+            <el-empty ref="emptyText" @loaded="onEmptyText" :description="emptyText || t('el.table.emptyText')" :type="1" :image-size="['medium','small','mini'].includes(size) ? 86 : 108"></el-empty>
+          </slot>
+        </div>
       </div>
       <div
         v-if="$slots.append"
@@ -215,6 +217,7 @@
 
 <script type="text/babel">
   import ElCheckbox from 'iov-design/packages/checkbox';
+  import ElEmpty from 'iov-design/packages/empty';
   import { debounce, throttle } from 'throttle-debounce';
   import { addResizeListener, removeResizeListener } from 'iov-design/src/utils/resize-event';
   import Mousewheel from 'iov-design/src/directives/mousewheel';
@@ -346,7 +349,8 @@
       TableHeader,
       TableFooter,
       TableBody,
-      ElCheckbox
+      ElCheckbox,
+      ElEmpty
     },
 
     methods: {
@@ -500,6 +504,10 @@
 
       toggleAllSelection() {
         this.store.commit('toggleAllSelection');
+      },
+
+      onEmptyText() {
+        this.emptyTextHeight = this.$refs.emptyText.$el.offsetHeight;
       }
 
     },
@@ -587,7 +595,7 @@
 
       emptyBlockStyle() {
         if (this.data && this.data.length) return null;
-        let height = '100%';
+        let height = this.emptyTextHeight + 'px';
         if (this.layout.appendHeight) {
           height = `calc(100% - ${this.layout.appendHeight}px)`;
         }
@@ -708,7 +716,9 @@
         },
         // 是否拥有多级表头
         isGroup: false,
-        scrollPosition: 'left'
+        scrollPosition: 'left',
+        // 暂无数据高度
+        emptyTextHeight: 0
       };
     }
   };

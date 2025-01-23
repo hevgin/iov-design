@@ -1,9 +1,9 @@
 <template>
   <div class="el-empty">
     <div class="el-empty__image" :style="imageStyle">
-      <img v-if="image" :src="image" ondragstart="return false">
+      <img v-if="image"  :src="image" @load="onLoad" ondragstart="return false">
       <slot v-else name="image">
-        <img :src="img" ondragstart="return false">
+        <img :src="img" @load="onLoad" ondragstart="return false">
       </slot>
     </div>
     <div class="el-empty__description">
@@ -61,6 +61,11 @@ export default {
     },
     img() {
       return IMG[this.type];
+    }
+  },
+  methods: {
+    onLoad() {
+      this.$emit('loaded');
     }
   }
 };
