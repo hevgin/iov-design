@@ -129,7 +129,7 @@
         </el-scrollbar>
         <template v-if="emptyText && (!allowCreate || loading || (allowCreate && options.length === 0 ))">
           <slot name="empty" v-if="$slots.empty"></slot>
-          <el-empty v-else :description="emptyText" :type="0" image-size="60"></el-empty>
+          <el-empty v-else :description="emptyText" :type="0" :image-size="60"></el-empty>
         </template>
       </el-select-menu>
     </transition>
