@@ -9,33 +9,33 @@
 :::demo 在 Form 组件中，每一个表单域由一个 Form-Item 组件构成，表单域中可以放置各种类型的表单控件，包括 Input、Select、Checkbox、Radio、Switch、DatePicker、TimePicker
 ```html
 <el-form ref="form" :model="form" :rules="rule" size="small">
-  <el-form-item>
-    <el-input v-model="form.name">
+  <el-form-item prop="name">
+    <el-input v-model="form.name" clearable>
       <template slot="prefixLabel">活动名称</template>
     </el-input>
   </el-form-item>
-  <el-form-item>
-    <el-select v-model="form.region" placeholder="请选择活动区域">
+  <el-form-item prop="region">
+    <el-select v-model="form.region" placeholder="请选择活动区域" clearable>
       <el-option label="区域一" value="shanghai"></el-option>
       <el-option label="区域二" value="beijing"></el-option>
       <template slot="prefixLabel">活动区域</template>
     </el-select>
   </el-form-item>
-  <el-form-item>
+  <el-form-item prop="prize">
     <el-select v-model="form.prize" placeholder="请选择活动奖品" multiple clearable >
       <el-option label="12月账务产品1 / LLDZ5233GNPC003" value="1"></el-option>
       <el-option label="12月账务产品1 / LLDZ52336V24002" value="2"></el-option>
       <template slot="prefixLabel">活动奖品</template>
     </el-select>
   </el-form-item>
-  <el-form-item>
-    <el-input v-model="form.cost">
+  <el-form-item prop="cost">
+    <el-input v-model="form.cost" clearable>
       <template slot="prefixLabel">活动费用</template>
       <template slot="suffixLabel">元</template>
     </el-input>
   </el-form-item>
   <el-form-item prop="amount">
-    <el-input v-model="form.amount">
+    <el-input v-model="form.amount" clearable>
       <template slot="prefixLabel">活动金额</template>
       <template slot="append">
         <el-select v-model="form.unit" style="width:60px">
@@ -46,7 +46,7 @@
     </el-input>
   </el-form-item>
   <el-form-item prop="amount">
-    <el-input v-model="form.amount">
+    <el-input v-model="form.amount" clearable>
       <template slot="append">
         <el-select v-model="form.unit" style="width:60px">
           <el-option label="元" value="1"></el-option>
@@ -69,6 +69,10 @@
           unit: '1'
         },
         rule: {
+          name: { required: true, message: '字段不能为空', trigger: 'blur' },
+          region: { required: true, message: '字段不能为空', trigger: ['blur', 'change'] },
+          prize: { required: true, message: '字段不能为空', trigger: ['blur', 'change'] },
+          cost: { required: true, message: '字段不能为空', trigger: 'blur' },
           amount: { required: true, message: '字段不能为空', trigger: 'blur' }
         }
       }

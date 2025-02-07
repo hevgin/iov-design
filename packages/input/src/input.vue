@@ -73,8 +73,8 @@
                 {{ textLength }}/{{ upperLimit }}
               </span>
             </span>
+            <i class="el-input__icon" v-if="validateState && needStatusIcon" :class="['el-input__validateIcon', validateIcon]"></i>
           </span>
-          <i class="el-input__icon" v-if="validateState" :class="['el-input__validateIcon', validateIcon]"></i>
         </span>
       </div>
       <!-- 后置元素 -->
