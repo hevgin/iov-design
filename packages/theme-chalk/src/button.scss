@@ -20,6 +20,7 @@
   margin: 0;
   transition: all ease .3s;
   font-weight: $--button-font-weight;
+  font-family: inherit;
   @include utils-user-select(none);
   & + & {
     margin-left: 10px;
