@@ -25,9 +25,9 @@
 
 ```html
 <el-tag dot>标签一</el-tag>
-<el-tag dot type="success">标签二</el-tag>
-<el-tag dot type="info">标签三</el-tag>
-<el-tag dot type="warning">标签四</el-tag>
+<el-tag dot size="medium" type="success">标签二</el-tag>
+<el-tag dot size="small" type="info">标签三</el-tag>
+<el-tag dot size="mini" type="warning">标签四</el-tag>
 <el-tag dot type="danger">标签五</el-tag>
 <el-tag dot type="gold">标签六</el-tag>
 <el-tag dot type="blue">标签七</el-tag>
