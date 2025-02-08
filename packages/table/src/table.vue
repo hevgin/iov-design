@@ -53,7 +53,7 @@
         :style="emptyBlockStyle">
         <div class="el-table__empty-text" >
           <slot name="empty">
-            <el-empty ref="emptyText" @loaded="onEmptyText" :description="emptyText || t('el.table.emptyText')" :type="1" :image-size="['medium','small','mini'].includes(size) ? 86 : 108"></el-empty>
+            <el-empty ref="emptyText" :description="emptyText || t('el.table.emptyText')" :type="1" :image-size="['small','mini'].includes(tableSize) ? 86 : 108"></el-empty>
           </slot>
         </div>
       </div>
@@ -504,12 +504,7 @@
 
       toggleAllSelection() {
         this.store.commit('toggleAllSelection');
-      },
-
-      onEmptyText() {
-        this.emptyTextHeight = this.$refs.emptyText.$el.offsetHeight;
       }
-
     },
 
     computed: {
@@ -595,7 +590,7 @@
 
       emptyBlockStyle() {
         if (this.data && this.data.length) return null;
-        let height = this.emptyTextHeight + 'px';
+        let height = ['small', 'mini'].includes(this.tableSize) ? '128px' : '150px';
         if (this.layout.appendHeight) {
           height = `calc(100% - ${this.layout.appendHeight}px)`;
         }
@@ -716,9 +711,7 @@
         },
         // 是否拥有多级表头
         isGroup: false,
-        scrollPosition: 'left',
-        // 暂无数据高度
-        emptyTextHeight: 0
+        scrollPosition: 'left'
       };
     }
   };
