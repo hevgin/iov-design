@@ -118,13 +118,14 @@
     text-align: left;
     box-sizing: border-box;
     z-index: 3;
-    pointer-events: none;
+    align-items: center;
+    // pointer-events: none;
 
     .el-tag {
       display: inline-flex;
       align-items: center;
       max-width: 100%;
-      margin: 2px 0 2px 6px;
+      margin: 2px 6px 2px 0;
       text-overflow: ellipsis;
       color: $--color-text-6;
       pointer-events: auto;
@@ -198,7 +199,7 @@
     flex: 1;
     height: 24px;
     min-width: 60px;
-    margin: 2px 0 2px 12px;
+    margin: 2px 0;
     padding: 0;
     color: $--cascader-menu-font-color;
     border: none;

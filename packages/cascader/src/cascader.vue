@@ -643,7 +643,6 @@ export default {
 
       const tags = $el.querySelector('.el-cascader__tags');
       const groupPrefix = $el.querySelector('.el-input-group--prefix');
-      const prefix = $el.querySelector('.el-input__prefix');
       const prefixLabel = $el.querySelector('.el-input-group__prefix-label');
       let suggestionPanelEl = null;
 
@@ -655,7 +654,7 @@ export default {
       if (tags) {
         const offsetHeight = Math.round(tags.getBoundingClientRect().height);
         const height = Math.max(offsetHeight + 4, inputInitialHeight) + 'px';
-        const inputPaddingLeft = groupPrefix || prefix ? Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) : 0;
+        const inputPaddingLeft = Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) || 0;
         const prefixLabelWidth = prefixLabel && Math.round(prefixLabel.getBoundingClientRect().width) || 0;
         if (groupPrefix) {
           groupPrefix.style.height = height;
