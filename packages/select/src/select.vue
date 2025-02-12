@@ -725,7 +725,7 @@
           this.visible = false;
         }
         this.isSilentBlur = byClick;
-        this.setSoftFocus();
+        // this.setSoftFocus();
         if (this.visible) return;
         this.$nextTick(() => {
           this.scrollToOption(option);
