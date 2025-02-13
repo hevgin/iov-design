@@ -473,6 +473,9 @@
       outline: none;
     }
     .el-select {
+      .el-input__inner {
+        color: $--color-text-4;
+      }
       .el-input.is-focus .el-input__inner {
         border: 0 none;
         box-shadow: none;
