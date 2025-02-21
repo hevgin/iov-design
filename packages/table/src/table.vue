@@ -325,6 +325,11 @@
         default: true
       },
 
+      crossPageSelection: {
+        type: Boolean,
+        default: false
+      },
+
       indent: {
         type: Number,
         default: 16
@@ -676,6 +681,7 @@
       });
 
       this.$ready = true;
+
     },
 
     destroyed() {

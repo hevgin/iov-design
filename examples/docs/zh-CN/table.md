@@ -891,11 +891,10 @@
     ref="multipleTable"
     :data="tableData"
     tooltip-effect="dark"
-    style="width: 100%"
-    @selection-change="handleSelectionChange">
+    style="width: 100%">
     <el-table-column
       type="selection"
-      width="55">
+      width="155">
     </el-table-column>
     <el-table-column
       label="日期"
@@ -924,30 +923,37 @@
     data() {
       return {
         tableData: [{
+          id: 1,
           date: '2016-05-03',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
         }, {
+          id: 2,
           date: '2016-05-02',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
         }, {
+          id: 3,
           date: '2016-05-04',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
         }, {
+          id: 4,
           date: '2016-05-01',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
         }, {
+          id: 5,
           date: '2016-05-08',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
         }, {
+          id: 6,
           date: '2016-05-06',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
         }, {
+          id: 7,
           date: '2016-05-07',
           name: '王小虎',
           address: '上海市普陀区金沙江路 1518 弄'
@@ -955,19 +961,132 @@
         multipleSelection: []
       }
     },
-
     methods: {
       toggleSelection(rows) {
         if (rows) {
           rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row);
+            this.$refs.multipleTable.toggleRowSelection(row, true);
           });
         } else {
           this.$refs.multipleTable.clearSelection();
         }
       },
-      handleSelectionChange(val) {
-        this.multipleSelection = val;
+      onSelectionChange(rows, isCrossPageSelection) {
+        this.multipleSelection = rows;
+      },
+      selectable(row, index) {
+        return index > 0
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 跨页多选
+
+跨页多选数据时el-table需增加 `cross-page-selection`、`row-key` 属性
+
+:::demo 手动添加一个`el-table-column`，设`type`属性为`selection`，`reserveSelection`值为 `true`。`selection-change` 回调2个参数`(rows, isCrossPageSelection)`, `isCrossPageSelection` 为 `true`时表示跨页选择, 此时`rows`为跨页选择时未选择的数据项
+```html
+<template>
+  <el-table
+    ref="multipleTable"
+    :data="tableData"
+    tooltip-effect="dark"
+    style="width: 100%"
+    cross-page-selection
+    row-key="id"
+    @selection-change="onSelectionChange">
+    <el-table-column
+      type="selection"
+      width="155"
+      :selectable="selectable">
+    </el-table-column>
+    <el-table-column
+      label="日期"
+      width="120">
+      <template slot-scope="scope">{{ scope.row.date }}</template>
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="120">
+    </el-table-column>
+    <el-table-column
+      prop="address"
+      label="地址"
+      show-overflow-tooltip>
+    </el-table-column>
+  </el-table>
+  <div style="margin-top: 20px">
+    <el-button @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
+    <el-button @click="toggleSelection()">取消选择</el-button>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [{
+          id: 1,
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          id: 2,
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          id: 3,
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          id: 4,
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          id: 5,
+          date: '2016-05-08',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          id: 6,
+          date: '2016-05-06',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          id: 7,
+          date: '2016-05-07',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }],
+        multipleSelection: []
+      }
+    },
+    mounted() {
+      this.toggleSelection([this.tableData[0], this.tableData[1]])
+    },
+    methods: {
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row, true);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
+      },
+      onSelectionChange(rows, crossPage) {
+        console.log(rows, crossPage, 'selection-change------------------------------')
+        this.multipleSelection = rows;
+      },
+      selectable(row, index) {
+        return index > 0
       }
     }
   }
@@ -1926,6 +2045,7 @@
 | header-cell-class-name | 表头单元格的 className 的回调方法，也可以使用字符串为所有表头单元格设置一个固定的 className。 | Function({row, column, rowIndex, columnIndex})/String | — | — |
 | header-cell-style | 表头单元格的 style 的回调方法，也可以使用一个固定的 Object 为所有表头单元格设置一样的 Style。 | Function({row, column, rowIndex, columnIndex})/Object | — | — |
 | row-key | 行数据的 Key，用来优化 Table 的渲染；在使用 reserve-selection 功能与显示树形数据时，该属性是必填的。类型为 String 时，支持多层访问：`user.info.id`，但不支持 `user.info[0].id`，此种情况请使用 `Function`。 | Function(row)/String | — | — |
+| cross-page-selection | table支持跨页渲染；此时`row-key`、`reserve-selection`是必填的| Boolean | — | false |
 | empty-text | 空数据时显示的文本内容，也可以通过 `slot="empty"` 设置 | String | — | 暂无数据 |
 | default-expand-all | 是否默认展开所有行，当 Table 包含展开行存在或者为树形表格时有效 | Boolean | — | false |
 | expand-row-keys | 可以通过该属性设置 Table 目前的展开行，需要设置 row-key 属性才能使用，该属性为展开行的 keys 数组。| Array | — | |
@@ -1946,7 +2066,7 @@
 | ---- | ---- | ---- |
 | select | 当用户手动勾选数据行的 Checkbox 时触发的事件 | selection, row |
 | select-all | 当用户手动勾选全选 Checkbox 时触发的事件 | selection |
-| selection-change | 当选择项发生变化时会触发该事件 | selection |
+| selection-change | 当选择项发生变化时会触发该事件 | selection, isCrossPageSelection |
 | cell-mouse-enter | 当单元格 hover 进入时会触发该事件 | row, column, cell, event |
 | cell-mouse-leave | 当单元格 hover 退出时会触发该事件 | row, column, cell, event |
 | cell-click | 当某个单元格被点击时会触发该事件 | row, column, cell, event |

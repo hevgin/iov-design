@@ -29,11 +29,39 @@ export const cellStarts = {
 export const cellForced = {
   selection: {
     renderHeader: function(h, { store }) {
-      return <el-checkbox
-        disabled={ store.states.data && store.states.data.length === 0 }
-        indeterminate={ store.states.selection.length > 0 && !this.isAllSelected }
+      // console.log(store, 'store===========');
+      const { isCrossPageSelection, selection, data, rowKey } = store.states;
+      let indeterminate = selection.length > 0 && !(selection.length === data.length);
+      if (isCrossPageSelection) {
+        // 全选: v-model - true, indeterminate - false
+        // 半选: v-model - false, indeterminate - true
+        // 不选：v-model - false, indeterminate - false
+
+        // 已选择的数据中是否包括当前页的数据项 && !当前页数据全部选中
+        indeterminate = selection.some(o => data.some(row => row[rowKey] === o[rowKey])) && !(data.every(row => selection.some(o => row[rowKey] === o[rowKey])));
+      }
+      // console.log(indeterminate, 'indeterminate===========');
+      return [<el-checkbox
+        disabled={ data && data.length === 0 }
+        indeterminate={ indeterminate }
         on-input={ this.toggleAllSelection }
-        value={ this.isAllSelected } />;
+        value={ this.isAllSelected } />,
+      this.table.crossPageSelection && <el-dropdown
+        class="el-table__cross-page-selection"
+        placement="bottom-start"
+        trigger="click"
+        onCommand={command => this.onCommand(command, this.scope)}
+        on-visible-change={this.onVisibleChange}
+      >
+        <i class={['iov-icon-arrow-down', this.store.states.showSelectionDropdown ? 'show-selection-dropdown' : '']} />
+        <el-dropdown-menu slot="dropdown" class="table-selection__dropdown">
+          <el-dropdown-item command={1}>全选当页</el-dropdown-item>
+          <el-dropdown-item command={3}>全选所有页</el-dropdown-item>
+          <el-dropdown-item command={2}>清空当页</el-dropdown-item>
+          <el-dropdown-item command={4}>清空所有页</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      ];
     },
     renderCell: function(h, { row, column, isSelected, store, $index }) {
       return <el-checkbox

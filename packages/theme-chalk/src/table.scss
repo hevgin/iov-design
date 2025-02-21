@@ -36,6 +36,20 @@
     pointer-events: none;
   }
 
+
+  // 跨页选择
+  @include e(cross-page-selection) {
+    .iov-icon-arrow-down {
+      color: $--color-fill-6;
+      cursor: pointer;
+      transition: all ease .2s;
+      &.show-selection-dropdown {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+
   // 展开行
   @include e(expand-column) {
     .cell {
@@ -285,18 +299,18 @@
     .has-gutter {
       .el-table__cell {
         border-bottom: 0 none;
-        &:nth-last-child(2) {
-          border-right: 0 none;
-        }
+        // &:nth-last-child(2) {
+        //   border-right: 0 none;
+        // }
       }
     }
 
     .el-table__row {
-      .el-table__cell {
-        &:last-child {
-          border-right: 0 none;
-        }
-      }
+      // .el-table__cell {
+      //   &:last-child {
+      //     border-right: 0 none;
+      //   }
+      // }
       &:last-child {
         .el-table__cell {
           border-bottom: 0 none;
@@ -384,6 +398,18 @@
     .el-table__fixed-footer-wrapper {
       left: auto;
       right: 0;
+      .el-table__row {
+        .el-table__cell {
+          &:last-child {
+            border-right: 0 none;
+          }
+        }
+        &:last-child {
+          .el-table__cell {
+            border-bottom: 0 none;
+          }
+        }
+      }
     }
   }
 
