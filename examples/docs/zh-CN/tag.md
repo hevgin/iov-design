@@ -257,7 +257,6 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | type | 类型 | string | success/info/warning/danger | — |
 | closable | 是否可关闭 | boolean | — | false |
-| disable-transitions | 是否禁用渐变动画 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
 | dot | 是否展示状态标签 | boolean | — | false |
 | color | 背景色 | string | — | — |

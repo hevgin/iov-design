@@ -7,7 +7,6 @@
       type: String,
       hit: Boolean,
       dot: Boolean,
-      disableTransitions: Boolean,
       color: String,
       size: String,
       icon: String,
@@ -58,7 +57,7 @@
         </span>
       );
 
-      return this.disableTransitions ? tagEl : <transition name="el-zoom-in-center">{ tagEl }</transition>;
+      return tagEl;
     }
   };
 </script>
