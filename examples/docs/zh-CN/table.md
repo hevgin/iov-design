@@ -990,103 +990,84 @@
 :::demo 手动添加一个`el-table-column`，设`type`属性为`selection`，`reserveSelection`值为 `true`。`selection-change` 回调2个参数`(rows, isCrossPageSelection)`, `isCrossPageSelection` 为 `true`时表示跨页选择, 此时`rows`为跨页选择时未选择的数据项
 ```html
 <template>
-  <el-table
-    ref="multipleTable"
-    :data="tableData"
-    tooltip-effect="dark"
-    style="width: 100%"
-    cross-page-selection
-    row-key="id"
-    @selection-change="onSelectionChange">
-    <el-table-column
-      type="selection"
-      width="155"
-      :selectable="selectable">
-    </el-table-column>
-    <el-table-column
-      label="日期"
-      width="120">
-      <template slot-scope="scope">{{ scope.row.date }}</template>
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="姓名"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="address"
-      label="地址"
-      show-overflow-tooltip>
+  <div style="margin-bottom: 10px;">
+    <el-button size="small" @click="onCreate()">新增</el-button>
+    <el-button size="small" @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
+    <el-button size="small" @click="toggleSelection()">取消选择</el-button>
+  </div>
+  <el-table ref="multipleTable" :data="tableData" style="width: 100%" cross-page-selection row-key="id" @selection-change="onSelectionChange">
+    <el-table-column type="selection" reserveSelection width="85" :selectable="selectable" />
+    <el-table-column label="ID" prop="id" width="120" />
+    <el-table-column label="日期" prop="date" width="120" />
+    <el-table-column prop="name" label="姓名" width="120" />
+    <el-table-column prop="address" label="地址" show-overflow-tooltip />
+    <el-table-column label="操作" width="80">
+      <template slot-scope="scope">
+        <el-link type="primary" @click="onRemove(scope.$index, scope.row)">删除</el-link>
+      </template>
     </el-table-column>
   </el-table>
-  <div style="margin-top: 20px">
-    <el-button @click="toggleSelection([tableData[1], tableData[2]])">切换第二、第三行的选中状态</el-button>
-    <el-button @click="toggleSelection()">取消选择</el-button>
-  </div>
+  <el-pagination layout="prev, pager, next" :total="50" :current-page.sync="currPage" @current-change="onCurrPage" class="demo-pagination"></el-pagination>
 </template>
 
 <script>
   export default {
     data() {
       return {
-        tableData: [{
-          id: 1,
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          id: 2,
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          id: 3,
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          id: 4,
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          id: 5,
-          date: '2016-05-08',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          id: 6,
-          date: '2016-05-06',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          id: 7,
-          date: '2016-05-07',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }],
+        list: ['1', '2', '3', '4', '5'],
+        tableData: [],
+        currPage: 1,
         multipleSelection: []
       }
     },
     mounted() {
-      this.toggleSelection([this.tableData[0], this.tableData[1]])
+      this.initData()
+      // this.toggleSelection([this.tableData[0], this.tableData[1]])
     },
     methods: {
+      initData() {
+        this.tableData = this.list.map(item => {
+          return {
+            id: this.currPage + item,
+            date: '2025-02-23',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }
+        })
+      },
+
+      onCurrPage(currPage) {
+        this.initData()
+      },
+
+      onCreate() {
+        const data = {
+          id: Math.floor(Math.random() * 100),
+          date: '2016-05-07',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }
+        this.tableData.unshift(data)
+      },
+      onRemove(index) {
+        this.tableData.splice(index, 1)
+      },
       toggleSelection(rows) {
         if (rows) {
           rows.forEach(row => {
-            this.$refs.multipleTable.toggleRowSelection(row, true);
+            this.$refs.multipleTable.toggleRowSelection(row);
           });
         } else {
           this.$refs.multipleTable.clearSelection();
         }
       },
       onSelectionChange(rows, crossPage) {
-        console.log(rows, crossPage, 'selection-change------------------------------')
+        const ids = rows.map(item => item.id)
+        console.log(ids, crossPage)
         this.multipleSelection = rows;
       },
       selectable(row, index) {
-        return index > 0
+        return index >= 0
       }
     }
   }

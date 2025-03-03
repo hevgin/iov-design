@@ -192,43 +192,40 @@ export default {
     'store.states.data': {
       handler() {
         const { states } = this.store;
-        const { data = [], selection } = states;
-        const { rowKey } = this.table;
+        const { data = [], selection, unSelectionData, rowKey } = states;
+        const selectionRowKeys = selection.map(item => item[rowKey]);
+        const unSelectionRowKeys = unSelectionData.map(item => item[rowKey]);
+        // console.log(data, 'data');
+        // console.log(selection, unSelectionRowKeys, 'selection');
         // 全选所有页
         if (this.store.states.isCrossPageSelection) {
-
-          states.isAllSelected = true;
-
           data.forEach((row, index) => {
             if (states.selectable) {
               if (states.selectable.call(null, row, index)) {
                 // 如果已勾选数据中不包含当前页数据(如跳转至新的一页), 则勾选
-                if (!selection.some(o => o[rowKey] === row[rowKey])) {
+                if (!selectionRowKeys.includes(row[rowKey])) {
                   toggleRowStatus(selection, row, true);
                 }
-                if (states.unSelectedRow.some(o => o[rowKey] === row[rowKey])) {
-                  // 如果取消勾选数据中包含当前页数据项, 则取消勾选
+                // 如果取消勾选数据中包含当前页数据项, 则取消勾选
+                if (unSelectionRowKeys.includes(row[rowKey])) {
                   toggleRowStatus(selection, row, false);
-                  states.isAllSelected = false;
                 }
               }
             } else {
               // 如果已勾选数据中不包含当前页数据(如跳转至新的一页), 则勾选
-              if (!selection.some(o => o[rowKey] === row[rowKey])) {
+              if (!selectionRowKeys.includes(row[rowKey])) {
                 toggleRowStatus(selection, row, true);
               }
               // 如果取消勾选数据中包含当前页数据项, 则取消勾选
-              if (states.unSelectedRow.some(o => o[rowKey] === row[rowKey])) {
+              if (unSelectionRowKeys.includes(row[rowKey])) {
                 toggleRowStatus(selection, row, false);
-                states.isAllSelected = false;
               }
             }
           });
-          // console.log(states, 'states===========================');
-        } else {
-          // states.isAllSelected = false;
-          states.selection = [];
         }
+        this.store.getUnSelectedRow(states.selection);
+        this.store.updateAllSelected();
+        console.log('isAllSelected', states.isAllSelected);
       },
       deep: true
     }
@@ -354,94 +351,8 @@ export default {
     * 选择数据事件
     * @param  {num} command 选择事件类型 1-全选当前页 2-清空当前页 3-全选所有页 4-清空所有页
     */
-    onCommand(command) {
-      this.store.states.selectionType = command;
-      const { states } = this.store;
-      const { data = [], selection } = states;
-      // console.log(this, 'this===========================');
-
-      switch (command) {
-        // 全选当前页
-        case 1:
-          states.isAllSelected = true;
-          data.forEach((row, index) => {
-            if (states.selectable) {
-              if (states.selectable.call(null, row, index)) {
-                toggleRowStatus(selection, row, true);
-              }
-            } else {
-              toggleRowStatus(selection, row, true);
-            }
-          });
-          // console.log(states, 'states1===========================');
-          // 先点击跨页全选，再点击清空当前页/取消几条勾选数据, 最后点击全选当前页
-          if (states.isCrossPageSelection) {
-            // 重新计算未选中数据
-            this.store.getUnSelectedRow(states.selection);
-            // 触发el-table的'selection-change'事件
-            this.table.$listeners['selection-change'](states.unSelectedRow, true);
-          } else {
-            this.table.$listeners['selection-change'](this.table.selection, false);
-          }
-          break;
-          // 清空当前页
-        case 2:
-          // 先点击跨页选择，再点击清空当前页
-          if (states.isCrossPageSelection) {
-            // 标记当前页未选中, 如果有选中的数据，清空选中数据
-            states.isAllSelected = false;
-            const oldSelection = states.selection;
-            // 表格中有选中的数据项是disabled状态时，清空时保留该数据
-            const isDisabledSelection = states.data.filter((row, index) => {
-              // 判断selectable是不可选中状态, 且当前数据项已被选中
-              if (states.selectable && !states.selectable.call(null, row, index) && oldSelection.some(item => item[states.rowKey] === row[states.rowKey])) {
-                return row;
-              }
-            });
-            if (oldSelection.length) {
-              states.selection = isDisabledSelection;
-            }
-            // 重新计算未选中数据
-            this.store.getUnSelectedRow(states.selection);
-            // 触发el-table的'selection-change'事件
-            this.table.$listeners['selection-change'](states.unSelectedRow, true);
-          } else {
-            states.unSelectedRow = [];
-            this.table.clearSelection();
-          }
-          // console.log(states, 'states2===========================');
-          break;
-          // 全选所有页
-        case 3:
-          states.isCrossPageSelection = true;
-          states.unSelectedRow = [];
-          states.isAllSelected = true;
-          data.forEach((row, index) => {
-            if (states.selectable) {
-              if (states.selectable.call(null, row, index)) {
-                toggleRowStatus(selection, row, true);
-              }
-            } else {
-              toggleRowStatus(selection, row, true);
-            }
-          });
-          // console.log(states, 'states3===========================');
-          // 重新计算未选中数据
-          this.store.getUnSelectedRow(states.selection);
-          // 触发el-table的'selection-change'事件
-          this.table.$listeners['selection-change'](states.unSelectedRow, true);
-          break;
-          // 清空所有页
-        case 4:
-          states.isCrossPageSelection = false;
-          states.unSelectedRow = [];
-          // console.log(states, 'states4===========================');
-          this.table.clearSelection();
-          break;
-        default:
-          break;
-      }
-
+    onSelectionChange(command) {
+      this.store.onSelectionChange(command);
     },
 
     handleFilterClick(event, column) {

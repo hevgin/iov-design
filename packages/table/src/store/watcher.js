@@ -62,10 +62,8 @@ export default Vue.extend({
         isCrossPageSelection: false,
         // 全选下拉出现/隐藏事件
         showSelectionDropdown: false,
-        // 1-全选当前页 2-取消全选当前页 3-全选所有页 4-取消全选所有页
-        selectionType: 0,
         // 已取消勾选的数据
-        unSelectedRow: [],
+        unSelectionData: [],
 
         // 过滤
         filters: {}, // 不可响应的
@@ -131,7 +129,7 @@ export default Vue.extend({
       return selection.indexOf(row) > -1;
     },
 
-    clearSelection() {
+    clearSelection(emitChange = true) {
       const states = this.states;
       states.isAllSelected = false;
       const oldSelection = states.selection;
@@ -145,7 +143,7 @@ export default Vue.extend({
       });
       if (oldSelection.length) {
         states.selection = isDisabledSelection;
-        this.table.$emit('selection-change', states.selection, false);
+        emitChange && this.table.$emit('selection-change', states.selection, states.isCrossPageSelection);
       }
     },
 
@@ -182,10 +180,72 @@ export default Vue.extend({
           this.table.$emit('select', newSelection, row);
         }
         if (this.states.isCrossPageSelection) {
-          this.table.$emit('selection-change', this.states.unSelectedRow, true);
+          this.table.$emit('selection-change', this.states.unSelectionData, true);
         } else {
           this.table.$emit('selection-change', newSelection, false);
         }
+      }
+    },
+
+    /**
+    * 选择数据事件
+    * @param  {num} command 选择事件类型 1-全选当前页 2-清空当前页 3-全选所有页 4-清空所有页
+    */
+    onSelectionChange(command) {
+      switch (command) {
+        // 全选当前页
+        case 1:
+          this.onChangeCurrentPage(true, command);
+          break;
+          // 清空当前页
+        case 2:
+          this.onChangeCurrentPage(false, command);
+          break;
+          // 全选所有页
+        case 3:
+          this.states.isCrossPageSelection = true;
+          this.onChangeCurrentPage(true, command);
+          break;
+          // 清空所有页
+        case 4:
+          this.onChangeCurrentPage(false, command);
+          break;
+        default:
+          break;
+      }
+    },
+
+    onChangeCurrentPage(selected, command) {
+      const states = this.states;
+      const { data = [], selection } = states;
+      data.forEach((row, index) => {
+        if (states.selectable) {
+          if (states.selectable.call(null, row, index)) {
+            toggleRowStatus(selection, row, selected);
+          }
+        } else {
+          toggleRowStatus(selection, row, selected);
+        }
+      });
+      this.updateAllSelected();
+
+      // 先点击跨页全选，再点击清空当前页/取消几条勾选数据, 最后点击全选当前页
+      if (states.isCrossPageSelection) {
+        // 重新计算未选中数据
+        this.getUnSelectedRow(states.selection);
+      }
+
+      if (command === 4) {
+        states.isCrossPageSelection = false;
+        this.clearSelection(false);
+        states.unSelectionData = [];
+      }
+
+      // 触发el-table的'selection-change'事件
+      if (states.isCrossPageSelection) {
+        this.table.$listeners['selection-change'](states.unSelectionData, states.isCrossPageSelection);
+      } else {
+        this.table.$listeners['selection-change'](states.selection, states.isCrossPageSelection);
       }
     },
 
@@ -196,26 +256,26 @@ export default Vue.extend({
     getUnSelectedRow(selection) {
       if (!this.states.isCrossPageSelection) return;
 
-      const { rowKey } = this.table;
+      const { rowKey } = this.states;
 
       // 从全部勾选数据中过滤出当前页勾选的数据
-      const selected = this.table.data.filter(item => selection.some(row => row[rowKey] === item[rowKey]));
+      const selected = this.states.data.filter(item => selection.some(row => row[rowKey] === item[rowKey]));
       // 通过当前页数据与当前页已勾选的数据, 过滤出当前页未勾选的数据
-      const unselected = this.table.data.filter((item) => !selected.some((row) => row[rowKey] === item[rowKey]));
+      const unselected = this.states.data.filter((item) => !selected.some((row) => row[rowKey] === item[rowKey]));
 
       // 取消勾选数据中是否存在当页面已勾选的数据项, 如有则删除
       const index = [];
-      this.states.unSelectedRow.forEach((item, i) => {
+      this.states.unSelectionData.forEach((item, i) => {
         if (selected.some(s => s[rowKey] === item[rowKey])) {
           index.push(i);
         }
       });
-      this.states.unSelectedRow = this.states.unSelectedRow.filter((item, i) => !index.includes(i));
+      this.states.unSelectionData = this.states.unSelectionData.filter((item, i) => !index.includes(i));
 
       // 取消勾选数据中如果不存在当前页未勾选的数据, 则将当前未勾选的数据添push到取消勾选数据中
       unselected.forEach(item => {
-        if (!this.states.unSelectedRow.some(s => s[rowKey] === item[rowKey])) {
-          this.states.unSelectedRow.push(item);
+        if (!this.states.unSelectionData.some(s => s[rowKey] === item[rowKey])) {
+          this.states.unSelectionData.push(item);
         }
       });
     },
@@ -248,7 +308,7 @@ export default Vue.extend({
       if (selectionChanged) {
         if (states.isCrossPageSelection) {
           this.getUnSelectedRow(newSelection);
-          this.table.$emit('selection-change', states.unSelectedRow || [], true);
+          this.table.$emit('selection-change', states.unSelectionData || [], true);
         } else {
           this.table.$emit('selection-change', selection ? selection.slice() : [], false);
         }
