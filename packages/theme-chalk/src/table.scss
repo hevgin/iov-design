@@ -202,7 +202,6 @@
 
   th.el-table__cell {
     overflow: hidden;
-    user-select: none;
     background-color: $--table-header-background-color;
     font-weight: 500;
     > .cell {
