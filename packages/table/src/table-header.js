@@ -225,7 +225,7 @@ export default {
         }
         this.store.getUnSelectedRow(states.selection);
         this.store.updateAllSelected();
-        console.log('isAllSelected', states.isAllSelected);
+        // console.log('isAllSelected', states.isAllSelected);
       },
       deep: true
     }

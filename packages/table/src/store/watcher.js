@@ -204,6 +204,7 @@ export default Vue.extend({
           // 全选所有页
         case 3:
           this.states.isCrossPageSelection = true;
+          this.states.unSelectionData = [];
           this.onChangeCurrentPage(true, command);
           break;
           // 清空所有页
