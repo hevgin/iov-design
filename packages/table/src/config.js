@@ -49,6 +49,7 @@ export const cellForced = {
         class="el-table__cross-page-selection"
         placement="bottom-start"
         trigger="click"
+        size="small"
         onCommand={command => this.onSelectionChange(command, this.scope)}
         on-visible-change={this.onVisibleChange}
       >

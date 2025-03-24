@@ -626,9 +626,9 @@ $--tree-expand-icon-color: $--color-text-placeholder !default;
 
 /* Dropdown
 -------------------------- */
-$--dropdown-menu-box-shadow: $--box-shadow-light !default;
-$--dropdown-menuItem-hover-fill: $--color-primary-light-9 !default;
-$--dropdown-menuItem-hover-color: $--link-color !default;
+$--dropdown-menu-box-shadow: 0px 2px 8px 0px rgba(73, 75, 83, 0.12) !default;
+$--dropdown-menuItem-hover-fill: $--color-fill-1 !default;
+$--dropdown-menuItem-hover-color: $--color-text-6 !default;
 
 /* Badge
 -------------------------- */

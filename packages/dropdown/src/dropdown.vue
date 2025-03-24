@@ -283,7 +283,7 @@
       const menuElm = disabled ? null : this.$slots.dropdown;
 
       return (
-        <div class="el-dropdown" v-clickoutside={hide} aria-disabled={disabled}>
+        <div class="el-dropdown" size={dropdownSize} v-clickoutside={hide} aria-disabled={disabled}>
           {triggerElm}
           {menuElm}
         </div>
