@@ -198,7 +198,7 @@
   @include e(search-input) {
     flex: 1;
     height: 24px;
-    min-width: 60px;
+    min-width: 10px;
     margin: 2px 0;
     padding: 0;
     color: $--cascader-menu-font-color;
