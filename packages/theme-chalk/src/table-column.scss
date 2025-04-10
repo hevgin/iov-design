@@ -6,8 +6,11 @@
 @include b(table-column) {
   @include m(selection) {
     .cell {
-      padding-left: 14px;
-      padding-right: 14px;
+      padding-left: 14px !important;
+      padding-right: 14px !important;
+    }
+    .el-checkbox__input {
+      margin-right: 0;
     }
   }
 }
