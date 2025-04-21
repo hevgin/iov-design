@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'iovfont';  /* Project id 4466910 */
-  src: url('//at.alicdn.com/t/c/font_4466910_ks3hmkfvzoq.woff2?t=1741776009511') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4466910_ks3hmkfvzoq.woff?t=1741776009511') format('woff'),
-       url('//at.alicdn.com/t/c/font_4466910_ks3hmkfvzoq.ttf?t=1741776009511') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4466910_q299sf1aufe.woff2?t=1745224771455') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4466910_q299sf1aufe.woff?t=1745224771455') format('woff'),
+       url('//at.alicdn.com/t/c/font_4466910_q299sf1aufe.ttf?t=1745224771455') format('truetype');
 }
 
 [class^="iov-icon-"], [class*=" iov-icon-"] {
@@ -36,6 +36,22 @@
   }
 }
 
+
+.iov-icon-notice:before {
+  content: "\e6eb";
+}
+
+.iov-icon-computer:before {
+  content: "\e6ec";
+}
+
+.iov-icon-img-placeholder:before {
+  content: "\e6ea";
+}
+
+.iov-icon-select:before {
+  content: "\e6e9";
+}
 
 .iov-icon-fold:before {
   content: "\e6f2";
