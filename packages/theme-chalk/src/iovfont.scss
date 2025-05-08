@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'iovfont';  /* Project id 4466910 */
-  src: url('//at.alicdn.com/t/c/font_4466910_q299sf1aufe.woff2?t=1745224771455') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4466910_q299sf1aufe.woff?t=1745224771455') format('woff'),
-       url('//at.alicdn.com/t/c/font_4466910_q299sf1aufe.ttf?t=1745224771455') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4466910_05nzvw64idz7.woff2?t=1746691225503') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4466910_05nzvw64idz7.woff?t=1746691225503') format('woff'),
+       url('//at.alicdn.com/t/c/font_4466910_05nzvw64idz7.ttf?t=1746691225503') format('truetype');
 }
 
 [class^="iov-icon-"], [class*=" iov-icon-"] {
@@ -36,6 +36,33 @@
   }
 }
 
+.iov-icon-circle-minus:before {
+  content: "\e6f6";
+}
+
+.iov-icon-brush:before {
+  content: "\e6ee";
+}
+
+.iov-icon-code:before {
+  content: "\e6ef";
+}
+
+.iov-icon-circle-plus:before {
+  content: "\e6f0";
+}
+
+.iov-icon-branch:before {
+  content: "\e6f4";
+}
+
+.iov-icon-swap:before {
+  content: "\e6f5";
+}
+
+.iov-icon-wand:before {
+  content: "\e6ed";
+}
 
 .iov-icon-notice:before {
   content: "\e6eb";
