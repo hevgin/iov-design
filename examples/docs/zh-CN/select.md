@@ -155,7 +155,7 @@
       </el-select>
     </el-col>
     <el-col :span="12">
-      <el-select v-model="value2" placeholder="请选择" size="small">
+      <el-select v-model="value2" placeholder="请选择" multiple size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
         <template slot="prefixLabel">分类</template>
       </el-select>

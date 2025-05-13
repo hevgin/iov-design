@@ -8,7 +8,7 @@
       class="el-select__tags"
       v-if="multiple"
       ref="tags"
-      :style="{ 'max-width': inputWidth - 32 + 'px', width: '100%', left: tagsLeft }">
+      :style="{ 'max-width': inputWidth - 32 + 'px', width: (inputWidth - tagsLeft - 32) + 'px', left: tagsLeft + 'px' }">
       <span class="el-tag__group" v-if="collapseTags && selected.length">
         <el-tag
           :closable="!selectDisabled"
@@ -656,7 +656,7 @@
           const inputInner = this.$el.querySelector('.el-input__inner');
           const prefixLabelWidth = prefixLabel && Math.round(prefixLabel.getBoundingClientRect().width) || 0;
           const inputPaddingLeft = prefixLabel || prefix ? Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) : 0;
-          this.tagsLeft = (prefixLabelWidth + inputPaddingLeft) + 'px';
+          this.tagsLeft = prefixLabelWidth + inputPaddingLeft;
         });
       },
 
