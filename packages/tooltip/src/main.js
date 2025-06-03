@@ -12,7 +12,7 @@ export default {
   props: {
     openDelay: {
       type: Number,
-      default: 0
+      default: 300
     },
     disabled: Boolean,
     manual: Boolean,
@@ -72,7 +72,7 @@ export default {
       }
     }).$mount();
 
-    this.debounceClose = debounce(200, () => this.handleClosePopper());
+    this.debounceClose = debounce(150, () => this.handleClosePopper());
   },
 
   render(h) {
