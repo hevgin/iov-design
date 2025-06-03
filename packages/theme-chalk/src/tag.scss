@@ -195,14 +195,14 @@
   line-height: 32px;
   padding: $--tag-padding;
   font-size: $--tag-font-size;
-  color: $--color-primary-6;
+  color: #546EFF;
   border-width: 1px;
   border-style: solid;
   border-color: transparent;
   border-radius: $--tag-border-radius;
   box-sizing: border-box;
   white-space: nowrap;
-  @include genTheme($--color-primary-1, $--color-primary-2, $--color-primary-6, $--color-primary-7, $--color-primary-1);
+  @include genTheme($--color-primary-1, $--color-primary-2, #546EFF, $--color-primary-7, $--color-primary-1);
   @include genThemeInfo($--color-fill-2, $--color-line-2, $--color-text-3, $--color-text-4, $--color-fill-2);
   @include genThemeSuccess($--color-success-1, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-1);
   @include genThemeWarning($--color-warning-1, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-1);
@@ -264,7 +264,7 @@
   }
 
   @include m(dark) {
-    @include genTheme($--color-primary-6, $--color-primary-6, $--color-white, $--color-white, $--color-primary-6);
+    @include genTheme(#546EFF, #546EFF, $--color-white, $--color-white, #546EFF);
     @include genThemeInfo($--color-text-3, $--color-text-3, $--color-white, $--color-white, $--color-text-3);
     @include genThemeSuccess($--color-success-6, $--color-success-6, $--color-white, $--color-white, $--color-success-6);
     @include genThemeWarning($--color-warning-6, $--color-warning-6, $--color-white, $--color-white, $--color-warning-6);
@@ -276,7 +276,7 @@
   }
 
   @include m(plain) {
-    @include genTheme($--color-white, $--color-primary-2, $--color-primary-6, $--color-primary-7, $--color-primary-6);
+    @include genTheme($--color-white, $--color-primary-2, #546EFF, $--color-primary-7, #546EFF);
     @include genThemeInfo($--color-white, $--color-line-2, $--color-text-3, $--color-text-4, $--color-text-3);
     @include genThemeSuccess($--color-white, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-6);
     @include genThemeWarning($--color-white, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-6);
