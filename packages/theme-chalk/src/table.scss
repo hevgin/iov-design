@@ -298,18 +298,18 @@
     .has-gutter {
       .el-table__cell {
         border-bottom: 0 none;
-        // &:nth-last-child(2) {
-        //   border-right: 0 none;
-        // }
+        &:nth-last-child(2) {
+          border-right: 0 none;
+        }
       }
     }
 
     .el-table__row {
-      // .el-table__cell {
-      //   &:last-child {
-      //     border-right: 0 none;
-      //   }
-      // }
+      .el-table__cell {
+        &:last-child {
+          border-right: 0 none;
+        }
+      }
       &:last-child {
         .el-table__cell {
           border-bottom: 0 none;
