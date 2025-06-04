@@ -123,7 +123,7 @@
         type: Boolean
       },
       roundButton: {
-        default: false,
+        default: true,
         type: Boolean
       }
     },

@@ -29,7 +29,7 @@ const defaults = {
   beforeClose: null,
   dangerouslyUseHTMLString: false,
   center: false,
-  roundButton: false,
+  roundButton: true,
   distinguishCancelAndClose: false
 };
 
