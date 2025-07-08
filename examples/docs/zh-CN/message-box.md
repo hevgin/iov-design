@@ -236,10 +236,10 @@
 ```
 :::
 
-### 居中布局
-内容支持居中布局
+### 标题带ICON
+标题前带icon, 需与`type`属性一起使用
 
-:::demo 将 `center` 设置为 `true` 即可开启居中布局
+:::demo 将 `showTitleIcon` 设置为 `true` 即可
 
 ```html
 <template>
@@ -254,7 +254,8 @@
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
-          center: true
+          showTitleIcon: true,
+          showClose: false
         }).then(() => {
           this.$message({
             type: 'success',
@@ -322,5 +323,6 @@ import { MessageBox } from 'iov-design';
 | inputPattern | 输入框的校验表达式 | regexp | — | — |
 | inputValidator | 输入框的校验函数。可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给 inputErrorMessage | function | — | — |
 | inputErrorMessage | 校验未通过时的提示文本 | string | — | 输入的数据不合法! |
-| center | 是否居中布局 | boolean | — | false |
-| roundButton | 是否使用圆角按钮 | boolean | — | false |
+| showTitleBorder | 是否显示标题下边框 | boolean | — | true |
+| showTitleIcon | 是否在标题前面展示icon图标, 需配置type属性 | boolean | — | false |
+| roundButton | 是否使用圆角按钮 | boolean | — | true |

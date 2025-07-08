@@ -8,30 +8,30 @@
       role="dialog"
       aria-modal="true"
       :aria-label="title || 'dialog'">
-      <div class="el-message-box" :class="[customClass, center && 'el-message-box--center']">
-        <div class="el-message-box__header" v-if="title !== null">
+      <div class="el-message-box" :class="[customClass, showTitleIcon && 'el-message-box--title-icon']">
+        <div class="el-message-box__header" :class="[showTitleBorder && 'el-message-box__header-border']" v-if="title !== null">
           <div class="el-message-box__title">
             <div
               :class="['el-message-box__status', icon]"
-              v-if="icon && center">
+              v-if="icon && showTitleIcon">
             </div>
             <span>{{ title }}</span>
           </div>
-          <button
+          <span
             type="button"
             class="el-message-box__headerbtn"
             aria-label="Close"
             v-if="showClose"
             @click="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')"
             @keydown.enter="handleAction(distinguishCancelAndClose ? 'close' : 'cancel')">
-            <i class="el-message-box__close el-icon-close"></i>
-          </button>
+            <i class="el-message-box__close iov-icon-close"></i>
+          </span>
         </div>
         <div class="el-message-box__content">
           <div class="el-message-box__container">
             <div
               :class="['el-message-box__status', icon]"
-              v-if="icon && !center && message !== ''">
+              v-if="icon && !showTitleIcon && message !== ''">
             </div>
             <div class="el-message-box__message" v-if="message !== ''">
               <slot>
@@ -43,6 +43,7 @@
           <div class="el-message-box__input" v-show="showInput">
             <el-input
               v-model="inputValue"
+              size="small"
               :type="inputType"
               @keydown.enter.native="handleInputEnter"
               :placeholder="inputPlaceholder"
@@ -90,9 +91,9 @@
   let messageBox;
   let typeMap = {
     success: 'success',
-    info: 'info',
+    info: 'explain',
     warning: 'warning',
-    error: 'error'
+    error: 'fail'
   };
 
   export default {
@@ -118,7 +119,11 @@
       closeOnHashChange: {
         default: true
       },
-      center: {
+      showTitleBorder: {
+        default: true,
+        type: Boolean
+      },
+      showTitleIcon: {
         default: false,
         type: Boolean
       },
@@ -136,7 +141,7 @@
     computed: {
       icon() {
         const { type, iconClass } = this;
-        return iconClass || (type && typeMap[type] ? `el-icon-${ typeMap[type] }` : '');
+        return iconClass || (type && typeMap[type] ? `iov-icon-fill-${ typeMap[type] }` : '');
       },
 
       confirmButtonClasses() {

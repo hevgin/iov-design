@@ -6,14 +6,9 @@
 
 @include b(message-box) {
   display: inline-block;
-  width: $--msgbox-width;
-  padding-bottom: 10px;
-  vertical-align: middle;
-  background-color: $--color-white;
-  border-radius: $--msgbox-border-radius;
-  border: 1px solid $--border-color-lighter;
-  font-size: $--messagebox-font-size;
-  box-shadow: $--box-shadow-light;
+  width: 480px;
+  background: #fff;
+  border-radius: 8px;
   text-align: left;
   overflow: hidden;
   backface-visibility: hidden;
@@ -37,54 +32,58 @@
 
   @include e(header) {
     position: relative;
-    padding: $--msgbox-padding-primary;
-    padding-bottom: 10px;
+    padding: 16px 24px;
+    &.el-message-box__header-border {
+      border-bottom: 1px solid $--color-line-1;
+    }
   }
 
   @include e(title) {
     padding-left: 0;
     margin-bottom: 0;
-    font-size: $--messagebox-font-size;
+    font-size: 16px;
     line-height: 1;
-    color: $--messagebox-title-color;
+    color: $--color-text-6;
   }
 
   @include e(headerbtn) {
     position: absolute;
-    top: $--msgbox-padding-primary;
-    right: $--msgbox-padding-primary;
-    padding: 0;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: $--message-close-size;
+    top: 50%;
+    right: 20px;
+    padding: 4px;
     cursor: pointer;
+    font-size: 0;
+    margin-top: -12px;
+    transition: all ease .3s;
+    border-radius: 4px;
 
     .el-message-box__close {
-      color: $--color-info;
+      font-size: 16px;
+      color: $--color-fill-5;
     }
 
     &:focus, &:hover {
+      background: $--color-fill-1;
       .el-message-box__close {
-        color: $--color-primary;
+        color: $--color-fill-6;
       }
     }
 
   }
 
   @include e(content) {
-    padding: 10px $--msgbox-padding-primary;
-    color: $--messagebox-content-color;
-    font-size: $--messagebox-content-font-size;
+    padding: 16px 24px 0;
+    color: $--color-text-6;
+    font-size: 13px;
+    line-height: 20px;
   }
-  
+
   @include e(container) {
     position: relative;
   }
 
   @include e(input) {
-    padding-top: 15px;
-
+    padding-top: 4px;
     & input.invalid {
       border-color: $--color-danger;
       &:focus {
@@ -94,35 +93,28 @@
   }
 
   @include e(status) {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
     font-size: 24px !important;
-
-    &::before {
-      // 防止图标切割
-      padding-left: 1px;
-    }
+    position: absolute;
+    top: -2px;
 
     + .el-message-box__message {
-      padding-left: 36px;
-      padding-right: 12px;
+      padding-left: 32px;
     }
 
-    &.el-icon-success {
-      color: $--messagebox-success-color;
+    &.iov-icon-fill-success {
+      color: $--color-success-6;
     }
 
-    &.el-icon-info {
-      color: $--messagebox-info-color;
+    &.iov-icon-fill-explain {
+      color: $--color-primary-6;
     }
 
-    &.el-icon-warning {
-      color: $--messagebox-warning-color;
+    &.iov-icon-fill-warning {
+      color: $--color-warning-6;
     }
 
-    &.el-icon-error {
-      color: $--messagebox-danger-color;
+    &.iov-icon-fill-fail {
+      color: $--color-danger-6;
     }
   }
 
@@ -131,19 +123,19 @@
 
     & p {
       margin: 0;
-      line-height: 24px;
+      line-height: 20px;
     }
   }
 
   @include e(errormsg) {
-    color: $--color-danger;
-    font-size: $--messagebox-error-font-size;
+    color: $--color-danger-6;
+    font-size: 12px;
     min-height: 18px;
     margin-top: 2px;
   }
 
   @include e(btns) {
-    padding: 5px 15px 0;
+    padding: 16px 24px 20px;
     text-align: right;
 
     & button:nth-child(2) {
@@ -156,41 +148,27 @@
   }
 
   // centerAlign 布局
-  @include m(center) {
-    padding-bottom: 30px;
-
+  @include m(title-icon) {
     @include e(header) {
-      padding-top: 30px;
+      padding: 24px 24px 0;
+      border-bottom: 0 none;
     }
-
     @include e(title) {
-      position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
     }
-
     @include e(status) {
+      margin-right: 8px;
       position: relative;
       top: auto;
-      padding-right: 5px;
-      text-align: center;
-      transform: translateY(-1px);
     }
-
+    @include e(content) {
+      padding-left: 56px;
+      padding-top: 8px;
+      color: $--color-text-3;
+    }
     @include e(message) {
       margin-left: 0;
-    }
-
-    @include e((btns, content)) {
-      text-align: center;
-    }
-
-    @include e(content) {
-      $padding-horizontal: $--msgbox-padding-primary + 12px;
-
-      padding-left: $padding-horizontal;
-      padding-right: $padding-horizontal;
     }
   }
 }

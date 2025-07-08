@@ -296,28 +296,6 @@ $--alert-icon-size: 16px !default;
 $--alert-icon-large-size: 28px !default;
 
 /* MessageBox
--------------------------- */
-/// color||Color|0
-$--messagebox-title-color: $--color-text-primary !default;
-$--msgbox-width: 480px !default;
-$--msgbox-border-radius: 4px !default;
-/// fontSize||Font|1
-$--messagebox-font-size: $--font-size-large !default;
-/// fontSize||Font|1
-$--messagebox-content-font-size: $--font-size-base !default;
-/// color||Color|0
-$--messagebox-content-color: $--color-text-regular !default;
-/// fontSize||Font|1
-$--messagebox-error-font-size: 12px !default;
-$--msgbox-padding-primary: 15px !default;
-/// color||Color|0
-$--messagebox-success-color: $--color-success !default;
-/// color||Color|0
-$--messagebox-info-color: $--color-info !default;
-/// color||Color|0
-$--messagebox-warning-color: $--color-warning !default;
-/// color||Color|0
-$--messagebox-danger-color: $--color-danger !default;
 
 /* Message
 -------------------------- */
@@ -532,16 +510,7 @@ $--switch-button-size: 16px !default;
 
 /* Dialog
 -------------------------- */
-$--dialog-background-color: $--color-white !default;
-$--dialog-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !default;
-/// fontSize||Font|1
-$--dialog-title-font-size: $--font-size-large !default;
-/// fontSize||Font|1
-$--dialog-content-font-size: 14px !default;
-/// fontLineHeight||LineHeight|2
-$--dialog-font-line-height: $--font-line-height-primary !default;
-/// padding||Spacing|3
-$--dialog-padding-primary: 20px !default;
+$--dialog-padding: 16px 24px !default;
 
 /* Table
 -------------------------- */

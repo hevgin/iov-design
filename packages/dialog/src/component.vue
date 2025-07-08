@@ -19,16 +19,15 @@
           <slot name="title">
             <span class="el-dialog__title">{{ title }}</span>
           </slot>
-          <button
-            type="button"
+          <span
             class="el-dialog__headerbtn"
             aria-label="Close"
             v-if="showClose"
-            @click="handleClose">
-            <i class="el-dialog__close el-icon el-icon-close"></i>
-          </button>
+            >
+            <i class="el-dialog__close el-icon iov-icon-close" v-if="showClose" @click="handleClose"></i>
+          </span>
         </div>
-        <div class="el-dialog__body" v-if="rendered"><slot></slot></div>
+        <div class="el-dialog__body" :class="type === 'form' ? 'el-dialog__body--form' : 'el-dialog__body--desc'" v-if="rendered"><slot></slot></div>
         <div class="el-dialog__footer" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
@@ -51,6 +50,11 @@
       title: {
         type: String,
         default: ''
+      },
+
+      type: {
+        type: String,
+        default: 'form'
       },
 
       modal: {

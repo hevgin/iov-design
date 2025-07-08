@@ -6,9 +6,8 @@
 @include b(dialog) {
   position: relative;
   margin: 0 auto 50px;
-  background: $--dialog-background-color;
-  border-radius: $--border-radius-small;
-  box-shadow: $--dialog-box-shadow;
+  background: #fff;
+  border-radius: 8px;
   box-sizing: border-box;
   width: 50%;
 
@@ -31,50 +30,59 @@
   }
 
   @include e(header) {
-    padding: $--dialog-padding-primary;
-    padding-bottom: 10px;
+    padding: $--dialog-padding;
+    position: relative;
+    border-bottom: 1px solid $--color-line-1;
   }
 
   @include e(headerbtn) {
     position: absolute;
-    top: $--dialog-padding-primary;
-    right: $--dialog-padding-primary;
-    padding: 0;
-    background: transparent;
-    border: none;
-    outline: none;
+    top: 50%;
+    right: 20px;
+    padding: 4px;
     cursor: pointer;
-    font-size: $--message-close-size;
+    font-size: 0;
+    margin-top: -12px;
+    transition: all ease .3s;
+    border-radius: 4px;
 
     .el-dialog__close {
-      color: $--color-info;
+      font-size: 16px;
+      color: $--color-fill-5;
     }
 
     &:focus, &:hover {
+      background: $--color-fill-1;
       .el-dialog__close {
-        color: $--color-primary;
+        color: $--color-fill-6;
       }
     }
   }
 
   @include e(title) {
-    line-height: $--dialog-font-line-height;
-    font-size: $--dialog-title-font-size;
-    color: $--color-text-primary;
+    line-height: 1;
+    font-size: 16px;
+    color: $--color-text-6;
   }
 
   @include e(body) {
-    padding: ($--dialog-padding-primary + 10px) $--dialog-padding-primary;
-    color: $--color-text-regular;
-    font-size: $--dialog-content-font-size;
+    padding: $--dialog-padding;
+    padding-bottom: 0;
+    color: $--color-text-6;
+    font-size: 13px;
     word-break: break-all;
+    max-height: 503px;
+    overflow-y: auto;
+    &.el-dialog__body--desc {
+      padding-bottom: 20px;
+    }
   }
 
   @include e(footer) {
-    padding: $--dialog-padding-primary;
-    padding-top: 10px;
+    padding: 16px 24px 20px 0;
     text-align: right;
     box-sizing: border-box;
+    font-size: 0;
   }
 
   // 内容居中布局
@@ -83,7 +91,6 @@
 
     @include e(body) {
       text-align: initial;
-      padding: 25px ($--dialog-padding-primary + 5px) 30px;
     }
 
     @include e(footer) {

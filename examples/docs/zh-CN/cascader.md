@@ -25,7 +25,7 @@
       v-model="value"
       :options="options"
       :props="{ expandTrigger: 'hover' }"
-      size="medium"
+      size="small"
       @change="handleChange">
         <template slot="prefixLabel">分类</template>
       </el-cascader>

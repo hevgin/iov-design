@@ -17,8 +17,8 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
   :before-close="handleClose">
   <span>这是一段信息</span>
   <span slot="footer" class="dialog-footer">
-    <el-button @click="dialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+    <el-button size="small" round @click="dialogVisible = false">取 消</el-button>
+    <el-button size="small" round type="primary" @click="dialogVisible = false">确 定</el-button>
   </span>
 </el-dialog>
 
@@ -49,14 +49,14 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。
 
 ### 自定义内容
 
-Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下面是应用了 Element Table 和 Form 组件的两个样例。
+Dialog 组件的内容可以是任意的，甚至可以是表格或表单，如果内容是非表单，则需手动补齐内容`padding-bottom: 20px`或 设置  `type='desc'`, 下面是应用了 Element Table 和 Form 组件的两个样例。
 
 :::demo
 ```html
 <!-- Table -->
 <el-button type="text" @click="dialogTableVisible = true">打开嵌套表格的 Dialog</el-button>
 
-<el-dialog title="收货地址" :visible.sync="dialogTableVisible">
+<el-dialog title="收货地址" :visible.sync="dialogTableVisible" type="desc">
   <el-table :data="gridData">
     <el-table-column property="date" label="日期" width="150"></el-table-column>
     <el-table-column property="name" label="姓名" width="200"></el-table-column>
@@ -80,8 +80,8 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
     </el-form-item>
   </el-form>
   <div slot="footer" class="dialog-footer">
-    <el-button @click="dialogFormVisible = false">取 消</el-button>
-    <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+    <el-button size="small" round @click="dialogFormVisible = false">取 消</el-button>
+    <el-button size="small" round type="primary" @click="dialogFormVisible = false">确 定</el-button>
   </div>
 </el-dialog>
 
@@ -132,7 +132,7 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
 ```html
 <template>
   <el-button type="text" @click="outerVisible = true">点击打开外层 Dialog</el-button>
-  
+
   <el-dialog title="外层 Dialog" :visible.sync="outerVisible">
     <el-dialog
       width="30%"
@@ -141,8 +141,8 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
       append-to-body>
     </el-dialog>
     <div slot="footer" class="dialog-footer">
-      <el-button @click="outerVisible = false">取 消</el-button>
-      <el-button type="primary" @click="innerVisible = true">打开内层 Dialog</el-button>
+      <el-button size="small" round @click="outerVisible = false">取 消</el-button>
+      <el-button size="small" round type="primary" @click="innerVisible = true">打开内层 Dialog</el-button>
     </div>
   </el-dialog>
 </template>
@@ -176,8 +176,8 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，下�
   center>
   <span>需要注意的是内容是默认不居中的</span>
   <span slot="footer" class="dialog-footer">
-    <el-button @click="centerDialogVisible = false">取 消</el-button>
-    <el-button type="primary" @click="centerDialogVisible = false">确 定</el-button>
+    <el-button size="small" round @click="centerDialogVisible = false">取 消</el-button>
+    <el-button size="small" round type="primary" @click="centerDialogVisible = false">确 定</el-button>
   </span>
 </el-dialog>
 
@@ -206,6 +206,7 @@ Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默�
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | visible   | 是否显示 Dialog，支持 .sync 修饰符 | boolean | — | false |
 | title     | Dialog 的标题，也可通过具名 slot （见下表）传入 | string    | — | — |
+| type     | 弹窗body的padding-bottom默认0, 如果为'desc', 则为20px, 如果为form, 则为0px | string    | — | form |
 | width     | Dialog 的宽度 | string    | — | 50% |
 | fullscreen     | 是否为全屏 Dialog | boolean    | — | false |
 | top       | Dialog CSS 中的 margin-top 值 | string | — | 15vh |
