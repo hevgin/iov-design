@@ -118,11 +118,12 @@ export const cellForced = {
 
 export function defaultRenderCell(h, { row, column, $index }) {
   const property = column.property;
+  const emptyValuePlaceholder = column.emptyValuePlaceholder;
   const value = property && getPropByPath(row, property).v;
   if (column && column.formatter) {
     return column.formatter(row, column, value, $index);
   }
-  return value;
+  return emptyValuePlaceholder && ['', undefined, null].includes(value) ? emptyValuePlaceholder : value;
 }
 
 export function treeCellPrefix(h, { row, treeNode, store }) {

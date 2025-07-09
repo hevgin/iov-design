@@ -24,6 +24,7 @@
       </el-table-column>
       <el-table-column
         prop="address"
+        empty-value-placeholder='--'
         label="地址">
       </el-table-column>
     </el-table>
@@ -48,7 +49,7 @@
           }, {
             date: '2016-05-03',
             name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
+            address: ''
           }]
         }
       }
@@ -2111,6 +2112,7 @@
 | filter-multiple | 数据过滤的选项是否多选 | Boolean | — | true |
 | filter-method | 数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示。 | Function(value, row, column) | — | — |
 | filtered-value | 选中的数据过滤项，如果需要自定义表头过滤的渲染方式，可能会需要此属性。 | Array | — | — |
+| empty-value-placeholder | 空值占位符, 单元格数据如果为['', undefined, null]3个中的一种，则取此值 | String | — | — |
 
 ### Table-column Scoped Slot
 | name | 说明 |

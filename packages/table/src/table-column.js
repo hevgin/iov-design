@@ -56,7 +56,8 @@ export default {
       validator(val) {
         return val.every(order => ['ascending', 'descending', null].indexOf(order) > -1);
       }
-    }
+    },
+    emptyValuePlaceholder: String
   },
 
   data() {
@@ -275,7 +276,8 @@ export default {
       // sort 相关属性
       sortable: sortable,
       // index 列
-      index: this.index
+      index: this.index,
+      emptyValuePlaceholder: this.emptyValuePlaceholder || ''
     };
 
     const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'type', 'renderHeader', 'formatter', 'fixed', 'resizable'];
