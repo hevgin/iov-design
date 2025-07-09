@@ -9,7 +9,7 @@
       aria-modal="true"
       :aria-label="title || 'dialog'">
       <div class="el-message-box" :class="[customClass, showTitleIcon && 'el-message-box--title-icon']">
-        <div class="el-message-box__header" :class="[showTitleBorder && 'el-message-box__header-border']" v-if="title !== null">
+        <div class="el-message-box__header" v-if="title !== null">
           <div class="el-message-box__title">
             <div
               :class="['el-message-box__status', icon]"
@@ -27,13 +27,13 @@
             <i class="el-message-box__close iov-icon-close"></i>
           </span>
         </div>
-        <div class="el-message-box__content">
+        <div class="el-message-box__content" v-if="message !== ''">
           <div class="el-message-box__container">
             <div
               :class="['el-message-box__status', icon]"
               v-if="icon && !showTitleIcon && message !== ''">
             </div>
-            <div class="el-message-box__message" v-if="message !== ''">
+            <div class="el-message-box__message" :class="[!icon && 'no-type']" v-if="message !== ''">
               <slot>
                 <p v-if="!dangerouslyUseHTMLString">{{ message }}</p>
                 <p v-else v-html="message"></p>
@@ -118,10 +118,6 @@
       },
       closeOnHashChange: {
         default: true
-      },
-      showTitleBorder: {
-        default: true,
-        type: Boolean
       },
       showTitleIcon: {
         default: false,

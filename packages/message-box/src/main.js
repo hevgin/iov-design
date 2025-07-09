@@ -28,7 +28,6 @@ const defaults = {
   customClass: '',
   beforeClose: null,
   dangerouslyUseHTMLString: false,
-  showTitleBorder: true,
   showTitleIcon: false,
   roundButton: true,
   distinguishCancelAndClose: false

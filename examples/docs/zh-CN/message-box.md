@@ -237,9 +237,8 @@
 :::
 
 ### 标题带ICON
-标题前带icon, 需与`type`属性一起使用
-
-:::demo 将 `showTitleIcon` 设置为 `true` 即可
+标题前带icon, 需与`type`属性一起使用，将 `showTitleIcon` 设置为 `true` 即可
+:::demo
 
 ```html
 <template>
@@ -254,6 +253,43 @@
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning',
+          showTitleIcon: true,
+          showClose: false
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 标题不带下边框
+将 `showTitleIcon` 设置为 `true` , 不配置`type`属性即可
+
+:::demo
+
+```html
+<template>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open() {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
           showTitleIcon: true,
           showClose: false
         }).then(() => {
@@ -323,6 +359,5 @@ import { MessageBox } from 'iov-design';
 | inputPattern | 输入框的校验表达式 | regexp | — | — |
 | inputValidator | 输入框的校验函数。可以返回布尔值或字符串，若返回一个字符串, 则返回结果会被赋值给 inputErrorMessage | function | — | — |
 | inputErrorMessage | 校验未通过时的提示文本 | string | — | 输入的数据不合法! |
-| showTitleBorder | 是否显示标题下边框 | boolean | — | true |
-| showTitleIcon | 是否在标题前面展示icon图标, 需配置type属性 | boolean | — | false |
+| showTitleIcon | 是否在标题前面展示icon图标, 如未配置type属性, 则不展示标题下面的边框 | boolean | — | false |
 | roundButton | 是否使用圆角按钮 | boolean | — | true |

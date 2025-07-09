@@ -33,9 +33,7 @@
   @include e(header) {
     position: relative;
     padding: 16px 24px;
-    &.el-message-box__header-border {
-      border-bottom: 1px solid $--color-line-1;
-    }
+    border-bottom: 1px solid $--color-line-1;
   }
 
   @include e(title) {
@@ -44,6 +42,9 @@
     font-size: 16px;
     line-height: 1;
     color: $--color-text-6;
+    span {
+      font-weight: 500;
+    }
   }
 
   @include e(headerbtn) {
@@ -80,6 +81,7 @@
 
   @include e(container) {
     position: relative;
+    overflow: hidden;
   }
 
   @include e(input) {
@@ -93,12 +95,13 @@
   }
 
   @include e(status) {
+    margin-right: 8px;
     font-size: 24px !important;
-    position: absolute;
-    top: -2px;
+    float: left;
 
     + .el-message-box__message {
-      padding-left: 32px;
+      padding-top: 2px;
+      overflow: hidden;
     }
 
     &.iov-icon-fill-success {
@@ -158,17 +161,17 @@
       align-items: center;
     }
     @include e(status) {
-      margin-right: 8px;
-      position: relative;
-      top: auto;
+      float: none;
     }
     @include e(content) {
-      padding-left: 56px;
       padding-top: 8px;
       color: $--color-text-3;
     }
     @include e(message) {
-      margin-left: 0;
+      padding-left: 32px;
+      &.no-type {
+        padding-left: 0;
+      }
     }
   }
 }
