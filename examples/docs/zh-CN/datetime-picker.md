@@ -90,7 +90,6 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
     <el-date-picker
       v-model="value1"
       type="datetimerange"
-      range-separator="至"
       start-placeholder="开始日期"
       end-placeholder="结束日期">
     </el-date-picker>
@@ -101,7 +100,6 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
       v-model="value2"
       type="datetimerange"
       :picker-options="pickerOptions"
-      range-separator="至"
       start-placeholder="开始日期"
       end-placeholder="结束日期"
       align="right">
@@ -209,7 +207,7 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DateTimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
-| range-separator | 选择范围时的分隔符 | string | - | '-' |
+| range-separator | 选择范围时的分隔符 | string | - | - |
 | default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
 | default-time | 选中日期后的默认具体时刻 | 非范围选择时：string / 范围选择时：string[] | 非范围选择时：形如`12:00:00`的字符串；范围选择时：数组，长度为 2，每项值为字符串，形如`12:00:00`，第一项指定开始日期的时刻，第二项指定结束日期的时刻。不指定会使用时刻 `00:00:00` | — |
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |

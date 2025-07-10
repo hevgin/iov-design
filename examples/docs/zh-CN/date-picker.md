@@ -160,7 +160,6 @@
       <el-date-picker
         v-model="value1"
         type="daterange"
-        range-separator="至"
         start-placeholder="开始日期"
         end-placeholder="结束日期">
         <template slot="prefixLabel">选择日期</template>
@@ -172,7 +171,6 @@
         type="daterange"
         align="right"
         unlink-panels
-        range-separator="至"
         start-placeholder="开始日期"
         end-placeholder="结束日期"
         :picker-options="pickerOptions">
@@ -234,7 +232,6 @@
     <el-date-picker
       v-model="value1"
       type="monthrange"
-      range-separator="至"
       start-placeholder="开始月份"
       end-placeholder="结束月份">
     </el-date-picker>
@@ -246,7 +243,6 @@
       type="monthrange"
       align="right"
       unlink-panels
-      range-separator="至"
       start-placeholder="开始月份"
       end-placeholder="结束月份"
       :picker-options="pickerOptions">
@@ -422,7 +418,7 @@
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DatePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object |  — | {} |
-| range-separator | 选择范围时的分隔符 | string | — | '-' |
+| range-separator | 选择范围时的分隔符 | string | — | — |
 | default-value | 可选，选择器打开时默认显示的时间 | Date | 可被`new Date()`解析 | — |
 | default-time | 范围选择时选中日期所使用的当日内具体时刻 | string[] | 数组，长度为 2，每项值为字符串，形如`12:00:00`，第一项指定开始日期的时刻，第二项指定结束日期的时刻，不指定会使用时刻 `00:00:00` | — |
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |

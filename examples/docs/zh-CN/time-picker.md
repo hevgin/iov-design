@@ -118,7 +118,6 @@
   <el-time-picker
     is-range
     v-model="value1"
-    range-separator="至"
     start-placeholder="开始时间"
     end-placeholder="结束时间"
     placeholder="选择时间范围">
@@ -127,7 +126,6 @@
     is-range
     arrow-control
     v-model="value2"
-    range-separator="至"
     start-placeholder="开始时间"
     end-placeholder="结束时间"
     placeholder="选择时间范围">
@@ -164,7 +162,7 @@
 | align | 对齐方式 | string | left / center / right | left |
 | popper-class | TimePicker 下拉框的类名 | string | — | — |
 | picker-options | 当前时间日期选择器特有的选项参考下表 | object | — | {} |
-| range-separator | 选择范围时的分隔符 | string | - | '-' |
+| range-separator | 选择范围时的分隔符 | string | - | - |
 | value-format | 可选，仅TimePicker时可用，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |
 | default-value | 可选，选择器打开时默认显示的时间 | Date(TimePicker) / string(TimeSelect) | 可被`new Date()`解析(TimePicker) / 可选值(TimeSelect) | — |
 | name | 原生属性 | string | — | — |

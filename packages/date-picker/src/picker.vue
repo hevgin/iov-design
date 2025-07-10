@@ -64,9 +64,15 @@
       @change="handleStartChange"
       @focus="handleFocus"
       class="el-range-input">
-    <slot name="range-separator">
-      <span class="el-range-separator">{{ rangeSeparator }}</span>
-    </slot>
+      <span v-if="$slots['range-separator']" class="el-range-separator">
+        <slot name="range-separator"></slot>
+      </span>
+      <span v-else-if="rangeSeparator" class="el-range-separator">
+        {{ rangeSeparator }}
+      </span>
+      <span v-else class="el-range-separator">
+        <i class="iov-icon-arrow-half-right"></i>
+      </span>
     <input
       autocomplete="off"
       :placeholder="endPlaceholder"
@@ -409,7 +415,7 @@ export default {
     defaultValue: {},
     defaultTime: {},
     rangeSeparator: {
-      default: '-'
+      default: ''
     },
     pickerOptions: {},
     unlinkPanels: Boolean,
