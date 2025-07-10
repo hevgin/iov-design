@@ -27,8 +27,8 @@
             <i class="el-dialog__close el-icon iov-icon-close" v-if="showClose" @click="handleClose"></i>
           </span>
         </div>
-        <div class="el-dialog__body" :class="type === 'form' ? 'el-dialog__body--form' : 'el-dialog__body--desc'" v-if="rendered"><slot></slot></div>
-        <div class="el-dialog__footer" v-if="$slots.footer">
+        <div class="el-dialog__body" ref="body" :class="type === 'form' ? 'el-dialog__body--form' : 'el-dialog__body--desc'" v-if="rendered"><slot></slot></div>
+        <div class="el-dialog__footer" ref="footer" v-if="$slots.footer">
           <slot name="footer"></slot>
         </div>
       </div>
@@ -103,7 +103,7 @@
 
       top: {
         type: String,
-        default: '15vh'
+        default: '50%'
       },
       beforeClose: Function,
       center: {
@@ -149,7 +149,7 @@
       style() {
         let style = {};
         if (!this.fullscreen) {
-          style.marginTop = this.top;
+          style.top = this.top;
           if (this.width) {
             style.width = this.width;
           }
@@ -189,10 +189,47 @@
         this.broadcast('ElDropdownMenu', 'updatePopper');
       },
       afterEnter() {
+        this.onDialogOpened();
         this.$emit('opened');
       },
       afterLeave() {
         this.$emit('closed');
+      },
+
+      onDialogOpened() {
+        this.$nextTick(() => {
+          this.checkOverflow();
+          this.observeContentChanges();
+        });
+      },
+
+      // 检查内容是否超过body高度
+      checkOverflow() {
+        const body = this.$refs.body;
+        const footer = this.$refs.footer;
+        if (!body || !footer) return;
+        if (body.scrollHeight > body.clientHeight) {
+          footer.classList.add('el-dialog__footer--shadow');
+        } else {
+          footer.classList.remove('el-dialog__footer--shadow');
+        }
+      },
+      // 监听节点变化
+      observeContentChanges() {
+        const body = this.$refs.body;
+        if (!body) return;
+        if (this._mutationObserver) {
+          this._mutationObserver.disconnect();
+        }
+        this._mutationObserver = new MutationObserver(() => {
+          this.checkOverflow();
+        });
+        // 监听子节点及文本节点的内容变化
+        this._mutationObserver.observe(body, {
+          childList: true,
+          subtree: true,
+          characterData: true
+        });
       }
     },
 
@@ -210,6 +247,9 @@
       // if appendToBody is true, remove DOM node after destroy
       if (this.appendToBody && this.$el && this.$el.parentNode) {
         this.$el.parentNode.removeChild(this.$el);
+      }
+      if (this._mutationObserver) {
+        this._mutationObserver.disconnect();
       }
     }
   };

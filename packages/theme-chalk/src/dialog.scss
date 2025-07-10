@@ -10,13 +10,22 @@
   border-radius: 8px;
   box-sizing: border-box;
   width: 50%;
+  transform: translateY(-50%);
 
   @include when(fullscreen) {
     width: 100%;
-    margin-top: 0;
+    top: 0;
     margin-bottom: 0;
     height: 100%;
     overflow: auto;
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .el-dialog__body {
+      flex: 1;
+      max-height: none;
+    }
   }
 
   @include e(wrapper) {
@@ -79,22 +88,23 @@
   }
 
   @include e(footer) {
-    padding: 16px 24px 20px 0;
+    padding: 16px 24px 20px;
     text-align: right;
     box-sizing: border-box;
     font-size: 0;
+    &.el-dialog__footer--shadow {
+      box-shadow: 0 0 12px 0 rgba(196, 198, 207, 0.21);
+    }
   }
 
-  // 内容居中布局
   @include m(center) {
-    text-align: center;
 
     @include e(body) {
-      text-align: initial;
+      text-align: left;
     }
 
     @include e(footer) {
-      text-align: inherit;
+      text-align: center;
     }
   }
 }
