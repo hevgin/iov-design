@@ -40,7 +40,7 @@
 :::demo
 ```html
 <el-empty>
-  <el-button type="primary">按钮</el-button>
+  <el-button type="primary" round size="small" icon="iov-icon-plus">添加应用</el-button>
 </el-empty>
 ```
 :::
@@ -49,7 +49,7 @@
 | 参数          | 说明            | 类型            | 可选值                 | 默认值   |
 |-------------  |---------------- |---------------- |---------------------- |-------- |
 | image          | 图片地址         | string  |          —             |    —     |
-| image-size    | 图片大小（宽度）  | number | — |    160  |
+| image-size    | 图片大小（宽度）  | number | — |    140  |
 | description  | 文本描述    | string  |    —  |  — |
 | type  | 图片类型    | number  |    -  |  1 |
 

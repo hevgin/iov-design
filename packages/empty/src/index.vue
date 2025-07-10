@@ -44,7 +44,10 @@ export default {
       type: Number,
       default: 1
     },
-    imageSize: Number,
+    imageSize: {
+      type: Number,
+      default: 140
+    },
     description: {
       type: String,
       default: ''
