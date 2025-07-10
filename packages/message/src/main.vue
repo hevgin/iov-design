@@ -19,17 +19,17 @@
         <p v-if="!dangerouslyUseHTMLString" class="el-message__content">{{ message }}</p>
         <p v-else v-html="message" class="el-message__content"></p>
       </slot>
-      <i v-if="showClose" class="el-message__closeBtn el-icon-close" @click="close"></i>
+      <i v-if="showClose" class="el-message__closeBtn iov-icon-close" @click="close"></i>
     </div>
   </transition>
 </template>
 
 <script type="text/babel">
-  const typeMap = {
+  let typeMap = {
     success: 'success',
-    info: 'info',
+    info: 'explain',
     warning: 'warning',
-    error: 'error'
+    error: 'fail'
   };
 
   export default {
@@ -44,7 +44,7 @@
         onClose: null,
         showClose: false,
         closed: false,
-        verticalOffset: 20,
+        verticalOffset: 46,
         timer: null,
         dangerouslyUseHTMLString: false,
         center: false
@@ -54,7 +54,7 @@
     computed: {
       typeClass() {
         return this.type && !this.iconClass
-          ? `el-message__icon el-icon-${ typeMap[this.type] }`
+          ? `el-message__icon iov-icon-fill-${ typeMap[this.type] }`
           : '';
       },
       positionStyle() {

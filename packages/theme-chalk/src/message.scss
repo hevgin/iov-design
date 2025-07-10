@@ -2,22 +2,21 @@
 @import "common/var";
 
 @include b(message) {
-  min-width: $--message-min-width;
+  min-width: 204px;
   box-sizing: border-box;
-  border-radius: $--border-radius-base;
-  border-width: $--border-width-base;
-  border-style: $--border-style-base;
-  border-color: $--border-color-lighter;
+  border-radius: 4px;
+  border: 1px solid $--color-line-2;
   position: fixed;
   left: 50%;
-  top: 20px;
+  top: 46px;
   transform: translateX(-50%);
-  background-color: $--message-background-color;
+  background-color: #fff;
   transition: opacity 0.3s, transform .4s, top 0.4s;
   overflow: hidden;
-  padding: $--message-padding;
+  padding: 13px 16px;
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 18px 0 rgba(73,75,83,0.1);
 
   @include when(center) {
     justify-content: center;
@@ -25,7 +24,7 @@
 
   @include when(closable) {
     .el-message__content {
-      padding-right: 16px;
+      padding-right: 24px;
     }
   }
 
@@ -35,45 +34,37 @@
 
   @include m(info) {
     .el-message__content {
-      color: $--message-info-font-color;
+      color: $--color-text-6;
     }
   }
 
   @include m(success) {
-    background-color: $--color-success-lighter;
-    border-color: $--color-success-light;
-
     .el-message__content {
-      color: $--message-success-font-color;
+      color: $--color-text-6;
     }
   }
 
   @include m(warning) {
-    background-color: $--color-warning-lighter;
-    border-color: $--color-warning-light;
-
     .el-message__content {
-      color: $--message-warning-font-color;
+      color: $--color-text-6;
     }
   }
 
   @include m(error) {
-    background-color: $--color-danger-lighter;
-    border-color: $--color-danger-light;
-
     .el-message__content {
-      color: $--message-danger-font-color;
+      color: $--color-text-6;
     }
   }
 
   @include e(icon) {
-    margin-right: 10px;
+    margin-right: 8px;
+    font-size: 16px;
   }
 
   @include e(content) {
     padding: 0;
-    font-size: 14px;
-    line-height: 1;
+    font-size: 13px;
+    line-height: 16px;
     &:focus {
       outline-width: 0;
     }
@@ -82,34 +73,34 @@
   @include e(closeBtn) {
     position: absolute;
     top: 50%;
-    right: 15px;
+    right: 16px;
     transform: translateY(-50%);
     cursor: pointer;
-    color: $--message-close-icon-color;
-    font-size: $--message-close-size;
+    color: $--color-fill-5;
+    font-size: 14px;
 
     &:focus {
       outline-width: 0;
     }
     &:hover {
-      color: $--message-close-hover-color;
+      color: $--color-fill-6;
     }
   }
 
-  & .el-icon-success {
-    color: $--message-success-font-color;
+  .iov-icon-fill-success {
+    color: $--color-success-6;
   }
 
-  & .el-icon-error {
-    color: $--message-danger-font-color;
+  .iov-icon-fill-explain {
+    color: $--color-primary-6;
   }
 
-  & .el-icon-info {
-    color: $--message-info-font-color;
+  .iov-icon-fill-warning {
+    color: $--color-warning-6;
   }
 
-  & .el-icon-warning {
-    color: $--message-warning-font-color;
+  .iov-icon-fill-fail {
+    color: $--color-danger-6;
   }
 }
 
