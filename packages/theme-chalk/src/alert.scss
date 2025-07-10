@@ -3,12 +3,12 @@
 
 @include b(alert) {
   width: 100%;
-  padding: $--alert-padding;
+  padding: 11px 12px;
   margin: 0;
   box-sizing: border-box;
-  border-radius: $--alert-border-radius;
+  border-radius: 4px;
   position: relative;
-  background-color: $--color-white;
+  background-color: #fff;
   overflow: hidden;
   opacity: 1;
   display: flex;
@@ -26,10 +26,10 @@
 
   @include when(dark) {
     .el-alert__closebtn {
-      color: $--color-white;
+      color: #fff;
     }
     .el-alert__description {
-      color: $--color-white;
+      color: #fff;
     }
   }
 
@@ -49,7 +49,7 @@
 
     &.is-dark {
       background-color: $--color-success-6;
-      color: $--color-white;
+      color: #fff;
     }
   }
 
@@ -65,7 +65,7 @@
 
     &.is-dark {
       background-color: $--color-primary-6;
-      color: $--color-white;
+      color: #fff;
     }
   }
 
@@ -81,7 +81,7 @@
 
     &.is-dark {
       background-color: $--color-warning-6;
-      color: $--color-white;
+      color: #fff;
     }
   }
 
@@ -97,7 +97,7 @@
 
     &.is-dark {
       background-color: $--color-danger-6;
-      color: $--color-white;
+      color: #fff;
     }
   }
 
@@ -107,30 +107,33 @@
 
   @include e(icon) {
     margin-right: 8px;
-    font-size: $--alert-icon-size;
-    width: $--alert-icon-size;
+    font-size: 16px;
+    width: 16px;
     @include when(big) {
-      font-size: $--alert-icon-large-size;
-      width: $--alert-icon-large-size;
+      font-size: 16px;
+      width: 16px;
+      align-self: flex-start;
     }
   }
 
   @include e(title) {
-    font-size: $--alert-title-font-size;
+    font-size: 12px;
+    line-height: 16px;
+    display: block;
     @include when(bold) {
       font-weight: 500;
     }
   }
 
   & .el-alert__description {
-    font-size: $--alert-description-font-size;
-    margin: 5px 0 0 0;
+    font-size: 12px;
+    margin: 4px 0 0 0;
     color: $--color-text-6;
     font-weight: 400;
   }
 
   @include e(closebtn) {
-    font-size: $--alert-close-font-size;
+    font-size: 14px;
     opacity: 1;
     position: absolute;
     top: 12px;
@@ -139,7 +142,7 @@
 
     @include when(customed) {
       font-style: normal;
-      font-size: $--alert-close-customed-font-size;
+      font-size: 12px;
       top: 11px;
     }
   }
