@@ -3,27 +3,46 @@
 通过点击或者拖拽上传文件
 
 ### 点击上传
-
-:::demo 通过 slot 你可以传入自定义的上传按钮类型和文字提示。可通过设置`limit`和`on-exceed`来限制上传文件的个数和定义超出限制时的行为。可通过设置`before-remove`来阻止文件移除操作。
+通过 slot 你可以传入自定义的上传按钮类型和文字提示。可通过设置`limit`和`on-exceed`来限制上传文件的个数和定义超出限制时的行为。可通过设置`before-remove`来阻止文件移除操作，通过设置`background`来决定是否显示背景颜色
+:::demo
 ```html
-<el-upload
-  class="upload-demo"
-  action="https://jsonplaceholder.typicode.com/posts/"
-  :on-preview="handlePreview"
-  :on-remove="handleRemove"
-  :before-remove="beforeRemove"
-  multiple
-  :limit="3"
-  :on-exceed="handleExceed"
-  :file-list="fileList">
-  <el-button size="small" type="primary">点击上传</el-button>
-  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-</el-upload>
+<el-row :gutter="12">
+  <el-col :span="12">
+    <el-upload
+      action="https://jsonplaceholder.typicode.com/posts/"
+      :on-preview="handlePreview"
+      :on-remove="handleRemove"
+      :before-remove="beforeRemove"
+      multiple
+      :limit="3"
+      :on-exceed="handleExceed"
+      :file-list="fileList">
+      <el-button size="small" icon="iov-icon-upload">选择文件</el-button>
+      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+  </el-col>
+  <el-col :span="12">
+    <el-upload
+      background
+      action="https://jsonplaceholder.typicode.com/posts/"
+      :on-preview="handlePreview"
+      :on-remove="handleRemove"
+      :before-remove="beforeRemove"
+      multiple
+      :limit="3"
+      :on-exceed="handleExceed"
+      :file-list="fileList">
+      <el-button size="small" type="primary" icon="iov-icon-upload">选择文件</el-button>
+      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+  </el-col>
+</el-row>
+
 <script>
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList: [{name: '西红柿.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: '王星越入职账号申请.docx', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
       };
     },
     methods: {
@@ -34,10 +53,13 @@
         console.log(file);
       },
       handleExceed(files, fileList) {
-        this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
+        return this.$message.warning(`当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`);
       },
       beforeRemove(file, fileList) {
-        return this.$confirm(`确定移除 ${ file.name }？`);
+        return this.$confirm('', `确定移除 ${ file.name }?`, {
+          showTitleIcon: true,
+          showClose: false
+        });
       }
     }
   }
@@ -52,46 +74,23 @@
 :::demo
 ```html
 <el-upload
-  class="avatar-uploader"
   action="https://jsonplaceholder.typicode.com/posts/"
+  list-type="picture-card"
   :show-file-list="false"
+  :limit="1"
+  :fileList="fileList"
   :on-success="handleAvatarSuccess"
   :before-upload="beforeAvatarUpload">
-  <img v-if="imageUrl" :src="imageUrl" class="avatar">
-  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+    <div class="el-upload__picture">
+      <i class="el-upload__icon iov-icon-img-default"></i>
+      <div class="el-upload__desc">点击上传</div>
+    </div>
 </el-upload>
-
-<style>
-  .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 178px;
-    height: 178px;
-    line-height: 178px;
-    text-align: center;
-  }
-  .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
-  }
-</style>
-
 <script>
   export default {
     data() {
       return {
-        imageUrl: ''
+        fileList: [{name: '西红柿.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
       };
     },
     methods: {
@@ -125,9 +124,13 @@
 <el-upload
   action="https://jsonplaceholder.typicode.com/posts/"
   list-type="picture-card"
+  :fileList="fileList"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
-  <i class="el-icon-plus"></i>
+  <div class="el-upload__picture">
+    <i class="el-upload__icon iov-icon-img-default"></i>
+    <div class="el-upload__desc">点击上传</div>
+  </div>
 </el-upload>
 <el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
@@ -137,7 +140,8 @@
     data() {
       return {
         dialogImageUrl: '',
-        dialogVisible: false
+        dialogVisible: false,
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg111'}]
       };
     },
     methods: {
@@ -164,34 +168,38 @@
   action="#"
   list-type="picture-card"
   :auto-upload="false">
-    <i slot="default" class="el-icon-plus"></i>
-    <div slot="file" slot-scope="{file}">
-      <img
-        class="el-upload-list__item-thumbnail"
-        :src="file.url" alt=""
-      >
-      <span class="el-upload-list__item-actions">
-        <span
-          class="el-upload-list__item-preview"
-          @click="handlePictureCardPreview(file)"
-        >
-          <i class="el-icon-zoom-in"></i>
+    <div class="el-upload__picture">
+      <i class="el-upload__icon iov-icon-img-default"></i>
+      <div class="el-upload__desc">点击上传</div>
+    </div>
+    <div slot="file" slot-scope="{file}" style="height: 100%">
+      <div class="el-upload-list__file">
+        <div class="el-upload-list__item-name">
+          <span class="el-upload-list__item-thumbnail">
+            <el-image :src="file.url" fit="contain">
+              <i slot="placeholder" class="el-image__placeholder"></i>
+              <i slot="error" class="el-image__error"></i>
+            </el-image>
+          </span>
+        </div>
+        <div v-if="file.status === 'uploading'" class="el-upload-list__item-status-label">
+          <el-progress
+            :percentage="file.percentage"
+            :stroke-width="2"
+            :show-text="false"
+            type="line"
+            color="#3F57FF"
+            define-back-color="#F2F3F5"
+            class="el-upload-progress"
+          />
+          <span class="el-upload-progress__text">上传中</span>
+        </div>
+        <span class="el-upload-list__item-actions" v-if="file.status === 'success'">
+          <i class="el-upload-list__item-preview iov-icon-eye"></i>
+          <i class="el-upload-list__item-delete iov-icon-delete"></i>
+          <i class="el-upload-list__item-update iov-icon-update"></i>
         </span>
-        <span
-          v-if="!disabled"
-          class="el-upload-list__item-delete"
-          @click="handleDownload(file)"
-        >
-          <i class="el-icon-download"></i>
-        </span>
-        <span
-          v-if="!disabled"
-          class="el-upload-list__item-delete"
-          @click="handleRemove(file)"
-        >
-          <i class="el-icon-delete"></i>
-        </span>
-      </span>
+      </div>
     </div>
 </el-upload>
 <el-dialog :visible.sync="dialogVisible">
@@ -234,14 +242,14 @@
   :on-remove="handleRemove"
   :file-list="fileList"
   list-type="picture">
-  <el-button size="small" type="primary">点击上传</el-button>
+  <el-button size="small" type="primary" icon='iov-icon-upload'>点击上传</el-button>
   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <script>
   export default {
     data() {
       return {
-        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'}]
       };
     },
     methods: {
@@ -299,16 +307,121 @@
 :::demo
 ```html
 <el-upload
-  class="upload-demo"
   drag
   action="https://jsonplaceholder.typicode.com/posts/"
   multiple>
-  <i class="el-icon-upload"></i>
-  <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-  <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+  <i class="el-upload__icon iov-icon-upload"></i>
+  <div class="el-upload__text">点击或拖拽文件到此处上传</div>
+  <div slot="tip" class="el-upload__tip">支持jpg/png/pdf格式，最多上传5个文件，单个文件≤5M</div>
 </el-upload>
 ```
 :::
+
+### 拖拽单文件上传
+
+:::demo
+```html
+<el-row :gutter="12">
+  <el-col :span="12">
+    <el-upload
+      drag
+      size="medium"
+      action="https://jsonplaceholder.typicode.com/posts/"
+      :limit="1"
+      :show-file-list="false"
+      >
+      <template>
+        <i class="el-upload__icon iov-icon-file-excel"></i>
+        <el-button class="el-upload__btn" round size="small">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">支持jpg/png/pdf格式，最多上传5个文件，单个文件≤5M</div>
+      </template>
+    </el-upload>
+  </el-col>
+  <el-col :span="12">
+    <el-upload
+      drag
+      size="medium"
+      action="https://jsonplaceholder.typicode.com/posts/"
+      :limit="1"
+      :file-list="fileList"
+      :show-file-list="false"
+      >
+      <template>
+        <i class="el-upload__icon iov-icon-file-excel"></i>
+        <el-button class="el-upload__btn" round size="small">点击上传</el-button>
+        <div slot="tip" class="el-upload__tip">支持jpg/png/pdf格式，最多上传5个文件，单个文件≤5M</div>
+      </template>
+    </el-upload>
+  </el-col>
+</el-row>
+
+<script>
+  export default {
+    data() {
+      return {
+        fileList: [{
+          name: '王星越入职账号申请.xlsx',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        }]
+      };
+    }
+  }
+</script>
+```
+:::
+
+
+### 拖拽小尺寸文件文件上传
+
+:::demo
+```html
+<el-row :gutter="12">
+  <el-col :span="12">
+    <el-upload
+      drag
+      size="small"
+      action="https://jsonplaceholder.typicode.com/posts/"
+      :limit="1"
+      :show-file-list="false"
+      >
+      <template>
+        <el-link icon="iov-icon-upload">选择文件</el-link>
+        <div slot="tip" class="el-upload__tip">点击或拖拽上传</div>
+      </template>
+    </el-upload>
+  </el-col>
+  <el-col :span="12">
+    <el-upload
+      drag
+      size="small"
+      action="https://jsonplaceholder.typicode.com/posts/"
+      :limit="1"
+      :file-list="fileList"
+      :show-file-list="false"
+      >
+      <template>
+        <el-link icon="iov-icon-upload">选择文件</el-link>
+        <div slot="tip" class="el-upload__tip">点击或拖拽上传</div>
+      </template>
+    </el-upload>
+  </el-col>
+</el-row>
+
+<script>
+  export default {
+    data() {
+      return {
+        fileList: [{
+          name: '王星越入职账号申请.xlsx',
+          url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
+        }]
+      };
+    }
+  }
+</script>
+```
+:::
+
 
 ### 手动上传
 
@@ -376,6 +489,8 @@
 | disabled | 是否禁用 | boolean | — | false |
 | limit | 最大允许上传个数 |  number | — | — |
 | on-exceed | 文件超出个数限制时的钩子 | function(files, fileList) | — | - |
+| background | 是否显示灰色背景 | boolean | — | false |
+| size | 上图组件大小, 图 | string | large/medium/small | false |
 
 ### Slot
 | name | 说明 |

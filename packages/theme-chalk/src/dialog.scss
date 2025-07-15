@@ -42,6 +42,10 @@
     padding: $--dialog-padding;
     position: relative;
     border-bottom: 1px solid $--color-line-1;
+    height: 54px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
   }
 
   @include e(headerbtn) {

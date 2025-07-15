@@ -26,164 +26,282 @@
     filter: alpha(opacity=0);
   }
 
-  /* 照片墙模式 */
-  @include m(picture-card) {
-    background-color: #fbfdff;
-    border: 1px dashed #c0ccda;
-    border-radius: 6px;
-    box-sizing: border-box;
-    width: 148px;
-    height: 148px;
-    cursor: pointer;
-    line-height: 146px;
-    vertical-align: top;
+  @include m(wrap) {
+    position: relative;
+  }
 
-    i {
-      font-size: 28px;
-      color: #8c939d;
+  @include m(drag) {
+    display: block;
+    &.el-upload--drag__small {
+      width: 112px;
+      background: $--color-fill-1;
+      &:hover {
+        background: #fff;
+      }
+      .el-upload-dragger {
+        padding: 0;
+        height: 68px;
+        .el-upload-list__item-status-label {
+          left: 12px;
+          right: 12px;
+        }
+      }
+      .el-upload-list__file {
+        padding: 5px 12px;
+      }
+      .el-upload-list__item {
+        .el-upload-list__icon {
+          width: 24px;
+          height: 24px;
+        }
+        .el-upload-list__name {
+          margin-top: 4px;
+        }
+      }
+      .el-upload-progress__text {
+        margin-top: 8px;
+      }
     }
-
-    &:hover {
-      border-color: $--color-primary;
-      color: $--color-primary;
+    &.el-upload--drag__medium {
+      width: 400px;
+      .el-upload-dragger {
+        padding: 0;
+        height: 132px;
+      }
     }
   }
-  &:focus {
-    border-color: $--color-primary;
-    color: $--color-primary;
 
-    .el-upload-dragger {
-      border-color: $--color-primary;
+  /* 照片墙模式 */
+  @include m(picture-card) {
+    border: 1px dashed $--color-line-2;
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+    vertical-align: middle;
+    &:hover {
+      border-color: $--color-primary-5;
+    }
+    &:focus {
+      border-color: $--color-primary-6;
+    }
+    // 图片上传(如头像上传)
+    &.el-upload--picture-card__no-border {
+      border: 0 none;
+      overflow: hidden;
+      .el-upload-list__item {
+        margin: 0;
+      }
+    }
+    &.el-upload--large {
+      width: 106px;
+      height: 106px;
+    }
+    &.el-upload--medium {
+      width: 88px;
+      height: 88px;
+    }
+    &.el-upload--small {
+      width: 68px;
+      height: 68px;
+    }
+    .el-upload__picture {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .el-upload__icon {
+      font-size: 24px;
+      color: $--color-fill-4;
+      margin: 0 auto;
+    }
+    .el-upload__desc {
+      margin: 4px auto 0;
+      font-size: 12px;
+      color: $--color-text-2;
     }
   }
 }
 
+// 拖拽上传
 @include b(upload-dragger) {
-  background-color: #fff;
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
+  padding: 0 30px;
+  border: 1px dashed $--color-line-2;
+  border-radius: 4px;
   box-sizing: border-box;
-  width: 360px;
-  height: 180px;
+  height: 132px;
   text-align: center;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-  .el-icon-upload {
-    font-size: 67px;
-    color: $--color-text-placeholder;
-    margin: 40px 0 16px;
-    line-height: 50px;
+  .el-link {
+    font-size: 13px;
+    [class*="iov-icon-"] + span {
+      margin-left: 4px;
+    }
   }
-
-  + .el-upload__tip {
-    text-align: center;
+  .el-upload__icon {
+    font-size: 30px;
+    color: $--color-fill-4;
+    margin: 0 auto;
   }
-
-  ~ .el-upload__files {
-    border-top: $--border-base;
-    margin-top: 7px;
-    padding-top: 5px;
-  }
-
-  .el-upload__text {
-    color: $--color-text-regular;
-    font-size: 14px;
-    text-align: center;
-
-    em {
-      color: $--color-primary;
-      font-style: normal;
+  .el-upload__btn {
+    margin-top: 10px;
+    align-self: center;
+    ~ .el-upload__tip {
+      margin-top: 8px;
     }
   }
 
+  .el-upload__tip {
+    margin: 4px auto 0;
+    text-align: center;
+    color: $--color-text-2;
+  }
+
+  .el-upload__remove {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+
+    &:before {
+      margin-right: -12px;
+      color: #fff;
+      font-size: 10px;
+      position: relative;
+      line-height: 1;
+    }
+    &:after {
+      content: '';
+      border-radius: 100%;
+      width: 14px;
+      height: 14px;
+      background: $--color-fill-5;
+    }
+
+    &:hover {
+      &:before {
+        color: #fff;
+      }
+      &:after {
+        background: $--color-fill-5;
+      }
+    }
+  }
+
+  // 重置file-list样式
+  .el-upload-list__item {
+    position: inherit;
+    &:first-child {
+      margin-top: 0;
+    }
+    .el-upload-list__file {
+      margin-right: 0;
+      background: none;
+      .el-upload-list__item-name {
+        margin-right: 0;
+      }
+    }
+    .el-upload-list__icon {
+      margin: 0 auto;
+      display: block;
+      width: 30px;
+      height: 30px;
+    }
+    .el-upload-list__name {
+      display: block;
+      height: auto;
+      line-height: 1;
+      margin-top: 8px;
+      width: 100%;
+    }
+    .el-upload__btn {
+      margin-top: 10px;
+    }
+  }
+  .el-upload-list__item-status-label {
+    left: 24px;
+    right: 24px;
+  }
+  .el-upload-progress__text {
+    margin: 12px auto 0;
+    color: $--color-text-6;
+    font-size: 12px;
+    display: block;
+  }
+
+  .el-upload__text {
+    margin: 12px auto 0;
+    color: $--color-text-6;
+    font-size: 12px;
+    text-align: center;
+  }
+
   &:hover {
-    border-color: $--color-primary;
+    border-color: $--color-primary-5;
+  }
+
+  &:fcous,
+  &:active {
+    border-color: $--color-primary-6;
   }
 
   @include when(dragover) {
-    background-color: rgba(32, 159, 255, .06);
-    border: 2px dashed $--color-primary;
+    border-color: $--color-primary-5;
   }
 }
 
+// backgorund模式
+@include b(upload-bg) {
+  padding: 12px;
+  background: rgba(246, 247, 248, 0.6);
+  border-radius: 4px;
+  .el-upload-list__file {
+    background: #fff;
+  }
+}
+
+// 上传文件列表
 @include b(upload-list) {
   margin: 0;
   padding: 0;
   list-style: none;
 
   @include e(item) {
-    transition: all .5s cubic-bezier(.55,0,.1,1);
-    font-size: 14px;
-    color: $--color-text-regular;
-    line-height: 1.8;
-    margin-top: 5px;
+    margin-top: 4px;
     position: relative;
-    box-sizing: border-box;
-    border-radius: 4px;
     width: 100%;
-
-    .el-progress {
-      position: absolute;
-      top: 20px;
-      width: 100%;
-    }
-
-    .el-progress__text {
-      position: absolute;
-      right: 0;
-      top: -13px;
-    }
-
-    .el-progress-bar {
-      margin-right: 0;
-      padding-right: 0;
-    }
-
+    box-sizing: border-box;
     &:first-child {
-      margin-top: 10px;
+      margin-top: 8px;
     }
 
-    & .el-icon-upload-success {
-      color: $--color-success;
+    .el-upload-success {
+      color: $--color-success-6;
     }
 
-    .el-icon-close {
+    .iov-icon-delete {
       display: none;
       position: absolute;
-      top: 5px;
-      right: 5px;
+      top: 50%;
+      right: 8px;
       cursor: pointer;
-      opacity: .75;
-      color: $--color-text-regular;
-      //transform: scale(.7);
-
+      transform: translateY(-50%);
+      color: $--color-fill-5;
       &:hover {
-        opacity: 1;
+        color: $--color-primary-6;
       }
-    }
-
-    & .el-icon-close-tip {
-      display: none;
-      position: absolute;
-      top: 5px;
-      right: 5px;
-      font-size: 12px;
-      cursor: pointer;
-      opacity: 1;
-      color: $--color-primary;
     }
 
     &:hover {
-      background-color: $--background-color-base;
-
-      .el-icon-close {
+      .iov-icon-delete {
         display: inline-block;
-      }
-
-      .el-progress__text {
-        display: none;
       }
     }
 
@@ -192,28 +310,8 @@
         display: block;
       }
 
-      .el-upload-list__item-name:hover, .el-upload-list__item-name:focus {
-        color: $--link-hover-color;
+      .el-upload-list__item-name:hover {
         cursor: pointer;
-      }
-
-      &:focus:not(:hover) {  /* 键盘focus */
-        .el-icon-close-tip {
-          display: inline-block;
-        }
-      }
-
-      &:not(.focusing):focus, &:active { /* click时 */
-        outline-width: 0;
-        .el-icon-close-tip {
-          display: none;
-        }
-      }
-
-      &:hover, &:focus {
-        .el-upload-list__item-status-label {
-          display: none;
-        }
       }
     }
   }
@@ -224,30 +322,59 @@
     }
   }
 
-  @include e(item-name) {
-    color: $--color-text-regular;
-    display: block;
-    margin-right: 40px;
-    overflow: hidden;
-    padding-left: 4px;
-    text-overflow: ellipsis;
-    transition: color .3s;
-    white-space: nowrap;
+  @include e(file) {
+    margin-right: 30px;
+    padding: 5px 8px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: $--color-fill-1;
+    position: relative;
+  }
 
-    [class^="el-icon"] {
+  @include e(icon) {
+    margin-right: 4px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    vertical-align: middle;
+  }
+
+  @include e(name) {
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    color: $--color-text-6;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 50px);
+
+    .file-name:hover {
+      border-bottom: 1px solid $--color-text-6;
+    }
+  }
+
+  @include e(item-name) {
+    color: $--color-text-6;
+    display: block;
+
+    [class^="iov-icon"] {
       height: 100%;
-      margin-right: 7px;
-      color: $--color-text-secondary;
+      margin-right: 4px;
       line-height: inherit;
     }
   }
 
   @include e(item-status-label) {
     position: absolute;
-    right: 5px;
-    top: 0;
-    line-height: inherit;
-    display: none;
+    right: 8px;
+    top: 55%;
+    transform: translateY(-50%);
   }
 
   @include e(item-delete) {
@@ -263,68 +390,96 @@
     }
   }
 
+  @include m(text) {
+    .el-upload-list__item-name{
+      margin-right: 30px;
+    }
+    .el-upload-progress {
+      position: relative;
+      top: 2px;
+      svg {
+        path {
+          &:nth-child(1) {
+            stroke: $--color-primary-2;
+          }
+          &:nth-child(2) {
+            stroke: $--color-primary-6;
+          }
+        }
+      }
+    }
+  }
+
+  // 图片墙列表
   @include m(picture-card) {
-    margin: 0;
     display: inline;
-    vertical-align: top;
-
     .el-upload-list__item {
+      margin: 0 8px 0 0;
       overflow: hidden;
-      background-color: #fff;
-      border: 1px solid #c0ccda;
-      border-radius: 6px;
+      background: #fff;
+      border: 1px solid $--color-line-2;
+      border-radius: 4px;
       box-sizing: border-box;
-      width: 148px;
-      height: 148px;
-      margin: 0 8px 8px 0;
       display: inline-block;
-
-      .el-icon-check,
-      .el-icon-circle-check {
-        color: $--color-white;
+      font-size: 0;
+      vertical-align: middle;
+      &:first-child {
+        margin-top: 0;
       }
-
-      .el-icon-close {
-        display: none;
-      }
-      &:hover {
-        .el-upload-list__item-status-label {
-          display: none;
+      &.el-upload-list__item-large {
+        width: 106px;
+        height: 106px;
+        .el-image__placeholder,
+        .el-image__error {
+          background-size: 53px 53px;
         }
-
-        .el-progress__text {
-          display: block;
+      }
+      &.el-upload-list__item-medium {
+        width: 88px;
+        height: 88px;
+        .el-image__placeholder,
+        .el-image__error {
+          background-size: 44px 44px;
+        }
+      }
+      &.el-upload-list__item-small {
+        width: 68px;
+        height: 68px;
+        .el-image__placeholder,
+        .el-image__error {
+          background-size: 34px 34px;
         }
       }
     }
-
-    .el-upload-list__item-name {
-      display: none;
-    }
-
-    .el-upload-list__item-thumbnail {
+    .el-upload-list__file {
+      margin: 0 auto;
+      padding: 0;
       width: 100%;
       height: 100%;
     }
-
-    .el-upload-list__item-status-label {
-      position: absolute;
-      right: -15px;
-      top: -6px;
-      width: 40px;
-      height: 24px;
-      background: #13ce66;
-      text-align: center;
-      transform: rotate(45deg);
-      box-shadow: 0 0 1pc 1px rgba(0,0,0,0.2);
-
-      i {
-        font-size: 12px;
-        margin-top: 11px;
-        transform: rotate(-45deg);
+    .el-upload-list__item-name {
+      height: 100%;
+    }
+    .el-upload-list__item-thumbnail {
+      width: 100%;
+      height: 100%;
+      display: block;
+      .el-image {
+        width: 100%;
+        height: 100%;
       }
     }
-
+    .el-upload-list__item-status-label {
+      left: 10px;
+      right: 10px;
+    }
+    .el-upload-progress__text {
+      margin: 8px auto 0;
+      color: $--color-text-6;
+      font-size: 12px;
+      display: block;
+      text-align: center;
+    }
     .el-upload-list__item-actions {
       position: absolute;
       width: 100%;
@@ -335,269 +490,79 @@
       text-align: center;
       color: #fff;
       opacity: 0;
-      font-size: 20px;
-      background-color: rgba(0, 0, 0, .5);
+      background: rgba(0, 0, 0, .5);
       transition: opacity .3s;
-      &::after {
-        display: inline-block;
-        content: "";
-        height: 100%;
-        vertical-align: middle
-      }
-
-      span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      i {
         display: none;
         cursor: pointer;
+        font-size: 18px;
+        color: #fff;
+        flex: none;
       }
-
-      span + span {
-        margin-left: 15px;
+      .iov-icon-delete {
+        position: relative;
+        top: auto;
+        right: auto;
+        transform: none;
       }
-
-      .el-upload-list__item-delete {
-        position: static;
-        font-size: inherit;
-        color: inherit;
-      }
-
       &:hover {
         opacity: 1;
-        span {
+        i {
           display: inline-block;
+          color: #fff;
         }
-      }
-    }
-
-    .el-progress {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      bottom: auto;
-      width: 126px;
-
-      .el-progress__text {
-        top: 50%;
       }
     }
   }
 
+  .el-image__placeholder {
+    display: inline-block;
+    background: $--color-fill-1 url(./assets/img_placeholder.png) no-repeat center center / 20px 20px;
+  }
+  .el-image__error {
+    display: inline-block;
+    background: $--color-fill-3 url(./assets/img_fail.png) no-repeat center center / 20px 20px;
+  }
+
+  // 图片列表缩略图
   @include m(picture) {
-    .el-upload-list__item {
-      overflow: hidden;
-      z-index: 0;
-      background-color: #fff;
-      border: 1px solid #c0ccda;
-      border-radius: 6px;
-      box-sizing: border-box;
-      margin-top: 10px;
-      padding: 10px 10px 10px 90px;
-      height: 92px;
-
-      .el-icon-check,
-      .el-icon-circle-check {
-        color: $--color-white;
+    .el-upload-list__file {
+      padding: 6px 8px;
+    }
+    .el-upload-list__item-thumbnail {
+      margin-right: 8px;
+      vertical-align: middle;
+      display: inline-block;
+      position: relative;
+      background: $--color-fill-3;
+      border: 1px solid $--color-line-2;
+      border-radius: 4px;
+      font-size: 0;
+      .el-image {
+        width: 40px;
+        height: 40px;
       }
-
-      &:hover {
-        .el-upload-list__item-status-label {
-          background: transparent;
-          box-shadow: none;
-          top: -2px;
-          right: -12px;
-        }
-
-        .el-progress__text {
-          display: block;
-        }
-      }
-
-      &.is-success {
-        .el-upload-list__item-name {
-          line-height: 70px;
-          margin-top: 0;
-          i {
-            display: none;
+    }
+    .el-upload-list__name {
+      width: calc(100% - 80px);
+    }
+    .el-upload-progress {
+      position: relative;
+      top: 2px;
+      svg {
+        path {
+          &:nth-child(1) {
+            stroke: $--color-primary-2;
+          }
+          &:nth-child(2) {
+            stroke: $--color-primary-6;
           }
         }
       }
     }
-
-    .el-upload-list__item-thumbnail {
-      vertical-align: middle;
-      display: inline-block;
-      width: 70px;
-      height: 70px;
-      float: left;
-      position: relative;
-      z-index: 1;
-      margin-left: -80px;
-      background-color: $--color-white
-    }
-
-    .el-upload-list__item-name {
-      display: block;
-      margin-top: 20px;
-
-      i {
-        font-size: 70px;
-        line-height: 1;
-        position: absolute;
-        left: 9px;
-        top: 10px;
-      }
-    }
-
-    .el-upload-list__item-status-label {
-      position: absolute;
-      right: -17px;
-      top: -7px;
-      width: 46px;
-      height: 26px;
-      background: #13ce66;
-      text-align: center;
-      transform: rotate(45deg);
-      box-shadow: 0 1px 1px #ccc;
-
-      i {
-        font-size: 12px;
-        margin-top: 12px;
-        transform: rotate(-45deg);
-      }
-    }
-
-    .el-progress {
-      position: relative;
-      top: -7px;
-    }
-  }
-}
-
-@include b(upload-cover) {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  z-index: 10;
-  cursor: default;
-  @include utils-vertical-center;
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  @include e(label) {
-    position: absolute;
-    right: -15px;
-    top: -6px;
-    width: 40px;
-    height: 24px;
-    background: #13ce66;
-    text-align: center;
-    transform: rotate(45deg);
-    box-shadow: 0 0 1pc 1px rgba(0,0,0,0.2);
-
-    i {
-      font-size: 12px;
-      margin-top: 11px;
-      transform: rotate(-45deg);
-      color: #fff;
-    }
-  }
-
-  @include e(progress) {
-    display: inline-block;
-    vertical-align: middle;
-    position: static;
-    width: 243px;
-
-    + .el-upload__inner {
-      opacity: 0;
-    }
-  }
-
-  @include e(content) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  @include e(interact) {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(#000, .72);
-    text-align: center;
-
-    .btn {
-      display: inline-block;
-      color: $--color-white;
-      font-size: 14px;
-      cursor: pointer;
-      vertical-align: middle;
-      transition: $--md-fade-transition;
-      margin-top: 60px;
-
-      i {
-        margin-top: 0;
-      }
-
-      span {
-        opacity: 0;
-        transition: opacity .15s linear;
-      }
-
-      &:not(:first-child) {
-        margin-left: 35px;
-      }
-
-      &:hover {
-        transform: translateY(-13px);
-
-        span {
-          opacity: 1;
-        }
-      }
-
-      i {
-        color: $--color-white;
-        display: block;
-        font-size: 24px;
-        line-height: inherit;
-        margin: 0 auto 5px;
-      }
-    }
-  }
-
-  @include e(title) {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    background-color: $--color-white;
-    height: 36px;
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-weight: normal;
-    text-align: left;
-    padding: 0 10px;
-    margin: 0;
-    line-height: 36px;
-    font-size: 14px;
-    color: $--color-text-primary;
-  }
-
-  + .el-upload__inner {
-    opacity: 0;
-    position: relative;
-    z-index: 1;
   }
 }

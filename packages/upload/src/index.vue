@@ -1,5 +1,7 @@
 <script>
 import UploadList from './upload-list';
+import UploadFile from './upload-file';
+import UploadPicture from './upload-picture';
 import Upload from './upload';
 import ElProgress from 'iov-design/packages/progress';
 import Migrating from 'iov-design/src/mixins/migrating';
@@ -14,6 +16,8 @@ export default {
   components: {
     ElProgress,
     UploadList,
+    UploadFile,
+    UploadPicture,
     Upload
   },
 
@@ -103,6 +107,11 @@ export default {
     onExceed: {
       type: Function,
       default: noop
+    },
+    background: Boolean,
+    size: {
+      type: String,
+      default: 'medium'
     }
   },
 
@@ -267,13 +276,53 @@ export default {
 
   render(h) {
     let uploadList;
-
+    let uploadFile = (
+      <UploadFile
+        disabled={this.uploadDisabled}
+        listType={this.listType}
+        files={this.uploadFiles}
+        width={this.width}
+        height={this.height}
+        size={this.size}
+        on-remove={this.handleRemove}
+        handlePreview={this.onPreview}>
+        {
+          (props) => {
+            if (this.$scopedSlots.file) {
+              return this.$scopedSlots.file({
+                file: props.file
+              });
+            }
+          }
+        }
+      </UploadFile>
+    );
+    let uploadPicture = (
+      <UploadPicture
+        disabled={this.uploadDisabled}
+        listType={this.listType}
+        files={this.uploadFiles}
+        size={this.size}
+        on-remove={this.handleRemove}
+        handlePreview={this.onPreview}>
+        {
+          (props) => {
+            if (this.$scopedSlots.file) {
+              return this.$scopedSlots.file({
+                file: props.file
+              });
+            }
+          }
+        }
+      </UploadPicture>
+    );
     if (this.showFileList) {
       uploadList = (
         <UploadList
           disabled={this.uploadDisabled}
           listType={this.listType}
           files={this.uploadFiles}
+          size={this.size}
           on-remove={this.handleRemove}
           handlePreview={this.onPreview}>
           {
@@ -293,6 +342,7 @@ export default {
       props: {
         type: this.type,
         drag: this.drag,
+        size: this.size,
         action: this.action,
         multiple: this.multiple,
         'before-upload': this.beforeUpload,
@@ -302,6 +352,7 @@ export default {
         data: this.data,
         accept: this.accept,
         fileList: this.uploadFiles,
+        showFileList: this.showFileList,
         autoUpload: this.autoUpload,
         listType: this.listType,
         disabled: this.uploadDisabled,
@@ -318,18 +369,35 @@ export default {
       ref: 'upload-inner'
     };
 
-    const trigger = this.$slots.trigger || this.$slots.default;
-    const uploadComponent = <upload {...uploadData}>{trigger}</upload>;
+    const hideUploadInput = !this.showFileList && this.listType === 'picture-card' && this.limit === 1;
+    let slotDefault = this.$slots.default;
+    if (this.drag) {
+      // 拖动文件上传
+      if (this.limit === 1 && !this.showFileList) {
+        slotDefault = this.uploadFiles.length > 0
+          ? uploadFile
+          : [this.$slots.default, this.$slots.tip];
+      } else {
+        slotDefault = [this.$slots.default, this.$slots.tip];
+      }
+    } else if (hideUploadInput) {
+      // 单个图片上传(不显示图片墙)
+      slotDefault = [ uploadPicture, this.$slots.default];
+    } else {
+      slotDefault = this.$slots.default;
+    }
 
+    const trigger = this.$slots.trigger || slotDefault;
+    const uploadComponent = <upload {...uploadData}>{trigger}</upload>;
     return (
-      <div>
+      <div class={{ 'el-upload--wrap': true, 'el-upload-bg': this.background }}>
         { this.listType === 'picture-card' ? uploadList : ''}
         {
           this.$slots.trigger
             ? [uploadComponent, this.$slots.default]
             : uploadComponent
         }
-        {this.$slots.tip}
+        { !this.drag && this.$slots.tip }
         { this.listType !== 'picture-card' ? uploadList : ''}
       </div>
     );

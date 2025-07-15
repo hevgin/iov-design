@@ -19,32 +19,15 @@
     >
       <slot :file="file">
         <div class="el-upload-list__file">
-          <div class="el-upload-list__item-name" @click="handleClick(file)">
-            <span v-if="['picture-card', 'picture'].includes(listType)" class="el-upload-list__item-thumbnail">
+          <div v-if="file.status === 'success'" class="el-upload-list__item-name" @click="handleClick(file)">
+            <span class="el-upload-list__item-thumbnail">
               <el-image :src="file.url" :preview-src-list="handlePreview ? [] : [file.url]" fit="contain">
                 <i slot="placeholder" class="el-image__placeholder"></i>
                 <i slot="error" class="el-image__error"></i>
               </el-image>
             </span>
-            <i v-else-if="['text'].includes(listType)" class="el-upload-list__icon" :style="iconStyle(file.name)"></i>
-            <div v-if="['text', 'picture'].includes(listType)" class="el-upload-list__name">
-              <span class="file-name">{{file.name}}</span>
-            </div>
           </div>
-          <div v-if="['text', 'picture'].includes(listType)" class="el-upload-list__item-status-label">
-            <el-progress
-              v-if="file.status === 'uploading'"
-              :percentage="file.percentage"
-              :width="14"
-              :stroke-width="7"
-              :show-text="false"
-              type="circle"
-              stroke-linecap="butt"
-              class="el-upload-progress"
-            />
-            <i v-else-if="file.status === 'success'" class="el-upload-success iov-icon-success"></i>
-          </div>
-          <div v-else-if="['picture-card'].includes(listType) && file.status === 'uploading'"  class="el-upload-list__item-status-label">
+          <div v-if="file.status === 'uploading'" class="el-upload-list__item-status-label">
             <el-progress
               :percentage="file.percentage"
               :stroke-width="2"
@@ -57,9 +40,8 @@
             <span class="el-upload-progress__text">上传中</span>
           </div>
         </div>
-        <i class="iov-icon-delete" v-if="!disabled && ['text', 'picture'].includes(listType)" @click="$emit('remove', file)"></i>
-        <span class="el-upload-list__item-actions" v-if="listType === 'picture-card' && file.status === 'success'">
-          <i v-if="handlePreview" @click.stop="handlePreview(file)" class="el-upload-list__item-preview iov-icon-eye"></i>
+        <span class="el-upload-list__item-actions" v-if="file.status === 'success'">
+          <i v-if="handlePreview" @click="handlePreview(file)" class="el-upload-list__item-preview iov-icon-eye"></i>
           <i v-if="!disabled" class="el-upload-list__item-delete iov-icon-delete" @click.stop="$emit('remove', file)"></i>
           <i v-if="!disabled" class="el-upload-list__item-update iov-icon-update"></i>
         </span>
@@ -70,8 +52,9 @@
 <script>
   import ElProgress from 'iov-design/packages/progress';
   import { iconStyle } from './utils';
+
   export default {
-    name: 'ElUploadList',
+    name: 'ElUploadPicture',
     data() {
       return {
         focusing: false,
@@ -92,7 +75,7 @@
         default: false
       },
       size: String,
-      handlePreview: null,
+      handlePreview: Function,
       listType: String
     },
     methods: {

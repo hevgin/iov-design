@@ -28,6 +28,7 @@ export default {
     onError: Function,
     beforeUpload: Function,
     drag: Boolean,
+    size: String,
     onPreview: {
       type: Function,
       default: function() {}
@@ -55,6 +56,15 @@ export default {
     };
   },
 
+  computed: {
+    hideUploadInput() {
+      return !this.showFileList &&
+           this.listType === 'picture-card' &&
+           this.limit === 1 &&
+           this.fileList.length === 1;
+    }
+  },
+
   methods: {
     isImage(str) {
       return str.indexOf('image') !== -1;
@@ -63,6 +73,10 @@ export default {
       const files = ev.target.files;
 
       if (!files) return;
+
+      if (this.drag && this.limit === 1 || this.hideUploadInput) {
+        this.fileList.length = [];
+      }
       this.uploadFiles(files);
     },
     uploadFiles(files) {
@@ -184,11 +198,17 @@ export default {
       listType,
       uploadFiles,
       disabled,
-      handleKeydown
+      handleKeydown,
+      size
     } = this;
     const data = {
       class: {
-        'el-upload': true
+        'el-upload': true,
+        'el-upload--drag': drag,
+        [`el-upload--drag__${size}`]: drag,
+        [`el-upload--${size}`]: !drag,
+        'el-upload--picture-card': listType === 'picture-card',
+        'el-upload--picture-card__no-border': this.hideUploadInput
       },
       on: {
         click: handleClick,
@@ -200,7 +220,7 @@ export default {
       <div {...data} tabindex="0" >
         {
           drag
-            ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}</upload-dragger>
+            ? <upload-dragger disabled={disabled} on-file={uploadFiles}>{this.$slots.default}{this.$slots.tip}</upload-dragger>
             : this.$slots.default
         }
         <input class="el-upload__input" type="file" ref="input" name={name} on-change={handleChange} multiple={multiple} accept={accept}></input>
