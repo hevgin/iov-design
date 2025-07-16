@@ -93,6 +93,14 @@ export default {
         return [];
       }
     },
+    fileNameAlias: {
+      type: String,
+      name: 'name'
+    },
+    fileUrlAlias: {
+      type: String,
+      name: 'url'
+    },
     autoUpload: {
       type: Boolean,
       default: true
@@ -278,6 +286,8 @@ export default {
     let uploadList;
     let uploadFile = (
       <UploadFile
+        fileNameAlias={this.fileNameAlias}
+        fileUrlAlias={this.fileUrlAlias}
         disabled={this.uploadDisabled}
         listType={this.listType}
         files={this.uploadFiles}
@@ -299,6 +309,8 @@ export default {
     );
     let uploadPicture = (
       <UploadPicture
+        fileNameAlias={this.fileNameAlias}
+        fileUrlAlias={this.fileUrlAlias}
         disabled={this.uploadDisabled}
         listType={this.listType}
         files={this.uploadFiles}
@@ -319,6 +331,8 @@ export default {
     if (this.showFileList) {
       uploadList = (
         <UploadList
+          fileNameAlias={this.fileNameAlias}
+          fileUrlAlias={this.fileUrlAlias}
           disabled={this.uploadDisabled}
           listType={this.listType}
           files={this.uploadFiles}

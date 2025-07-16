@@ -490,7 +490,9 @@
 | limit | 最大允许上传个数 |  number | — | — |
 | on-exceed | 文件超出个数限制时的钩子 | function(files, fileList) | — | - |
 | background | 是否显示灰色背景 | boolean | — | false |
-| size | 上图组件大小, 图 | string | large/medium/small | false |
+| size | 上图组件大小 | string | large/medium/small | false |
+| fileNameAlias | 文件名称字段别名 | string | - | name |
+| fileUrlAlias | 文件地址字段别名 | string | - | url |
 
 ### Slot
 | name | 说明 |

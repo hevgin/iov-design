@@ -21,7 +21,7 @@
         <div class="el-upload-list__file">
           <div v-if="file.status === 'success'" class="el-upload-list__item-name" @click="handleClick(file)">
             <span class="el-upload-list__item-thumbnail">
-              <el-image :src="file.url" :preview-src-list="handlePreview ? [] : [file.url]" fit="contain">
+              <el-image :src="file[fileUrlAlias]" :preview-src-list="handlePreview ? [] : [file[fileUrlAlias]]" fit="contain">
                 <i slot="placeholder" class="el-image__placeholder"></i>
                 <i slot="error" class="el-image__error"></i>
               </el-image>
@@ -69,6 +69,14 @@
         default() {
           return [];
         }
+      },
+      fileNameAlias: {
+        type: String,
+        default: 'name'
+      },
+      fileUrlAlias: {
+        type: String,
+        default: 'url'
       },
       disabled: {
         type: Boolean,

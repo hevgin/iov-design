@@ -21,14 +21,14 @@
         <div class="el-upload-list__file">
           <div class="el-upload-list__item-name" @click="handleClick(file)">
             <span v-if="['picture-card', 'picture'].includes(listType)" class="el-upload-list__item-thumbnail">
-              <el-image :src="file.url" :preview-src-list="handlePreview ? [] : [file.url]" fit="contain">
+              <el-image :src="file[fileUrlAlias]" :preview-src-list="handlePreview ? [] : [file[fileUrlAlias]]" fit="contain">
                 <i slot="placeholder" class="el-image__placeholder"></i>
                 <i slot="error" class="el-image__error"></i>
               </el-image>
             </span>
-            <i v-else-if="['text'].includes(listType)" class="el-upload-list__icon" :style="iconStyle(file.name)"></i>
+            <i v-else-if="['text'].includes(listType)" class="el-upload-list__icon" :style="iconStyle(file[fileNameAlias])"></i>
             <div v-if="['text', 'picture'].includes(listType)" class="el-upload-list__name">
-              <span class="file-name">{{file.name}}</span>
+              <span class="file-name">{{file[fileNameAlias]}}</span>
             </div>
           </div>
           <div v-if="['text', 'picture'].includes(listType)" class="el-upload-list__item-status-label">
@@ -86,6 +86,14 @@
         default() {
           return [];
         }
+      },
+      fileNameAlias: {
+        type: String,
+        default: 'name'
+      },
+      fileUrlAlias: {
+        type: String,
+        default: 'url'
       },
       disabled: {
         type: Boolean,
