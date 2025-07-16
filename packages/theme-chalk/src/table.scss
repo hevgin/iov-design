@@ -179,13 +179,13 @@
   }
 
   @include m(mini) {
-    .el-table__header {
-      th {
-        &.el-table__cell {
-          background: $--color-primary-1;
-        }
-      }
-    }
+    // .el-table__header {
+    //   th {
+    //     &.el-table__cell {
+    //       background: $--color-primary-1;
+    //     }
+    //   }
+    // }
     .el-table__cell {
       padding: 7px 0;
       font-size: 12px;
