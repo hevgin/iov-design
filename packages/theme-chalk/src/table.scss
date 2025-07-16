@@ -168,19 +168,27 @@
 
   @include m(medium) {
     .el-table__cell {
-      padding: 12px 0;
+      padding: 10px 0;
     }
   }
 
   @include m(small) {
     .el-table__cell {
-      padding: 10px 0;
+      padding: 7px 0;
     }
   }
 
   @include m(mini) {
+    .el-table__header {
+      th {
+        &.el-table__cell {
+          background: $--color-primary-1;
+        }
+      }
+    }
     .el-table__cell {
-      padding: 8px 0;
+      padding: 7px 0;
+      font-size: 12px;
     }
   }
 

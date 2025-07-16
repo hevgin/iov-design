@@ -231,7 +231,7 @@
     &.el-button--text {
       padding: 0 4px;
       height: 22px;
-      line-height: 22px;
+      line-height: 20px;
     }
     @include when(icon-only) {
       font-size: $--button-icon-only-size;
@@ -242,6 +242,7 @@
     border-color: transparent;
     color: $--color-primary-6;
     background: transparent;
+    font-weight: 400;
 
     &:hover {
       color: $--color-primary-6;

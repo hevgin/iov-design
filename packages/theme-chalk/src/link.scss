@@ -32,6 +32,19 @@ $typeMap: (
     }
   }
 
+  @include m(large) {
+    font-size: 16px;
+  }
+  @include m(medium) {
+    font-size: 14px;
+  }
+  @include m(small) {
+    font-size: 13px;
+  }
+  @include m(mini) {
+    font-size: 12px;
+  }
+
   @include when(disabled) {
     cursor: not-allowed;
   }

@@ -58,7 +58,7 @@
   }
   @include when(card) {
     margin-right: 12px;
-    padding: 12px;
+    padding: 12px 14px;
     border-radius: $--border-radius-base;
     border: 1px solid $--color-line-2;
     box-sizing: border-box;
@@ -77,16 +77,16 @@
     .el-radio__label {
       font-weight: 600;
       font-size: 13px;
-      line-height: 16px;
-      color: $--color-text-6;
+      line-height: 18px;
+      color: $--color-text-5;
       float: left;
       overflow: hidden;
     }
     .el-radio__desc {
-      margin: 6px 0 0;
+      margin: 4px 0 0;
       font-weight: 400;
       font-size: 12px;
-      line-height: 1;
+      line-height: 17px;
       color: $--color-text-3;
     }
 
@@ -109,7 +109,7 @@
     }
 
     &.is-checked {
-      border-color: $--color-primary-6;
+      border-color: $--color-primary-3;
       background: $--color-primary-1;
       &:after {
         content: '';
@@ -122,7 +122,7 @@
         right: -1px;
       }
       &.is-disabled {
-        border-color: $--color-primary-6;
+        border-color: $--color-primary-3;
         background: $--color-primary-1;
         // &:after {
         //   opacity: .25;

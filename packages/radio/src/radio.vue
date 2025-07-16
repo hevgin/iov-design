@@ -42,8 +42,10 @@
       >
     </span>
     <span class="el-radio__label" @keydown.stop>
-      <slot></slot>
-      <template v-if="!$slots.default">{{label}}</template>
+      <span class="el-radio__name">
+        <slot></slot>
+        <template v-if="!$slots.default">{{label}}</template>
+      </span>
       <p v-if="desc" class="el-radio__desc">{{ desc }}</p>
     </span>
   </label>

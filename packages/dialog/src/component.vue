@@ -241,6 +241,7 @@
           document.body.appendChild(this.$el);
         }
       }
+      this.onDialogOpened();
     },
 
     destroyed() {

@@ -53,7 +53,7 @@
         :style="emptyBlockStyle">
         <div class="el-table__empty-text" >
           <slot name="empty">
-            <el-empty ref="emptyText" :description="emptyText || t('el.table.emptyText')" :type="1" :image-size="['small','mini'].includes(tableSize) ? 86 : 108"></el-empty>
+            <el-empty ref="emptyText" :description="emptyText || t('el.table.emptyText')" :type="1" :image-size="emptySize"></el-empty>
           </slot>
         </div>
       </div>
@@ -517,6 +517,16 @@
         return this.size || (this.$ELEMENT || {}).size;
       },
 
+      emptySize() {
+        const sizeMap = {
+          mini: 70,
+          small: 86,
+          medium: 86,
+          large: 108
+        };
+        return sizeMap[this.tableSize] || 108;
+      },
+
       bodyWrapper() {
         return this.$refs.bodyWrapper;
       },
@@ -595,7 +605,13 @@
 
       emptyBlockStyle() {
         if (this.data && this.data.length) return null;
-        let height = ['small', 'mini'].includes(this.tableSize) ? '128px' : '150px';
+        const heightMap = {
+          large: '153px',
+          medium: '153px',
+          small: '131px',
+          mini: '99px'
+        };
+        let height = heightMap[this.tableSize] || '153px';
         if (this.layout.appendHeight) {
           height = `calc(100% - ${this.layout.appendHeight}px)`;
         }

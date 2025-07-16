@@ -70,3 +70,4 @@
 | disabled       | 是否禁用状态                       | boolean | —                                    | false   |
 | href           | 原生 href 属性                     | string  | —                                    | -       |
 | icon           | 图标类名                       | string  | —                                    | -       |
+| size           | 字体大小                       | large(16px)/medium(14px)/small(13px)/mini(12px)  | —                   | small    |

@@ -3,6 +3,7 @@
     :class="[
       'el-link',
       type ? `el-link--${type}` : '',
+      size ? `el-link--${size}` : '',
       disabled && 'is-disabled',
       underline && !disabled && 'is-underline'
     ]"
@@ -37,7 +38,11 @@ export default {
     },
     disabled: Boolean,
     href: String,
-    icon: String
+    icon: String,
+    size: {
+      type: String,
+      default: 'small'
+    }
   },
 
   methods: {
