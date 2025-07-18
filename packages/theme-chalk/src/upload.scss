@@ -355,7 +355,7 @@
     width: calc(100% - 50px);
 
     .file-name:hover {
-      border-bottom: 1px solid $--color-text-6;
+      color: $--color-primary-6;
     }
   }
 

@@ -26,9 +26,9 @@
                 <i slot="error" class="el-image__error"></i>
               </el-image>
             </span>
-            <i v-else-if="['text'].includes(listType)" class="el-upload-list__icon" :style="iconStyle(file[fileNameAlias])"></i>
+            <i v-else-if="['text'].includes(listType)" class="el-upload-list__icon" :style="iconStyle(file.name || file[fileNameAlias])"></i>
             <div v-if="['text', 'picture'].includes(listType)" class="el-upload-list__name">
-              <span class="file-name">{{file[fileNameAlias]}}</span>
+              <span class="file-name">{{file.name || file[fileNameAlias]}}</span>
             </div>
           </div>
           <div v-if="['text', 'picture'].includes(listType)" class="el-upload-list__item-status-label">
