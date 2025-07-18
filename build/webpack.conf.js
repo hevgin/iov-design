@@ -61,19 +61,6 @@ module.exports = {
             preserveWhitespace: false
           }
         }
-      },
-      {
-        test: /\.(png|jpe?g|gif|svg)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[hash:8].[ext]',
-              outputPath: 'static/',
-              esModule: false
-            }
-          }
-        ]
       }
     ]
   },
