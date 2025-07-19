@@ -122,6 +122,11 @@
     },
 
     watch: {
+      $route() {
+        if (this.visible) {
+          this.handleClose();
+        }
+      },
       visible(val) {
         if (val) {
           this.closed = false;
