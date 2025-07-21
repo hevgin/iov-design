@@ -10,22 +10,29 @@
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px', width: (inputWidth - tagsLeft - 32) + 'px', left: tagsLeft + 'px' }">
       <span class="el-tag__group" v-if="collapseTags && selected.length">
-        <el-tag
-          :closable="!selectDisabled"
-          :size="collapseTagSize"
-          :hit="selected[0].hitState"
-          type="info"
-          @close="deleteTag($event, selected[0])"
-          disable-transitions>
-          <span class="el-select__tags-text">{{ selected[0].currentLabel }}</span>
-        </el-tag>
+        <template v-for="(item, index) in selected">
+          <el-tag
+            :key="getValueKey(item)"
+            v-if="index <= multipleLimitShow - 1"
+            :closable="!selectDisabled"
+            :size="collapseTagSize"
+            :hit="item.hitState"
+            :maxWidth="multipleTagMaxWidth"
+            type="info"
+            @close="deleteTag($event, item)"
+            disable-transitions>
+            <span class="el-select__tags-text">{{ item.currentLabel }}</span>
+          </el-tag>
+        </template>
         <el-tag
           v-if="selected.length > 1"
           :closable="false"
           :size="collapseTagSize"
           type="info"
+          class="el-select__tags-count"
+          :class="{'el-select__tags-count-fixed': collapseTagsFixed}"
           disable-transitions>
-          <span class="el-select__tags-text">+ {{ selected.length - 1 }}</span>
+          <span class="el-select__tags-text">{{collapseTagsFixed ? '' : '+'}}{{ selected.length - 1 }}{{ collapseTagsSuffix }}</span>
         </el-tag>
       </span>
       <transition-group class="el-tag__group" @after-leave="resetInputHeight" v-if="!collapseTags">
@@ -35,6 +42,7 @@
           :closable="!item.disabled && !selectDisabled"
           :size="collapseTagSize"
           :hit="item.hitState"
+          :maxWidth="multipleTagMaxWidth"
           type="info"
           @close="deleteTag($event, item)"
           disable-transitions>
@@ -296,6 +304,22 @@
       multipleLimit: {
         type: Number,
         default: 0
+      },
+      multipleLimitShow: {
+        type: Number,
+        default: 1
+      },
+      multipleTagMaxWidth: {
+        type: String,
+        default: 'none'
+      },
+      collapseTagsSuffix: {
+        type: String,
+        default: ''
+      },
+      collapseTagsFixed: {
+        type: Boolean,
+        default: false
       },
       placeholder: {
         type: String,

@@ -202,7 +202,9 @@
 
 适用性较广的基础多选，用 Tag 展示已选项
 
-:::demo 为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组。默认情况下选中值会以 Tag 的形式展现，你也可以设置`collapse-tags`属性将它们合并为一段文字。
+为`el-select`设置`multiple`属性即可启用多选，此时`v-model`的值为当前选中值所组成的数组。默认情况下选中值会以 Tag 的形式展现，你也可以设置`collapse-tags`属性将它们合并为一段文字。
+
+:::demo
 ```html
 <template>
   <el-row :gutter="12">
@@ -212,7 +214,22 @@
       </el-select>
     </el-col>
     <el-col :span="12">
-      <el-select v-model="value2" multiple collapse-tags placeholder="请选择" size="small">
+      <el-select v-model="value1" multiple filterable collapse-tags :collapseTagsFixed="true" placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value1" multiple collapse-tags :multipleLimitShow="2" collapseTagsSuffix=" more" filterable placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value1" multiple collapse-tags filterable placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value1" multiple collapse-tags filterable multipleTagMaxWidth="50px" placeholder="请选择" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </el-col>
@@ -224,12 +241,52 @@
     data() {
       return {
         options: [
-          {value: '1',label: '黄金糕'},
-          {value: '2',label: '双皮奶', disabled: true},
-          {value: '3',label: '蚵仔煎'},
-          {value: '4',label: '龙须面'}
+          {
+            "value": "JASPER_SPLIT",
+            "label": "账单分成"
+          },
+          {
+            "value": "SMS",
+            "label": "短信费"
+          },
+          {
+            "value": "VOICE",
+            "label": "语音费"
+          },
+          {
+            "value": "OTA",
+            "label": "流量费"
+          },
+          {
+            "value": "OPERATE_COST",
+            "label": "运营费"
+          },
+          {
+            "value": "VEHICLE",
+            "label": "车辆服务费"
+          },
+          {
+            "value": "SPECIAL_LINE",
+            "label": "专线费"
+          },
+          {
+            "value": "SIM_CARD",
+            "label": "SIM卡费"
+          },
+          {
+            "value": "FLOW_POOL",
+            "label": "灵活共享计费"
+          },
+          {
+            "value": "MONTH_RENT",
+            "label": "月租费"
+          },
+          {
+            "value": "RNR",
+            "label": "实名费"
+          }
         ],
-        value1: ['1','2','3'],
+        value1: ['FLOW_POOL','SPECIAL_LINE','RNR'],
         value2: []
       }
     }
@@ -486,6 +543,10 @@
 | clearable | 是否可以清空选项 | boolean | — | false |
 | collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
 | multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
+| multiple-limit-show | 多选时展示tag数量 | number | — | 1 |
+| multiple-tag-max-width | 多选时tag中的文字最大宽度 | string | none/${x}px | none |
+| collapse-tags-suffix | 多选时统计tag数后缀 | string | more/... | - |
+| collapse-tags-fixed | 多选时统计tag数固定后右侧 | boolean | - | false |
 | name | select input 的 name 属性 | string | — | — |
 | autocomplete | select input 的 autocomplete 属性 | string | — | off |
 | auto-complete | 下个主版本弃用 | string | — | off |

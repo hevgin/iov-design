@@ -263,6 +263,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 | size | 尺寸 | string | medium / small / mini | — |
 | icon | 图标 | string | - | — |
 | effect | 主题 | string | dark / light / plain | light |
+| max-width | 文字内容最大宽度 | string | none/px | none |
 
 
 ### Events

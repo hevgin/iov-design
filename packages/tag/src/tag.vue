@@ -10,6 +10,10 @@
       color: String,
       size: String,
       icon: String,
+      maxWidth: {
+        type: String,
+        default: 'none'
+      },
       effect: {
         type: String,
         default: 'light',
@@ -47,7 +51,7 @@
           class={ classes }
           style={{ backgroundColor: this.color }}
           on-click={ this.handleClick }>
-          <span class="el-tag__inner">
+          <span class="el-tag__inner" style={{ maxWidth: this.maxWidth }}>
             { this.icon && <i class={`${this.icon} el-tag-icon`}></i> }
             <span class="el-tag__text">{ this.$slots.default }</span>
             {

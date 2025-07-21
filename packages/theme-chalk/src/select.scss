@@ -141,6 +141,13 @@
     align-items: center;
     flex-wrap: wrap;
     pointer-events: none;
+    .el-select__tags-count-fixed {
+      border-radius: 50%;
+      text-align: center;
+      position: absolute;
+      right: 0;
+      justify-content: center;
+    }
   }
 
   @include e(tags-text) {
@@ -167,6 +174,9 @@
     pointer-events: auto;
     height: $--input-height - 8px;
     line-height: $--input-height - 8px;
+    &.el-select__tags-count-fixed {
+      min-width: $--input-height - 8px;
+    }
     &.el-tag--info {
       background: $--color-fill-2;
       color: $--color-text-6;
@@ -178,18 +188,27 @@
     .el-tag--medium {
       height: $--input-medium-height - 8px;
       line-height: $--input-medium-height - 8px;
+      &.el-select__tags-count-fixed {
+        min-width: $--input-medium-height - 8px;
+      }
     }
   }
   @include m(small) {
     .el-tag--small {
       height: $--input-small-height - 8px;
       line-height: $--input-small-height - 8px;
+      &.el-select__tags-count-fixed {
+        min-width: $--input-small-height - 8px;
+      }
     }
   }
   @include m(mini) {
     .el-tag--mini {
       height: $--input-mini-height - 8px;
       line-height: $--input-mini-height - 8px;
+      &.el-select__tags-count-fixed {
+        min-width: $--input-mini-height - 8px;
+      }
     }
   }
 }
