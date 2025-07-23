@@ -64,7 +64,7 @@
 @mixin button-size($height, $padding-horizontal, $font-size, $border-radius) {
   padding: 0 $padding-horizontal;
   height: $height;
-  line-height: calc(#{$height} - 2px);
+  line-height: $height - 2px;
   font-size: $font-size;
   border-radius: $border-radius;
   &.is-round {

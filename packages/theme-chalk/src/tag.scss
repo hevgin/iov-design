@@ -6,7 +6,8 @@
   color: $color;
   border-color: $plainBorderColor;
   @include when(hit) {
-    border-color: $borderColor;
+    border: 1px solid $borderColor;
+    line-height: 30px;
   }
   @include when(dot) {
     .el-tag__text:before {
@@ -196,9 +197,6 @@
   padding: $--tag-padding;
   font-size: $--tag-font-size;
   color: $--color-darkblue-6;
-  border-width: 1px;
-  border-style: solid;
-  border-color: transparent;
   border-radius: $--tag-border-radius;
   box-sizing: border-box;
   white-space: nowrap;
@@ -278,6 +276,9 @@
   }
 
   @include m(plain) {
+    border-width: 1px;
+    border-style: solid;
+    line-height: 30px;
     @include genTheme($--color-white, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-6);
     @include genThemeInfo($--color-white, $--color-line-2, $--color-text-3, $--color-text-4, $--color-text-3);
     @include genThemeSuccess($--color-white, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-6);
@@ -297,6 +298,10 @@
     &.is-dot {
       font-size: 14px;
     }
+    &.is-hit,
+    &.el-tag--plain {
+      line-height: 28px;
+    }
 
     .el-tag-icon {
       font-size: 16px;
@@ -314,6 +319,10 @@
     &.is-dot {
       font-size: 13px;
     }
+    &.is-hit,
+    &.el-tag--plain {
+      line-height: 24px;
+    }
 
     .el-tag-icon {
       font-size: 12px;
@@ -328,9 +337,13 @@
     font-size: $--tag-small-font-size;
     height: 22px;
     border-radius: 4px;
-    line-height: 20px;
+    line-height: 22px;
     &.is-dot {
       font-size: 12px;
+    }
+    &.is-hit,
+    &.el-tag--plain {
+      line-height: 20px;
     }
 
     .el-tag-icon {

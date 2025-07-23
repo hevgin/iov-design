@@ -6,7 +6,6 @@
 
 @include b(button) {
   display: inline-block;
-  line-height: 1;
   white-space: nowrap;
   cursor: pointer;
   background: $--button-default-background-color;
@@ -201,7 +200,7 @@
     &.el-button--text {
       padding: 0 8px;
       height: $--button-small-height;
-      line-height: calc(#{$--button-small-height} - 2px);
+      line-height: $--button-small-height - 2px;
     }
     @include when(icon-only) {
       font-size: $--button-icon-only-size;
@@ -216,7 +215,7 @@
     &.el-button--text {
       padding: 0 4px;
       height: $--button-mini-height;
-      line-height: calc(#{$--button-mini-height }- 2px);
+      line-height: $--button-mini-height - 2px;
     }
     @include when(icon-only) {
       font-size: $--button-icon-only-size;

@@ -225,6 +225,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
     v-for="item in items"
     :key="item.label"
     :type="item.type"
+    size="small"
     effect="plain">
     {{ item.label }}
   </el-tag>
