@@ -2,35 +2,36 @@
 @import "mixins/mixins";
 
 @include b(divider) {
-  background-color: $--border-color-base;
   position: relative;
+  border-bottom: 1px dashed $--color-line-1;
 
   @include m(horizontal) {
     display: block;
-    height: 1px;
+    height: 0;
+    font-size: 0;
     width: 100%;
-    margin: 24px 0;
   }
 
   @include m(vertical) {
     display: inline-block;
-    width: 1px;
+    width: 0;
     height: 1em;
     margin: 0 8px;
     vertical-align: middle;
+    border-right: 1px dashed $--color-line-1;
+    border-bottom: 0 none;
     position: relative;
   }
 
   @include e(text) {
     position: absolute;
-    background-color: $--color-white;
-    padding: 0 20px;
-    font-weight: 500;
-    color: $--color-text-primary;
-    font-size: 14px;
+    background-color: #fff;
+    padding: 0 8px;
+    color: $--color-text-6;
+    font-size: 13px;
 
     @include when(left) {
-      left: 20px;
+      left: 16px;
       transform: translateY(-50%);
     }
 
@@ -40,7 +41,7 @@
     }
 
     @include when(right)  {
-      right: 20px;
+      right: 16px;
       transform: translateY(-50%);
     }
   }

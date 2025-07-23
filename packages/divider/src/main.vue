@@ -2,6 +2,12 @@
   <div
     v-bind="data.attrs"
     v-on="listeners"
+    :style="{
+      borderBottomStyle: props.direction === 'horizontal' && props.type || '',
+      borderBottomColor: props.direction === 'horizontal' && props.color || '',
+      borderRightStyle: props.direction === 'vertical' && props.type || '',
+      borderRightColor: props.direction === 'vertical' && props.color || ''
+    }"
     :class="[data.staticClass, 'el-divider', `el-divider--${props.direction}`]"
   >
     <div
@@ -30,6 +36,14 @@ export default {
       validator(val) {
         return ['left', 'center', 'right'].indexOf(val) !== -1;
       }
+    },
+    color: {
+      type: String,
+      default: '' // $--color-line-1
+    },
+    type: {
+      type: String,
+      default: ''
     }
   }
 };
