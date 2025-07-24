@@ -1,8 +1,8 @@
 @font-face {
   font-family: 'iovfont';  /* Project id 4466910 */
-  src: url('//at.alicdn.com/t/c/font_4466910_8y5kjsv7pqg.woff2?t=1750820266142') format('woff2'),
-       url('//at.alicdn.com/t/c/font_4466910_8y5kjsv7pqg.woff?t=1750820266142') format('woff'),
-       url('//at.alicdn.com/t/c/font_4466910_8y5kjsv7pqg.ttf?t=1750820266142') format('truetype');
+  src: url('//at.alicdn.com/t/c/font_4466910_qnw5e0xxy7.woff2?t=1753354243540') format('woff2'),
+       url('//at.alicdn.com/t/c/font_4466910_qnw5e0xxy7.woff?t=1753354243540') format('woff'),
+       url('//at.alicdn.com/t/c/font_4466910_qnw5e0xxy7.ttf?t=1753354243540') format('truetype');
 }
 
 [class^="iov-icon-"], [class*=" iov-icon-"] {
@@ -34,6 +34,35 @@
     animation: rotating 2s linear infinite;
     display: inline-block;
   }
+}
+
+.iov-icon-bottle:before {
+  content: "\e6fe";
+}
+
+.iov-icon-line-github:before {
+  content: "\e6f8";
+}
+
+
+.iov-icon-sun:before {
+  content: "\e6f9";
+}
+
+.iov-icon-panel:before {
+  content: "\e6fa";
+}
+
+.iov-icon-cube:before {
+  content: "\e6fb";
+}
+
+.iov-icon-github:before {
+  content: "\e6fc";
+}
+
+.iov-icon-menu-fold-right:before {
+  content: "\e6fd";
 }
 
 .iov-icon-circle-minus:before {
@@ -632,7 +661,7 @@
   content: "\e66a";
 }
 
-.iov-icon-menu-fold:before {
+.iov-icon-menu-fold-left:before {
   content: "\e66b";
 }
 
