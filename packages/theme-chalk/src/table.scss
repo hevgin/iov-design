@@ -40,7 +40,7 @@
   // 跨页选择
   @include e(cross-page-selection) {
     .iov-icon-arrow-down {
-      color: $--color-fill-6;
+      color: $--color-fill-4;
       cursor: pointer;
       transition: all ease .2s;
       &.show-selection-dropdown {
