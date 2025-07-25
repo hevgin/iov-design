@@ -21,7 +21,11 @@
         default: 'top'
       },
       beforeLeave: Function,
-      stretch: Boolean
+      stretch: Boolean,
+      primary: {
+        type: Boolean,
+        default: false
+      }
     },
 
     provide() {
@@ -167,6 +171,7 @@
           'el-tabs': true,
           'el-tabs--normal': !type,
           'el-tabs--card': type === 'card',
+          'el-tabs--card-primary': type === 'card' && this.primary,
           'el-tabs--capsule': type === 'capsule',
           [`el-tabs--${size}`]: size,
           [`el-tabs--${tabPosition}`]: true,

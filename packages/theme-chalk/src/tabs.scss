@@ -176,26 +176,69 @@
     }
   }
   @include m(card) {
+    &.el-tabs--card-primary {
+      .el-tabs__item {
+        &.is-active {
+          position: relative;
+          color: $--color-primary-6;
+          border-top-color: transparent;
+          &:before {
+            content: '';
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABIBAMAAAANAGjIAAAAKlBMVEUAAAA/Vv8/V/8/V/8/V/8/V/8/V/9BWf89Vf9AVf8qVf8/Vv8+Wf8/V//3fmOTAAAADXRSTlMAkm3589XUKyoMBr1CxUdJxQAAAD9JREFUKM9jYGAoDLkLBAwMC4EkiMG1F8pgvAtl1N5N6mQAAVkjBggIPgBlODFAQQKMoQBjNMAYExhGwSjADwC0VhuDywNOfgAAAABJRU5ErkJggg==), url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABIBAMAAAANAGjIAAAALVBMVEUAAAA/V/8/V/8/V/9AVv8+V/9AV/8+WP9BWf89Vf9AVf8qVf8/Vv8+Wf8/V/9Mw9oEAAAADnRSTlMA89XUlI9waysqDAa9QkOQHV4AAAA/SURBVCjPY3gHBEIRDAxABgh4wxhvNkAZ7xwYQGBl8rsXDBBQ+BTK4BVigAnBGMwwBhuMwQljcDGMglGAAwAASmoc2AEfAyMAAAAASUVORK5CYII=);
+            background-repeat: no-repeat, no-repeat;
+            background-position: 0, 100%;
+            background-size: 8px 100%, 8px 100%;
+            position: absolute;
+            top: 0;
+            left: -1px;
+            right: -1px;
+            height: 36px;
+          }
+          &:after {
+            content: '';
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABIAQMAAADF4Oe4AAAABlBMVEUAAAA/V/9SqD98AAAAAXRSTlMAQObYZgAAAA9JREFUCNdj+P8fgYYRAACKogf5+x8cIAAAAABJRU5ErkJggg==);
+            background-repeat: repeat-x;
+            background-position: 0 0;
+            background-size: 8px 36px;
+            left: 6px;
+            right: 6px;
+            position: absolute;
+            top: 0;
+            height: 36px;
+          }
+        }
+      }
+    }
     .el-tabs__item {
       height: 36px;
       line-height: 36px;
+      font-size: 14px;
+      font-weight: 400;
+      color: $--color-text-3;
+      transition: all ease .25s;
+      &:hover {
+        background: $--color-line-1;
+      }
     }
     &.el-tabs--medium {
       .el-tabs__item {
         height: 32px;
         line-height: 32px;
+        font-size: 14px;
       }
     }
     &.el-tabs--small {
       .el-tabs__item {
         height: 30px;
         line-height: 30px;
+        font-size: 13px;
       }
     }
     &.el-tabs--mini {
       .el-tabs__item {
         height: 28px;
         line-height: 28px;
+        font-size: 13px;
       }
     }
     .el-tabs__header {
@@ -233,8 +276,10 @@
         }
       }
       &.is-active {
-        border-bottom-color: $--color-white;
-        background: $--color-white;
+        border-bottom-color: #fff;
+        background: #fff;
+        font-weight: 500;
+        color: $--color-text-7;
 
         &.is-closable {
           padding-left: 20px;
@@ -257,18 +302,32 @@
       padding: 0 14px;
       color: $--color-text-3;
       transition: all ease .2s;
+      border: 0.5px solid transparent;
       &:hover {
         background: $--color-white;
+        border: 0.5px solid $--color-line-2;
+      }
+      &.is-disabled {
+        &:hover {
+          background: none;
+          border-color: transparent;
+        }
       }
     }
     &.el-tabs--medium {
+      .el-tabs__header {
+        height: 32px;
+      }
       .el-tabs__item {
-        height: 30px;
-        line-height: 30px;
+        height: 28px;
+        line-height: 28px;
         font-size: 13px;
       }
     }
     &.el-tabs--small {
+      .el-tabs__header {
+        height: 30px;
+      }
       .el-tabs__item {
         height: 26px;
         line-height: 26px;
@@ -276,6 +335,9 @@
       }
     }
     &.el-tabs--mini {
+      .el-tabs__header {
+        height: 28px;
+      }
       .el-tabs__item {
         height: 24px;
         line-height: 24px;
@@ -284,6 +346,7 @@
     }
     .el-tabs__header {
       padding: 2px;
+      height: 34px;
       display: inline-block;
       background: $--color-fill-2;
       border-radius: 4px;
@@ -318,6 +381,7 @@
       &.is-active {
         background: $--color-white;
         color: $--color-primary-6;
+        border: 0.5px solid $--color-line-2;
 
         &.is-closable {
           padding-left: 20px;

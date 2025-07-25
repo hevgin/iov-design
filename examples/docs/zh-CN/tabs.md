@@ -11,34 +11,34 @@
 ```html
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth" disabled>定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth" disabled></el-tab-pane>
   </el-tabs>
 
 
   <el-tabs v-model="activeName" @tab-click="handleClick" size="medium">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth" disabled>定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth" disabled></el-tab-pane>
   </el-tabs>
 
 
   <el-tabs v-model="activeName" @tab-click="handleClick" size="small">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth" disabled>定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth" disabled></el-tab-pane>
   </el-tabs>
 
 
   <el-tabs v-model="activeName" @tab-click="handleClick" size="mini">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth" disabled>定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth" disabled></el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -70,16 +70,13 @@
     </el-tab-pane>
     <el-tab-pane label="配置管理" name="second">
       <span slot="label"><i class="el-icon-date"/> 配置管理</span>
-      配置管理
-      </el-tab-pane>
+    </el-tab-pane>
     <el-tab-pane label="角色管理" name="third">
       <span slot="label"><i class="el-icon-date"/> 角色管理</span>
-      角色管理
-      </el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth" disabled>
-      <span slot="label"><i class="el-icon-date"/> 定时任务补偿</span>
-      定时任务补偿
-      </el-tab-pane>
+    </el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth" disabled>
+      <span slot="label"><i class="el-icon-date"/> 定时任务</span>
+    </el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -108,31 +105,84 @@
 ```html
 <template>
   <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
   <el-tabs v-model="activeName" type="card" size="medium" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
   <el-tabs v-model="activeName" type="card" size="small" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
   <el-tabs v-model="activeName" type="card" size="mini" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
+  </el-tabs>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        activeName: 'first'
+      };
+    },
+    methods: {
+      handleClick(tab, event) {
+        console.log(tab, event);
+      }
+    }
+  };
+</script>
+```
+:::
+
+### 选项卡蓝色样式
+
+选项卡样式的标签页。
+
+:::demo 只需要设置 `type` 属性为 `card`, 增加 `primary`属性, 就可以使选项卡改变为标签风格。
+
+```html
+<template>
+  <el-tabs v-model="activeName" type="card" primary @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
+  </el-tabs>
+
+  <el-tabs v-model="activeName" type="card" primary size="medium" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
+  </el-tabs>
+
+  <el-tabs v-model="activeName" type="card" primary size="small" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
+  </el-tabs>
+
+  <el-tabs v-model="activeName" type="card" primary size="mini" @tab-click="handleClick">
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third"></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -161,31 +211,31 @@
 ```html
 <template>
   <el-tabs v-model="activeName" type="capsule" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third" disabled>角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third" disabled></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
   <el-tabs v-model="activeName" type="capsule" size="medium" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third" disabled>角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third" disabled></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
   <el-tabs v-model="activeName" type="capsule" size="small" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third" disabled>角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third" disabled></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
   <el-tabs v-model="activeName" type="capsule" size="mini" @tab-click="handleClick">
-    <el-tab-pane label="用户管理" name="first">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理" name="second">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理" name="third" disabled>角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿" name="fourth">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理" name="first"></el-tab-pane>
+    <el-tab-pane label="配置管理" name="second"></el-tab-pane>
+    <el-tab-pane label="角色管理" name="third" disabled></el-tab-pane>
+    <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -212,10 +262,10 @@
 :::demo 将`type`设置为`border-card`。
 ```html
 <el-tabs type="border-card">
-  <el-tab-pane label="用户管理">用户管理</el-tab-pane>
-  <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-  <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-  <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+  <el-tab-pane label="用户管理"></el-tab-pane>
+  <el-tab-pane label="配置管理"></el-tab-pane>
+  <el-tab-pane label="角色管理"></el-tab-pane>
+  <el-tab-pane label="定时任务"></el-tab-pane>
 </el-tabs>
 ```
 :::
@@ -236,10 +286,10 @@
   </el-radio-group>
 
   <el-tabs :tab-position="tabPosition" style="height: 200px;">
-    <el-tab-pane label="用户管理">用户管理</el-tab-pane>
-    <el-tab-pane label="配置管理">配置管理</el-tab-pane>
-    <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-    <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+    <el-tab-pane label="用户管理"></el-tab-pane>
+    <el-tab-pane label="配置管理"></el-tab-pane>
+    <el-tab-pane label="角色管理"></el-tab-pane>
+    <el-tab-pane label="定时任务"></el-tab-pane>
   </el-tabs>
 </template>
 <script>
@@ -266,8 +316,8 @@
     我的行程
   </el-tab-pane>
   <el-tab-pane label="消息中心">消息中心</el-tab-pane>
-  <el-tab-pane label="角色管理">角色管理</el-tab-pane>
-  <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+  <el-tab-pane label="角色管理"></el-tab-pane>
+  <el-tab-pane label="定时任务"></el-tab-pane>
 </el-tabs>
 ```
 :::
