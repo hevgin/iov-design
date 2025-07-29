@@ -209,28 +209,28 @@
 <template>
   <el-row :gutter="12">
     <el-col :span="12">
-      <el-select v-model="value1" multiple placeholder="请选择" size="small">
+      <el-select v-model="value1" multiple filterable collapse-tags :collapseTagsFixed="true" placeholder="多选数量在右侧" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
       </el-select>
     </el-col>
     <el-col :span="12">
-      <el-select v-model="value1" multiple filterable collapse-tags :collapseTagsFixed="true" placeholder="请选择" size="small">
+      <el-select v-model="value1" multiple collapse-tags filterable placeholder="多选数量跟随" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value1" multiple collapse-tags :multipleLimitShow="6" collapseTagsSuffix=" more" filterable placeholder="自定义显示TAG数及数量内容" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value1" multiple collapse-tags filterable multipleTagMaxWidth="50px" placeholder="固定TAG宽度" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value1" multiple placeholder="默认多选" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
-      </el-select>
-    </el-col>
-    <el-col :span="12">
-      <el-select v-model="value1" multiple collapse-tags :multipleLimitShow="2" collapseTagsSuffix=" more" filterable placeholder="请选择" size="small">
-        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-      </el-select>
-    </el-col>
-    <el-col :span="12">
-      <el-select v-model="value1" multiple collapse-tags filterable placeholder="请选择" size="small">
-        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-      </el-select>
-    </el-col>
-    <el-col :span="12">
-      <el-select v-model="value1" multiple collapse-tags filterable multipleTagMaxWidth="50px" placeholder="请选择" size="small">
-        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </el-col>
   </el-row>
@@ -286,8 +286,7 @@
             "label": "实名费"
           }
         ],
-        value1: ['FLOW_POOL','SPECIAL_LINE','RNR'],
-        value2: []
+        value1: []
       }
     }
   }
@@ -544,7 +543,7 @@
 | collapse-tags | 多选时是否将选中值按文字的形式展示 | boolean | — | false |
 | multiple-limit | 多选时用户最多可以选择的项目数，为 0 则不限制 | number | — | 0 |
 | multiple-limit-show | 多选时展示tag数量 | number | — | 1 |
-| multiple-tag-max-width | 多选时tag中的文字最大宽度 | string | none/${x}px | none |
+| multiple-tag-max-width | 多选时tag中的文字最大宽度, 如有multiple-limit-show则自动计算 | string | none/${x}px | none |
 | collapse-tags-suffix | 多选时统计tag数后缀 | string | more/... | - |
 | collapse-tags-fixed | 多选时统计tag数固定后右侧 | boolean | - | false |
 | name | select input 的 name 属性 | string | — | — |

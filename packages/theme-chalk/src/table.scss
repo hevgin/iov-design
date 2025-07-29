@@ -39,6 +39,7 @@
 
   // 跨页选择
   @include e(cross-page-selection) {
+    margin-left: 2px;
     .iov-icon-arrow-down {
       color: $--color-fill-4;
       cursor: pointer;

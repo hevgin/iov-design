@@ -17,7 +17,7 @@
             :closable="!selectDisabled"
             :size="collapseTagSize"
             :hit="item.hitState"
-            :maxWidth="multipleTagMaxWidth"
+            :maxWidth="maxWidth"
             type="info"
             @close="deleteTag($event, item)"
             disable-transitions>
@@ -29,6 +29,7 @@
           :closable="false"
           :size="collapseTagSize"
           type="info"
+          ref="tagsCount"
           class="el-select__tags-count"
           :class="{'el-select__tags-count-fixed': collapseTagsFixed}"
           disable-transitions>
@@ -42,7 +43,7 @@
           :closable="!item.disabled && !selectDisabled"
           :size="collapseTagSize"
           :hit="item.hitState"
-          :maxWidth="multipleTagMaxWidth"
+          :maxWidth="maxWidth"
           type="info"
           @close="deleteTag($event, item)"
           disable-transitions>
@@ -186,6 +187,18 @@
     },
 
     computed: {
+      maxWidth() {
+        if (this.collapseTags) {
+          if (this.multipleTagMaxWidth && this.multipleTagMaxWidth !== 'none') {
+            return this.multipleTagMaxWidth;
+          }
+          const tagsCountWidth = this.$refs.tagsCount && this.$refs.tagsCount.$el.clientWidth + 20;
+          const count = this.selected.length <= this.multipleLimitShow ? this.selected.length : this.multipleLimitShow;
+          return Math.floor((this.inputWidth - this.tagsLeft - 32 - tagsCountWidth - count * 16) / count) + 'px';
+        } else {
+          return this.multipleTagMaxWidth || 'none';
+        }
+      },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
