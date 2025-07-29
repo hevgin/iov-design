@@ -106,7 +106,7 @@
   </div>
 </template>
 <script>
-  import { addClass } from 'iov-design/src/utils/dom';
+  import { addClass, removeClass } from 'iov-design/src/utils/dom';
   import emitter from 'iov-design/src/mixins/emitter';
   import Migrating from 'iov-design/src/mixins/migrating';
   import calcTextareaHeight from './calcTextareaHeight';
@@ -383,9 +383,13 @@
         const isButton = pendantEl.querySelector('.el-button');
         if (isSelect) {
           addClass(pendantEl, 'is-select');
+        } else {
+          removeClass(pendantEl, 'is-select');
         }
         if (isButton) {
           addClass(pendantEl, 'is-button');
+        } else {
+          removeClass(pendantEl, 'is-button');
         }
       },
       calcIconOffset(place) {
