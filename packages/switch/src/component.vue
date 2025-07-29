@@ -1,7 +1,7 @@
 <template>
   <div
     class="el-switch"
-    :class="{ 'is-disabled': switchDisabled, 'is-checked': checked }"
+    :class="[ size ? 'el-switch--' + size : '', type ? 'el-switch--' + type : '', {'is-disabled': switchDisabled}, {'is-checked': checked}  ]"
     role="switch"
     :aria-checked="checked"
     :aria-disabled="switchDisabled"
@@ -20,15 +20,15 @@
       @keydown.enter="switchValue"
     >
     <span
-      :class="['el-switch__label', 'el-switch__label--left', !checked ? 'is-active' : '']"
+      :class="['el-switch__label', 'el-switch__label--left', inactiveIconClass ? 'el-switch__label--left-icon' : '', inactiveText ? 'el-switch__label--left-text' : '', !checked ? 'is-active' : '']"
       v-if="inactiveIconClass || inactiveText">
       <i :class="[inactiveIconClass]" v-if="inactiveIconClass"></i>
       <span v-if="!inactiveIconClass && inactiveText" :aria-hidden="checked">{{ inactiveText }}</span>
     </span>
-    <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth + 'px' }">
+    <span class="el-switch__core" ref="core" :style="{ 'width': coreWidth > 0 ? coreWidth + 'px' : '' }">
     </span>
     <span
-      :class="['el-switch__label', 'el-switch__label--right', checked ? 'is-active' : '']"
+      :class="['el-switch__label', 'el-switch__label--right', activeIconClass ? 'el-switch__label--right-icon' : '', activeText ? 'el-switch__label--right-text' : '', checked ? 'is-active' : '']"
       v-if="activeIconClass || activeText">
       <i :class="[activeIconClass]" v-if="activeIconClass"></i>
       <span v-if="!activeIconClass && activeText" :aria-hidden="!checked">{{ activeText }}</span>
@@ -59,7 +59,7 @@
       },
       width: {
         type: Number,
-        default: 40
+        default: 0
       },
       activeIconClass: {
         type: String,
@@ -94,6 +94,14 @@
       validateEvent: {
         type: Boolean,
         default: true
+      },
+      size: {
+        type: String,
+        default: ''
+      },
+      type: {
+        type: String,
+        default: 'circle'
       },
       id: String
     },
@@ -164,7 +172,7 @@
     },
     mounted() {
       /* istanbul ignore if */
-      this.coreWidth = this.width || 40;
+      this.coreWidth = this.width;
       if (this.activeColor || this.inactiveColor) {
         this.setBackgroundColor();
       }

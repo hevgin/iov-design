@@ -7,11 +7,15 @@
 :::demo 绑定`v-model`到一个`Boolean`类型的变量。可以使用`active-color`属性与`inactive-color`属性来设置开关的背景色。
 
 ```html
-<el-switch
-  v-model="value"
-  active-color="#13ce66"
-  inactive-color="#ff4949">
-</el-switch>
+<el-switch v-model="value"></el-switch>
+<el-switch v-model="value" size="medium"></el-switch>
+<el-switch v-model="value" size="small"></el-switch>
+<el-switch v-model="value" size="mini"></el-switch>
+
+<el-switch v-model="value" type="rect"></el-switch>
+<el-switch v-model="value" type="rect" size="medium"></el-switch>
+<el-switch v-model="value" type="rect" size="small"></el-switch>
+<el-switch v-model="value" type="rect" size="mini"></el-switch>
 
 <script>
   export default {
@@ -30,19 +34,14 @@
 :::demo 使用`active-text`属性与`inactive-text`属性来设置开关的文字描述。
 
 ```html
-<el-switch
-  v-model="value1"
-  active-text="按月付费"
-  inactive-text="按年付费">
-</el-switch>
-<el-switch
-  style="display: block"
-  v-model="value2"
-  active-color="#13ce66"
-  inactive-color="#ff4949"
-  active-text="按月付费"
-  inactive-text="按年付费">
-</el-switch>
+<el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail"></el-switch>
+<el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="medium"></el-switch>
+<el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="small"></el-switch>
+<el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="mini"></el-switch>
+<el-switch v-model="value2" active-text="开" inactive-text="关"></el-switch>
+<el-switch v-model="value2" active-text="开" inactive-text="关" size="medium"></el-switch>
+<el-switch v-model="value2" active-text="开" inactive-text="关" size="small"></el-switch>
+<el-switch v-model="value2" active-text="开" inactive-text="关" size="mini"></el-switch>
 
 <script>
   export default {
@@ -119,16 +118,18 @@
 |---------- |-------- |---------- |-------------  |-------- |
 | value / v-model | 绑定值 | boolean / string / number | — | — |
 | disabled  | 是否禁用    | boolean   | — | false   |
-| width  | switch 的宽度（像素）    | number   | — | 40 |
+| width  | switch 的宽度（像素）    | number   | — | 32 |
 | active-icon-class  | switch 打开时所显示图标的类名，设置此项会忽略 `active-text`    | string   | — | — |
 | inactive-icon-class  | switch 关闭时所显示图标的类名，设置此项会忽略 `inactive-text`    | string   | — | — |
 | active-text  | switch 打开时的文字描述    | string   | — | — |
 | inactive-text  | switch 关闭时的文字描述    | string   | — | — |
 | active-value  | switch 打开时的值    | boolean / string / number | — | true |
 | inactive-value  | switch 关闭时的值    | boolean / string / number | — | false |
-| active-color  | switch 打开时的背景色    | string   | — | #409EFF |
-| inactive-color  | switch 关闭时的背景色    | string   | — | #C0CCDA |
+| active-color  | switch 打开时的背景色    | string   | — | #3F57FF |
+| inactive-color  | switch 关闭时的背景色    | string   | — | #ABAFB5 |
 | name            | switch 对应的 name 属性    | string   | — | — |
+| size            | switch 大小    | string   | large/medium/small/mini | large |
+| type            | switch 类型    | string   | circle/rect | circle |
 | validate-event  | 改变 switch 状态时是否触发表单的校验     | boolean   | - | true |
 
 ### Events
