@@ -25,7 +25,7 @@
           </el-tag>
         </template>
         <el-tag
-          v-if="selected.length > 1"
+          v-if="selected.length > 1 && selected.length > multipleLimitShow || selected.length > 0 && collapseTagsFixed"
           :closable="false"
           :size="collapseTagSize"
           type="info"
@@ -33,7 +33,7 @@
           class="el-select__tags-count"
           :class="{'el-select__tags-count-fixed': collapseTagsFixed}"
           disable-transitions>
-          <span class="el-select__tags-text">{{collapseTagsFixed ? '' : '+'}}{{ selected.length - 1 }}{{ collapseTagsSuffix }}</span>
+          <span class="el-select__tags-text">{{collapseTagsFixed ? '' : '+'}}{{ collapseTagsFixed ? selected.length : selected.length - multipleLimitShow }}{{ collapseTagsSuffix }}</span>
         </el-tag>
       </span>
       <transition-group class="el-tag__group" @after-leave="resetInputHeight" v-if="!collapseTags">
@@ -187,18 +187,18 @@
     },
 
     computed: {
-      maxWidth() {
-        if (this.collapseTags) {
-          if (this.multipleTagMaxWidth && this.multipleTagMaxWidth !== 'none') {
-            return this.multipleTagMaxWidth;
-          }
-          const tagsCountWidth = this.$refs.tagsCount && this.$refs.tagsCount.$el.clientWidth + 20;
-          const count = this.selected.length <= this.multipleLimitShow ? this.selected.length : this.multipleLimitShow;
-          return Math.floor((this.inputWidth - this.tagsLeft - 32 - tagsCountWidth - count * 16) / count) + 'px';
-        } else {
-          return this.multipleTagMaxWidth || 'none';
-        }
-      },
+      // maxWidth() {
+      //   if (this.collapseTags) {
+      //     if (this.multipleTagMaxWidth && this.multipleTagMaxWidth !== 'none') {
+      //       return this.multipleTagMaxWidth;
+      //     }
+      //     const tagsCountWidth = this.$refs.tagsCount && this.$refs.tagsCount.$el.clientWidth || 0;
+      //     const count = this.selected.length <= this.multipleLimitShow ? this.selected.length : this.multipleLimitShow;
+      //     return Math.floor((this.inputWidth - this.tagsLeft - 32 - tagsCountWidth - 20 - count * 16) / count) + 'px';
+      //   } else {
+      //     return this.multipleTagMaxWidth || 'none';
+      //   }
+      // },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
@@ -375,7 +375,8 @@
         menuVisibleOnFocus: false,
         isOnComposition: false,
         isSilentBlur: false,
-        tagsLeft: 0
+        tagsLeft: 0,
+        maxWidth: 'none'
       };
     },
 
@@ -402,6 +403,7 @@
             this.query = '';
             this.handleQueryChange(this.query);
           }
+          this.getMaxWidth();
         }
         this.setSelected();
         if (this.filterable && !this.multiple) {
@@ -488,6 +490,20 @@
     },
 
     methods: {
+      getMaxWidth() {
+        this.$nextTick(() => {
+          if (this.collapseTags) {
+            if (this.multipleTagMaxWidth && this.multipleTagMaxWidth !== 'none') {
+              this.maxWidth = this.multipleTagMaxWidth;
+            }
+            const tagsCountWidth = this.$refs.tagsCount && this.$refs.tagsCount.$el.clientWidth || 0;
+            const count = this.selected.length <= this.multipleLimitShow ? this.selected.length : this.multipleLimitShow;
+            this.maxWidth = Math.floor((this.inputWidth - this.tagsLeft - 32 - tagsCountWidth - 20 - count * 16) / count) + 'px';
+          } else {
+            this.maxWidth = this.multipleTagMaxWidth || 'none';
+          }
+        });
+      },
       handleNavigate(direction) {
         if (this.isOnComposition) return;
 

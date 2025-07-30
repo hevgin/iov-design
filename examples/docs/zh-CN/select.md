@@ -229,7 +229,7 @@
       </el-select>
     </el-col>
     <el-col :span="12">
-      <el-select v-model="value1" multiple placeholder="默认多选" size="small">
+      <el-select v-model="value1" multiple :multiple-limit="3" placeholder="默认多选" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
       </el-select>
     </el-col>
