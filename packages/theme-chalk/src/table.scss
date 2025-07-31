@@ -145,6 +145,14 @@
     position: relative;
     text-align: left;
 
+    @include when(top) {
+      vertical-align: top;
+    }
+
+    @include when(bottom) {
+      vertical-align: bottom;
+    }
+
     @include when(center) {
       text-align: center;
     }
@@ -307,7 +315,7 @@
 
     .has-gutter {
       .el-table__cell {
-        border-bottom: 0 none;
+        // border-bottom: 0 none;
         &:nth-last-child(2) {
           border-right: 0 none;
         }

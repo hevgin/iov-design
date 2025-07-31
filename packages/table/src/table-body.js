@@ -216,7 +216,7 @@ export default {
     },
 
     getCellClass(rowIndex, columnIndex, row, column) {
-      const classes = [column.id, column.align, column.className];
+      const classes = [column.id, column.align, column.verticalAlign, column.className];
 
       if (this.isColumnHidden(columnIndex)) {
         classes.push('is-hidden');

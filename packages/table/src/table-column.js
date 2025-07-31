@@ -32,6 +32,7 @@ export default {
     },
     columnKey: String,
     align: String,
+    verticalAlign: String,
     headerAlign: String,
     showTooltipWhenOverflow: Boolean,
     showOverflowTooltip: Boolean,
@@ -94,6 +95,10 @@ export default {
 
     realAlign() {
       return this.align ? 'is-' + this.align : null;
+    },
+
+    realVerticalAlign() {
+      return this.verticalAlign ? 'is-' + this.verticalAlign : null;
     },
 
     realHeaderAlign() {
@@ -201,6 +206,7 @@ export default {
       const aliases = {
         prop: 'property',
         realAlign: 'align',
+        realVerticalAlign: 'verticalAlign',
         realHeaderAlign: 'headerAlign',
         realWidth: 'width'
       };
@@ -265,6 +271,7 @@ export default {
       type: type,
       property: this.prop || this.property,
       align: this.realAlign,
+      verticalAlign: this.realVerticalAlign,
       headerAlign: this.realHeaderAlign,
       showOverflowTooltip: this.showOverflowTooltip || this.showTooltipWhenOverflow,
       // filter 相关属性
