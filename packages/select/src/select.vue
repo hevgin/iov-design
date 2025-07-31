@@ -709,7 +709,7 @@
           const inputInner = this.$el.querySelector('.el-input__inner');
           const prefixLabelWidth = prefixLabel && Math.round(prefixLabel.getBoundingClientRect().width) || 0;
           const inputPaddingLeft = prefixLabel || prefix ? Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) : 0;
-          this.tagsLeft = prefixLabelWidth + inputPaddingLeft;
+          this.tagsLeft = prefixLabel ? (prefixLabelWidth + inputPaddingLeft - 4) : 0;
         });
       },
 
