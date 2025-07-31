@@ -933,23 +933,27 @@
 
 :::demo 在开启多选模式后，默认情况下会展示所有已选中的选项的Tag，你可以使用`collapse-tags`来折叠Tag
 ```html
-<div class="block">
-  <span class="demonstration">默认显示所有Tag</span>
-  <el-cascader
-    v-model="value"
-    :options="options"
-    :props="props"
-    disabled
-    clearable></el-cascader>
-</div>
-<div class="block">
-  <span class="demonstration">折叠展示Tag</span>
-  <el-cascader
-    :options="options"
-    :props="props"
-    collapse-tags
-    clearable></el-cascader>
-</div>
+<el-row :gutter="12">
+  <el-col :span="24">
+     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" disabled></el-cascader>
+  </el-col>
+  <el-col :span="24">
+     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small"></el-cascader>
+  </el-col>
+  <el-col :span="12">
+     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags></el-cascader>
+  </el-col>
+  <el-col :span="12">
+     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags collapseTagsFixed></el-cascader>
+  </el-col>
+  <el-col :span="12">
+     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags :multipleLimitShow="4" collapseTagsSuffix=" more">
+     </el-cascader>
+  </el-col>
+  <el-col :span="12">
+     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags multipleTagMaxWidth="40px"></el-cascader>
+  </el-col>
+</el-row>
 
 <script>
   export default {
@@ -1949,6 +1953,10 @@
 | clearable | 是否支持清空选项 | boolean | — | false |
 | show-all-levels | 输入框中是否显示选中值的完整路径 | boolean | — | true |
 | collapse-tags | 多选模式下是否折叠Tag | boolean | - | false |
+| multiple-limit-show | 多选时展示tag数量 | number | — | 1 |
+| multiple-tag-max-width | 多选时tag中的文字最大宽度, 如有multiple-limit-show则自动计算 | string | none/${x}px | none |
+| collapse-tags-suffix | 多选时统计tag数后缀 | string | more/... | - |
+| collapse-tags-fixed | 多选时统计tag数固定后右侧 | boolean | - | false |
 | separator | 选项分隔符 | string | — | 斜杠' / ' |
 | filterable | 是否可搜索选项 | boolean | — | — |
 | filter-method | 自定义搜索逻辑，第一个参数是节点`node`，第二个参数是搜索关键词`keyword`，通过返回布尔值表示是否命中 | function(node, keyword) | - | - |

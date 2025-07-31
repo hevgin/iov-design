@@ -49,18 +49,33 @@
       </template>
     </el-input>
 
-    <div v-if="multiple" class="el-cascader__tags">
+    <transition-group v-if="multiple && collapseTags && checkedNodes.length" class="el-cascader__tags" @after-leave="updateStyle">
+      <template v-for="(tag, index) in presentTags">
+        <el-tag
+          :key="tag.key"
+          v-if="collapseTags && index <= multipleLimitShow - 1"
+          type="info"
+          :size="tagSize"
+          :hit="tag.hitState"
+          :maxWidth="maxWidth"
+          :closable="tag.closable"
+          :class="{'is-disabled': !tag.closable && tag.key !== -1}"
+          disable-transitions
+          @close="deleteTag(tag)">
+          <span>{{ tag.text }}</span>
+        </el-tag>
+      </template>
       <el-tag
-        v-for="tag in presentTags"
-        :key="tag.key"
-        type="info"
+        v-if="collapseTags && (checkedNodes.length > 1 && checkedNodes.length > multipleLimitShow || checkedNodes.length > 0 && collapseTagsFixed)"
+        :closable="false"
         :size="tagSize"
-        :hit="tag.hitState"
-        :closable="tag.closable"
-        :class="{'is-disabled': !tag.closable && tag.key !== -1}"
-        disable-transitions
-        @close="deleteTag(tag)">
-        <span>{{ tag.text }}</span>
+        key="count"
+        type="info"
+        ref="tagsCount"
+        class="el-cascader__tags-count"
+        :class="{'el-cascader__tags-count-fixed': collapseTagsFixed}"
+        disable-transitions>
+        <span class="el-cascader__tags-text">{{collapseTagsFixed ? '' : '+'}}{{ collapseTagsFixed ? checkedNodes.length : checkedNodes.length - multipleLimitShow }}{{ collapseTagsSuffix }}</span>
       </el-tag>
       <input
         v-if="filterable && !isDisabled"
@@ -71,7 +86,33 @@
         @input="e => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
         @keydown.delete="handleDelete">
-    </div>
+    </transition-group>
+    <transition-group class="el-cascader__tags" @after-leave="updateStyle" v-if="!collapseTags">
+      <template v-for="tag in presentTags">
+        <el-tag
+          :key="tag.key"
+          type="info"
+          :size="tagSize"
+          :hit="tag.hitState"
+          :maxWidth="maxWidth"
+          :closable="tag.closable"
+          :class="{'is-disabled': !tag.closable && tag.key !== -1}"
+          disable-transitions
+          @close="deleteTag(tag)">
+          <span>{{ tag.text }}</span>
+        </el-tag>
+      </template>
+      <input
+        v-if="filterable && !isDisabled"
+        v-model.trim="inputValue"
+        type="text"
+        class="el-cascader__search-input"
+        :placeholder="presentTags.length ? '' : placeholder"
+        @input="e => handleInput(inputValue, e)"
+        @click.stop="toggleDropDownVisible(true)"
+        @keydown.delete="handleDelete">
+    </transition-group>
+
 
     <transition name="el-zoom-in-top" @after-leave="handleDropdownLeave">
       <div
@@ -225,6 +266,22 @@ export default {
       default: true
     },
     collapseTags: Boolean,
+    multipleLimitShow: {
+      type: Number,
+      default: 1
+    },
+    multipleTagMaxWidth: {
+      type: String,
+      default: 'none'
+    },
+    collapseTagsSuffix: {
+      type: String,
+      default: ''
+    },
+    collapseTagsFixed: {
+      type: Boolean,
+      default: false
+    },
     debounce: {
       type: Number,
       default: 300
@@ -248,7 +305,10 @@ export default {
       filtering: false,
       suggestions: [],
       inputInitialHeight: 0,
-      pressDeleteCount: 0
+      pressDeleteCount: 0,
+      inputWidth: 0,
+      tagsLeft: 0,
+      maxWidth: 'none'
     };
   },
 
@@ -357,6 +417,8 @@ export default {
     const { input } = this.$refs;
     if (input && input.$el) {
       this.inputInitialHeight = Math.max(input.$el.offsetHeight, InputSizeMap[this.realSize]) || 36;
+      this.resetInputWidth();
+      this.resetTagsLeft();
     }
 
     if (!this.isEmptyValue(this.value)) {
@@ -389,6 +451,33 @@ export default {
   },
 
   methods: {
+    resetInputWidth() {
+      this.inputWidth = this.$refs.input.$el.getBoundingClientRect().width;
+    },
+    resetTagsLeft() {
+      this.$nextTick(() => {
+        const prefixLabel = this.$el.querySelector('.el-input-group__prefix-label');
+        const prefix = this.$el.querySelector('.el-input__prefix');
+        const inputInner = this.$el.querySelector('.el-input__inner');
+        const prefixLabelWidth = prefixLabel && Math.round(prefixLabel.getBoundingClientRect().width) || 0;
+        const inputPaddingLeft = prefixLabel || prefix ? Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) : 0;
+        this.tagsLeft = prefixLabelWidth + inputPaddingLeft;
+      });
+    },
+    getMaxWidth() {
+      this.$nextTick(() => {
+        if (this.collapseTags) {
+          if (this.multipleTagMaxWidth && this.multipleTagMaxWidth !== 'none') {
+            this.maxWidth = this.multipleTagMaxWidth;
+          }
+          const tagsCountWidth = this.$refs.tagsCount && this.$refs.tagsCount.$el.clientWidth || 0;
+          const count = this.checkedNodes.length <= this.multipleLimitShow ? this.checkedNodes.length : this.multipleLimitShow;
+          this.maxWidth = Math.floor((this.inputWidth - this.tagsLeft - 32 - tagsCountWidth - 20 - count * 16) / count) + 'px';
+        } else {
+          this.maxWidth = this.multipleTagMaxWidth || 'none';
+        }
+      });
+    },
     getMigratingConfig() {
       return {
         props: {
@@ -515,7 +604,7 @@ export default {
       this.presentText = null;
     },
     computePresentTags() {
-      const { isDisabled, leafOnly, showAllLevels, separator, collapseTags } = this;
+      const { isDisabled, leafOnly, showAllLevels, separator } = this;
       const checkedNodes = this.getCheckedNodes(leafOnly);
       const tags = [];
 
@@ -528,25 +617,29 @@ export default {
       });
 
       if (checkedNodes.length) {
-        const [first, ...rest] = checkedNodes;
-        const restCount = rest.length;
-        tags.push(genTag(first));
+        checkedNodes.forEach(node => tags.push(genTag(node)));
+        // const [first, ...rest] = checkedNodes;
+        // const restCount = rest.length;
+        // tags.push(genTag(first));
 
-        if (restCount) {
-          if (collapseTags) {
-            tags.push({
-              key: -1,
-              text: `+${restCount}`,
-              closable: false
-            });
-          } else {
-            rest.forEach(node => tags.push(genTag(node)));
-          }
-        }
+        // console.log(restCount, 'restCount============');
+        // this.restCount = restCount;
+        // if (restCount) {
+        //   if (collapseTags) {
+        //     tags.push({
+        //       key: -1,
+        //       text: `+${restCount}`,
+        //       closable: false
+        //     });
+        //   } else {
+        //     rest.forEach(node => tags.push(genTag(node)));
+        //   }
+        // }
       }
 
       this.checkedNodes = checkedNodes;
       this.presentTags = tags;
+      this.getMaxWidth();
     },
     getSuggestions() {
       let { filterMethod } = this;
@@ -661,7 +754,10 @@ export default {
         } else {
           inputInner.style.height = height;
         }
-        tags.style.left = (prefixLabelWidth + inputPaddingLeft) + 'px';
+        tags.style.left = prefixLabel ? (prefixLabelWidth + inputPaddingLeft - 4) + 'px' : '0px';
+        if (this.checkedNodes.length === 0 && !prefixLabel) {
+          tags.style.left = '12px';
+        }
         if (this.dropDownVisible) {
           this.updatePopper();
         }

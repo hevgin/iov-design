@@ -168,6 +168,7 @@
     border-color: transparent;
     margin: 2px 0 2px 4px;
     padding: 0 6px;
+    border-radius: 2px;
     display: flex;
     max-width: 100%;
     align-items: center;
@@ -176,6 +177,7 @@
     line-height: $--input-height - 8px;
     &.el-select__tags-count-fixed {
       min-width: $--input-height - 8px;
+      border-radius: 50%;
     }
     &.el-tag--info {
       background: $--color-fill-2;
