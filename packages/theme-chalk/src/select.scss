@@ -23,6 +23,60 @@
     }
   }
 
+  &.is-fill {
+    background: $--color-fill-1;
+    border-radius: 4px;
+    .el-input-group--prefix,
+    .el-input-group--suffix {
+      background: $--color-fill-1;
+      border-color: $--color-fill-1;
+      &:hover,
+      &.is-focus {
+        border-color: $--input-focus-border;
+      }
+      &.is-disabled {
+        border-color: $--color-fill-1;
+      }
+    }
+    .el-input__inner {
+      background: $--color-fill-1;
+      border-color: $--color-fill-1;
+    }
+    .el-input {
+      &.is-focus {
+        .el-input__suffix,
+        .el-input__inner,
+        .el-input-group--prefix,
+        .el-input-group--suffix {
+          background: #fff;
+          border-color: $--input-focus-border;
+        }
+        .el-input-group--prefix,
+        .el-input-group--suffix {
+          box-shadow: $--input-box-shadow;
+        }
+      }
+    }
+    .el-input__suffix {
+      background: $--color-fill-1;
+    }
+    &:hover {
+      .el-input__inner {
+        border-color: $--select-border-color-hover;
+      }
+    }
+    .el-select__tags {
+      &.is-focus {
+        .el-tag.el-tag--info {
+          background: $--color-fill-2;
+        }
+      }
+    }
+    .el-tag.el-tag--info {
+      background: #fff;
+    }
+  }
+
   .el-input__inner {
     cursor: pointer;
     padding-right: 35px;

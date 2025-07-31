@@ -10,7 +10,12 @@
 <template>
   <el-row :gutter="12">
     <el-col :span="12">
-      <el-select v-model="value" placeholder="请选择" size="small">
+      <el-select v-model="value" placeholder="请选择" size="small" clearable>
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value" placeholder="请选择" fill size="small" clearable>
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </el-col>
@@ -536,6 +541,7 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | value / v-model | 绑定值 | boolean / string / number | — | — |
 | multiple | 是否多选 | boolean | — | false |
+| fill | 无边框填充效果 | boolean | — | false |
 | disabled | 是否禁用 | boolean | — | false |
 | value-key | 作为 value 唯一标识的键名，绑定值为对象类型时必填 | string | — | value |
 | size | 输入框尺寸 | string | medium/small/mini | — |

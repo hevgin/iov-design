@@ -1,11 +1,12 @@
 <template>
   <div
     class="el-select"
-    :class="[selectSize ? 'el-select--' + selectSize : '', selectDisabled ? 'is-disabled' : '']"
+    :class="[fill ? 'is-fill' : '', selectSize ? 'el-select--' + selectSize : '', selectDisabled ? 'is-disabled' : '']"
     @click.stop="toggleMenu"
     v-clickoutside="handleClose">
     <div
       class="el-select__tags"
+      :class="{ 'is-focus': visible }"
       v-if="multiple"
       ref="tags"
       :style="{ 'max-width': inputWidth - 32 + 'px', width: (inputWidth - tagsLeft - 32) + 'px', left: tagsLeft + 'px' }">
@@ -348,7 +349,8 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
-      }
+      },
+      fill: Boolean
     },
 
     data() {

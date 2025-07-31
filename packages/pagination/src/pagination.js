@@ -174,6 +174,7 @@ export default {
         return (
           <span class="el-pagination__sizes">
             <el-select
+              fill
               value={ this.$parent.internalPageSize }
               popperClass={ this.$parent.popperClass || '' }
               size={ this.$parent.small ? 'mini' : 'small' }
