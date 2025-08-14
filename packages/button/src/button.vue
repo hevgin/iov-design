@@ -7,6 +7,7 @@
     :type="nativeType"
     :class="[
       type ? 'el-button--' + type : '',
+      type === 'text' && size ? 'el-button--text-' + color : '',
       $slots.default ? '' : 'is-icon-only',
       buttonSize ? 'el-button--' + buttonSize : '',
       {
@@ -61,7 +62,11 @@
       circle: Boolean,
       dashed: Boolean,
       ghost: Boolean,
-      block: Boolean
+      block: Boolean,
+      color: {
+        type: String,
+        default: 'primary'
+      }
     },
 
     computed: {

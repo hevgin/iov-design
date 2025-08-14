@@ -261,6 +261,78 @@
       border-color: transparent;
     }
   }
+  @include m(text-info) {
+    color: $--color-text-5;
+    &:hover {
+      color: $--color-text-5;
+      border-color: $--color-fill-1;
+      background-color: $--color-fill-1;
+    }
+    &:active {
+      color: $--color-text-5;
+      border-color: $--color-fill-2;
+      background-color: $--color-fill-2;
+    }
+    &.is-disabled,
+    &.is-disabled:hover,
+    &.is-disabled:focus {
+      color: $--color-text-2;
+    }
+  }
+  @include m(text-success) {
+    color: $--color-success-6;
+    &:hover {
+      color: $--color-success-6;
+      border-color: $--color-success-1;
+      background-color: $--color-success-1;
+    }
+    &:active {
+      color: $--color-success-6;
+      border-color: $--color-success-2;
+      background-color: $--color-success-2;
+    }
+    &.is-disabled,
+    &.is-disabled:hover,
+    &.is-disabled:focus {
+      color: $--color-success-3;
+    }
+  }
+  @include m(text-warning) {
+    color: $--color-warning-6;
+    &:hover {
+      color: $--color-warning-6;
+      border-color: $--color-warning-1;
+      background-color: $--color-warning-1;
+    }
+    &:active {
+      color: $--color-warning-6;
+      border-color: $--color-warning-2;
+      background-color: $--color-warning-2;
+    }
+    &.is-disabled,
+    &.is-disabled:hover,
+    &.is-disabled:focus {
+      color: $--color-warning-3;
+    }
+  }
+  @include m(text-danger) {
+    color: $--color-danger-6;
+    &:hover {
+      color: $--color-danger-6;
+      border-color: $--color-danger-1;
+      background-color: $--color-danger-1;
+    }
+    &:active {
+      color: $--color-danger-6;
+      border-color: $--color-danger-2;
+      background-color: $--color-danger-2;
+    }
+    &.is-disabled,
+    &.is-disabled:hover,
+    &.is-disabled:focus {
+      color: $--color-danger-3;
+    }
+  }
 }
 
 @include b(button-group) {

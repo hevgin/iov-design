@@ -95,10 +95,7 @@
   @include e(expanded-cell) {
     background-color: $--color-white;
 
-    // 纯属为了增加权重
-    &[class*=cell] {
-      padding: 20px 50px;
-    }
+    padding: 0 !important;
 
     &:hover {
       background-color: transparent !important;

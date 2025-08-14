@@ -161,18 +161,22 @@ Block 按钮在宽度上充满其所在的父容器（无 padding 和 margin 值
 
 :::demo
 ```html
-<el-row>
-  <el-button type="text">文字按钮</el-button>
-  <el-button type="text" size="medium">文字按钮</el-button>
-  <el-button type="text" size="small">文字按钮</el-button>
-  <el-button type="text" size="mini">文字按钮</el-button>
+<el-row v-for="size of sizes">
+  <el-button type="text" v-for="color of colors" :color="color" :size="size">文字按钮</el-button>
 </el-row>
-<el-row>
-  <el-button disabled type="text">文字按钮</el-button>
-  <el-button disabled type="text" size="medium">文字按钮</el-button>
-  <el-button disabled type="text" size="small">文字按钮</el-button>
-  <el-button disabled type="text" size="mini">文字按钮</el-button>
+<el-row v-for="size of sizes">
+  <el-button type="text" disabled v-for="color of colors" :color="color" :size="size">文字按钮</el-button>
 </el-row>
+<script>
+  export default {
+    data() {
+      return {
+        sizes: ['large', 'medium', 'small', 'mini'],
+        colors: ['info', 'primary', 'success', 'warning', 'danger']
+      };
+    }
+  }
+</script>
 ```
 :::
 
