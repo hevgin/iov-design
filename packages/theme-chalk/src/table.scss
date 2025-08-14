@@ -410,8 +410,7 @@
     position: absolute;
     top: -1px;
     right: 0;
-    background-color: $--color-white;
-    border-bottom: $--table-border;
+    background-color: $--table-header-background-color;
   }
 
   @include e(fixed-right) {
