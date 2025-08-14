@@ -215,7 +215,7 @@ Dialog 的内容是懒渲染的，即在第一次被打开之前，传入的默�
 | append-to-body     | Dialog 自身是否插入至 body 元素上。嵌套的 Dialog 必须指定该属性并赋值为 true   | boolean   | — | false |
 | lock-scroll | 是否在 Dialog 出现时将 body 滚动锁定 | boolean | — | true |
 | custom-class      | Dialog 的自定义类名 | string    | — | — |
-| close-on-click-modal | 是否可以通过点击 modal 关闭 Dialog | boolean    | — | true |
+| close-on-click-modal | 是否可以通过点击 modal 关闭 Dialog | boolean    | — | false |
 | close-on-press-escape | 是否可以通过按下 ESC 关闭 Dialog | boolean    | — | true |
 | show-close | 是否显示关闭按钮 | boolean    | — | true |
 | before-close | 关闭前的回调，会暂停 Dialog 的关闭 | function(done)，done 用于关闭 Dialog | — | — |
