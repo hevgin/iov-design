@@ -125,7 +125,11 @@
     }
   }
   > .el-radio {
-    margin-right: 8px;
+    opacity: 0;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
     .el-radio__input {
       margin-right: 0;
     }
