@@ -31,8 +31,8 @@
   top: 0;
   width: 100%;
   height: 100%;
-  opacity: $--popup-modal-opacity;
-  background: $--popup-modal-background-color;
+  opacity: 0.6;
+  background: #000;
 }
 
 @include b(popup-parent) {

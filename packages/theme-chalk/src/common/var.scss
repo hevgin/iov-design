@@ -505,28 +505,6 @@ $--pagination-button-disabled-color: $--color-fill-4 !default;
 $--pagination-button-disabled-background-color: $--color-white !default;
 $--pagination-hover-color: $--color-primary-6 !default;
 
-/* Popup
--------------------------- */
-/// color||Color|0
-$--popup-modal-background-color: $--color-black !default;
-/// opacity||Other|1
-$--popup-modal-opacity: 0.6 !default;
-
-
-/* Tooltip
--------------------------- */
-/// color|1|Color|0
-$--tooltip-fill: $--color-text-primary !default;
-/// color|1|Color|0
-$--tooltip-color: $--color-white !default;
-/// fontSize||Font|1
-$--tooltip-font-size: 12px !default;
-/// color||Color|0
-$--tooltip-border-color: $--color-text-primary !default;
-$--tooltip-arrow-size: 6px !default;
-/// padding||Spacing|3
-$--tooltip-padding: 10px !default;
-
 /* Tag
 -------------------------- */
 $--tag-font-size: 13px !default;

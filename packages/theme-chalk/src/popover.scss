@@ -11,7 +11,6 @@
   padding: 12px;
   z-index: 2000;
   color: $--color-text-5;
-  line-height: 1.4;
   text-align: justify;
   font-size: 12px;
   box-shadow: 0px 2px 8px 0px rgba(73,75,83,0.12);
@@ -32,7 +31,7 @@
     font-weight: 400;
     font-size: 12px;
     color: $--color-text-5;
-    line-height: 1.4;
+    line-height: 18px;
   }
 
   @include e(reference) {
