@@ -15,7 +15,9 @@
         :aria-hidden="(disabled || !showPopper) ? 'true' : 'false'"
       >
         <div class="el-popover__title" v-if="title" v-text="title"></div>
-        <slot>{{ content }}</slot>
+        <div class="el-popover__content">
+          <slot>{{ content }}</slot>
+        </div>
       </div>
     </transition>
     <span class="el-popover__reference-wrapper" ref="wrapper" >
