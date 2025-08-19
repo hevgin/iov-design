@@ -20,6 +20,23 @@
 ```
 :::
 
+### 文本样式
+:::demo
+```html
+<div>
+  <el-link text>默认链接</el-link>
+  <el-link text type="primary">主要链接</el-link>
+  <el-link text type="success">成功链接</el-link>
+  <el-link text type="warning">警告链接</el-link>
+  <el-link text type="danger">危险链接</el-link>
+  <el-link text type="gold">信息链接</el-link>
+  <el-link text type="blue">信息链接</el-link>
+  <el-link text type="purple">信息链接</el-link>
+  <el-link text type="pink">信息链接</el-link>
+</div>
+```
+:::
+
 ### 禁用状态
 文字链接不可用状态。
 :::demo
@@ -71,3 +88,4 @@
 | href           | 原生 href 属性                     | string  | —                                    | -       |
 | icon           | 图标类名                       | string  | —                                    | -       |
 | size           | 字体大小                       | large(16px)/medium(14px)/small(13px)/mini(12px)  | —                   | small    |
+| text           | 是否文本样式                   | boolean  | - | false |

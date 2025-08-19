@@ -4,6 +4,7 @@
       'el-link',
       type ? `el-link--${type}` : '',
       size ? `el-link--${size}` : '',
+      text ? `is-text` : '',
       disabled && 'is-disabled',
       underline && !disabled && 'is-underline'
     ]"
@@ -39,6 +40,7 @@ export default {
     disabled: Boolean,
     href: String,
     icon: String,
+    text: Boolean,
     size: {
       type: String,
       default: 'small'

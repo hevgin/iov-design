@@ -2,15 +2,14 @@
 @import "common/var";
 
 $typeMap: (
-  primary: $--link-primary-font-color,
-  danger: $--link-danger-font-color,
-  success: $--link-success-font-color,
-  warning: $--link-warning-font-color,
-  gold: $--link-gold-font-color,
-  blue: $--link-blue-font-color,
-  purple: $--link-purple-font-color,
-  pink: $--link-pink-font-color,
-  // info: $--link-info-font-color
+  primary: (default: $--color-primary-6, hover: $--color-primary-5, disabled: $--color-primary-3),
+  danger:  (default: $--color-danger-6,  hover: $--color-danger-5,  disabled: $--color-danger-3),
+  success: (default: $--color-success-6, hover: $--color-success-5, disabled: $--color-success-3),
+  warning: (default: $--color-warning-6, hover: $--color-warning-5, disabled: $--color-warning-3),
+  gold:    (default: $--color-gold-6,    hover: $--color-gold-5,    disabled: $--color-gold-3),
+  blue:    (default: $--color-blue-6,    hover: $--color-blue-5,    disabled: $--color-blue-3),
+  purple:  (default: $--color-purple-6,  hover: $--color-purple-5,  disabled: $--color-purple-3),
+  pink:    (default: $--color-pink-6,    hover: $--color-pink-5,    disabled: $--color-pink-3)
 );
 
 @include b(link) {
@@ -28,7 +27,7 @@ $typeMap: (
       right: 0;
       height: 0;
       bottom: 0;
-      border-bottom: 1px solid $--link-default-active-color
+      border-bottom: 1px solid $--color-primary-6;
     }
   }
 
@@ -57,33 +56,51 @@ $typeMap: (
 
 
   &.el-link--default  {
-    color: $--link-default-font-color;
+    color: $--color-text-6;
     &:hover {
-      color: $--link-default-active-color
+      color: $--color-primary-6;
     }
     &:after {
-      border-color: $--link-default-active-color
+      border-color: $--color-primary-6;
     }
     @include when(disabled) {
-      color: $--link-disabled-font-color
+      color: $--color-text-1;
+    }
+    &.is-text {
+      color: $--color-text-6;
+      cursor: text;
+      &:hover {
+        color: $--color-text-6;
+      }
     }
   }
 
-  @each $type, $primaryColor in $typeMap {
+  @each $type, $colors in $typeMap {
     &.el-link--#{$type} {
+      $primaryColor: map-get($colors, default);
+      $hoverColor: map-get($colors, hover);
+      $disabledColor: map-get($colors, disabled);
       color: $primaryColor;
       &:hover {
-        color: mix($primaryColor, $--color-white, 80%)
+        color: $hoverColor;
       }
       &:after {
-        border-color: $primaryColor
+        border-color: $primaryColor;
       }
       @include when(disabled) {
-        color: mix($primaryColor, $--color-white, 50%)
+        color: $disabledColor;
       }
       @include when(underline) {
         &:hover:after {
-          border-color: $primaryColor
+          border-color: $primaryColor;
+        }
+      }
+
+      &.is-text {
+        cursor: text;
+        color: $primaryColor;
+        &:hover {
+          color: $primaryColor; // 保持一致
         }
       }
     }

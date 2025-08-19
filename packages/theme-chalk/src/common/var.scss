@@ -70,11 +70,6 @@ $--border-color-extra-light: #F2F6FC !default;
 /// color|1|Background Color|4
 $--background-color-base: #F5F7FA !default;
 
-/* Link
--------------------------- */
-$--link-color: $--color-primary-light-2 !default;
-$--link-hover-color: $--color-primary !default;
-
 /* Border
 -------------------------- */
 $--border-width-base: 1px !default;
@@ -704,22 +699,6 @@ $--backtop-background-color: $--color-white !default;
 $--backtop-font-color: $--color-primary !default;
 /// color||Color|0
 $--backtop-hover-background-color: $--border-color-extra-light !default;
-
-/* Link
---------------------------*/
-$--link-default-font-color: $--color-text-6 !default;
-$--link-default-active-color: $--color-primary-6 !default;
-$--link-disabled-font-color: $--color-text-1 !default;
-
-$--link-primary-font-color: $--color-primary-6 !default;
-$--link-success-font-color: $--color-success-6 !default;
-$--link-warning-font-color: $--color-warning-6 !default;
-$--link-danger-font-color: $--color-danger-6 !default;
-$--link-gold-font-color: $--color-gold-6 !default;
-$--link-blue-font-color: $--color-blue-6 !default;
-$--link-purple-font-color: $--color-purple-6 !default;
-$--link-pink-font-color: $--color-pink-6 !default;
-$--link-info-font-color: $--color-gray-6 !default;
 
 
 /* Calendar
