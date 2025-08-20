@@ -64,7 +64,7 @@
     }
   }
   @include when(ghost) {
-    background: none;
+    background: none !important;
   }
   @include when(block) {
     display: block;
@@ -75,11 +75,11 @@
     &,
     &:hover,
     &:focus {
-      color: $--button-disabled-font-color;
+      color: $--color-text-2;
       cursor: not-allowed;
       background-image: none;
-      background-color: $--button-disabled-background-color;
-      border-color: $--button-disabled-border-color;
+      background-color: $--color-fill-1;
+      border-color: $--color-line-2;
     }
 
     &.el-button--text {
