@@ -159,6 +159,7 @@
       .el-radio__label {
         transition: color ease .3s;
         color: $--color-primary-6;
+        font-weight: 500;
       }
       &.is-disabled {
         background-color: $--color-primary-1;

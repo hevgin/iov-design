@@ -124,7 +124,7 @@
     display: inline-block;
     list-style: none;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 500;
     color: $--color-text-3;
     position: relative;
 
@@ -146,6 +146,7 @@
 
     @include when(active) {
       color: $--color-text-7;
+      font-weight: 600;
     }
 
     &:hover {
@@ -293,6 +294,9 @@
     }
   }
   @include m(capsule) {
+    .el-tabs__nav-wrap:after {
+      display: none;
+    }
     .el-tabs__item {
       height: 30px;
       line-height: 30px;
