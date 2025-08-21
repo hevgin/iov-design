@@ -2,14 +2,14 @@
 @import "common/var";
 
 $typeMap: (
-  primary: (default: $--color-primary-6, hover: $--color-primary-5, disabled: $--color-primary-2),
-  danger:  (default: $--color-danger-6,  hover: $--color-danger-5,  disabled: $--color-danger-2),
-  success: (default: $--color-success-6, hover: $--color-success-5, disabled: $--color-success-2),
-  warning: (default: $--color-warning-6, hover: $--color-warning-5, disabled: $--color-warning-2),
-  gold:    (default: $--color-gold-6,    hover: $--color-gold-5,    disabled: $--color-gold-2),
-  blue:    (default: $--color-blue-6,    hover: $--color-blue-5,    disabled: $--color-blue-2),
-  purple:  (default: $--color-purple-6,  hover: $--color-purple-5,  disabled: $--color-purple-2),
-  pink:    (default: $--color-pink-6,    hover: $--color-pink-5,    disabled: $--color-pink-2)
+  primary: (default: $--color-primary-6, hover: $--color-primary-5, disabled: $--color-primary-3),
+  danger:  (default: $--color-danger-6,  hover: $--color-danger-5,  disabled: $--color-danger-3),
+  success: (default: $--color-success-6, hover: $--color-success-5, disabled: $--color-success-3),
+  warning: (default: $--color-warning-6, hover: $--color-warning-5, disabled: $--color-warning-3),
+  gold:    (default: $--color-gold-6,    hover: $--color-gold-5,    disabled: $--color-gold-3),
+  blue:    (default: $--color-blue-6,    hover: $--color-blue-5,    disabled: $--color-blue-3),
+  purple:  (default: $--color-purple-6,  hover: $--color-purple-5,  disabled: $--color-purple-3),
+  pink:    (default: $--color-pink-6,    hover: $--color-pink-5,    disabled: $--color-pink-3)
 );
 
 @include b(link) {
