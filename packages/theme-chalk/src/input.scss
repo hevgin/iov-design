@@ -39,7 +39,7 @@
   }
 
   & .el-input__count {
-    color: $--color-text-1;
+    color: $--color-text-2;
     background: $--color-white;
     position: absolute;
     font-size: 12px;
@@ -111,7 +111,7 @@
     height: 100%;
     display: inline-flex;
     align-items: center;
-    color: $--color-info;
+    color: $--color-text-2;
     font-size: 12px;
 
     .el-input__count-inner {
