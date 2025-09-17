@@ -54,14 +54,6 @@ $typeMap: (
     }
   }
 
-  &.is-text {
-    color: $--color-text-6;
-    cursor: text;
-    &:hover {
-      color: $--color-text-6;
-    }
-  }
-
   &.el-link--default  {
     color: $--color-text-6;
     &:hover {
@@ -72,6 +64,13 @@ $typeMap: (
     }
     @include when(disabled) {
       color: $--color-text-1;
+    }
+    &.is-text {
+      color: $--color-text-6;
+      cursor: text;
+      &:hover {
+        color: $--color-text-6;
+      }
     }
   }
 
