@@ -23,6 +23,8 @@ const defaults = {
   cancelButtonHighlight: false,
   confirmButtonText: '',
   cancelButtonText: '',
+  confirmButtonCode: '',
+  cancelButtonCode: '',
   confirmButtonClass: '',
   cancelButtonClass: '',
   customClass: '',

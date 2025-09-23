@@ -347,6 +347,8 @@ import { MessageBox } from 'iov-design';
 | showConfirmButton | 是否显示确定按钮 | boolean | — | true |
 | cancelButtonText | 取消按钮的文本内容 | string | — | 取消 |
 | confirmButtonText | 确定按钮的文本内容 | string | — | 确定 |
+| cancelButtonCode | 取消按钮的埋点code | string | — | — |
+| confirmButtonCode | 确定按钮的埋点code | string | — | — |
 | cancelButtonClass | 取消按钮的自定义类名 | string | — | — |
 | confirmButtonClass | 确定按钮的自定义类名 | string | — | — |
 | closeOnClickModal | 是否可通过点击遮罩关闭 MessageBox | boolean | — | true（以 alert 方式调用时为 false） |
