@@ -30,7 +30,10 @@
     .el-input-group--suffix {
       background: $--color-fill-1;
       border-color: $--color-fill-1;
-      &:hover,
+      &:hover {
+        background: $--color-fill-2;
+        border-color: $--color-fill-2;
+      }
       &.is-focus {
         border-color: $--input-focus-border;
       }
@@ -41,6 +44,9 @@
     .el-input__inner {
       background: $--color-fill-1;
       border-color: $--color-fill-1;
+      &:focus {
+        box-shadow: none;
+      }
     }
     .el-input {
       &.is-focus {
@@ -62,7 +68,11 @@
     }
     &:hover {
       .el-input__inner {
-        border-color: $--select-border-color-hover;
+        background: $--color-fill-2;
+        border-color: $--color-fill-2;
+      }
+      .el-input__suffix {
+        background: $--color-fill-2;
       }
     }
     .el-select__tags {

@@ -6261,9 +6261,9 @@
     "minimist" "^1.2.0"
 
 "jsonc-parser@^3.0.0":
-  "integrity" "sha512-HUgH65KyejrUFPvHFPbqOY0rsFip3Bo5wb4ngvdi1EpCYWUQDC5V+Y7mZws+DLkr4M//zQJoanu1SP+87Dv1oQ=="
-  "resolved" "https://registry.npmjs.org/jsonc-parser/-/jsonc-parser-3.3.1.tgz"
-  "version" "3.3.1"
+  "integrity" "sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA=="
+  "resolved" "https://registry.npmmirror.com/jsonc-parser/-/jsonc-parser-3.0.0.tgz"
+  "version" "3.0.0"
 
 "jsonfile@^4.0.0":
   "integrity" "sha512-m6F1R3z8jjlf2imQHS2Qez5sjKWQzbuuhuJ/FKYFRZvPE3PuHcSMVZzfsLhGVOkfd20obL5SWEBew5ShlquNxg=="

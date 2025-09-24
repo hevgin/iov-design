@@ -112,12 +112,6 @@
     margin-left: 8px;
     font-weight: normal;
     color: $--color-text-6;
-
-    .el-input .el-input__inner {
-      &:hover {
-        border-color: $--pagination-hover-color;
-      }
-    }
   }
 
   @include e(total) {
@@ -251,8 +245,7 @@
     }
 
     &:hover {
-      color: $--pagination-hover-color;
-      background-color: $--color-primary-1;
+      background-color: $--color-fill-1;
     }
 
     &.active {
