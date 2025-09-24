@@ -265,6 +265,12 @@
   .el-upload-list__file {
     background: #fff;
   }
+
+  .el-upload-list {
+    .iov-icon-delete {
+      color: $--color-fill-6;
+    }
+  }
 }
 
 // 上传文件列表
@@ -272,6 +278,19 @@
   margin: 0;
   padding: 0;
   list-style: none;
+
+  .iov-icon-delete {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    cursor: pointer;
+    transform: translateY(-50%);
+    color: $--color-fill-5;
+    &:hover {
+      color: $--color-primary-6;
+    }
+  }
 
   @include e(item) {
     margin-top: 4px;
@@ -284,19 +303,6 @@
 
     .el-upload-success {
       color: $--color-success-6;
-    }
-
-    .iov-icon-delete {
-      display: none;
-      position: absolute;
-      top: 50%;
-      right: 8px;
-      cursor: pointer;
-      transform: translateY(-50%);
-      color: $--color-fill-5;
-      &:hover {
-        color: $--color-primary-6;
-      }
     }
 
     &:hover {
