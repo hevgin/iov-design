@@ -183,6 +183,7 @@
           position: relative;
           color: $--color-primary-6;
           border-top-color: transparent;
+          background: linear-gradient( 180deg, #F0F4FD 0%, #FFFFFF 100%);
           &:before {
             content: '';
             background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABIBAMAAAANAGjIAAAAKlBMVEUAAAA/Vv8/V/8/V/8/V/8/V/8/V/9BWf89Vf9AVf8qVf8/Vv8+Wf8/V//3fmOTAAAADXRSTlMAkm3589XUKyoMBr1CxUdJxQAAAD9JREFUKM9jYGAoDLkLBAwMC4EkiMG1F8pgvAtl1N5N6mQAAVkjBggIPgBlODFAQQKMoQBjNMAYExhGwSjADwC0VhuDywNOfgAAAABJRU5ErkJggg==), url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAABIBAMAAAANAGjIAAAALVBMVEUAAAA/V/8/V/8/V/9AVv8+V/9AV/8+WP9BWf89Vf9AVf8qVf8/Vv8+Wf8/V/9Mw9oEAAAADnRSTlMA89XUlI9waysqDAa9QkOQHV4AAAA/SURBVCjPY3gHBEIRDAxABgh4wxhvNkAZ7xwYQGBl8rsXDBBQ+BTK4BVigAnBGMwwBhuMwQljcDGMglGAAwAASmoc2AEfAyMAAAAASUVORK5CYII=);
