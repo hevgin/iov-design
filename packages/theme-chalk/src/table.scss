@@ -140,7 +140,6 @@
     &.is-group {
       th.el-table__cell {
         background: $--background-color-base;
-        border-bottom: $--table-border;
       }
     }
   }
@@ -315,11 +314,41 @@
 
   // table--border
   @include m(border) {
-    // border-right: none;
-    // border-bottom: none;
-
     &.el-loading-parent--relative {
       border-color: transparent;
+    }
+
+    .el-table__header-wrapper {
+      tr:first-child {
+        .el-table__cell {
+          border-top: 0 none;
+        }
+      }
+      .el-table__cell {
+        border: $--table-border;
+        &:first-child {
+          border-left: 0 none;
+        }
+        &:last-child {
+          border-right: 0 none;
+        }
+      }
+    }
+    .el-table__footer-wrapper {
+      tr:last-child {
+        .el-table__cell {
+          border-bottom: 0 none;
+        }
+      }
+      .el-table__cell {
+        border: $--table-border;
+        &:first-child {
+          border-left: 0 none;
+        }
+        &:last-child {
+          border-right: 0 none;
+        }
+      }
     }
 
     .has-gutter {
@@ -331,10 +360,23 @@
       }
     }
 
+    // body
     .el-table__row {
       .el-table__cell {
+        border: $--table-border;
+        &[rowspan]:not([rowspan="1"]) {
+          border-bottom: 0 none;
+        }
+        &:first-child {
+          border-left: 0 none;
+        }
         &:last-child {
           border-right: 0 none;
+        }
+      }
+      &:first-child {
+        .el-table__cell {
+          border-top: 0 none;
         }
       }
       &:last-child {
@@ -351,10 +393,6 @@
     th.el-table__cell.gutter:last-of-type {
       border-bottom: $--table-border;
       border-bottom-width: 1px;
-    }
-
-    & th.el-table__cell {
-      border-bottom: $--table-border;
     }
   }
 
@@ -478,7 +516,6 @@
   }
 
   @include e(footer-wrapper) {
-    margin-top: -1px;
     td.el-table__cell {
       border-top: $--table-border;
     }
@@ -486,7 +523,7 @@
 
   @include e((header, body, footer)) {
     table-layout: fixed;
-    border-collapse: separate;
+    border-collapse: collapse;
   }
 
   @include e((header-wrapper, footer-wrapper)) {
