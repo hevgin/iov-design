@@ -273,6 +273,44 @@
 ```
 :::
 
+### 标题带ICON, 无内容信息
+标题前带icon, 需与`type`属性一起使用，将 `showTitleIcon` 设置为 `true` 即可
+:::demo
+
+```html
+<template>
+  <el-button type="text" @click="open">点击打开 Message Box</el-button>
+</template>
+
+<script>
+  export default {
+    methods: {
+      open() {
+        this.$confirm('', '此操作将永久删除该文件, 是否继续? 这个提示内容很长，内容会回行。', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          showTitleIcon: true,
+          showClose: false
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      }
+    }
+  }
+</script>
+```
+
+:::
+
 ### 标题不带下边框
 将 `showTitleIcon` 设置为 `true` , 不配置`type`属性即可
 

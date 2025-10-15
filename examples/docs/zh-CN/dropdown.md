@@ -10,9 +10,9 @@
 
 ```html
 <el-dropdown>
-  <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
-  </span>
+  <el-link>
+    下拉菜单<i class="iov-icon-arrow-down"></i>
+  </el-link>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
     <el-dropdown-item>狮子头</el-dropdown-item>
@@ -27,7 +27,7 @@
     cursor: pointer;
     color: #409EFF;
   }
-  .el-icon-arrow-down {
+  .iov-icon-arrow-down {
     font-size: 12px;
   }
 </style>
@@ -43,7 +43,7 @@
 ```html
 <el-dropdown>
   <el-button type="primary">
-    更多菜单<i class="el-icon-arrow-down el-icon--right"></i>
+    更多菜单<i class="iov-icon-arrow-down"></i>
   </el-button>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -71,7 +71,7 @@
   .el-dropdown + .el-dropdown {
     margin-left: 15px;
   }
-  .el-icon-arrow-down {
+  .iov-icon-arrow-down {
     font-size: 12px;
   }
 </style>
@@ -99,9 +99,9 @@
   <el-col :span="12">
     <span class="demonstration">hover 激活</span>
     <el-dropdown>
-      <span class="el-dropdown-link">
-        下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
+      <el-link>
+        下拉菜单<i class="iov-icon-arrow-down"></i>
+      </el-link>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>
         <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
@@ -114,9 +114,9 @@
   <el-col :span="12">
     <span class="demonstration">click 激活</span>
     <el-dropdown trigger="click">
-      <span class="el-dropdown-link">
-        下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
+      <el-link>
+        下拉菜单<i class="iov-icon-arrow-down"></i>
+      </el-link>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>
         <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
@@ -129,13 +129,6 @@
 </el-row>
 
 <style>
-  .el-dropdown-link {
-    cursor: pointer;
-    color: #409EFF;
-  }
-  .el-icon-arrow-down {
-    font-size: 12px;
-  }
   .demonstration {
     display: block;
     color: #8492a6;
@@ -153,9 +146,9 @@
 :::demo 下拉菜单默认在点击菜单项后会被隐藏，将`hide-on-click`属性默认为`false`可以关闭此功能。
 ```html
 <el-dropdown :hide-on-click="false">
-  <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
-  </span>
+  <el-link>
+    下拉菜单<i class="iov-icon-arrow-down"></i>
+  </el-link>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
     <el-dropdown-item>狮子头</el-dropdown-item>
@@ -164,16 +157,6 @@
     <el-dropdown-item divided>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
-
-<style>
-  .el-dropdown-link {
-    cursor: pointer;
-    color: #409EFF;
-  }
-  .el-icon-arrow-down {
-    font-size: 12px;
-  }
-</style>
 ```
 :::
 
@@ -184,9 +167,9 @@
 :::demo
 ```html
 <el-dropdown @command="handleCommand">
-  <span class="el-dropdown-link">
-    下拉菜单<i class="el-icon-arrow-down el-icon--right"></i>
-  </span>
+  <el-link>
+    下拉菜单<i class="iov-icon-arrow-down"></i>
+  </el-link>
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item command="a">黄金糕</el-dropdown-item>
     <el-dropdown-item command="b">狮子头</el-dropdown-item>
@@ -201,7 +184,7 @@
     cursor: pointer;
     color: #409EFF;
   }
-  .el-icon-arrow-down {
+  .iov-icon-arrow-down {
     font-size: 12px;
   }
 </style>

@@ -15,7 +15,7 @@
               :class="['el-message-box__status', icon]"
               v-if="icon && showTitleIcon">
             </div>
-            <span>{{ title }}</span>
+            <span class="el-message-box__title-text">{{ title }}</span>
           </div>
           <span
             type="button"

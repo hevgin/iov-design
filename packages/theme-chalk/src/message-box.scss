@@ -42,9 +42,11 @@
     font-size: 16px;
     line-height: 1;
     color: $--color-text-6;
-    span {
-      font-weight: 500;
-    }
+  }
+  @include e(title-text) {
+    padding-top: 1px;
+    font-weight: 500;
+    line-height: 22px;
   }
 
   @include e(headerbtn) {
@@ -158,7 +160,7 @@
     }
     @include e(title) {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
     }
     @include e(status) {
       float: none;
