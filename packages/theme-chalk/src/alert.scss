@@ -12,7 +12,7 @@
   overflow: hidden;
   opacity: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   transition: opacity .2s;
 
   @include when(light) {

@@ -2,7 +2,7 @@
   <a
     :class="[
       'el-link',
-      type ? `el-link--${type}` : '',
+      type ? `el-link--${type}` : 'el-link--default',
       size ? `el-link--${size}` : '',
       text ? `is-text` : '',
       disabled && 'is-disabled',
