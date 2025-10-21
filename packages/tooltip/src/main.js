@@ -76,6 +76,19 @@ export default {
   },
 
   render(h) {
+    const content = this.$slots.content || this.content;
+
+    // 如果没有 tooltip 内容，直接返回默认插槽元素，不渲染 popper
+    if (!content) {
+      const firstElement = this.getFirstElement();
+      if (!firstElement) return null;
+
+      const data = firstElement.data = firstElement.data || {};
+      data.staticClass = this.addTooltipClass(data.staticClass);
+
+      return firstElement;
+    }
+
     if (this.popperVM) {
       this.popperVM.node = (
         <transition
