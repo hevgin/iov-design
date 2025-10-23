@@ -13,7 +13,7 @@
   <el-link>
     下拉菜单<i class="iov-icon-arrow-down"></i>
   </el-link>
-  <el-dropdown-menu slot="dropdown">
+  <el-dropdown-menu :visibleArrow="false" slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
     <el-dropdown-item>狮子头</el-dropdown-item>
     <el-dropdown-item>螺蛳粉</el-dropdown-item>
@@ -289,3 +289,4 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 | disabled      | 禁用     | boolean          | — | false |
 | divided       | 显示分割线     | boolean          | — | false |
 | icon          | 图标类名 | string   |  —  |  —  |
+|  visible-arrow   |  是否显示 Tooltip 箭头，更多参数可见[Vue-popper](https://github.com/element-component/vue-popper) | Boolean | — | false |

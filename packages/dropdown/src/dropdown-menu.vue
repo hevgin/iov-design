@@ -18,11 +18,11 @@
     props: {
       visibleArrow: {
         type: Boolean,
-        default: true
+        default: false
       },
       arrowOffset: {
         type: Number,
-        default: 0
+        default: 400
       }
     },
 
