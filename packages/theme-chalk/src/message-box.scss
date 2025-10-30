@@ -11,6 +11,7 @@
   border-radius: 8px;
   text-align: left;
   overflow: hidden;
+  vertical-align: middle;
   backface-visibility: hidden;
 
   @include e(wrapper) {

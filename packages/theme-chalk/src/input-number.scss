@@ -4,135 +4,131 @@
 
 @include b(input-number) {
   position: relative;
-  display: inline-block;
-  width: 180px;
+  display: block;
   line-height: #{$--input-height - 2};
+  padding-left: #{$--input-height - 2};
+  padding-right: #{$--input-height - 2};
 
   .el-input {
     display: block;
-
     &__inner {
       -webkit-appearance: none;
-      padding-left: #{$--input-height + 10};
-      padding-right: #{$--input-height + 10};
-      text-align: center;
+      border-radius: 0;
+      &:hover,
+      &:focus {
+        z-index: 2;
+        position: relative;
+      }
     }
   }
 
   @include e((increase, decrease)) {
     position: absolute;
     z-index: 1;
-    top: 1px;
-    width: $--input-height;
+    width: #{$--input-height - 2};
     height: auto;
     text-align: center;
-    background: $--background-color-base;
-    color: $--color-text-regular;
+    background: $--color-fill-1;
+    color: $--color-fill-6;
     cursor: pointer;
     font-size: 13px;
+    border: 1px solid $--color-line-2;
+    box-sizing: border-box;
 
     &:hover {
-      color: $--color-primary;
-
-      &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
-        border-color: $--input-focus-border;
-      }
+      color: $--color-primary-5;
+      border-color: $--color-primary-5;
+      background: $--color-primary-1;
+    }
+    &:focus {
+      color: $--color-primary-7;
+      border-color: $--color-primary-5;
+      background: $--color-primary-1;
     }
 
     &.is-disabled {
-      color: $--disabled-color-base;
+      color: $--color-fill-4;
       cursor: not-allowed;
+      background: $--color-fill-1;
+      &:hover {
+        border-color: $--color-line-2;
+        background: $--color-fill-1;
+      }
     }
   }
 
   @include e(increase) {
     right: 1px;
-    border-radius: 0 $--border-radius-base $--border-radius-base 0;
-    border-left: $--border-base;
+    border-radius: 0 4px 4px 0;
   }
 
   @include e(decrease) {
     left: 1px;
-    border-radius: $--border-radius-base 0 0 $--border-radius-base;
-    border-right: $--border-base;
+    border-radius: 4px 0 0 4px;
   }
 
   @include when(disabled) {
     @include e((increase, decrease)) {
-      border-color: $--disabled-border-base;
-      color: $--disabled-border-base;
+      border-color: $--color-line-2;
+      color: $--color-fill-4;
 
       &:hover {
-        color: $--disabled-border-base;
+        color: $--color-fill-4;
         cursor: not-allowed;
+        background: $--color-fill-1;
       }
     }
   }
 
   @include m(medium) {
-    width: 200px;
     line-height: #{$--input-medium-height - 2};
+    padding-left: #{$--input-medium-height - 2};
+    padding-right: #{$--input-medium-height - 2};
 
     @include e((increase, decrease)) {
-      width: $--input-medium-height;
+      width: #{$--input-medium-height - 2};
       font-size: $--input-medium-font-size;
-    }
-
-    .el-input__inner {
-      padding-left: #{$--input-medium-height + 7};
-      padding-right: #{$--input-medium-height + 7};
     }
   }
 
   @include m(small) {
-    width: 130px;
     line-height: #{$--input-small-height - 2};
+    padding-left: #{$--input-small-height};
+    padding-right: #{$--input-small-height};
 
     @include e((increase, decrease)) {
       width: $--input-small-height;
       font-size: $--input-small-font-size;
-
-      [class*=el-icon] {
-        transform: scale(.9);
-      }
-    }
-
-    .el-input__inner {
-      padding-left: #{$--input-small-height + 7};
-      padding-right: #{$--input-small-height + 7};
     }
   }
 
   @include m(mini) {
-    width: 130px;
     line-height: #{$--input-mini-height - 2};
+    padding-left: #{$--input-mini-height};
+    padding-right: #{$--input-mini-height};
 
     @include e((increase, decrease)) {
       width: $--input-mini-height;
       font-size: $--input-mini-font-size;
-
-      [class*=el-icon] {
-        transform: scale(.8);
-      }
-    }
-
-    .el-input__inner {
-      padding-left: #{$--input-mini-height + 7};
-      padding-right: #{$--input-mini-height + 7};
     }
   }
 
   @include when(without-controls) {
+    padding: 0;
     .el-input__inner {
-      padding-left: 15px;
-      padding-right: 15px;
+      border-radius: 4px;
     }
   }
 
   @include when(controls-right) {
+    padding: 0;
     .el-input__inner {
-      padding-left: 15px;
-      padding-right: #{$--input-height + 10};
+      border-radius: 4px;
+      &:hover,
+      &:focus {
+        z-index: 0;
+        position: relative;
+      }
     }
 
     @include e((increase, decrease)) {
@@ -146,7 +142,11 @@
 
     @include e(increase) {
       border-radius: 0 $--border-radius-base 0 0;
-      border-bottom: $--border-base;
+      border: 0 none;
+      border-left: 1px solid $--color-line-2;
+      border-bottom: 1px solid $--color-line-2;
+      right: 1px;
+      top: 1px;
     }
 
     @include e(decrease) {
@@ -154,8 +154,8 @@
       bottom: 1px;
       top: auto;
       left: auto;
-      border-right: none;
-      border-left: $--border-base;
+      border: 0 none;
+      border-left: 1px solid $--color-line-2;
       border-radius: 0 0 $--border-radius-base 0;
     }
 
