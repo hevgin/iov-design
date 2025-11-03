@@ -76,19 +76,6 @@ export default {
   },
 
   render(h) {
-    const content = this.$slots.content || this.content;
-
-    // 如果没有 tooltip 内容，直接返回默认插槽元素，不渲染 popper
-    if (!content) {
-      const firstElement = this.getFirstElement();
-      if (!firstElement) return null;
-
-      const data = firstElement.data = firstElement.data || {};
-      data.staticClass = this.addTooltipClass(data.staticClass);
-
-      return firstElement;
-    }
-
     if (this.popperVM) {
       this.popperVM.node = (
         <transition
@@ -105,7 +92,9 @@ export default {
             class={
               ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
             }>
-            { this.$slots.content || this.content }
+            <el-scrollbar wrap-style="max-height: 168px;">
+              { this.$slots.content || this.content }
+            </el-scrollbar>
           </div>
         </transition>);
     }
@@ -157,6 +146,16 @@ export default {
       } else {
         removeClass(this.referenceElm, 'focusing');
       }
+    },
+    content(val) {
+      // 如果内容变为空，立即隐藏 tooltip
+      if (!val) {
+        this.showPopper = false;
+        clearTimeout(this.timeout);
+        if (this.timeoutPending) {
+          clearTimeout(this.timeoutPending);
+        }
+      }
     }
   },
   methods: {
@@ -190,7 +189,10 @@ export default {
     },
 
     handleShowPopper() {
-      if (!this.expectedState || this.manual) return;
+      // 检查内容是否为空
+      const hasContent = this.content || (this.$slots.content && this.$slots.content.length > 0);
+      if (!hasContent || !this.expectedState || this.manual) return;
+
       clearTimeout(this.timeout);
       this.timeout = setTimeout(() => {
         this.showPopper = true;
