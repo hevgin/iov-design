@@ -187,11 +187,13 @@ Block 按钮在宽度上充满其所在的父容器（无 padding 和 margin 值
 :::demo 设置`icon`属性即可，icon 的列表可以参考 Element 的 icon 组件，也可以设置在文字右边的 icon ，只要使用`i`标签即可，可以使用自定义图标。
 
 ```html
-<el-button type="primary" icon="el-icon-edit"></el-button>
-<el-button type="primary" icon="el-icon-share"></el-button>
-<el-button type="primary" icon="el-icon-delete"></el-button>
-<el-button type="primary" icon="el-icon-search">搜索</el-button>
-<el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
+<el-button type="primary" icon="iov-icon-update"></el-button>
+<el-button type="primary" icon="iov-icon-plus"></el-button>
+<el-button type="primary" icon="iov-icon-delete"></el-button>
+<el-button type="primary" icon="iov-icon-search" plain>搜索</el-button>
+<el-button type="primary" icon="iov-icon-upload" plain>上传</el-button>
+<el-button type="primary" icon="iov-icon-upload" plain size="mini">上传</el-button>
+<el-button type="text" color="primary" icon="iov-icon-plus">新增</el-button>
 ```
 :::
 

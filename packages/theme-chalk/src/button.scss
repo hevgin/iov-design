@@ -236,12 +236,23 @@
       font-size: $--button-icon-only-size;
       width: $--button-mini-height;
     }
+    & [class*="iov-icon-"] {
+      & + span {
+        margin-left: 2px;
+      }
+    }
   }
   @include m(text) {
     border-color: transparent;
     color: $--color-primary-6;
     background: transparent;
     font-weight: 400;
+
+    & [class*="iov-icon-"] {
+      & + span {
+        margin-left: 2px;
+      }
+    }
 
     &:hover {
       color: $--color-primary-6;
