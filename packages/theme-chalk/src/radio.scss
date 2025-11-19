@@ -67,6 +67,7 @@
     background: #fff;
     .el-radio__input {
       float: left;
+      margin-top: 1px;
       font-size: 0;
       &.is-checked {
         & + .el-radio__label {

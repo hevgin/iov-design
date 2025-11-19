@@ -237,6 +237,48 @@
 ```
 :::
 
+### 卡片
+
+:::demo 设置`card`属性可以渲染为卡片的单选框。
+```html
+<template>
+  <div>
+    <el-checkbox v-model="checkbox1" label="1" card checkbox desc="这是一段描述文案">主标题文案</el-checkbox>
+    <el-checkbox v-model="checkbox1" label="2" card desc="这是一段描述文案">主标题文案</el-checkbox>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox v-model="checkbox2" label="1" card>主标题文案</el-checkbox>
+    <el-checkbox v-model="checkbox2" label="2" card>主标题文案</el-checkbox>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkbox3">
+      <el-checkbox label="1" card>备选项1</el-checkbox>
+      <el-checkbox label="2" card disabled>备选项2</el-checkbox>
+    </el-checkbox-group>
+  </div>
+  <div style="margin-top: 20px">
+    <el-checkbox-group v-model="checkbox4" disabled>
+      <el-checkbox label="1" card desc="这是一段描述文案">主标题文案</el-checkbox>
+      <el-checkbox label="2" card desc="这是一段描述文案">主标题文案</el-checkbox>
+    </el-checkbox-group>
+  </div>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        checkbox1: ['1'],
+        checkbox2: ['1'],
+        checkbox3: ['1'],
+        checkbox4: ['1']
+      };
+    }
+  }
+</script>
+```
+:::
+
 
 ### 带有填充
 :::demo
@@ -291,6 +333,9 @@
 | disabled  | 是否禁用    | boolean   |  — | false   |
 | border  | 是否显示边框按钮样式	  | boolean   | — | false   |
 | button  | 是否显示填充按钮样式	    | boolean   |  — | false   |
+| card  | 是否显示卡片按钮样式  | boolean   | — | false   |
+| checkbox  | 卡片按钮是否显示单选按钮样式  | boolean   | — | false   |
+| desc  | 卡片按钮内容描述  | string   | — | -   |
 | size  | Checkbox 的尺寸，仅在 border 为真时有效  | string  | medium / small / mini | — |
 | name | 原生 name 属性 | string    |      —         |     —    |
 | checked  | 当前是否勾选    | boolean   |  — | false   |

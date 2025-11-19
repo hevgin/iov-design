@@ -5,13 +5,15 @@
       (border || button) && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
       { 'is-disabled': isDisabled },
       { 'is-bordered': border },
+      { 'is-card': card},
+      { 'is-card-checkbox': card && checkbox},
       { 'is-button': button },
       { 'is-checked': isChecked }
     ]"
     :id="id"
   >
     <span class="el-checkbox__input"
-        :style="{ display: border || button ? 'none' : '' }"
+        :style="{ display: border || button ? 'none' : '' || card && !checkbox ? 'none' : '' }"
         :class="{
         'is-disabled': isDisabled,
         'is-checked': isChecked,
@@ -52,6 +54,7 @@
     <span class="el-checkbox__label" v-if="$slots.default || label">
       <slot></slot>
       <template v-if="!$slots.default">{{label}}</template>
+      <p v-if="desc" class="el-checkbox__desc">{{ desc }}</p>
     </span>
   </label>
 </template>
@@ -176,7 +179,10 @@
       controls: String, /* 当indeterminate为真时，为controls提供相关连的checkbox的id，表明元素间的控制关系*/
       border: Boolean,
       button: Boolean,
-      size: String
+      size: String,
+      card: Boolean,
+      checkbox: Boolean,
+      desc: String
     },
 
     methods: {
