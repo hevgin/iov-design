@@ -34,6 +34,8 @@
       value: {},
       size: String,
       button: Boolean,
+      card: Boolean,
+      radio: Boolean,
       fill: String,
       textColor: String,
       borderColor: String,

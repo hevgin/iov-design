@@ -8,8 +8,8 @@
       { 'is-bordered': border },
       { 'is-button': button || groupButton },
       { 'is-checked': model === label },
-      { 'is-card': card},
-      { 'is-card-radio': card && radio}
+      { 'is-card': card || groupCard},
+      { 'is-card-radio': (card || groupCard) && (radio || groupRadio)}
     ]"
     role="radio"
     :aria-checked="model === label"
@@ -18,7 +18,7 @@
     @keydown.space.stop.prevent="model = isDisabled ? model : label"
   >
     <span class="el-radio__input"
-      :style="{display: border || button || groupButton || card && !radio ? 'none' : ''}"
+      :style="{display: border || button || groupButton || (card || groupCard) && !(radio || groupRadio) ? 'none' : ''}"
       :class="{
         'is-disabled': isDisabled,
         'is-checked': model === label
@@ -125,6 +125,12 @@
       },
       groupButton() {
         return this.isGroup ? this._radioGroup.button : this.button;
+      },
+      groupCard() {
+        return this.isGroup ? this._radioGroup.card : this.card;
+      },
+      groupRadio() {
+        return this.isGroup ? this._radioGroup.radio : this.radio;
       },
       isDisabled() {
         return this.isGroup
