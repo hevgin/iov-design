@@ -7,20 +7,21 @@
 
 @include b(autocomplete) {
   position: relative;
-  display: inline-block;
 }
 
 @include b(autocomplete-suggestion) {
-  margin: 5px 0;
-  box-shadow: $--box-shadow-light;
+  position: absolute;
+  z-index: #{$--index-top + 1};
+  border: $--select-dropdown-border;
   border-radius: $--border-radius-base;
-  border: 1px solid $--border-color-light;
+  background-color: $--select-dropdown-background;
+  box-shadow: $--select-dropdown-shadow;
   box-sizing: border-box;
-  background-color: $--color-white;
+  margin: 4px 0;
 
   @include e(wrap) {
-    max-height: 280px;
-    padding: 10px 0;
+    max-height: $--select-dropdown-max-height;
+    padding: $--select-dropdown-padding;
     box-sizing: border-box;
   }
 
@@ -30,16 +31,18 @@
   }
 
   & li {
-    padding: 0 20px;
-    margin: 0;
-    line-height: 34px;
-    cursor: pointer;
-    color: $--color-text-regular;
-    font-size: $--font-size-base;
-    list-style: none;
+    font-size: $--select-font-size;
+    padding: 0 12px;
+    position: relative;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color: $--select-option-color;
+    height: $--select-option-height;
+    border-radius: $--select-option-border-radius;
+    line-height: $--select-option-height;
+    box-sizing: border-box;
+    cursor: pointer;
 
     &:hover {
       background-color: $--select-option-hover-background;

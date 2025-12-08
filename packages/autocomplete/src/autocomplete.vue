@@ -5,6 +5,7 @@
     aria-haspopup="listbox"
     role="combobox"
     :aria-expanded="suggestionVisible"
+    ref="autocomplete"
     :aria-owns="id"
   >
     <el-input
@@ -32,9 +33,15 @@
       <template slot="suffix" v-if="$slots.suffix">
         <slot name="suffix"></slot>
       </template>
+      <template slot="prefixLabel" v-if="$slots.prefixLabel">
+        <slot name="prefixLabel"></slot>
+      </template>
+      <template slot="suffixLabel" v-if="$slots.suffixLabel">
+        <slot name="suffixLabel"></slot>
+      </template>
     </el-input>
     <el-autocomplete-suggestions
-      visible-arrow
+      :visible-arrow="false"
       :class="[popperClass ? popperClass : '']"
       :popper-options="popperOptions"
       :append-to-body="popperAppendToBody"
@@ -155,8 +162,9 @@
     watch: {
       suggestionVisible(val) {
         let $input = this.getInput();
+        const $autocomplete = this.$refs.autocomplete;
         if ($input) {
-          this.broadcast('ElAutocompleteSuggestions', 'visible', [val, $input.offsetWidth]);
+          this.broadcast('ElAutocompleteSuggestions', 'visible', [val, $autocomplete.offsetWidth]);
         }
       }
     },
