@@ -41,7 +41,7 @@
           </div>
         </div>
         <span class="el-upload-list__item-actions" v-if="file.status === 'success'">
-          <i v-if="handlePreview" @click="handlePreview(file)" class="el-upload-list__item-preview iov-icon-eye"></i>
+          <i v-if="handlePreview" @click.stop="handlePreview(file)" class="el-upload-list__item-preview iov-icon-eye"></i>
           <i v-if="!disabled" class="el-upload-list__item-delete iov-icon-delete" @click.stop="$emit('remove', file)"></i>
           <i v-if="!disabled" class="el-upload-list__item-update iov-icon-update"></i>
         </span>
