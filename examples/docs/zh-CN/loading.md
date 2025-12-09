@@ -2,6 +2,45 @@
 
 加载数据时显示动效。
 
+### 全屏加载
+
+在表格等容器中加载数据时显示。
+
+:::demo Element 提供了两种调用 Loading 的方法：指令和服务。对于自定义指令`v-loading`，只需要绑定`Boolean`即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点，通过添加`body`修饰符，可以使遮罩插入至 DOM 中的 body 上。
+```html
+<template>
+  <div v-loading.fullscreen="loading">
+    <el-button @click="onLoading">全屏加载</el-button>
+  </div>
+</template>
+
+<style>
+  body {
+    margin: 0;
+  }
+</style>
+
+<script>
+  export default {
+    data() {
+      return {
+        loading: false
+      };
+    },
+    methods: {
+      onLoading() {
+        this.loading = true
+
+        setTimeout(() => {
+          this.loading = false
+        }, 20000000)
+      }
+    }
+  };
+</script>
+```
+:::
+
 ### 区域加载
 
 在表格等容器中加载数据时显示。
@@ -71,8 +110,9 @@
   <el-table
     v-loading="loading"
     element-loading-text="拼命加载中"
-    element-loading-spinner="el-icon-loading"
-    element-loading-background="rgba(0, 0, 0, 0.8)"
+    element-loading-spinner="iov-icon-loading"
+    element-loading-background="rgba(255, 255, 255, 0.6)"
+    element-loading-size="52"
     :data="tableData"
     style="width: 100%">
     <el-table-column
@@ -156,8 +196,9 @@
         const loading = this.$loading({
           lock: true,
           text: 'Loading',
-          spinner: 'el-icon-loading',
-          background: 'rgba(0, 0, 0, 0.7)'
+          spinner: 'iov-icon-loading',
+          background: 'rgba(0, 0, 0, 0.7)',
+          size: 50
         });
         setTimeout(() => {
           loading.close();
@@ -203,6 +244,7 @@ console.log(loadingInstance1 === loadingInstance2); // true
 | fullscreen | 同 `v-loading` 指令中的 `fullscreen` 修饰符 | boolean | — | true |
 | lock | 同 `v-loading` 指令中的 `lock` 修饰符 | boolean | — | false |
 | text | 显示在加载图标下方的加载文案 | string | — | — |
-| spinner | 自定义加载图标类名 | string | — | — |
-| background | 遮罩背景色 | string | — | — |
+| spinner | 自定义加载图标类名 | string | — | iov-icon-loading/iov-icon-loading-white/iov-icon-loading-gray/iov-icon-loading-grey |
+| background | 遮罩背景色 | string | — | rgba(255, 255, 255, 0.6) |
+| size | 自定义loading图标大小 | number | — | 14/16/22/26/32/自定义|
 | customClass | Loading 的自定义类名 | string | — | — |
