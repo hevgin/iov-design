@@ -10,7 +10,10 @@
         tag="ul"
         wrap-class="el-autocomplete-suggestion__wrap"
         view-class="el-autocomplete-suggestion__list">
-        <li v-if="!parent.hideLoading && parent.loading"><i class="iov-icon-loading"></i></li>
+        <li v-if="!parent.hideLoading && parent.loading">
+          <i class="iov-icon-loading"></i>
+          <span class="loading-text">加载中...</span>
+        </li>
         <slot v-else>
         </slot>
       </el-scrollbar>

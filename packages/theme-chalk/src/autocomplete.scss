@@ -74,9 +74,14 @@
       &:hover {
         background-color: $--color-white;
       }
+      .loading-text {
+        margin-left: 4px;
+        color: $--color-text-2;
+        font-size: 13px;
+      }
     }
 
-    & .el-icon-loading {
+    & .iov-icon-loading {
       vertical-align: middle;
     }
   }
