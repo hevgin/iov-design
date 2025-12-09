@@ -38,7 +38,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     color: $--select-option-color;
-    height: $--select-option-height;
+    min-height: $--select-option-height;
     border-radius: $--select-option-border-radius;
     line-height: $--select-option-height;
     box-sizing: border-box;

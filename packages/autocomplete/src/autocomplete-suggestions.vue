@@ -10,7 +10,7 @@
         tag="ul"
         wrap-class="el-autocomplete-suggestion__wrap"
         view-class="el-autocomplete-suggestion__list">
-        <li v-if="!parent.hideLoading && parent.loading"><i class="el-icon-loading"></i></li>
+        <li v-if="!parent.hideLoading && parent.loading"><i class="iov-icon-loading"></i></li>
         <slot v-else>
         </slot>
       </el-scrollbar>
@@ -60,7 +60,8 @@
 
     mounted() {
       this.$parent.popperElm = this.popperElm = this.$el;
-      this.referenceElm = this.$parent.$refs.input.$refs.input || this.$parent.$refs.input.$refs.textarea;
+      // this.referenceElm = this.$parent.$refs.input.$refs.input || this.$parent.$refs.input.$refs.textarea;
+      this.referenceElm = this.$parent.$el;
       this.referenceList = this.$el.querySelector('.el-autocomplete-suggestion__list');
       this.referenceList.setAttribute('role', 'listbox');
       this.referenceList.setAttribute('id', this.id);
