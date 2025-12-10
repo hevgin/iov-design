@@ -141,7 +141,7 @@ export default {
           let bodyHasOverflow = document.documentElement.clientHeight < document.body.scrollHeight;
           let bodyOverflowY = getStyle(document.body, 'overflowY');
           if (scrollBarWidth > 0 && (bodyHasOverflow || bodyOverflowY === 'scroll') && this.withoutHiddenClass) {
-            document.body.style.paddingRight = this.computedBodyPaddingRight + scrollBarWidth + 'px';
+            // document.body.style.paddingRight = this.computedBodyPaddingRight + scrollBarWidth + 'px';
           }
           addClass(document.body, 'el-popup-parent--hidden');
         }
