@@ -211,6 +211,7 @@ import { Message } from 'iov-design';
 | center | 文字是否居中 | boolean | — | false |
 | onClose | 关闭时的回调函数, 参数为被关闭的 message 实例 | function | — | — |
 | offset | Message 距离窗口顶部的偏移量 | number | — | 20 |
+| grouping | 合并内容相同的消息，不支持 VNode 类型的消息 | boolean | — | true |
 
 ### 方法
 调用 `Message` 或 `this.$message` 会返回当前 Message 的实例。如果需要手动关闭实例，可以调用它的 `close` 方法。

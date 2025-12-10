@@ -47,7 +47,8 @@
         verticalOffset: 46,
         timer: null,
         dangerouslyUseHTMLString: false,
-        center: false
+        center: false,
+        repeatNum: 1 // 合并消息数, 暂未渲染
       };
     },
 

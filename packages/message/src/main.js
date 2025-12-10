@@ -14,9 +14,30 @@ const Message = function(options) {
   options = options || {};
   if (typeof options === 'string') {
     options = {
+      grouping: true,
       message: options
     };
+  } else {
+    options = {
+      grouping: true,
+      ...options
+    };
   }
+  // ========== grouping 逻辑 ==========
+  if (options.grouping) {
+    const last = instances[instances.length - 1];
+
+    // 字符串形式时
+    const messageStr = typeof options === 'string'
+      ? options
+      : options.message;
+
+    if (last && !last.closed && last.message === messageStr) {
+      last.repeatNum++;
+      return last; // 直接返回，不创建新 toast
+    }
+  }
+  // =================================================
   let userOnClose = options.onClose;
   let id = 'message_' + seed++;
 
@@ -48,11 +69,13 @@ const Message = function(options) {
   Message[type] = (options) => {
     if (isObject(options) && !isVNode(options)) {
       return Message({
+        grouping: true,
         ...options,
         type
       });
     }
     return Message({
+      grouping: true,
       type,
       message: options
     });
