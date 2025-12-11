@@ -11,6 +11,13 @@
   display: inline-block;
   overflow: hidden;
 
+  @include e(border) {
+    border: 1px solid $--color-line-2;
+    border-radius: 4px;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
   @include e(inner) {
     @extend %size;
     vertical-align: top;

@@ -1,5 +1,5 @@
 <template>
-  <div class="el-image">
+  <div class="el-image" :class="{'el-image__border': border}">
     <slot v-if="loading" name="placeholder">
       <div class="el-image__placeholder"></div>
     </slot>
@@ -63,7 +63,8 @@
         type: Number,
         default: 2000
       },
-      initialIndex: Number
+      initialIndex: Number,
+      border: Boolean
     },
 
     data() {

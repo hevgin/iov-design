@@ -28,6 +28,34 @@
 ```
 :::
 
+### 带边框
+
+:::demo 可通过`border`属性给图片增加边框
+```html
+<div class="demo-image">
+  <div class="block" v-for="fit in fits" :key="fit">
+    <span class="demonstration">{{ fit }}</span>
+    <el-image
+      style="width: 100px; height: 100px"
+      :src="url"
+      border
+      :fit="fit"></el-image>
+  </div>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        fits: ['fill', 'contain', 'cover', 'none', 'scale-down'],
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+      }
+    }
+  }
+</script>
+```
+:::
+
 ### 占位内容
 
 :::demo 可通过`slot = placeholder`可自定义占位内容
@@ -148,6 +176,7 @@
 | preview-src-list | 开启图片预览功能 | Array | — | - |
 | z-index | 设置图片预览的 z-index(弹窗默认2001) | Number | — | 2050 |
 | initial-index | 图片预览初始图片index | Number | — | - |
+| border | 图片增加边框属性 | Boolean | — | false |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |
