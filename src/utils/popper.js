@@ -44,7 +44,8 @@
 
     'use strict';
 
-    var root = window;
+    // var root = window;
+    var root = window.__POWERED_BY_WUJIE__ ? window.parent : window;
 
     // default options
     var DEFAULTS = {
@@ -1026,6 +1027,9 @@
      */
     function getStyleComputedProperty(element, property) {
         // NOTE: 1 DOM access here
+        // var css = root.getComputedStyle(element, null);
+        // return css[property];
+        if (window.__POWERED_BY_WUJIE__ && element.nodeType === 9) return 'static';
         var css = root.getComputedStyle(element, null);
         return css[property];
     }
