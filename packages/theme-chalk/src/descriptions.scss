@@ -4,24 +4,55 @@
 
 @include b(descriptions) {
   box-sizing: border-box;
-  font-size: $--font-size-base;
-  color: $--color-text-primary;
+  font-size: 13px;
+  color: $--color-text-6;
 
   @include e(header) {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: $--descriptions-header-margin-bottom;
+    margin-bottom: 16px;
 
     @include e(title) {
-      font-size: $--descriptions-title-font-size;
+      font-size: 16px;
       font-weight: bold;
     }
   }
 
   @include e(body) {
-    color: $--color-text-regular;
-    background-color: $--color-white;
+    color: $--color-text-6;
+    background-color: #fff;
+    &.is-bordered {
+      border: 1px solid $--color-line-5;
+      border-radius: 5px;
+      overflow: hidden;
+      .el-descriptions-row {
+        .el-descriptions-item__cell:first-child {
+          border-left: 0 none;
+        }
+        .el-descriptions-item__cell:last-child {
+          border-right: 0 none;
+        }
+      }
+      tbody:first-child {
+        .el-descriptions-row {
+          &:first-child {
+            .el-descriptions-item__cell {
+              border-top: 0 none;
+            }
+          }
+        }
+      }
+      tbody:last-child {
+        .el-descriptions-row {
+          &:last-child {
+            .el-descriptions-item__cell {
+              border-bottom: 0 none;
+            }
+          }
+        }
+      }
+    }
 
     .el-descriptions__table {
       border-collapse: collapse;
@@ -32,7 +63,7 @@
         box-sizing: border-box;
         text-align: left;
         font-weight: normal;
-        line-height: 1.5;
+        line-height: 20px;
 
         @include when(left) {
           text-align: left;
@@ -52,8 +83,8 @@
   .is-bordered {
     table-layout: auto;
     .el-descriptions-item__cell {
-      border: $--descriptions-table-border;
-      padding: 12px 10px;
+      border: 1px solid $--color-line-5;
+      padding: 12px 16px;
     }
   }
 
@@ -66,7 +97,7 @@
   @include m(medium) {
     &.is-bordered {
       .el-descriptions-item__cell {
-        padding: 10px;
+        padding: 10px 16px;
       }
     }
 
@@ -78,17 +109,17 @@
   }
 
   @include m(small) {
-    font-size: 12px;
+    font-size: 13px;
 
     &.is-bordered {
       .el-descriptions-item__cell {
-        padding: 8px 10px;
+        padding: 7px 16px;
       }
     }
 
     &:not(.is-bordered) {
       .el-descriptions-item__cell {
-        padding-bottom: 8px;
+        padding-bottom: 7px;
       }
     }
   }
@@ -98,13 +129,13 @@
 
     &.is-bordered {
       .el-descriptions-item__cell {
-        padding: 6px 10px;
+        padding: 7px 16px;
       }
     }
 
     &:not(.is-bordered) {
       .el-descriptions-item__cell {
-        padding-bottom: 6px;
+        padding-bottom: 7px;
       }
     }
   }

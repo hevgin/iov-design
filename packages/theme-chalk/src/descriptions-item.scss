@@ -3,7 +3,7 @@
 
 @include b(descriptions-item) {
   vertical-align: top;
-  
+
   @include e(container) {
     display: flex;
 
@@ -27,8 +27,8 @@
     }
     &.is-bordered-label {
       font-weight: bold;
-      color: $--color-text-secondary;
-      background: $--descriptions-item-bordered-label-background;
+      color: $--color-text-5;
+      background: $--color-fill-1;
     }
     &:not(.is-bordered-label) {
       margin-right: 10px;
