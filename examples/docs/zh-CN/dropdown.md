@@ -171,11 +171,11 @@
     下拉菜单<i class="iov-icon-arrow-down"></i>
   </el-link>
   <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item command="a">黄金糕</el-dropdown-item>
-    <el-dropdown-item command="b">狮子头</el-dropdown-item>
-    <el-dropdown-item command="c">螺蛳粉</el-dropdown-item>
-    <el-dropdown-item command="d" disabled>双皮奶</el-dropdown-item>
-    <el-dropdown-item command="e" divided>蚵仔煎</el-dropdown-item>
+    <el-dropdown-item :class="{ selected: command === 'a' }" command="a">黄金糕</el-dropdown-item>
+    <el-dropdown-item :class="{ selected: command === 'b' }" command="b">狮子头</el-dropdown-item>
+    <el-dropdown-item :class="{ selected: command === 'c' }" command="c">螺蛳粉</el-dropdown-item>
+    <el-dropdown-item :class="{ selected: command === 'd' }" command="d" disabled>双皮奶</el-dropdown-item>
+    <el-dropdown-item :class="{ selected: command === 'e' }" command="e" divided>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
 
@@ -191,8 +191,14 @@
 
 <script>
   export default {
+    data() {
+      return {
+        command: ''
+      }
+    },
     methods: {
       handleCommand(command) {
+        this.command = command
         this.$message('click on item ' + command);
       }
     }
