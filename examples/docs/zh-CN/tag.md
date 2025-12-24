@@ -8,6 +8,7 @@
 
 ```html
 <el-tag>标签一</el-tag>
+<el-tag type="primary">标签一</el-tag>
 <el-tag type="success">标签二</el-tag>
 <el-tag type="info">标签三</el-tag>
 <el-tag type="warning">标签四</el-tag>
@@ -25,6 +26,7 @@
 
 ```html
 <el-tag dot>标签一</el-tag>
+<el-tag dot size="medium" type="primary">标签二</el-tag>
 <el-tag dot size="medium" type="success">标签二</el-tag>
 <el-tag dot size="small" type="info">标签三</el-tag>
 <el-tag dot size="mini" type="warning">标签四</el-tag>
@@ -41,6 +43,7 @@
 
 ```html
 <el-tag hit>标签一</el-tag>
+<el-tag hit type="primary">标签二</el-tag>
 <el-tag hit type="success">标签二</el-tag>
 <el-tag hit type="info">标签三</el-tag>
 <el-tag hit type="warning">标签四</el-tag>
@@ -59,6 +62,7 @@
 ```html
 <el-tag icon="el-icon-success">标签一</el-tag>
 <el-tag type="success" icon="el-icon-success">标签二</el-tag>
+<el-tag type="primary">标签三</el-tag>
 <el-tag type="info">标签三</el-tag>
 <el-tag type="warning">标签四</el-tag>
 <el-tag type="danger">标签五</el-tag>
@@ -88,6 +92,7 @@
       return {
         tags: [
           { name: '标签一', type: '' },
+          { name: '标签一', type: 'primary' },
           { name: '标签二', type: 'success' },
           { name: '标签三', type: 'info' },
           { name: '标签四', type: 'warning' },
@@ -237,6 +242,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
       return {
         items: [
           { type: '', label: '标签一' },
+          { type: 'primary', label: '标签一' },
           { type: 'success', label: '标签二' },
           { type: 'info', label: '标签三' },
           { type: 'danger', label: '标签四' },
@@ -256,7 +262,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 类型 | string | success/info/warning/danger | — |
+| type | 类型 | string | primary/success/info/warning/danger | — |
 | closable | 是否可关闭 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
 | dot | 是否展示状态标签 | boolean | — | false |

@@ -21,6 +21,27 @@
     }
   }
 }
+@mixin genThemePrimary($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+  &.el-tag--primary {
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
+    @include when(hit) {
+      border-color: $borderColor;
+    }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
+    }
+    .el-tag__close {
+      color: $color;
+      &:hover {
+        color: $hoverColor;
+      }
+    }
+  }
+}
 @mixin genThemeInfo($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
   &.el-tag--info {
     background-color: $backgroundColor;
@@ -196,11 +217,12 @@
   line-height: 32px;
   padding: $--tag-padding;
   font-size: $--tag-font-size;
-  color: $--color-darkblue-6;
+  color: $--color-text-5;
   border-radius: $--tag-border-radius;
   box-sizing: border-box;
   white-space: nowrap;
-  @include genTheme($--color-darkblue-1, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-1);
+  @include genTheme($--color-fill-2, $--color-line-2, $--color-text-5, $--color-text-4, $--color-fill-2);
+  @include genThemePrimary($--color-darkblue-1, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-1);
   @include genThemeInfo($--color-fill-2, $--color-line-2, $--color-text-3, $--color-text-4, $--color-fill-2);
   @include genThemeSuccess($--color-success-1, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-1);
   @include genThemeWarning($--color-warning-1, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-1);
@@ -264,7 +286,8 @@
   }
 
   @include m(dark) {
-    @include genTheme($--color-darkblue-6, $--color-darkblue-6, $--color-white, $--color-white, $--color-darkblue-6);
+    @include genTheme($--color-text-3, $--color-text-3, $--color-white, $--color-white, $--color-text-3);
+    @include genThemePrimary($--color-darkblue-6, $--color-darkblue-6, $--color-white, $--color-white, $--color-darkblue-6);
     @include genThemeInfo($--color-text-3, $--color-text-3, $--color-white, $--color-white, $--color-text-3);
     @include genThemeSuccess($--color-success-6, $--color-success-6, $--color-white, $--color-white, $--color-success-6);
     @include genThemeWarning($--color-warning-6, $--color-warning-6, $--color-white, $--color-white, $--color-warning-6);
@@ -279,7 +302,8 @@
     border-width: 1px;
     border-style: solid;
     line-height: 30px;
-    @include genTheme($--color-white, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-6);
+    @include genTheme($--color-white, $--color-line-2, $--color-text-3, $--color-text-4, $--color-text-3);
+    @include genThemePrimary($--color-white, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-6);
     @include genThemeInfo($--color-white, $--color-line-2, $--color-text-3, $--color-text-4, $--color-text-3);
     @include genThemeSuccess($--color-white, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-6);
     @include genThemeWarning($--color-white, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-6);
