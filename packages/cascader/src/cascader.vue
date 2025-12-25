@@ -150,9 +150,10 @@
               <span>{{ item.text }}</span>
             </li>
           </template>
-          <slot v-else name="empty">
-            <li class="el-cascader__empty-text">{{ t('el.cascader.noMatch') }}</li>
-          </slot>
+          <template v-else>
+            <slot name="empty" v-if="$slots.empty"></slot>
+            <el-empty v-else :description="t('el.cascader.noMatch')" :type="0" :image-size="60"></el-empty>
+          </template>
         </el-scrollbar>
       </div>
     </transition>

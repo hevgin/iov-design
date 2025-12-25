@@ -76,7 +76,7 @@ export default {
 
     renderEmptyText(h) {
       return (
-        <div class="el-cascader-menu__empty-text">{ this.t('el.cascader.noData') }</div>
+        <el-empty description={this.t('el.cascader.noData')} type={0} image-size={60}></el-empty>
       );
     },
     renderNodeList(h) {

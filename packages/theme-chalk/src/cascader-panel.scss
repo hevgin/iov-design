@@ -39,6 +39,11 @@
     padding: 4px;
     list-style: none;
     box-sizing: border-box;
+    &.is-empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   @include e(hover-zone) {
