@@ -13,6 +13,8 @@ const colors = {
   pink: '#D91AD9',
   gray: '#6B707A',
   darkblue: '#546EFF',
+  mauve: '#8066FF',
+  salmon: '#FE6536',
   line: ['#EDEFF3', '#DCDFE6', '#D2D5DF', '#C3C7D1', '#E9EBF0'],
   fill: ['#F6F7F8', '#F2F3F5', '#E5E6EB', '#ABAFB5', '#777D87', '#494B53', '#212026', '#0D1722'],
   text: ['#C6C7CA', '#A2A3AA', '#6B707A', '#65677A', '#3D4158', '#212026', '#0D1722']

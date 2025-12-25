@@ -17,6 +17,8 @@
 <el-tag type="blue">标签七</el-tag>
 <el-tag type="purple">标签八</el-tag>
 <el-tag type="pink">标签九</el-tag>
+<el-tag type="mauve">标签十</el-tag>
+<el-tag type="salmon">标签十</el-tag>
 ```
 :::
 
@@ -35,6 +37,8 @@
 <el-tag dot type="blue">标签七</el-tag>
 <el-tag dot type="purple">标签八</el-tag>
 <el-tag dot type="pink">标签九</el-tag>
+<el-tag dot type="mauve">标签十</el-tag>
+<el-tag dot type="salmon">标签十</el-tag>
 ```
 :::
 ### 是否有边框描边
@@ -52,6 +56,8 @@
 <el-tag hit type="blue">标签七</el-tag>
 <el-tag hit type="purple">标签八</el-tag>
 <el-tag hit type="pink">标签九</el-tag>
+<el-tag hit type="mauve">标签十</el-tag>
+<el-tag hit type="salmon">标签十</el-tag>
 ```
 :::
 
@@ -70,6 +76,8 @@
 <el-tag type="blue">标签七</el-tag>
 <el-tag type="purple">标签八</el-tag>
 <el-tag type="pink">标签九</el-tag>
+<el-tag type="mauve">标签十</el-tag>
+<el-tag type="salmon">标签十</el-tag>
 ```
 :::
 
@@ -262,7 +270,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 类型 | string | primary/success/info/warning/danger | — |
+| type | 类型 | string | primary/success/info/warning/danger/ | — |
 | closable | 是否可关闭 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
 | dot | 是否展示状态标签 | boolean | — | false |
