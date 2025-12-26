@@ -76,6 +76,9 @@
   border-radius: 2px;
   transition: all .2s ease;
   cursor: pointer;
+  width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   &:hover, &:focus {
     background: $--cascader-node-background-hover;
   }
