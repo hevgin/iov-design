@@ -120,6 +120,12 @@ export default {
     size: {
       type: String,
       default: 'medium'
+    },
+    actions: {
+      type: Array,
+      default() {
+        return ['preview', 'update', 'remove'];
+      }
     }
   },
 
@@ -316,6 +322,7 @@ export default {
         files={this.uploadFiles}
         size={this.size}
         on-remove={this.handleRemove}
+        actions={this.actions}
         handlePreview={this.onPreview}>
         {
           (props) => {
@@ -338,6 +345,7 @@ export default {
           files={this.uploadFiles}
           size={this.size}
           on-remove={this.handleRemove}
+          actions={this.actions}
           handlePreview={this.onPreview}>
           {
             (props) => {
@@ -378,7 +386,8 @@ export default {
         'on-error': this.handleError,
         'on-preview': this.onPreview,
         'on-remove': this.handleRemove,
-        'http-request': this.httpRequest
+        'http-request': this.httpRequest,
+        actions: this.actions
       },
       ref: 'upload-inner'
     };

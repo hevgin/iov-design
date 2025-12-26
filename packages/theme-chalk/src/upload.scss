@@ -5,7 +5,6 @@
 @include b(upload) {
   display: inline-block;
   text-align: center;
-  cursor: pointer;
   outline: none;
   @include e(input) {
     display: none;
@@ -76,7 +75,6 @@
     border: 1px dashed $--color-line-2;
     border-radius: 4px;
     box-sizing: border-box;
-    cursor: pointer;
     vertical-align: middle;
     &:hover {
       border-color: $--color-primary-5;
@@ -119,6 +117,9 @@
       margin: 4px auto 0;
       font-size: 12px;
       color: $--color-text-2;
+    }
+    .el-image__inner {
+      cursor: default;
     }
   }
 }

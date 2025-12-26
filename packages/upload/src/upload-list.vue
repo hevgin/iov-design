@@ -19,8 +19,8 @@
     >
       <slot :file="file">
         <div class="el-upload-list__file">
-          <div class="el-upload-list__item-name" @click="handleClick(file)">
-            <span v-if="['picture-card', 'picture'].includes(listType)" class="el-upload-list__item-thumbnail">
+          <div class="el-upload-list__item-name" @click="onPreview(file)">
+            <span v-if="['picture'].includes(listType)  || ['picture-card'].includes(listType) && file.status === 'success'" class="el-upload-list__item-thumbnail">
               <el-image :src="file[fileUrlAlias]" :preview-src-list="handlePreview ? [] : [file[fileUrlAlias]]" fit="contain">
                 <i slot="placeholder" class="el-image__placeholder"></i>
                 <i slot="error" class="el-image__error"></i>
@@ -57,11 +57,11 @@
             <span class="el-upload-progress__text">上传中</span>
           </div>
         </div>
-        <i class="iov-icon-delete" v-if="!disabled && ['text', 'picture'].includes(listType)" @click="$emit('remove', file)"></i>
-        <span class="el-upload-list__item-actions" v-if="listType === 'picture-card' && file.status === 'success'">
-          <i v-if="handlePreview" @click.stop="handlePreview(file)" class="el-upload-list__item-preview iov-icon-eye"></i>
-          <i v-if="!disabled" class="el-upload-list__item-delete iov-icon-delete" @click.stop="$emit('remove', file)"></i>
-          <i v-if="!disabled" class="el-upload-list__item-update iov-icon-update"></i>
+        <i class="iov-icon-delete" v-if="!disabled && ['text', 'picture'].includes(listType)" @click.stop="$emit('remove', file)"></i>
+        <span class="el-upload-list__item-actions" v-if="listType === 'picture-card' && file.status === 'success' && actions.length > 0">
+          <i v-if="handlePreview && actions.includes('preview')" @click.stop="onPreview(file)" class="el-upload-list__item-preview iov-icon-eye"></i>
+          <i v-if="!disabled && actions.includes('update')" class="el-upload-list__item-update iov-icon-update" @click.stop="onUpdate"></i>
+          <i v-if="!disabled && actions.includes('remove')" class="el-upload-list__item-delete iov-icon-delete" @click.stop="$emit('remove', file)"></i>
         </span>
       </slot>
     </li>
@@ -101,14 +101,18 @@
       },
       size: String,
       handlePreview: null,
-      listType: String
+      listType: String,
+      actions: Array
     },
     methods: {
       parsePercentage(val) {
         return parseInt(val, 10);
       },
-      handleClick(file) {
+      onPreview(file) {
         this.handlePreview && this.handlePreview(file);
+      },
+      onUpdate() {
+        this.$parent.$refs['upload-inner'].handleClick();
       }
     }
   };

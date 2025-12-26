@@ -80,17 +80,23 @@
   :limit="1"
   :fileList="fileList"
   :on-success="handleAvatarSuccess"
+  :on-preview="handlePictureCardPreview"
   :before-upload="beforeAvatarUpload">
     <div class="el-upload__picture">
       <i class="el-upload__icon iov-icon-img-default"></i>
       <div class="el-upload__desc">点击上传</div>
     </div>
 </el-upload>
+<el-dialog :visible.sync="dialogVisible">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
 <script>
   export default {
     data() {
       return {
-        fileList: [{name: '西红柿.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}]
+        fileList: [{name: '西红柿.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
+        dialogImageUrl: '',
+        dialogVisible: false,
       };
     },
     methods: {
@@ -108,6 +114,10 @@
           this.$message.error('上传头像图片大小不能超过 2MB!');
         }
         return isJPG && isLt2M;
+      },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
       }
     }
   }
@@ -493,6 +503,7 @@
 | size | 上图组件大小 | string | large/medium/small | false |
 | fileNameAlias | 文件名称字段别名 | string | - | name |
 | fileUrlAlias | 文件地址字段别名 | string | - | url |
+| actions | 已上传图片自定义操作按钮 | [] | array | ['preview', 'update', 'remove'] |
 
 ### Slot
 | name | 说明 |

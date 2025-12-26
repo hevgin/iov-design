@@ -46,7 +46,8 @@ export default {
     },
     disabled: Boolean,
     limit: Number,
-    onExceed: Function
+    onExceed: Function,
+    actions: Array
   },
 
   data() {
@@ -174,7 +175,7 @@ export default {
       }
     },
     handleClick() {
-      if (!this.disabled) {
+      if (!this.disabled && this.actions.includes('update')) {
         this.$refs.input.value = null;
         this.$refs.input.click();
       }

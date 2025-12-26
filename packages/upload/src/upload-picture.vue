@@ -19,7 +19,7 @@
     >
       <slot :file="file">
         <div class="el-upload-list__file">
-          <div v-if="file.status === 'success'" class="el-upload-list__item-name" @click="handleClick(file)">
+          <div v-if="file.status === 'success'" class="el-upload-list__item-name">
             <span class="el-upload-list__item-thumbnail">
               <el-image :src="file[fileUrlAlias]" :preview-src-list="handlePreview ? [] : [file[fileUrlAlias]]" fit="contain">
                 <i slot="placeholder" class="el-image__placeholder"></i>
@@ -40,10 +40,10 @@
             <span class="el-upload-progress__text">上传中</span>
           </div>
         </div>
-        <span class="el-upload-list__item-actions" v-if="file.status === 'success'">
-          <i v-if="handlePreview" @click.stop="handlePreview(file)" class="el-upload-list__item-preview iov-icon-eye"></i>
-          <i v-if="!disabled" class="el-upload-list__item-delete iov-icon-delete" @click.stop="$emit('remove', file)"></i>
-          <i v-if="!disabled" class="el-upload-list__item-update iov-icon-update"></i>
+        <span class="el-upload-list__item-actions" v-if="file.status === 'success' && actions.length > 0" @click.stop>
+          <i v-if="handlePreview && actions.includes('preview')" @click.stop="onPreview(file)" class="el-upload-list__item-preview iov-icon-eye"></i>
+          <i v-if="!disabled && actions.includes('update')" class="el-upload-list__item-update iov-icon-update" @click.stop="onUpdate"></i>
+          <i v-if="!disabled && actions.includes('remove')" class="el-upload-list__item-delete iov-icon-delete" @click.stop="$emit('remove', file)"></i>
         </span>
       </slot>
     </li>
@@ -84,14 +84,18 @@
       },
       size: String,
       handlePreview: Function,
-      listType: String
+      listType: String,
+      actions: Array
     },
     methods: {
       parsePercentage(val) {
         return parseInt(val, 10);
       },
-      handleClick(file) {
+      onPreview(file) {
         this.handlePreview && this.handlePreview(file);
+      },
+      onUpdate() {
+        this.$parent.handleClick();
       }
     }
   };
