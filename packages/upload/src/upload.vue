@@ -175,7 +175,7 @@ export default {
       }
     },
     handleClick() {
-      if (!this.disabled && this.actions.includes('update')) {
+      if (!this.disabled && this.actions.includes('update') || this.fileList.length === 0) {
         this.$refs.input.value = null;
         this.$refs.input.click();
       }
