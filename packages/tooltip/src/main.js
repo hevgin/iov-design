@@ -52,6 +52,10 @@ export default {
     tabindex: {
       type: Number,
       default: 0
+    },
+    size: {
+      type: String,
+      default: ''
     }
   },
 
@@ -90,7 +94,10 @@ export default {
             aria-hidden={ (this.disabled || !this.showPopper) ? 'true' : 'false' }
             v-show={!this.disabled && this.showPopper}
             class={
-              ['el-tooltip__popper', 'is-' + this.effect, this.popperClass]
+              [
+                'el-tooltip__popper', 'is-' + this.effect, this.popperClass,
+                this.size ? 'el-tooltip--' + this.size : ''
+              ]
             }>
             <el-scrollbar wrap-style="max-height: 168px;">
               { this.$slots.content || this.content }
