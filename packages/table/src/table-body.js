@@ -50,7 +50,7 @@ export default {
               return acc.concat(this.wrappedRowRender(row, acc.length));
             }, [])
           }
-          <el-tooltip effect={this.table.tooltipEffect} placement="top" ref="tooltip" content={this.tooltipContent}></el-tooltip>
+          <el-tooltip effect={this.table.tooltipEffect} placement="top" popper-class="el-table__tooltip-offset" ref="tooltip" content={this.tooltipContent}></el-tooltip>
         </tbody>
       </table>
     );
@@ -248,12 +248,13 @@ export default {
     },
 
     handleCellMouseEnter(event, row) {
-      const table = this.table;
+      const { table } = this;
       const cell = getCell(event);
 
       if (cell) {
         const column = getColumnByCell(table, cell);
-        const hoverState = table.hoverState = { cell, column, row };
+        table.hoverState = { cell, column, row };
+        const { hoverState } = table;
         table.$emit('cell-mouse-enter', hoverState.row, hoverState.column, hoverState.cell, event);
       }
 
@@ -268,25 +269,52 @@ export default {
       range.setStart(cellChild, 0);
       range.setEnd(cellChild, cellChild.childNodes.length);
       const rangeWidth = range.getBoundingClientRect().width;
-      const padding = (parseInt(getStyle(cellChild, 'paddingLeft'), 10) || 0) +
-        (parseInt(getStyle(cellChild, 'paddingRight'), 10) || 0);
+      const padding = (parseInt(getStyle(cellChild, 'paddingLeft'), 10) || 0) + (parseInt(getStyle(cellChild, 'paddingRight'), 10) || 0);
       if ((rangeWidth + padding > cellChild.offsetWidth || cellChild.scrollWidth > cellChild.offsetWidth) && this.$refs.tooltip) {
-        const tooltip = this.$refs.tooltip;
-        // TODO 会引起整个 Table 的重新渲染，需要优化
-        this.tooltipContent = cell.innerText || cell.textContent;
-        tooltip.referenceElm = cell;
-        tooltip.$refs.popper && (tooltip.$refs.popper.style.display = 'none');
-        tooltip.doDestroy();
-        tooltip.setExpectedState(true);
-        this.activateTooltip(tooltip);
+        const { tooltip } = this.$refs;
+        const { tooltipEnterable } = this.table;
+        const showTooltip = () => {
+          this.tooltipContent = cell.innerText || cell.textContent;
+          tooltip.referenceElm = cell;
+          if (tooltip.$refs.popper) {
+            tooltip.$refs.popper.style.display = 'none';
+          }
+          tooltip.doDestroy();
+          tooltip.setExpectedState(true);
+          this.activateTooltip(tooltip);
+        };
+        if (tooltipEnterable && tooltip.showPopper) {
+          clearTimeout(tooltip.timeoutEnter);
+          tooltip.timeoutEnter = setTimeout(() => {
+            if (!tooltip.expectedState) {
+              tooltip.handleClosePopper();
+              showTooltip();
+            }
+            tooltip.timeoutEnter = null;
+          }, 100);
+          return;
+        }
+
+        showTooltip();
       }
     },
 
     handleCellMouseLeave(event) {
-      const tooltip = this.$refs.tooltip;
+      const { tooltip } = this.$refs;
       if (tooltip) {
         tooltip.setExpectedState(false);
-        tooltip.handleClosePopper();
+        const { tooltipEnterable } = this.table;
+        if (tooltipEnterable) {
+          clearTimeout(tooltip.timeoutLeave);
+          tooltip.timeoutLeave = setTimeout(() => {
+            if (!tooltip.expectedState) {
+              tooltip.handleClosePopper();
+            }
+            tooltip.timeoutLeave = null;
+          }, 100);
+        } else {
+          tooltip.handleClosePopper();
+        }
       }
       const cell = getCell(event);
       if (!cell) return;

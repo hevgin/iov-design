@@ -347,7 +347,12 @@
 
       lazy: Boolean,
 
-      load: Function
+      load: Function,
+
+      tooltipEnterable: {
+        type: Boolean,
+        default: true
+      }
     },
 
     components: {

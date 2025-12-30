@@ -16,6 +16,11 @@
   font-size: $--table-font-size;
   color: $--table-font-color;
 
+
+  @include e(tooltip-offset) {
+    transform: translateY(12px);
+  }
+
   // 数据为空
   @include e(empty-block) {
     text-align: center;
@@ -428,7 +433,6 @@
     overflow-x: hidden;
     overflow-y: hidden;
     box-shadow: $--table-fixed-box-shadow;
-    background: #fff;
     .cell {
       pointer-events: auto;
     }
