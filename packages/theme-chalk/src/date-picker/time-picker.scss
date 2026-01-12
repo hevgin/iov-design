@@ -13,6 +13,10 @@
   user-select: none;
   box-sizing: content-box;
 
+  .popper__arrow {
+    display: none;
+  }
+
   @include e(content) {
     font-size: 0;
     position: relative;

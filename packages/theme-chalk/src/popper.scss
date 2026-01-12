@@ -2,100 +2,56 @@
 @import "common/var";
 
 @include b(popper) {
-  .popper__arrow,
-  .popper__arrow::after {
-    position: absolute;
-    display: block;
-    width: 0;
-    height: 0;
-    border-color: transparent;
-    border-style: solid;
-  }
-
   .popper__arrow {
-    border-width: 6px;
-    filter: drop-shadow(0 2px 12px rgba(0, 0, 0, 0.03))
+    position: absolute;
+    width: 16px;
+    height: 8px;
   }
-
-  .popper__arrow::after {
-    content: " ";
-    border-width: 6px;
+  .popper__arrow:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: $--color-line-2;
+    transform: translateY(-0.5px);
+    clip-path: path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z');
   }
-
+  .popper__arrow:after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 8px;
+    inset-inline-start: 0;
+    background: #fff;
+    clip-path: path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z');
+  }
   &[x-placement^="top"] {
     margin-bottom: 4px;
-  }
-
-  &[x-placement^="top"] .popper__arrow {
-    bottom: -6px;
-    left: 50%;
-    margin-right: 3px;
-    border-top-color: $--color-line-2;
-    border-bottom-width: 0;
-
-    &::after {
-      bottom: 0.5px;
-      margin-left: -6px;
-      border-top-color: #fff;
-      border-bottom-width: 0;
+    .popper__arrow {
+      bottom: -8px;
+      transform: rotateZ(180deg);
     }
   }
 
   &[x-placement^="bottom"] {
     margin-top: 4px;
-  }
-
-  &[x-placement^="bottom"] .popper__arrow {
-    top: -6px;
-    left: 50%;
-    margin-right: 3px;
-    border-top-width: 0;
-    border-bottom-color: $--color-line-2;
-
-    &::after {
-      top: 0.5px;
-      margin-left: -6px;
-      border-top-width: 0;
-      border-bottom-color: #fff;
+    .popper__arrow {
+      top: -8px;
     }
   }
 
   &[x-placement^="right"] {
     margin-left: 4px;
-  }
-
-  &[x-placement^="right"] .popper__arrow {
-    top: 50%;
-    left: -6px;
-    margin-bottom: 3px;
-    border-right-color: $--color-line-2;
-    border-left-width: 0;
-
-    &::after {
-      bottom: -6px;
-      left: 0.5px;
-      border-right-color: #fff;
-      border-left-width: 0;
+    .popper__arrow {
+      left: -12px;
+      transform: rotateZ(-90deg);
     }
   }
 
   &[x-placement^="left"] {
     margin-right: 4px;
-  }
-
-  &[x-placement^="left"] .popper__arrow {
-    top: 50%;
-    right: -6px;
-    margin-bottom: 3px;
-    border-right-width: 0;
-    border-left-color: $--color-line-2;
-
-    &::after {
-      right: 0.5px;
-      bottom: -6px;
-      margin-left: -6px;
-      border-right-width: 0;
-      border-left-color: #fff;
+    .popper__arrow {
+      right: -12px;
+      transform: rotateZ(90deg);
     }
   }
 }
