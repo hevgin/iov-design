@@ -145,7 +145,6 @@
       transform: translateX(5px);
       opacity: 0;
       transition: all .25s ease;
-      pointer-events: none;
     }
 
     @include e(increase) {

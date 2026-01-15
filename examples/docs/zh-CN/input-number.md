@@ -147,7 +147,7 @@
 ```html
 <template>
   <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
-  <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10" size="medium"></el-input-number>
+  <el-input-number v-model="num" disabled controls-position="right" @change="handleChange" :min="1" :max="10" size="medium"></el-input-number>
   <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10" size="small"></el-input-number>
   <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10" size="mini"></el-input-number>
 </template>
