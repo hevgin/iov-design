@@ -466,6 +466,8 @@ export default {
       });
     },
     getMaxWidth() {
+      this.resetInputWidth();
+      this.resetTagsLeft();
       this.$nextTick(() => {
         if (this.collapseTags) {
           if (this.multipleTagMaxWidth && this.multipleTagMaxWidth !== 'none') {
