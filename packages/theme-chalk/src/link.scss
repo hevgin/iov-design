@@ -18,6 +18,9 @@ $typeMap: (
   outline: none;
   cursor: pointer;
   padding: 0;
+  @include when(text) {
+    cursor: text;
+  }
 
   @include when(underline) {
     &:hover:after {
