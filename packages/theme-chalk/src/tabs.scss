@@ -90,9 +90,14 @@
   @include e((nav-next, nav-prev)) {
     position: absolute;
     cursor: pointer;
-    line-height: 44px;
-    font-size: 12px;
+    font-size: 0;
+    top: 50%;
+    margin-top: -6px;
     color: $--color-text-secondary;
+    .iov-icon-arrow-prev,
+    .iov-icon-arrow-next {
+      font-size: 12px;
+    }
   }
   @include e(nav-next) {
     right: 0;
