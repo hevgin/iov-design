@@ -16,21 +16,24 @@
   box-shadow: 0px 2px 8px 0px rgba(73,75,83,0.12);
   word-break: break-all;
 
-  &[x-placement^="top"] {
-    margin-bottom: 12px !important;
+  &.el-popper {
+    &[x-placement^="top"] {
+      margin-bottom: 12px;
+    }
+
+    &[x-placement^="bottom"] {
+      margin-top: 12px;
+    }
+
+    &[x-placement^="right"] {
+      margin-left: 12px;
+    }
+
+    &[x-placement^="left"] {
+      margin-right: 12px;
+    }
   }
 
-  &[x-placement^="bottom"] {
-    margin-top: 12px !important;
-  }
-
-  &[x-placement^="right"] {
-    margin-left: 12px !important;
-  }
-
-  &[x-placement^="left"] {
-    margin-right: 12px !important;
-  }
 
   @include m(plain) {
     padding: 9px 12px;
