@@ -4,7 +4,7 @@
       <div class="el-image-viewer__mask" @click.self="handleMaskClick"></div>
       <!-- CLOSE -->
       <span class="el-image-viewer__btn el-image-viewer__close" @click="hide">
-        <i class="el-icon-close"></i>
+        <i class="iov-icon-close"></i>
       </span>
       <!-- ARROW -->
       <template v-if="!isSingle">
@@ -12,25 +12,23 @@
           class="el-image-viewer__btn el-image-viewer__prev"
           :class="{ 'is-disabled': !infinite && isFirst }"
           @click="prev">
-          <i class="el-icon-arrow-left"/>
+          <i class="iov-icon-arrow-prev"/>
         </span>
         <span
           class="el-image-viewer__btn el-image-viewer__next"
           :class="{ 'is-disabled': !infinite && isLast }"
           @click="next">
-          <i class="el-icon-arrow-right"/>
+          <i class="iov-icon-arrow-next"/>
         </span>
       </template>
       <!-- ACTIONS -->
-      <div class="el-image-viewer__btn el-image-viewer__actions">
+      <div class="el-image-viewer__actions">
         <div class="el-image-viewer__actions__inner">
-          <i class="el-icon-zoom-out" @click="handleActions('zoomOut')"></i>
-          <i class="el-icon-zoom-in" @click="handleActions('zoomIn')"></i>
-          <i class="el-image-viewer__actions__divider"></i>
+          <i class="iov-icon-rotate-right" @click="handleActions('clocelise')"></i>
+          <i class="iov-icon-rotate-left" @click="handleActions('anticlocelise')"></i>
+          <i class="iov-icon-zoom-in" @click="handleActions('zoomIn')"></i>
+          <i class="iov-icon-zoom-out" :class="[transform.scale <= 0.2 ? 'disabled' : '']" @click="handleActions('zoomOut')"></i>
           <i :class="mode.icon" @click="toggleMode"></i>
-          <i class="el-image-viewer__actions__divider"></i>
-          <i class="el-icon-refresh-left" @click="handleActions('anticlocelise')"></i>
-          <i class="el-icon-refresh-right" @click="handleActions('clocelise')"></i>
         </div>
       </div>
       <!-- CANVAS -->
@@ -59,11 +57,11 @@ import { PopupManager } from 'iov-design/src/utils/popup';
 const Mode = {
   CONTAIN: {
     name: 'contain',
-    icon: 'el-icon-full-screen'
+    icon: 'iov-icon-fullscreen'
   },
   ORIGINAL: {
     name: 'original',
-    icon: 'el-icon-c-scale-to-original'
+    icon: 'iov-icon-zoom-reset'
   }
 };
 
