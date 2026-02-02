@@ -253,6 +253,49 @@
   }
 }
 
+@mixin genThemeGrey($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+  &.el-tag--gray {
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
+    @include when(hit) {
+      border-color: $borderColor;
+    }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
+    }
+    .el-tag__close {
+      color: $color;
+      &:hover {
+        color: $hoverColor;
+      }
+    }
+  }
+}
+@mixin genThemeDarkblue($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+  &.el-tag--darkblue {
+    background-color: $backgroundColor;
+    color: $color;
+    border-color: $plainBorderColor;
+    @include when(hit) {
+      border-color: $borderColor;
+    }
+    @include when(dot) {
+      .el-tag__text:before {
+        background: $color;
+      }
+    }
+    .el-tag__close {
+      color: $color;
+      &:hover {
+        color: $hoverColor;
+      }
+    }
+  }
+}
+
 @include b(tag) {
   display: inline-block;
   height: 32px;
@@ -275,6 +318,8 @@
   @include genThemePink($--color-pink-1, $--color-pink-2, $--color-pink-6, $--color-pink-7, $--color-pink-1);
   @include genThemeMauve($--color-mauve-1, $--color-mauve-2, $--color-mauve-6, $--color-mauve-7, $--color-mauve-1);
   @include genThemeSalmon($--color-salmon-1, $--color-salmon-2, $--color-salmon-6, $--color-salmon-7, $--color-salmon-1);
+  @include genThemeGrey($--color-grey-1, $--color-grey-2, $--color-grey-6, $--color-grey-7, $--color-grey-1);
+  @include genThemeDarkblue($--color-darkblue-1, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-1);
 
 
   @include when(dot) {
@@ -342,6 +387,8 @@
     @include genThemePink($--color-pink-6, $--color-pink-6, $--color-white, $--color-white, $--color-pink-6);
     @include genThemeMauve($--color-mauve-6, $--color-mauve-6, $--color-white, $--color-white, $--color-mauve-6);
     @include genThemeSalmon($--color-salmon-6, $--color-salmon-6, $--color-white, $--color-white, $--color-salmon-6);
+    @include genThemeGrey($--color-grey-6, $--color-grey-6, $--color-white, $--color-white, $--color-grey-6);
+    @include genThemeDarkblue($--color-darkblue-6, $--color-darkblue-6, $--color-white, $--color-white, $--color-darkblue-6);
   }
 
   @include m(plain) {
@@ -360,6 +407,8 @@
     @include genThemePink($--color-white, $--color-pink-2, $--color-pink-6, $--color-pink-7, $--color-pink-6);
     @include genThemeMauve($--color-white, $--color-mauve-2, $--color-mauve-6, $--color-mauve-7, $--color-mauve-6);
     @include genThemeSalmon($--color-white, $--color-salmon-2, $--color-salmon-6, $--color-salmon-7, $--color-salmon-6);
+    @include genThemeGrey($--color-white, $--color-grey-2, $--color-grey-6, $--color-grey-7, $--color-grey-6);
+    @include genThemeDarkblue($--color-white, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-6);
   }
 
   @include m(medium) {

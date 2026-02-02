@@ -11,7 +11,7 @@ const colors = {
   blue: '#168CFF',
   purple: '#722ED1',
   pink: '#D91AD9',
-  gray: '#6B707A',
+  grey: '#6B707A',
   darkblue: '#546EFF',
   mauve: '#8066FF',
   salmon: '#FE6536',
@@ -37,6 +37,10 @@ function generateBaseColor() {
     // 红色微调
     if (name === 'danger') {
       list.splice(0, 1, '#FFF1F1');
+    }
+    // 灰色微调
+    if (name === 'grey') {
+      list.splice(0, 1, '#EFF3F7');
     }
     // 失效色微调
     if (name === 'expire') {

@@ -7,18 +7,22 @@
 :::demo 由`type`属性来选择tag的类型，也可以通过`color`属性来自定义背景色。
 
 ```html
-<el-tag>标签一</el-tag>
-<el-tag type="primary">标签一</el-tag>
-<el-tag type="success">标签二</el-tag>
-<el-tag type="info">标签三</el-tag>
-<el-tag type="warning">标签四</el-tag>
-<el-tag type="danger">标签五</el-tag>
-<el-tag type="gold">标签六</el-tag>
-<el-tag type="blue">标签七</el-tag>
-<el-tag type="purple">标签八</el-tag>
-<el-tag type="pink">标签九</el-tag>
-<el-tag type="mauve">标签十</el-tag>
-<el-tag type="salmon">标签十</el-tag>
+<div class="tag-group">
+  <el-tag>default</el-tag>
+  <el-tag type="info">info</el-tag>
+  <el-tag type="grey">grey</el-tag>
+  <el-tag type="primary">primary</el-tag>
+  <el-tag type="success">success</el-tag>
+  <el-tag type="warning">warning</el-tag>
+  <el-tag type="danger">danger</el-tag>
+  <el-tag type="gold">gold</el-tag>
+  <el-tag type="blue">blue</el-tag>
+  <el-tag type="purple">purple</el-tag>
+  <el-tag type="pink">pink</el-tag>
+  <el-tag type="mauve">mauve</el-tag>
+  <el-tag type="salmon">salmon</el-tag>
+  <el-tag type="darkblue">darkblue</el-tag>
+</div>
 ```
 :::
 
@@ -27,18 +31,22 @@
 :::demo
 
 ```html
-<el-tag dot>标签一</el-tag>
-<el-tag dot size="medium" type="primary">标签二</el-tag>
-<el-tag dot size="medium" type="success">标签二</el-tag>
-<el-tag dot size="small" type="info">标签三</el-tag>
-<el-tag dot size="mini" type="warning">标签四</el-tag>
-<el-tag dot type="danger">标签五</el-tag>
-<el-tag dot type="gold">标签六</el-tag>
-<el-tag dot type="blue">标签七</el-tag>
-<el-tag dot type="purple">标签八</el-tag>
-<el-tag dot type="pink">标签九</el-tag>
-<el-tag dot type="mauve">标签十</el-tag>
-<el-tag dot type="salmon">标签十</el-tag>
+<div class="tag-group">
+  <el-tag dot>default</el-tag>
+  <el-tag dot type="info">info</el-tag>
+  <el-tag dot type="grey">grey</el-tag>
+  <el-tag dot type="primary">primary</el-tag>
+  <el-tag dot type="success">success</el-tag>
+  <el-tag dot type="warning">warning</el-tag>
+  <el-tag dot type="danger">danger</el-tag>
+  <el-tag dot type="gold">gold</el-tag>
+  <el-tag dot type="blue">blue</el-tag>
+  <el-tag dot type="purple">purple</el-tag>
+  <el-tag dot type="pink">pink</el-tag>
+  <el-tag dot type="mauve">mauve</el-tag>
+  <el-tag dot type="salmon">salmon</el-tag>
+  <el-tag dot type="darkblue">darkblue</el-tag>
+</div>
 ```
 :::
 ### 是否有边框描边
@@ -46,18 +54,22 @@
 :::demo
 
 ```html
-<el-tag hit>标签一</el-tag>
-<el-tag hit type="primary">标签二</el-tag>
-<el-tag hit type="success">标签二</el-tag>
-<el-tag hit type="info">标签三</el-tag>
-<el-tag hit type="warning">标签四</el-tag>
-<el-tag hit type="danger">标签五</el-tag>
-<el-tag hit type="gold">标签六</el-tag>
-<el-tag hit type="blue">标签七</el-tag>
-<el-tag hit type="purple">标签八</el-tag>
-<el-tag hit type="pink">标签九</el-tag>
-<el-tag hit type="mauve">标签十</el-tag>
-<el-tag hit type="salmon">标签十</el-tag>
+<div class="tag-group">
+  <el-tag hit>default</el-tag>
+  <el-tag hit type="info">info</el-tag>
+  <el-tag hit type="grey">grey</el-tag>
+  <el-tag hit type="primary">primary</el-tag>
+  <el-tag hit type="success">success</el-tag>
+  <el-tag hit type="warning">warning</el-tag>
+  <el-tag hit type="danger">danger</el-tag>
+  <el-tag hit type="gold">gold</el-tag>
+  <el-tag hit type="blue">blue</el-tag>
+  <el-tag hit type="purple">purple</el-tag>
+  <el-tag hit type="pink">pink</el-tag>
+  <el-tag hit type="mauve">mauve</el-tag>
+  <el-tag hit type="salmon">salmon</el-tag>
+  <el-tag hit type="darkblue">darkblue</el-tag>
+</div>
 ```
 :::
 
@@ -66,18 +78,22 @@
 :::demo
 
 ```html
-<el-tag icon="el-icon-success">标签一</el-tag>
-<el-tag type="success" icon="el-icon-success">标签二</el-tag>
-<el-tag type="primary">标签三</el-tag>
-<el-tag type="info">标签三</el-tag>
-<el-tag type="warning">标签四</el-tag>
-<el-tag type="danger">标签五</el-tag>
-<el-tag type="gold">标签六</el-tag>
-<el-tag type="blue">标签七</el-tag>
-<el-tag type="purple">标签八</el-tag>
-<el-tag type="pink">标签九</el-tag>
-<el-tag type="mauve">标签十</el-tag>
-<el-tag type="salmon">标签十</el-tag>
+<div class="tag-group">
+  <el-tag icon="el-icon-success">default</el-tag>
+  <el-tag icon="el-icon-success" type="info">info</el-tag>
+  <el-tag icon="el-icon-success" type="grey">grey</el-tag>
+  <el-tag icon="el-icon-success" type="primary">primary</el-tag>
+  <el-tag icon="el-icon-success" type="success">success</el-tag>
+  <el-tag icon="el-icon-success" type="warning">warning</el-tag>
+  <el-tag icon="el-icon-success" type="danger">danger</el-tag>
+  <el-tag icon="el-icon-success" type="gold">gold</el-tag>
+  <el-tag icon="el-icon-success" type="blue">blue</el-tag>
+  <el-tag icon="el-icon-success" type="purple">purple</el-tag>
+  <el-tag icon="el-icon-success" type="pink">pink</el-tag>
+  <el-tag icon="el-icon-success" type="mauve">mauve</el-tag>
+  <el-tag icon="el-icon-success" type="salmon">salmon</el-tag>
+  <el-tag icon="el-icon-success" type="darkblue">darkblue</el-tag>
+</div>
 ```
 :::
 
@@ -86,26 +102,21 @@
 :::demo 设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`disable-transitions`属性，它接受一个`Boolean`，true 为关闭。
 
 ```html
-<el-tag
-  v-for="tag in tags"
-  :key="tag.name"
-  closable
-  :type="tag.type">
-  {{tag.name}}
-</el-tag>
+<div class="tag-group">
+  <el-tag
+    v-for="tag in tags"
+    :key="tag"
+    closable
+    :type="tag">
+    {{tag}}
+  </el-tag>
+</div>
 
 <script>
   export default {
     data() {
       return {
-        tags: [
-          { name: '标签一', type: '' },
-          { name: '标签一', type: 'primary' },
-          { name: '标签二', type: 'success' },
-          { name: '标签三', type: 'info' },
-          { name: '标签四', type: 'warning' },
-          { name: '标签五', type: 'danger' }
-        ]
+        tags: ['default', 'info', 'grey', 'primary', 'success', 'warning', 'danger', 'gold', 'blue', 'purple', 'pink', 'mauve', 'salmon', 'darkblue']
       };
     }
   }
@@ -216,31 +227,31 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
   <span class="tag-group__title">Dark</span>
   <el-tag
     v-for="item in items"
-    :key="item.label"
-    :type="item.type"
+    :key="item"
+    :type="item"
     effect="dark">
-    {{ item.label }}
+    {{ item }}
   </el-tag>
 </div>
 <div class="tag-group">
   <span class="tag-group__title">Light</span>
   <el-tag
     v-for="item in items"
-    :key="item.label"
-    :type="item.type"
+    :key="item"
+    :type="item"
     effect="light">
-    {{ item.label }}
+    {{ item }}
   </el-tag>
 </div>
 <div class="tag-group">
   <span class="tag-group__title">Plain</span>
   <el-tag
     v-for="item in items"
-    :key="item.label"
-    :type="item.type"
+    :key="item"
+    :type="item"
     size="small"
     effect="plain">
-    {{ item.label }}
+    {{ item }}
   </el-tag>
 </div>
 
@@ -248,18 +259,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
   export default {
     data() {
       return {
-        items: [
-          { type: '', label: '标签一' },
-          { type: 'primary', label: '标签一' },
-          { type: 'success', label: '标签二' },
-          { type: 'info', label: '标签三' },
-          { type: 'danger', label: '标签四' },
-          { type: 'warning', label: '标签五' },
-          { type: 'gold', label: '标签六' },
-          { type: 'blue', label: '标签七' },
-          { type: 'purple', label: '标签八' },
-          { type: 'pink', label: '标签九' }
-        ]
+        items: ['default', 'info', 'grey', 'primary', 'success', 'warning', 'danger', 'gold', 'blue', 'purple', 'pink', 'mauve', 'salmon', 'darkblue']
       }
     }
   }
@@ -270,7 +270,7 @@ Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
-| type | 类型 | string | primary/success/info/warning/danger/ | — |
+| type | 类型 | string | default, info, grey, primary, success, warning, danger, gold, blue, purple, pink, mauve, salmon, darkblue | — |
 | closable | 是否可关闭 | boolean | — | false |
 | hit | 是否有边框描边 | boolean | — | false |
 | dot | 是否展示状态标签 | boolean | — | false |

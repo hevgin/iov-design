@@ -1,4 +1,12 @@
 .demo-block.demo-tag {
+  .tag-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    .el-tag + .el-tag {
+      margin-left: 0;
+    }
+  }
   .el-tag + .el-tag {
     margin-left: 10px;
   }
