@@ -45,8 +45,10 @@
   }
 
   & [class*="iov-icon-"] {
+    font-size: 14px;
     & + span {
       margin-left: 4px;
+      display: inline-block;
     }
   }
 
@@ -126,6 +128,9 @@
     padding: 0;
     width: $--button-height;
     font-size: $--font-size-large;
+    & [class*="iov-icon-"] {
+      font-size: inherit;
+    }
   }
   @include m(default) {
     @include when(icon-only) {
@@ -200,7 +205,7 @@
     &.el-button--text {
       padding: 0 8px;
       height: $--button-small-height;
-      line-height: $--button-small-height - 2px;
+      line-height: $--button-small-height;
     }
     @include when(icon-only) {
       font-size: $--button-icon-only-size;
@@ -215,7 +220,7 @@
     &.el-button--text {
       padding: 0 4px;
       height: $--button-mini-height;
-      line-height: $--button-mini-height - 2px;
+      line-height: $--button-mini-height;
     }
     @include when(icon-only) {
       font-size: $--button-icon-only-size;
@@ -230,7 +235,7 @@
     &.el-button--text {
       padding: 0 4px;
       height: 22px;
-      line-height: 20px;
+      line-height: 22px;
     }
     @include when(icon-only) {
       font-size: $--button-icon-only-size;

@@ -11,6 +11,7 @@
 @include b(select) {
   display: block;
   position: relative;
+  cursor: pointer;
 
   .el-select__tags
     >span {
@@ -110,7 +111,7 @@
       font-size: $--select-icon-size;
       transition: transform .3s;
       transform: rotateZ(180deg);
-      cursor: pointer;
+      // cursor: pointer;
 
       @include when(reverse) {
         transform: rotateZ(0deg);
@@ -133,12 +134,9 @@
     }
 
     &.is-disabled {
-      & .el-input__inner {
-        cursor: not-allowed;
-
-        // &:hover {
-        //   border-color: $--select-disabled-border;
-        // }
+      cursor: not-allowed;
+      .el-select__caret {
+        color: $--color-fill-4;
       }
     }
 

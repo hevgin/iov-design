@@ -212,7 +212,7 @@
     font-size: 14px;
     text-align: center;
     line-height: $--input-height;
-    cursor: pointer;
+    // cursor: pointer;
 
     &:after {
       content: '';
@@ -231,20 +231,18 @@
   }
 
   @include when(disabled) {
-    .el-input__inner {
-      background-color: $--input-disabled-fill;
-      border-color: $--input-disabled-border;
-      color: $--input-color-disabled;
-      cursor: not-allowed;
-
-      &::placeholder {
-        color: $--input-disabled-placeholder-color;
+    .el-input-group__inner.is-disabled {
+      .el-input__inner {
+        background-color: $--input-disabled-fill;
+        border-color: $--input-disabled-border;
+        color: $--input-color-disabled;
+        &::placeholder {
+          color: $--input-disabled-placeholder-color;
+        }
       }
-    }
-
-    .el-input__icon {
-      cursor: not-allowed;
-      color: $--color-fill-4;
+      > .el-input__inner {
+        cursor: not-allowed;
+      }
     }
     // .el-input__prefix,
     .el-input__suffix,

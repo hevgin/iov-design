@@ -393,6 +393,9 @@
 
     .el-table__cell {
       border-right: $--table-border;
+      &.el-table__expanded-cell {
+        border-right: 0 none;
+      }
     }
 
     th.el-table__cell.gutter:last-of-type {
