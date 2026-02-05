@@ -517,6 +517,7 @@
     top: 37px;
     overflow: hidden;
     z-index: 3;
+    background: #fff;
   }
 
   @include e((header-wrapper, body-wrapper, footer-wrapper)) {
