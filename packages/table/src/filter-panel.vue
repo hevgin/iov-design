@@ -16,10 +16,8 @@
         </el-scrollbar>
       </div>
       <div class="el-table-filter__bottom">
-        <button @click="handleConfirm"
-          :class="{ 'is-disabled': filteredValue.length === 0 }"
-          :disabled="filteredValue.length === 0">{{ t('el.table.confirmFilter') }}</button>
-        <button @click="handleReset">{{ t('el.table.resetFilter') }}</button>
+        <el-button size="small" @click="handleReset" :disabled="filteredValue.length === 0">重置</el-button>
+        <el-button size="small" type="info" @click="handleConfirm">确定</el-button>
       </div>
     </div>
     <div
@@ -114,6 +112,9 @@
           values: filteredValue
         });
         this.table.store.updateAllSelected();
+        if (this.column) {
+          this.$set(this.column, 'filterConfirmed', filteredValue.length > 0);
+        }
       }
     },
 

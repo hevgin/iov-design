@@ -17,67 +17,50 @@
 }
 
 @include b(table-filter) {
-  border: solid 1px $--border-color-lighter;
+  margin-top: 4px;
+  border: solid 1px $--color-line-2;
   border-radius: 2px;
-  background-color: $--color-white;
-  box-shadow: $--dropdown-menu-box-shadow;
+  box-shadow: 0px 2px 8px 0px rgba(73,75,83,0.12);
+  border-radius: 4px;
+  background-color: #fff;
   box-sizing: border-box;
-  margin: 2px 0;
 
   /** used for dropdown mode */
   @include e(list) {
-    padding: 5px 0;
+    padding: 4px;
     margin: 0;
     list-style: none;
-    min-width: 100px;
   }
 
   @include e(list-item) {
-    line-height: 36px;
-    padding: 0 10px;
+    line-height: 32px;
+    height: 32px;
+    padding: 0 12px;
     cursor: pointer;
-    font-size: $--font-size-base;
+    font-size: 13px;
+    transition: background ease .2s;
+    border-radius: 2px;
 
     &:hover {
-      background-color: $--dropdown-menuItem-hover-fill;
-      color: $--dropdown-menuItem-hover-color;
+      background: $--color-fill-1;
     }
 
     @include when(active) {
-      background-color: $--color-primary;
-      color: $--color-white;
+      background: $--color-fill-1;
     }
   }
 
   @include e(content) {
+    padding: 4px;
     min-width: 100px;
+    box-sizing: border-box;
   }
 
   @include e(bottom) {
-    border-top: 1px solid $--border-color-lighter;
+    border-top: 1px solid $--color-line-1;
     padding: 8px;
-
-    button {
-      background: transparent;
-      border: none;
-      color: $--color-text-regular;
-      cursor: pointer;
-      font-size: $--font-size-small;
-      padding: 0 3px;
-
-      &:hover {
-        color: $--color-primary;
-      }
-
-      &:focus {
-        outline: none;
-      }
-
-      &.is-disabled {
-        color: $--disabled-color-base;
-        cursor: not-allowed;
-      }
-    }
+    display: flex;
+    justify-content: flex-end;
   }
 
   @include e(wrap) {
@@ -85,17 +68,30 @@
   }
 
   @include e(checkbox-group) {
-    padding: 10px;
-
     label.el-checkbox {
       display: block;
-      margin-right: 5px;
-      margin-bottom: 8px;
-      margin-left: 5px;
-    }
-
-    .el-checkbox:last-child {
-      margin-bottom: 0;
+      margin: 0 auto;
+      padding: 0 12px;
+      height: 32px;
+      line-height: 32px;
+      border-radius: 2px;
+      transition: background ease .2s;
+      white-space: nowrap;
+      &:hover {
+        background: $--color-fill-1;
+        .el-checkbox__inner {
+          border-color: $--color-line-3;
+        }
+        .el-checkbox__input.is-checked .el-checkbox__inner {
+          border-color: $--color-primary-6;
+        }
+      }
+      .el-checkbox__input.is-checked.is-focus .el-checkbox__inner {
+        border-color: $--color-primary-6;
+      }
+      .el-checkbox__input.is-focus .el-checkbox__inner  {
+        border-color: $--color-line-3;
+      }
     }
   }
 }

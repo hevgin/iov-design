@@ -277,7 +277,7 @@ export default {
       // filter 相关属性
       filterable: this.filters || this.filterMethod,
       filteredValue: [],
-      filterPlacement: '',
+      filterPlacement: 'bottom',
       isColumnGroup: false,
       filterOpened: false,
       // sort 相关属性

@@ -671,14 +671,29 @@
   }
 
   @include e(column-filter-trigger) {
-    display: inline-block;
-    line-height: 34px;
+    display: inline-flex;
     cursor: pointer;
+    margin-left: 4px;
+    color: $--color-fill-4;
+    width: 20px;
+    height: 20px;
+    transition: background ease .2s;
+    position: relative;
+    border-radius: 2px;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    &:hover {
+      color: $--color-fill-5;
+      background: $--color-fill-3;
+    }
+
+    &.is-filtered i {
+      color: $--color-primary-6;
+    }
 
     & i {
-      color: $--color-info;
-      font-size: 12px;
-      transform: scale(.75);
+      font-size: 14px;
     }
   }
 

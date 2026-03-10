@@ -108,7 +108,7 @@ export default {
                     style={ this.getHeaderCellStyle(rowIndex, cellIndex, columns, column) }
                     class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }
                     key={ column.id }>
-                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? 'highlight' : '', column.labelClassName] }>
+                    <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? '' : '', column.labelClassName] }>
                       {
                         column.renderHeader
                           ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
@@ -125,9 +125,9 @@ export default {
                       }
                       {
                         column.filterable ? (<span
-                          class="el-table__column-filter-trigger"
+                          class={ ['el-table__column-filter-trigger', column.filterConfirmed ? 'is-filtered' : ''] }
                           on-click={ ($event) => this.handleFilterClick($event, column) }>
-                          <i class={ ['el-icon-arrow-down', column.filterOpened ? 'el-icon-arrow-up' : ''] }></i>
+                          <i class={ ['iov-icon-fill-filter'] }></i>
                         </span>) : ''
                       }
                     </div>
