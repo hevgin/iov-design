@@ -583,41 +583,45 @@
   }
 
   .caret-wrapper {
+    margin-left: 4px;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
-    height: 34px;
-    width: 24px;
+    height: 20px;
+    width: 20px;
     vertical-align: middle;
     cursor: pointer;
     overflow: initial;
     position: relative;
+    transition: background ease .2s;
+    border-radius: 2px;
+    color: $--color-fill-4;
+    &:hover {
+      color: $--color-fill-5;
+      background: $--color-fill-3;
+    }
   }
 
   .sort-caret {
-    width: 0;
-    height: 0;
-    border: solid 5px transparent;
+    font-size: 14px;
     position: absolute;
-    left: 7px;
-
+    left: 50%;
+    margin-left: -7px;
+    pointer-events: none;
     &.ascending {
-      border-bottom-color: $--color-text-placeholder;
-      top: 5px;
+      top: 3px;
     }
-
     &.descending {
-      border-top-color: $--color-text-placeholder;
-      bottom: 7px;
+      bottom: 3px;
     }
   }
 
   .ascending .sort-caret.ascending {
-    border-bottom-color: $--color-primary;
+    color: $--color-primary-6;
   }
 
   .descending .sort-caret.descending {
-    border-top-color: $--color-primary;
+    color: $--color-primary-6;
   }
 
   .hidden-columns {

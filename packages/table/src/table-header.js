@@ -115,16 +115,13 @@ export default {
                           : column.label
                       }
                       {
-                        column.sortable ? (<span
-                          class="caret-wrapper"
-                          on-click={ ($event) => this.handleSortClick($event, column) }>
-                          <i class="sort-caret ascending"
-                            on-click={ ($event) => this.handleSortClick($event, column, 'ascending') }>
-                          </i>
-                          <i class="sort-caret descending"
-                            on-click={ ($event) => this.handleSortClick($event, column, 'descending') }>
-                          </i>
-                        </span>) : ''
+                        column.sortable ? (
+                          <el-tooltip effect="dark" content={ column.order === 'ascending' ? '点击降序' : column.order === 'descending' ? '取消降序' : '点击升序' } placement="top">
+                            <span class="caret-wrapper" on-click={ ($event) => this.handleSortClick($event, column) }>
+                              <i class="sort-caret iov-icon-sort-up ascending"></i>
+                              <i class="sort-caret iov-icon-sort-down descending"></i>
+                            </span>
+                          </el-tooltip>) : ''
                       }
                       {
                         column.filterable ? (<span
@@ -517,6 +514,17 @@ export default {
 
     handleSortClick(event, column, givenOrder) {
       event.stopPropagation();
+
+      // 如果没有传入 givenOrder，则通过点击目标元素判断排序方向
+      if (!givenOrder) {
+        const target = event.target;
+        if (hasClass(target, 'ascending')) {
+          givenOrder = 'ascending';
+        } else if (hasClass(target, 'descending')) {
+          givenOrder = 'descending';
+        }
+      }
+
       let order = column.order === givenOrder
         ? null
         : (givenOrder || this.toggleOrder(column));
