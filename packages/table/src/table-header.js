@@ -110,7 +110,7 @@ export default {
                     class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }
                     key={ column.id }>
                     <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? '' : '', column.labelClassName] }>
-                      <span class="el-table__column-label">
+                      <span class="el-table__header-column-label">
                         {
                           column.renderHeader
                             ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })

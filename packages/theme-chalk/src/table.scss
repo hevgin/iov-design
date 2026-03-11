@@ -538,7 +538,7 @@
   @include e((header-wrapper, footer-wrapper)) {
     overflow: hidden;
 
-    .el-table__column-label {
+    .el-table__header-column-label {
       display: inline-block;
       vertical-align: middle;
     }
