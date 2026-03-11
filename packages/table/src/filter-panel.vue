@@ -84,12 +84,14 @@
       },
 
       handleConfirm() {
+        this.lastConfirmedValue = [...this.filteredValue];
         this.confirmFilter(this.filteredValue);
         this.handleOutsideClick();
       },
 
       handleReset() {
         this.filteredValue = [];
+        this.lastConfirmedValue = [];
         this.confirmFilter(this.filteredValue);
         this.handleOutsideClick();
       },
@@ -122,7 +124,8 @@
       return {
         table: null,
         cell: null,
-        column: null
+        column: null,
+        lastConfirmedValue: []
       };
     },
 
@@ -183,11 +186,18 @@
           Dropdown.close(this);
         }
       });
+
+      this.lastConfirmedValue = [...this.filteredValue];
     },
     watch: {
       showPopper(val) {
-        if (val === true && parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
-          this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+        if (val === true) {
+          if (parseInt(this.popperJS._popper.style.zIndex, 10) < PopupManager.zIndex) {
+            this.popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+          }
+          if (this.multiple) {
+            this.filteredValue = [...this.lastConfirmedValue];
+          }
         }
       }
     }
