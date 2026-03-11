@@ -128,7 +128,7 @@ export default {
                       }
                       {
                         column.filterable ? (<span
-                          class={ ['el-table__column-filter-trigger', column.filterConfirmed && column.filteredValue && column.filteredValue.length > 0 ? 'is-filtered' : ''] }
+                          class={ ['el-table__column-filter-trigger', column.filterConfirmed ? 'is-filtered' : ''] }
                           on-click={ ($event) => this.handleFilterClick($event, column) }>
                           <i class={ ['iov-icon-fill-filter'] }></i>
                         </span>) : ''
