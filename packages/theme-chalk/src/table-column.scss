@@ -16,6 +16,26 @@
   }
 }
 
+@include b(table-search) {
+  margin-top: 4px;
+  border: solid 1px $--color-line-2;
+  border-radius: 2px;
+  box-shadow: 0px 2px 8px 0px rgba(73,75,83,0.12);
+  border-radius: 4px;
+  background-color: #fff;
+  box-sizing: border-box;
+  @include e(content) {
+    padding: 8px;
+    min-width: 256px;
+    box-sizing: border-box;
+  }
+  @include e(bottom) {
+    padding: 0 8px 8px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
 @include b(table-filter) {
   margin-top: 4px;
   border: solid 1px $--color-line-2;

@@ -393,6 +393,10 @@
         this.store.clearFilter(columnKeys);
       },
 
+      clearSearch(columnKeys) {
+        this.store.clearSearch(columnKeys);
+      },
+
       clearSort() {
         this.store.clearSort();
       },
@@ -696,6 +700,13 @@
           this.store.commit('filterChange', {
             column,
             values: column.filteredValue,
+            silent: true
+          });
+        }
+        if (column.searchedValue) {
+          this.store.commit('searchChange', {
+            column,
+            value: column.searchedValue,
             silent: true
           });
         }

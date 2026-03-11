@@ -72,6 +72,7 @@ export const cellForced = {
       />;
     },
     sortable: false,
+    searchable: false,
     resizable: false
   },
   index: {
@@ -90,7 +91,8 @@ export const cellForced = {
 
       return <div>{ i }</div>;
     },
-    sortable: false
+    sortable: false,
+    searchable: false
   },
   expand: {
     renderHeader: function(h, { column }) {
@@ -111,6 +113,7 @@ export const cellForced = {
       </div>);
     },
     sortable: false,
+    searchable: false,
     resizable: false,
     className: 'el-table__expand-column'
   }

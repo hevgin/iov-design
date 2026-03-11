@@ -24,6 +24,11 @@ export default {
       type: [Boolean, String],
       default: false
     },
+    searchable: {
+      type: [Boolean, String],
+      default: false
+    },
+    searchPlaceholder: String,
     sortMethod: Function,
     sortBy: [String, Function, Array],
     resizable: {
@@ -201,7 +206,7 @@ export default {
     },
 
     registerNormalWatchers() {
-      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip'];
+      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'searchable', 'searchPlaceholder', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip'];
       // 一些属性具有别名
       const aliases = {
         prop: 'property',
@@ -265,6 +270,8 @@ export default {
 
     const type = this.type || 'default';
     const sortable = this.sortable === '' ? true : this.sortable;
+    const searchable = this.searchable === '' ? true : this.searchable;
+    const searchPlaceholder = this.searchPlaceholder || '请输入查询内容';
     const defaults = {
       ...cellStarts[type],
       id: this.columnId,
@@ -281,7 +288,9 @@ export default {
       isColumnGroup: false,
       filterOpened: false,
       // sort 相关属性
-      sortable: sortable,
+      sortable,
+      searchable,
+      searchPlaceholder,
       // index 列
       index: this.index,
       emptyValuePlaceholder: this.emptyValuePlaceholder || ''

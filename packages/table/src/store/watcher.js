@@ -69,6 +69,10 @@ export default Vue.extend({
         filters: {}, // 不可响应的
         filteredData: null,
 
+        // 搜索
+        searches: {}, // 不可响应的
+        searchedData: null,
+
         // 排序
         sortingColumn: null,
         sortProp: null,
@@ -385,6 +389,72 @@ export default Vue.extend({
       return filters;
     },
 
+    updateSearches(column, value) {
+      const states = this.states;
+      states.searches[column.id] = value;
+      const searches = {};
+      searches[column.columnKey || column.id] = value;
+      return searches;
+    },
+
+    clearSearch(columnKeys) {
+      const states = this.states;
+      const { tableHeader, fixedTableHeader, rightFixedTableHeader } = this.table.$refs;
+
+      // 收集所有已创建的 searchPanel 实例（面板懒创建，可能为空）
+      let panels = {};
+      if (tableHeader) panels = merge(panels, tableHeader.searchPanels);
+      if (fixedTableHeader) panels = merge(panels, fixedTableHeader.searchPanels);
+      if (rightFixedTableHeader) panels = merge(panels, rightFixedTableHeader.searchPanels);
+
+      if (typeof columnKeys === 'string') {
+        columnKeys = [columnKeys];
+      }
+
+      if (Array.isArray(columnKeys)) {
+        // 清除指定列的搜索条件
+        columnKeys.forEach(columnKey => {
+          const column = getColumnByKey(states, columnKey);
+          if (!column) return;
+
+          // 清除 state 中该列的搜索值
+          delete states.searches[column.id];
+
+          // 同步面板实例的显示值与列上的标记（面板可能尚未创建）
+          if (panels[column.id]) {
+            panels[column.id].searchValue = '';
+          }
+          Vue.set(column, 'searchedValue', '');
+        });
+
+        // 重新执行查询使数据恢复
+        this.execQuery();
+        this.updateTableScrollY();
+      } else {
+        // 无参数：清除所有列的搜索条件
+        // 清除所有面板实例的显示值与列标记
+        Object.keys(panels).forEach(key => {
+          const panel = panels[key];
+          panel.searchValue = '';
+          if (panel.column) {
+            Vue.set(panel.column, 'searchedValue', '');
+          }
+        });
+
+        // 兜底：遍历所有列清除 searchedValue（面板未创建的列也需要清除）
+        states.columns.forEach(column => {
+          if (column.searchedValue) {
+            Vue.set(column, 'searchedValue', '');
+          }
+        });
+
+        // 重置 searches map，重新查询
+        states.searches = {};
+        this.execQuery();
+        this.updateTableScrollY();
+      }
+    },
+
     updateSort(column, prop, order) {
       if (this.states.sortingColumn && this.states.sortingColumn !== column) {
         this.states.sortingColumn.order = null;
@@ -413,16 +483,42 @@ export default Vue.extend({
       states.filteredData = data;
     },
 
-    execSort() {
+    execSearch() {
       const states = this.states;
-      states.data = sortData(states.filteredData, states);
+      const { filteredData, searches } = states;
+      let data = filteredData;
+
+      Object.keys(searches).forEach((columnId) => {
+        const value = searches[columnId];
+        if (!value || value === '') return;
+        const column = getColumnById(this.states, columnId);
+        if (column) {
+          if (column.searchMethod) {
+            data = data.filter((row) => column.searchMethod.call(null, value, row, column));
+          } else if (column.property) {
+            data = data.filter((row) => {
+              const cellVal = row[column.property];
+              if (cellVal === null || cellVal === undefined) return false;
+              return String(cellVal).toLowerCase().indexOf(String(value).toLowerCase()) !== -1;
+            });
+          }
+        }
+      });
+
+      states.searchedData = data;
     },
 
-    // 根据 filters 与 sort 去过滤 data
+    execSort() {
+      const states = this.states;
+      states.data = sortData(states.searchedData, states);
+    },
+
+    // 根据 filters、search 与 sort 去过滤 data
     execQuery(ignore) {
       if (!(ignore && ignore.filter)) {
         this.execFilter();
       }
+      this.execSearch();
       this.execSort();
     },
 

@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { hasClass, addClass, removeClass } from 'iov-design/src/utils/dom';
 import ElCheckbox from 'iov-design/packages/checkbox';
 import FilterPanel from './filter-panel.vue';
+import SearchPanel from './search-panel.vue';
 import LayoutObserver from './layout-observer';
 import { mapStates } from './store/helper';
 import { toggleRowStatus } from './util';
@@ -125,9 +126,16 @@ export default {
                       }
                       {
                         column.filterable ? (<span
-                          class={ ['el-table__column-filter-trigger', column.filterConfirmed ? 'is-filtered' : ''] }
+                          class={ ['el-table__column-filter-trigger', column.filterConfirmed && column.filteredValue && column.filteredValue.length > 0 ? 'is-filtered' : ''] }
                           on-click={ ($event) => this.handleFilterClick($event, column) }>
                           <i class={ ['iov-icon-fill-filter'] }></i>
+                        </span>) : ''
+                      }
+                      {
+                        column.searchable ? (<span
+                          class={ ['el-table__column-search-trigger', column.searchedValue ? 'is-searched' : ''] }
+                          on-click={ ($event) => this.handleSearchClick($event, column) }>
+                          <i class={ ['iov-icon-search'] }></i>
                         </span>) : ''
                       }
                     </div>
@@ -230,6 +238,7 @@ export default {
 
   created() {
     this.filterPanels = {};
+    this.searchPanels = {};
   },
 
   mounted() {
@@ -246,6 +255,12 @@ export default {
     for (let prop in panels) {
       if (panels.hasOwnProperty(prop) && panels[prop]) {
         panels[prop].$destroy(true);
+      }
+    }
+    const searchPanels = this.searchPanels;
+    for (let prop in searchPanels) {
+      if (searchPanels.hasOwnProperty(prop) && searchPanels[prop]) {
+        searchPanels[prop].$destroy(true);
       }
     }
   },
@@ -314,6 +329,9 @@ export default {
       if (column.sortable) {
         classes.push('is-sortable');
       }
+      if (column.searchable) {
+        classes.push('is-searchable');
+      }
 
       const headerCellClassName = this.table.headerCellClassName;
       if (typeof headerCellClassName === 'string') {
@@ -352,6 +370,38 @@ export default {
       this.store.onSelectionChange(command);
     },
 
+    handleSearchClick(event, column) {
+      event.stopPropagation();
+      const target = event.target;
+      let cell = target.tagName === 'TH' ? target : target.parentNode;
+      if (hasClass(cell, 'noclick')) return;
+      cell = cell.querySelector('.el-table__column-search-trigger') || cell;
+      const table = this.$parent;
+
+      let searchPanel = this.searchPanels[column.id];
+
+      if (searchPanel && column.searchOpened) {
+        searchPanel.showPopper = false;
+        return;
+      }
+
+      if (!searchPanel) {
+        searchPanel = new Vue(SearchPanel);
+        this.searchPanels[column.id] = searchPanel;
+        if (column.searchPlacement) {
+          searchPanel.placement = column.searchPlacement;
+        }
+        searchPanel.table = table;
+        searchPanel.cell = cell;
+        searchPanel.column = column;
+        !this.$isServer && searchPanel.$mount(document.createElement('div'));
+      }
+
+      setTimeout(() => {
+        searchPanel.showPopper = true;
+      }, 16);
+    },
+
     handleFilterClick(event, column) {
       event.stopPropagation();
       const target = event.target;
@@ -385,10 +435,12 @@ export default {
     },
 
     handleHeaderClick(event, column) {
-      if (!column.filters && column.sortable) {
+      if (!column.filters && !column.searchable && column.sortable) {
         this.handleSortClick(event, column);
-      } else if (column.filterable && !column.sortable) {
+      } else if (column.filterable && !column.sortable && !column.searchable) {
         this.handleFilterClick(event, column);
+      } else if (column.searchable && !column.sortable && !column.filters) {
+        this.handleSearchClick(event, column);
       }
 
       this.$parent.$emit('header-click', column, event);

@@ -16,8 +16,8 @@
         </el-scrollbar>
       </div>
       <div class="el-table-filter__bottom">
-        <el-button size="small" @click="handleReset" :disabled="filteredValue.length === 0">重置</el-button>
-        <el-button size="small" type="info" @click="handleConfirm">确定</el-button>
+        <el-button size="mini" @click="handleReset" :disabled="filteredValue.length === 0">重置</el-button>
+        <el-button size="mini" type="info" @click="handleConfirm">确定</el-button>
       </div>
     </div>
     <div
@@ -68,7 +68,7 @@
     props: {
       placement: {
         type: String,
-        default: 'bottom-end'
+        default: 'bottom'
       }
     },
 

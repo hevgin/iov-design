@@ -113,6 +113,19 @@ Watcher.prototype.mutations = {
     this.updateTableScrollY();
   },
 
+  searchChange(states, options) {
+    const { column, value, silent } = options;
+    const newSearches = this.updateSearches(column, value);
+
+    this.execQuery();
+
+    if (!silent) {
+      this.table.$emit('search-change', newSearches);
+    }
+
+    this.updateTableScrollY();
+  },
+
   toggleAllSelection() {
     this.toggleAllSelection();
   },
