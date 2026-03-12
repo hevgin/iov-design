@@ -1,5 +1,6 @@
 <style lang="scss">
 .page-theme {
+  width: 1140px;
   &:last-child {
     margin-bottom: 55px;
   }
@@ -39,8 +40,8 @@
       <h2><%= 1 ></h2>
       <ul>
         <li class="theme-card" v-for="item in officialTheme" :key="item.name">
-          <theme-card 
-            type="official" 
+          <theme-card
+            type="official"
             :config="item"
             @action="onAction"
           ></theme-card>
@@ -51,14 +52,14 @@
       <h2><%= 2 > ({{userThemeCount}}/{{maxUserTheme}})</h2>
       <ul>
         <li class="theme-card" v-if="showUserUpload">
-          <theme-card 
-            type="upload" 
+          <theme-card
+            type="upload"
             :config="{name: 'upload'}"
             @action="onAction"
           ></theme-card>
         </li>
         <li class="theme-card" v-for="item in displayUserTheme" :key="item.name">
-          <theme-card 
+          <theme-card
             type="user"
             :config="item"
             @action="onAction"

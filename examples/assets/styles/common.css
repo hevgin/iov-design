@@ -14,7 +14,7 @@ html, body {
 
 #app {
   height: 100%;
-  
+
   &.is-component {
     overflow-y: hidden;
 
@@ -31,10 +31,10 @@ html, body {
       left: 0;
       top: 0;
       z-index: 1500;
-      
-      .container {
+
+      /* .container {
         padding: 0;
-      }
+      } */
     }
   }
 }
@@ -79,7 +79,7 @@ button, input, select, textarea {
 
 .container,
 .page-container {
-  width: 1140px;
+  /* width: 1140px; */
   padding: 0;
   margin: 0 auto;
 }

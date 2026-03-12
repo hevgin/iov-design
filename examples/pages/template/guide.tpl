@@ -1,5 +1,6 @@
 <style>
   .page-guide {
+    width: 1140px;
     padding: 55px 30px 95px;
     box-sizing: border-box;
 

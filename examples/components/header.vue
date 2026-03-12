@@ -18,6 +18,7 @@
       height: 100%;
       box-sizing: border-box;
       border-bottom: 1px solid #DCDFE6;
+      padding: 0 48px;
     }
 
     .nav-lang-spe {
@@ -100,6 +101,9 @@
 
       &.nav-algolia-search {
         cursor: default;
+        display: flex;
+        align-items: center;
+        height: 100%
       }
 
       &.lang-item,
