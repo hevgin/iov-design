@@ -401,7 +401,7 @@
           } else {
             this.currentPlaceholder = this.cachedPlaceHolder;
           }
-          if (this.filterable && !this.reserveKeyword) {
+          if (this.filterable && !this.reserveKeyword && !this.visible) {
             this.query = '';
             this.handleQueryChange(this.query);
           }
@@ -771,8 +771,8 @@
           this.$emit('input', value);
           this.emitChange(value);
           if (option.created) {
-            this.query = '';
-            this.handleQueryChange('');
+            // this.query = '';
+            // this.handleQueryChange('');
             this.inputLength = 20;
           }
           if (this.filterable) this.$refs.input.focus();
