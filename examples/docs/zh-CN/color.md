@@ -51,6 +51,19 @@
         if (window.userThemeConfig) {
           this.global = window.userThemeConfig.global;
         }
+      },
+      copyText(text) {
+        navigator.clipboard.writeText(`$--color-${text}`).then(() => {
+          this.$message({
+            message: '复制成功',
+            type: 'success'
+          });
+        }).catch(() => {
+          this.$message({
+            message: '复制失败',
+            type: 'error'
+          });
+        });
       }
     },
     data() {
@@ -70,7 +83,17 @@
         borderBase: '',
         borderLight: '',
         borderLighter: '',
-        borderExtraLight: ''
+        borderExtraLight: '',
+        // iovDesignPrimary: '#3F57FF',
+        iovDesingPrimarys: [
+          { color: '#F0F4FD', label: 'primary-1', desc: '警告提示背景/下拉菜单选中' },
+          { color: '#E6ECFE', label: 'primary-2', desc: '边框禁用/TAB选中/日期范围背景' },
+          { color: '#C0CDFF', label: 'primary-3', desc: '按钮的图标文字禁用/次要描边' },
+          { color: '#8399FF', label: 'primary-4', desc: '特殊场景' },
+          { color: '#6179FF', label: 'primary-5', desc: '悬停色' },
+          { color: '#3F57FF', label: 'primary-6', desc: '基色/常规' },
+          { color: '#2735D2', label: 'primary-7', desc: '点击色' },
+        ]
       }
     },
     watch: {
@@ -123,11 +146,11 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
     <div class="demo-color-box"
     :style="{ background: success }"
     >Success<div class="value">#67C23A</div>
-      <div 
+      <div
         class="bg-color-sub"
       >
-        <div 
-          class="bg-success-sub-item" 
+        <div
+          class="bg-success-sub-item"
           v-for="(item, key) in Array(2)"
           :key="key"
           :style="{ background: tintColor(success, (key + 8) / 10) }"
@@ -140,11 +163,11 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
     <div class="demo-color-box"
     :style="{ background: warning }"
     >Warning<div class="value">#E6A23C</div>
-      <div 
+      <div
           class="bg-color-sub"
         >
-        <div 
-          class="bg-success-sub-item" 
+        <div
+          class="bg-success-sub-item"
           v-for="(item, key) in Array(2)"
           :key="key"
           :style="{ background: tintColor(warning, (key + 8) / 10) }"
@@ -157,11 +180,11 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
     <div class="demo-color-box"
     :style="{ background: danger }"
     >Danger<div class="value">#F56C6C</div>
-      <div 
+      <div
           class="bg-color-sub"
         >
-        <div 
-          class="bg-success-sub-item" 
+        <div
+          class="bg-success-sub-item"
           v-for="(item, key) in Array(2)"
           :key="key"
           :style="{ background: tintColor(danger, (key + 8) / 10) }"
@@ -174,11 +197,11 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
     <div class="demo-color-box"
     :style="{ background: info }"
     >Info<div class="value">#909399</div>
-      <div 
+      <div
           class="bg-color-sub"
         >
-        <div 
-          class="bg-success-sub-item" 
+        <div
+          class="bg-success-sub-item"
           v-for="(item, key) in Array(2)"
           :key="key"
           :style="{ background: tintColor(info, (key + 8) / 10) }"
@@ -229,7 +252,7 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
   </el-col>
   <el-col :span="6" :xs="{span: 12}">
     <div class="demo-color-box-group">
-      <div 
+      <div
       class="demo-color-box demo-color-box-other"
       :style="{ background: black }"
       >基础黑色<div class="value">{{black}}</div></div>
@@ -242,3 +265,36 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
     </div>
   </el-col>
 </el-row>
+
+
+### IOV DESIGN 色彩
+
+#### 主题色
+
+主题色是产品中最核心、最高频使用的颜色，它常用于主要按钮和文字、重点操作状态、高亮提醒、空状态等，并在很大程度上决定了产品整体的基调和风格。IOV Design 以 [#2F48FF数智蓝] 作为默认主题色，蕴含了数智运营、科技创新的品牌特性，色彩倾向在稳重中透露出些许品牌活力和年轻化，在中后台设计中也具有广泛的普适性。
+另外我们也支持根据算法，基于配置的产品主色，通过动态梯度色彩算法自动生成适合的色板。
+
+<el-row class="iov-design-primary-color" type="flex" gutter="10">
+  <el-col
+    v-for="(item, index) in iovDesingPrimarys"
+    :key="index"
+    :span="6"
+    :xs="{span: 12}"
+  >
+    <div
+      class="demo-color-box"
+      :style="{'background-color': item.color}"
+    >
+      <div>{{item.color}}</div>
+    </div>
+    <div class="iov-design-color-desc-box">
+      <div>
+        <span>css变量: $--color-{{item.label}}</span>
+        <i class="el-icon-copy-document" @click="copyText(item.label)"></i>
+      </div>
+      <div>{{item.desc}}</div>
+    </div>
+  </el-col>
+</el-row>
+
+

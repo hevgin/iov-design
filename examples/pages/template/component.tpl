@@ -109,6 +109,12 @@
         color: #909399;
       }
 
+      .anchor-level-4 {
+        padding-left: 30px;
+        font-size: 12px;
+        color: #909399;
+      }
+
       /* 高亮当前锚点 */
       .anchor-nav__item.is-active {
         color: #409eff;
@@ -320,7 +326,7 @@
       extractAnchors() {
         if (/changelog/g.test(location.href)) return;
         this.anchorList = [];
-        const headingElements = document.querySelectorAll('.content h3[id]');
+        const headingElements = document.querySelectorAll('.content h3[id], .content h4[id]');
         headingElements.forEach(el => {
           const text = el.textContent.replace(/[^a-zA-Z0-9\u4e00-\u9fa5_\-\. ]/g, '').trim()
           this.anchorList.push({

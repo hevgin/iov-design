@@ -70,3 +70,22 @@
 .demo-color-box-lite {
   color: #303133;
 }
+
+.iov-design-primary-color {
+  flex-wrap: wrap;
+  .demo-color-box {
+    height: 70px;
+    line-height: 30px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .iov-design-color-desc-box {
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    color: #5e6d82;
+  }
+}
