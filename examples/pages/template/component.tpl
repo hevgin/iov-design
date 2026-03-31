@@ -341,7 +341,7 @@
         if (!targetEl || !this.componentScrollBox) return;
         this.componentScrollBox.scrollTop = targetEl.offsetTop - 20;
         this.activeAnchorId = anchorId;
-        window.history.replaceState(null, '', `#${anchorId}`);
+        // window.history.replaceState(null, '', `#${anchorId}`);
       },
       highlightActiveAnchor(scrollTop) {
         if (this.anchorList.length === 0) return;

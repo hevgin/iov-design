@@ -93,7 +93,70 @@
           { color: '#6179FF', label: 'primary-5', desc: '悬停色' },
           { color: '#3F57FF', label: 'primary-6', desc: '基色/常规' },
           { color: '#2735D2', label: 'primary-7', desc: '点击色' },
-        ]
+        ],
+        iovDesignLine: [
+          { color: '#EDEFF3', label: 'line-1', desc: '分割线/表格、列表分割线' },
+          { color: '#DCDFE6', label: 'line-2', desc: '输入控件描边、文字按钮分割、按钮描边' },
+          { color: '#D2D5DF', label: 'line-3', desc: '单选、复选框/树结构符号' },
+          { color: '#C3C7D1', label: 'line-4', desc: '灰背景下的分割线/流程引导线' },
+          { color: '#E9EBF0', label: 'line-5', desc: '大型数据展示模块描边' },
+        ],
+        iovDesignFill: [
+          { color: '#FFFFFF', label: 'fill-white', desc: '白色填充' },
+          { color: '#F6F7F8', label: 'fill-1', desc: '按钮背景/表头/下拉菜单、表格悬停色/输入控件禁用背景' },
+          { color: '#F2F3F5', label: 'line-2', desc: '标签背景/输入框、选择器背景/图标按钮背景' },
+          { color: '#E5E6EB', label: 'line-3', desc: '灰背景下的标签背景、按钮悬停色' },
+          { color: '#ABAFB5', label: 'line-4', desc: '表头图标、解释说明、按钮图标禁用' },
+          { color: '#777D87', label: 'line-5', desc: '输入控件图标色' },
+          { color: '#494B53', label: 'line-6', desc: '灰背景下图标色' },
+          { color: '#212026', label: 'line-7', desc: '深色图标色' },
+          { color: '#0D1722', label: 'line-8', desc: '深色按钮背景色' },
+        ],
+        iovDesignText: [
+          { color: '#C6C7CA', label: 'text-1', desc: '默认文案' },
+          { color: '#A2A3AA', label: 'text-2', desc: '文字禁用/提示文案' },
+          { color: '#6B707A', label: 'text-3', desc: 'TABS未选中/已输入禁用' },
+          { color: '#65677A', label: 'text-4', desc: 'lebal字色/图表标题' },
+          { color: '#3D4158', label: 'text-5', desc: '表头文字/TABS选中/面包屑选中' },
+          { color: '#212026', label: 'text-6', desc: '按钮文字/正文' },
+          { color: '#0D1722', label: 'text-7', desc: '楼层标题/导航菜单选中/TABS' },
+        ],
+        iovDesignWarning: [
+          { color: '#FFF7E8', label: 'warning-1', desc: '浅色/白底悬停' },
+          { color: '#FFE4BA', label: 'warning-2', desc: '文字禁用' },
+          { color: '#FFCF8B', label: 'warning-3', desc: '一般禁用' },
+          { color: '#FFB65D', label: 'warning-4', desc: '特殊场景' },
+          { color: '#FF9A2E', label: 'warning-5', desc: '悬停色' },
+          { color: '#FF7D00', label: 'warning-6', desc: '常规' },
+          { color: '#D25F00', label: 'warning-7', desc: '点击色' },
+        ],
+        iovDesignSuccess: [
+          { color: '#EFF9F3', label: 'success-1', desc: '浅色/白底悬停' },
+          { color: '#B8F0C7', label: 'success-2', desc: '文字禁用' },
+          { color: '#8CE0A5', label: 'success-3', desc: '一般禁用' },
+          { color: '#65D189', label: 'success-4', desc: '特殊场景' },
+          { color: '#42C170', label: 'success-5', desc: '悬停色' },
+          { color: '#23B25D', label: 'success-6', desc: '常规' },
+          { color: '#17994F', label: 'success-7', desc: '点击色' },
+        ],
+        iovDesignError: [
+          { color: '#FFF1F1', label: 'danger-1', desc: '浅色/白底悬停' },
+          { color: '#FDCDC5', label: 'danger-2', desc: '文字禁用' },
+          { color: '#FBACA3', label: 'danger-3', desc: '一般禁用' },
+          { color: '#F98981', label: 'danger-4', desc: '特殊场景' },
+          { color: '#F76560', label: 'danger-5', desc: '悬停色' },
+          { color: '#F53F3F', label: 'danger-6', desc: '常规' },
+          { color: '#CB272D', label: 'danger-7', desc: '点击色' },
+        ],
+        iovDesignFailed: [
+          { color: '#EFF3F7', label: 'grey-1', desc: '浅色/白底悬停' },
+          { color: '#CED9E4', label: 'grey-2', desc: '文字禁用' },
+          { color: '#B5BECA', label: 'grey-3', desc: '一般禁用' },
+          { color: '#9CA4AF', label: 'grey-4', desc: '特殊场景' },
+          { color: '#838A95', label: 'grey-5', desc: '悬停色' },
+          { color: '#6B707A', label: 'grey-6', desc: '常规' },
+          { color: '#49546F', label: 'grey-7', desc: '点击色' },
+        ],
       }
     },
     watch: {
@@ -274,9 +337,38 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
 主题色是产品中最核心、最高频使用的颜色，它常用于主要按钮和文字、重点操作状态、高亮提醒、空状态等，并在很大程度上决定了产品整体的基调和风格。IOV Design 以 [#2F48FF数智蓝] 作为默认主题色，蕴含了数智运营、科技创新的品牌特性，色彩倾向在稳重中透露出些许品牌活力和年轻化，在中后台设计中也具有广泛的普适性。
 另外我们也支持根据算法，基于配置的产品主色，通过动态梯度色彩算法自动生成适合的色板。
 
-<el-row class="iov-design-primary-color" type="flex" gutter="10">
+<el-row class="iov-design-color" type="flex" :gutter="12">
   <el-col
     v-for="(item, index) in iovDesingPrimarys"
+    :key="index"
+    :span="6"
+    :xs="{span: 12}"
+  >
+    <div
+      class="demo-color-box"
+      :style="{'background-color': item.color, color: tintColor('#212026', 0.1) }"
+    >
+      <div>{{item.color}}</div>
+    </div>
+    <div class="iov-design-color-desc-box">
+      <div>
+        <span>css变量: $--color-{{item.label}}</span>
+        <i class="el-icon-copy-document" @click="copyText(item.label)"></i>
+      </div>
+      <div class="color-desc">{{item.desc}}</div>
+    </div>
+  </el-col>
+</el-row>
+
+#### 中性色
+
+中性色又称为无彩色系，能在产品界面中调和色彩搭配，衬托主色及其他色彩，同时有利于拉开内容层次，使用户更专注于内容。主要被大量的应用在界面的文字部分，此外背景、边框、分割线等场景中也非常常见。IOV Design根据过往业务经验，提供了适合线条、填充和文字的带一定品牌色倾向的中性色参考色。
+
+##### 线条 Line
+
+<el-row type="flex" class="iov-design-color" :gutter="12">
+  <el-col
+    v-for="(item, index) in iovDesignLine"
     :key="index"
     :span="6"
     :xs="{span: 12}"
@@ -292,9 +384,137 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
         <span>css变量: $--color-{{item.label}}</span>
         <i class="el-icon-copy-document" @click="copyText(item.label)"></i>
       </div>
-      <div>{{item.desc}}</div>
+      <div class="color-desc">{{item.desc}}</div>
     </div>
   </el-col>
 </el-row>
 
 
+##### 填充 Fill
+
+<el-row type="flex" class="iov-design-color" :gutter="12">
+  <el-col
+    v-for="(item, index) in iovDesignFill"
+    :key="index"
+    :span="6"
+    :xs="{span: 12}"
+  >
+    <div
+      class="demo-color-box"
+      :style="{'background-color': item.color, color: tintColor('#212026', 0.7) }"
+    >
+      <div>{{item.color}}</div>
+    </div>
+    <div class="iov-design-color-desc-box">
+      <div>
+        <span>css变量: $--color-{{item.label}}</span>
+        <i class="el-icon-copy-document" @click="copyText(item.label)"></i>
+      </div>
+      <div class="color-desc">{{item.desc}}</div>
+    </div>
+  </el-col>
+</el-row>
+
+##### 文字 Text
+
+<el-row type="flex" class="iov-design-color" :gutter="12">
+  <el-col
+    v-for="(item, index) in iovDesignText"
+    :key="index"
+    :span="6"
+    :xs="{span: 12}"
+  >
+    <div
+      class="demo-color-box"
+      :style="{'background-color': item.color, color: tintColor('#212026', 0.7) }"
+    >
+      <div>{{item.color}}</div>
+    </div>
+    <div class="iov-design-color-desc-box">
+      <div>
+        <span>css变量: $--color-{{item.label}}</span>
+        <i class="el-icon-copy-document" @click="copyText(item.label)"></i>
+      </div>
+      <div class="color-desc">{{item.desc}}</div>
+    </div>
+  </el-col>
+</el-row>
+
+#### 功能色
+
+功能色代表了明确的信息以及状态，比如成功、出错、失败、提醒、链接等。我们定义了4种功能色，在遵循色彩通用含义选取色相的基础上，从视觉一致性的角度选取了与品牌色更具一致关系的色调，并结合WCAG2.0标准综合考量，使其达到可用性标准。我们建议在一套产品体系下，功能色尽量保持一致，不要有过多的自定义干扰用户的认知体验。
+
+##### 警示色
+
+<el-row type="flex" class="iov-design-color" :gutter="12">
+  <el-col
+    v-for="(item, index) in iovDesignWarning"
+    :key="index"
+    :span="6"
+    :xs="{span: 12}"
+  >
+    <div
+      class="demo-color-box"
+      :style="{'background-color': item.color}"
+    >
+      <div>{{item.color}}</div>
+    </div>
+    <div class="iov-design-color-desc-box">
+      <div>
+        <span>css变量: $--color-{{item.label}}</span>
+        <i class="el-icon-copy-document" @click="copyText(item.label)"></i>
+      </div>
+      <div class="color-desc">{{item.desc}}</div>
+    </div>
+  </el-col>
+</el-row>
+
+##### 成功色
+
+<el-row type="flex" class="iov-design-color" :gutter="12">
+  <el-col
+    v-for="(item, index) in iovDesignSuccess"
+    :key="index"
+    :span="6"
+    :xs="{span: 12}"
+  >
+    <div
+      class="demo-color-box"
+      :style="{'background-color': item.color}"
+    >
+      <div>{{item.color}}</div>
+    </div>
+    <div class="iov-design-color-desc-box">
+      <div>
+        <span>css变量: $--color-{{item.label}}</span>
+        <i class="el-icon-copy-document" @click="copyText(item.label)"></i>
+      </div>
+      <div class="color-desc">{{item.desc}}</div>
+    </div>
+  </el-col>
+</el-row>
+
+##### 错误色
+
+<el-row type="flex" class="iov-design-color" :gutter="12">
+  <el-col
+    v-for="(item, index) in iovDesignError"
+    :key="index"
+    :span="6"
+    :xs="{span: 12}"
+  >
+    <div
+      class="demo-color-box"
+      :style="{'background-color': item.color}"
+    >
+      <div>{{item.color}}</div>
+    </div>
+    <div class="iov-design-color-desc-box">
+      <div>
+        <span>css变量: $--color-{{item.label}}</span>
+        <i class="el-icon-copy-document" @click="copyText(item.label)"></i>
+      </div>
+      <div class="color-desc">{{item.desc}}</div>
+    </div>
+  </el-col>
+</el-row>

@@ -71,21 +71,35 @@
   color: #303133;
 }
 
-.iov-design-primary-color {
+.iov-design-color {
   flex-wrap: wrap;
   .demo-color-box {
+    color: #212026;
     height: 70px;
     line-height: 30px;
     text-align: center;
     box-sizing: border-box;
+    margin-bottom: 0;
+    margin-top: 12px;
+    border-radius: 4px 4px 0 0;
   }
   .iov-design-color-desc-box {
-    height: 50px;
+    height: 60px;
+    padding: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 12px;
     color: #5e6d82;
+    border: 1px solid #DCDFE6;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+  }
+  .color-desc {
+    margin-top: 8px;
+  }
+  .el-icon-copy-document {
+    margin-left: 5px;
   }
 }
