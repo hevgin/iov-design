@@ -1,51 +1,135 @@
 @import "../common/var";
 
 @include b(year-table) {
-  font-size: 12px;
-  margin: -1px;
+  font-size: 13px;
   border-collapse: collapse;
 
-  .el-icon {
-    color: $--datepicker-icon-color;
-  }
-
-  td {
-    text-align: center;
-    padding: 20px 3px;
-    cursor: pointer;
-
-    &.today {
-      .cell {
-        color: $--color-primary;
-        font-weight: bold;
+  tr td:nth-child(2) {
+    width: 100px;
+    &.start-date {
+      .year-grid {
+        margin-left: 16px;
+        border-top-left-radius: 24px;
+        border-bottom-left-radius: 24px;
+      }
+      .year-cell {
+        margin-left: 4px;
       }
     }
 
-    &.disabled .cell {
-      background-color: $--background-color-base;
-      cursor: not-allowed;
-      color: $--color-text-placeholder;
+    &.end-date {
+      .year-grid {
+        margin-right: 16px;
+        border-top-right-radius: 24px;
+        border-bottom-right-radius: 24px;
+      }
+      .year-cell {
+        margin-right: 4px;
+      }
+    }
+  }
 
-      &:hover {
-        color: $--color-text-placeholder;
+  td {
+    width: 68px;
+    height: 32px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 500;
+    .year-grid {
+      height: 32px;
+      margin: 4px 0;
+      padding: 4px 0;
+      box-sizing: border-box;
+    }
+    .year-cell {
+      margin: 0 auto;
+      width: 60px;
+    }
+    &.today {
+      .cell {
+        position: relative;
+        &:after {
+          content: '';
+          width: 4px;
+          height: 4px;
+          border-radius: 2px;
+          background: $--color-primary-6;
+          position: absolute;
+          bottom: -4px;
+          left: 50%;
+          margin-left: -2px;
+        }
+      }
+      &.start-date .cell,
+      &.end-date .cell {
+        color: #fff;
+      }
+    }
+
+    &.disabled div {
+      background-color: $--color-fill-1;
+      cursor: not-allowed;
+      .cell {
+        color: $--color-text-2;
+        &:hover {
+          background: none;
+        }
       }
     }
 
     .cell {
-      width: 48px;
-      height: 32px;
+      width: 60px;
+      height: 24px;
       display: block;
-      line-height: 32px;
-      color: $--datepicker-font-color;
+      line-height: 24px;
+      color: $--color-text-6;
       margin: 0 auto;
-
+      border-radius: 12px;
+      transition: background .2s ease;
       &:hover {
-        color: $--datepicker-hover-font-color;
+        background: $--color-fill-2;
+      }
+    }
+
+    &.in-range {
+      .year-grid {
+        background-color: $--color-primary-2;
+      }
+    }
+    &.in-range:not(.start-date):not(.end-date) {
+      .cell:hover {
+        background: none;
+      }
+    }
+    &.start-date .cell,
+    &.end-date .cell {
+      color: #fff;
+      background-color: $--color-primary-6;
+      &:after {
+        display: none;
+      }
+    }
+
+    &.start-date {
+      .year-grid {
+        border-top-left-radius: 24px;
+        border-bottom-left-radius: 24px;
+      }
+    }
+
+    &.end-date {
+      .year-grid {
+        border-top-right-radius: 24px;
+        border-bottom-right-radius: 24px;
       }
     }
 
     &.current:not(.disabled) .cell {
-      color: $--datepicker-active-color;
+      background: $--color-primary-6;
+      color: #fff;
+      &:after {
+        display: none;
+      }
     }
   }
 }

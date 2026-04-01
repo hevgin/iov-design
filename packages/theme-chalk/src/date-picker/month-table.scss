@@ -1,82 +1,135 @@
 @import "../common/var";
 
 @include b(month-table) {
-  font-size: 12px;
-  margin: -1px;
+  font-size: 13px;
   border-collapse: collapse;
 
+  tr td:nth-child(2) {
+    width: 100px;
+    &.start-date {
+      .month-grid {
+        margin-left: 16px;
+        border-top-left-radius: 24px;
+        border-bottom-left-radius: 24px;
+      }
+      .month-cell {
+        margin-left: 4px;
+      }
+    }
+
+    &.end-date {
+      .month-grid {
+        margin-right: 16px;
+        border-top-right-radius: 24px;
+        border-bottom-right-radius: 24px;
+      }
+      .month-cell {
+        margin-right: 4px;
+      }
+    }
+  }
+
   td {
+    width: 68px;
+    height: 32px;
     text-align: center;
-    padding: 8px 0px;
     cursor: pointer;
-    & div {
-      height: 48px;
-      padding: 6px 0;
+    font-weight: 500;
+    .month-grid {
+      height: 32px;
+      margin: 4px 0;
+      padding: 4px 0;
       box-sizing: border-box;
+    }
+    .month-cell {
+      margin: 0 auto;
+      width: 60px;
     }
     &.today {
       .cell {
-        color: $--color-primary;
-        font-weight: bold;
+        position: relative;
+        &:after {
+          content: '';
+          width: 4px;
+          height: 4px;
+          border-radius: 2px;
+          background: $--color-primary-6;
+          position: absolute;
+          bottom: -4px;
+          left: 50%;
+          margin-left: -2px;
+        }
       }
       &.start-date .cell,
       &.end-date .cell {
-        color: $--color-white;
+        color: #fff;
       }
     }
 
-    &.disabled .cell {
-      background-color: $--background-color-base;
+    &.disabled div {
+      background-color: $--color-fill-1;
       cursor: not-allowed;
-      color: $--color-text-placeholder;
-
-      &:hover {
-        color: $--color-text-placeholder;
+      .cell {
+        color: $--color-text-2;
+        &:hover {
+          background: none;
+        }
       }
     }
 
     .cell {
       width: 60px;
-      height: 36px;
+      height: 24px;
       display: block;
-      line-height: 36px;
-      color: $--datepicker-font-color;
+      line-height: 24px;
+      color: $--color-text-6;
       margin: 0 auto;
-      border-radius: 18px;
+      border-radius: 12px;
+      transition: background .2s ease;
       &:hover {
-        color: $--datepicker-hover-font-color;
+        background: $--color-fill-2;
       }
     }
 
-    &.in-range div {
-      background-color: $--datepicker-inrange-background-color;
-      &:hover {
-        background-color: $--datepicker-inrange-hover-background-color;
+    &.in-range {
+      .month-grid {
+        background-color: $--color-primary-2;
       }
     }
-    &.start-date div,
-    &.end-date div {
-      color: $--color-white;
+    &.in-range:not(.start-date):not(.end-date) {
+      .cell:hover {
+        background: none;
+      }
     }
-
     &.start-date .cell,
     &.end-date .cell {
-      color: $--color-white;
-      background-color: $--datepicker-active-color;
+      color: #fff;
+      background-color: $--color-primary-6;
+      &:after {
+        display: none;
+      }
     }
 
-    &.start-date div {
-      border-top-left-radius: 24px;
-      border-bottom-left-radius: 24px;
+    &.start-date {
+      .month-grid {
+        border-top-left-radius: 24px;
+        border-bottom-left-radius: 24px;
+      }
     }
 
-    &.end-date div {
-      border-top-right-radius: 24px;
-      border-bottom-right-radius: 24px;
+    &.end-date {
+      .month-grid {
+        border-top-right-radius: 24px;
+        border-bottom-right-radius: 24px;
+      }
     }
 
     &.current:not(.disabled) .cell {
-      color: $--datepicker-active-color;
+      background: $--color-primary-6;
+      color: #fff;
+      &:after {
+        display: none;
+      }
     }
   }
 }

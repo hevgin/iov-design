@@ -1,13 +1,11 @@
 @import "../common/var";
 
 @include b(picker-panel) {
-  color: $--color-text-regular;
-  border: 1px solid $--datepicker-border-color;
-  box-shadow: $--box-shadow-light;
+  color: $--color-text-6;
+  border: 1px solid $--color-line-1;
+  box-shadow: 0px 2px 8px 0px rgba(73,75,83,0.12);
   background: $--color-white;
-  border-radius: $--border-radius-base;
-  line-height: 30px;
-  margin: 5px 0;
+  border-radius: 4px;
   .popper__arrow {
     display: none !important;
   }
@@ -20,18 +18,40 @@
     }
   }
 
+  &--week {
+    width: 300px;
+  }
+  &--month, &--months,
+  &--year, &--years {
+    .el-picker-panel__content {
+      margin: 8px 16px;
+    }
+  }
+
   @include e(content) {
     position: relative;
-    margin: 15px;
+    margin: 12px 16px;
   }
 
   @include e(footer) {
-    border-top: 1px solid $--datepicker-inner-border-color;
-    padding: 4px;
-    text-align: right;
-    background-color: $--color-white;
+    padding: 0 12px;
+    border-top: 1px solid $--color-line-1;
     position: relative;
     font-size: 0;
+    height: 42px;
+    line-height: 42px;
+    text-align: center;
+    box-sizing: border-box;
+    &--flex-between {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    &--flex-end {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
   }
 
   @include e(shortcut) {
@@ -39,16 +59,19 @@
     width: 100%;
     border: 0;
     background-color: transparent;
-    line-height: 28px;
-    font-size: 14px;
-    color: $--datepicker-font-color;
-    padding-left: 12px;
-    text-align: left;
+    line-height: 32px;
+    font-size: 13px;
+    font-weight: 500;
+    color: $--color-text-6;
     outline: none;
     cursor: pointer;
+    transition: background ease .2s;
+    border-radius: 2px;
+    padding-left: 12px;
+    box-sizing: border-box;
 
     &:hover {
-      color: $--datepicker-hover-font-color;
+      background: $--color-fill-1;
     }
 
     &.active {
@@ -75,16 +98,25 @@
   }
 
   @include e(icon-btn) {
-    font-size: 12px;
-    color: $--datepicker-icon-color;
-    border: 0;
-    background: transparent;
+    font-size: 14px;
+    color: $--color-fill-5;
+    border: 0 none;
     cursor: pointer;
     outline: none;
-    margin-top: 8px;
+    border-radius: 2px;
+    width: 24px;
+    height: 24px;
+    transition: background ease .2s;
+    position: relative;
+    &:before {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -7px 0 0 -7px;
+    }
 
     &:hover {
-      color: $--datepicker-hover-font-color;
+      background: $--color-fill-1;
     }
 
     @include when(disabled) {
@@ -106,15 +138,16 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 110px;
-  border-right: 1px solid $--datepicker-inner-border-color;
+  width: 98px;
+  border-right: 1px solid $--color-line-1;
   box-sizing: border-box;
-  padding-top: 6px;
-  background-color: $--color-white;
+  padding: 8px;
+  background-color: #fff;
   overflow: auto;
+  border-radius: 4px 0 0 4px;
 }
 
 .el-picker-panel *[slot=sidebar] + .el-picker-panel__body,
 .el-picker-panel__sidebar + .el-picker-panel__body {
-  margin-left: 110px;
+  margin-left: 98px;
 }

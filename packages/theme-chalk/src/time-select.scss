@@ -5,7 +5,8 @@
 @import "./popper";
 
 .time-select {
-  margin: 5px 0;
+  margin: 4px 0;
+  padding: 4px;
   min-width: 0;
 }
 
@@ -15,23 +16,30 @@
 }
 
 .time-select-item {
-  padding: 8px 10px;
-  font-size: 14px;
-  line-height: 20px;
+  padding: 0 12px;
+  font-size: 13px;
+  line-height: 32px;
+  box-sizing: border-box;
+  font-weight: 400;
+  border-radius: 2px;
+  transition: all ease .2s;
+  cursor: pointer;
 }
 
 .time-select-item.selected:not(.disabled) {
-  color: $--color-primary;
-  font-weight: bold;
+  color: $--color-text-6;
+  font-weight: 500;
+  background-color: $--color-primary-1;
 }
 
 .time-select-item.disabled {
-  color: $--datepicker-border-color;
+  color: $--color-text-2;
   cursor: not-allowed;
+  &:hover {
+    background-color: transparent;
+  }
 }
 
 .time-select-item:hover {
-  background-color: $--background-color-base;
-  font-weight: bold;
-  cursor: pointer;
+  background-color: $--color-fill-1;
 }

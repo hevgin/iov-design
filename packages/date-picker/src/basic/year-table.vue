@@ -1,43 +1,97 @@
 <template>
-  <table @click="handleYearTableClick" class="el-year-table">
+  <table @click="handleYearTableClick" class="el-year-table" cellspacing="0" cellpadding="0">
     <tbody>
     <tr>
       <td class="available" :class="getCellStyle(startYear + 0)">
-        <a class="cell">{{ startYear }}</a>
+         <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear }}</a>
+          </div>
+         </div>
       </td>
       <td class="available" :class="getCellStyle(startYear + 1)">
-        <a class="cell">{{ startYear + 1 }}</a>
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 1 }}</a>
+          </div>
+         </div>
       </td>
       <td class="available" :class="getCellStyle(startYear + 2)">
-        <a class="cell">{{ startYear + 2 }}</a>
-      </td>
-      <td class="available" :class="getCellStyle(startYear + 3)">
-        <a class="cell">{{ startYear + 3 }}</a>
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 2 }}</a>
+          </div>
+         </div>
       </td>
     </tr>
     <tr>
+      <td class="available" :class="getCellStyle(startYear + 3)">
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 3 }}</a>
+          </div>
+         </div>
+      </td>
       <td class="available" :class="getCellStyle(startYear + 4)">
-        <a class="cell">{{ startYear + 4 }}</a>
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 4 }}</a>
+          </div>
+         </div>
       </td>
       <td class="available" :class="getCellStyle(startYear + 5)">
-        <a class="cell">{{ startYear + 5 }}</a>
-      </td>
-      <td class="available" :class="getCellStyle(startYear + 6)">
-        <a class="cell">{{ startYear + 6 }}</a>
-      </td>
-      <td class="available" :class="getCellStyle(startYear + 7)">
-        <a class="cell">{{ startYear + 7 }}</a>
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 5 }}</a>
+          </div>
+         </div>
       </td>
     </tr>
     <tr>
+      <td class="available" :class="getCellStyle(startYear + 6)">
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 6 }}</a>
+          </div>
+         </div>
+      </td>
+      <td class="available" :class="getCellStyle(startYear + 7)">
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 7 }}</a>
+          </div>
+         </div>
+      </td>
       <td class="available" :class="getCellStyle(startYear + 8)">
-        <a class="cell">{{ startYear + 8 }}</a>
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 8 }}</a>
+          </div>
+         </div>
       </td>
+    </tr>
+    <tr>
       <td class="available" :class="getCellStyle(startYear + 9)">
-        <a class="cell">{{ startYear + 9 }}</a>
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 9 }}</a>
+          </div>
+         </div>
       </td>
-      <td></td>
-      <td></td>
+      <td class="available" :class="getCellStyle(startYear + 10)">
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 10 }}</a>
+          </div>
+         </div>
+      </td>
+      <td class="available" :class="getCellStyle(startYear + 11)">
+        <div class="year-grid">
+          <div class="year-cell">
+            <a class="cell">{{ startYear + 11 }}</a>
+          </div>
+         </div>
+      </td>
     </tr>
     </tbody>
   </table>
@@ -70,7 +124,7 @@
 
     computed: {
       startYear() {
-        return Math.floor(this.date.getFullYear() / 10) * 10;
+        return Math.floor(this.date.getFullYear() / 12) * 12;
       }
     },
 
@@ -90,20 +144,21 @@
       },
 
       handleYearTableClick(event) {
-        const target = event.target;
-        if (target.tagName === 'A') {
-          if (hasClass(target.parentNode, 'disabled')) return;
-          const year = target.textContent || target.innerText;
-          if (this.selectionMode === 'years') {
-            const value = this.value || [];
-            const idx = arrayFindIndex(value, date => date.getFullYear() === Number(year));
-            const newValue = idx > -1
-              ? [...value.slice(0, idx), ...value.slice(idx + 1)]
-              : [...value, new Date(year)];
-            this.$emit('pick', newValue);
-          } else {
-            this.$emit('pick', Number(year));
-          }
+        let target = event.target;
+        if (target.tagName === 'A') target = target.parentNode.parentNode;
+        if (target.tagName === 'DIV') target = target.parentNode;
+        if (target.tagName !== 'TD') return;
+        if (hasClass(target, 'disabled')) return;
+        const year = target.textContent || target.innerText;
+        if (this.selectionMode === 'years') {
+          const value = this.value || [];
+          const idx = arrayFindIndex(value, date => date.getFullYear() === Number(year));
+          const newValue = idx > -1
+            ? [...value.slice(0, idx), ...value.slice(idx + 1)]
+            : [...value, new Date(year)];
+          this.$emit('pick', newValue);
+        } else {
+          this.$emit('pick', Number(year));
         }
       }
     }

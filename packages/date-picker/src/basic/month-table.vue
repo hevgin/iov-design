@@ -1,10 +1,12 @@
 <template>
-  <table @click="handleMonthTableClick" @mousemove="handleMouseMove" class="el-month-table">
+  <table @click="handleMonthTableClick" @mousemove="handleMouseMove" cellspacing="0" cellpadding="0" class="el-month-table">
     <tbody>
     <tr v-for="(row, key) in rows" :key="key">
       <td :class="getCellStyle(cell)" v-for="(cell, key) in row" :key="key">
-        <div>
-          <a class="cell">{{ t('el.datepicker.months.' + months[cell.text]) }}</a>
+        <div class="month-grid">
+          <div class="month-cell">
+            <a class="cell">{{ t('el.datepicker.months.' + months[cell.text]) }}</a>
+          </div>
         </div>
       </td>
     </tr>
@@ -38,13 +40,11 @@
     }
   };
 
-  // remove the first element that satisfies `pred` from arr
-  // return a new array if modification occurs
-  // return the original array otherwise
   const removeFromArray = function(arr, pred) {
     const idx = typeof pred === 'function' ? arrayFindIndex(arr, pred) : arr.indexOf(pred);
     return idx >= 0 ? [...arr.slice(0, idx), ...arr.slice(idx + 1)] : arr;
   };
+
   export default {
     props: {
       disabledDate: {},
@@ -53,11 +53,9 @@
         default: 'month'
       },
       minDate: {},
-
       maxDate: {},
       defaultValue: {
         validator(val) {
-          // null or valid Date Object
           return val === null || isDate(val) || (Array.isArray(val) && val.every(isDate));
         }
       },
@@ -78,13 +76,11 @@
       'rangeState.endDate'(newVal) {
         this.markRange(this.minDate, newVal);
       },
-
       minDate(newVal, oldVal) {
         if (getMonthTimestamp(newVal) !== getMonthTimestamp(oldVal)) {
           this.markRange(this.minDate, this.maxDate);
         }
       },
-
       maxDate(newVal, oldVal) {
         if (getMonthTimestamp(newVal) !== getMonthTimestamp(oldVal)) {
           this.markRange(this.minDate, this.maxDate);
@@ -95,7 +91,8 @@
     data() {
       return {
         months: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-        tableRows: [ [], [], [] ],
+        // ✅ 改为 4 行
+        tableRows: [ [], [], [], [] ],
         lastRow: null,
         lastColumn: null
       };
@@ -121,14 +118,8 @@
 
         if (cell.inRange) {
           style['in-range'] = true;
-
-          if (cell.start) {
-            style['start-date'] = true;
-          }
-
-          if (cell.end) {
-            style['end-date'] = true;
-          }
+          if (cell.start) style['start-date'] = true;
+          if (cell.end) style['end-date'] = true;
         }
         return style;
       },
@@ -144,11 +135,10 @@
         for (let i = 0, k = rows.length; i < k; i++) {
           const row = rows[i];
           for (let j = 0, l = row.length; j < l; j++) {
-
             const cell = row[j];
-            const index = i * 4 + j;
+            // ✅ 每行 3 列，索引计算改为 i * 3 + j
+            const index = i * 3 + j;
             const time = new Date(this.date.getFullYear(), index).getTime();
-
             cell.inRange = minDate && time >= minDate && time <= maxDate;
             cell.start = minDate && time === minDate;
             cell.end = maxDate && time === maxDate;
@@ -159,21 +149,14 @@
         if (!this.rangeState.selecting) return;
 
         let target = event.target;
-        if (target.tagName === 'A') {
-          target = target.parentNode.parentNode;
-        }
-        if (target.tagName === 'DIV') {
-          target = target.parentNode;
-        }
+        if (target.tagName === 'A') target = target.parentNode.parentNode;
+        if (target.tagName === 'DIV') target = target.parentNode;
         if (target.tagName !== 'TD') return;
 
         const row = target.parentNode.rowIndex;
         const column = target.cellIndex;
-        // can not select disabled date
         if (this.rows[row][column].disabled) return;
 
-        // only update rangeState when mouse moves to a new cell
-        // this avoids frequent Date object creation and improves performance
         if (row !== this.lastRow || column !== this.lastColumn) {
           this.lastRow = row;
           this.lastColumn = column;
@@ -182,25 +165,25 @@
             maxDate: this.maxDate,
             rangeState: {
               selecting: true,
-              endDate: this.getMonthOfCell(row * 4 + column)
+              // ✅ 改为 row * 3 + column
+              endDate: this.getMonthOfCell(row * 3 + column)
             }
           });
         }
       },
       handleMonthTableClick(event) {
         let target = event.target;
-        if (target.tagName === 'A') {
-          target = target.parentNode.parentNode;
-        }
-        if (target.tagName === 'DIV') {
-          target = target.parentNode;
-        }
+        if (target.tagName === 'A') target = target.parentNode.parentNode;
+        if (target.tagName === 'DIV') target = target.parentNode;
         if (target.tagName !== 'TD') return;
         if (hasClass(target, 'disabled')) return;
+
         const column = target.cellIndex;
         const row = target.parentNode.rowIndex;
-        const month = row * 4 + column;
+        // ✅ 改为 row * 3 + column
+        const month = row * 3 + column;
         const newDate = this.getMonthOfCell(month);
+
         if (this.selectionMode === 'range') {
           if (!this.rangeState.selecting) {
             this.$emit('pick', {minDate: newDate, maxDate: null});
@@ -228,15 +211,15 @@
 
     computed: {
       rows() {
-        // TODO: refactory rows / getCellClasses
         const rows = this.tableRows;
         const disabledDate = this.disabledDate;
         const selectedDate = [];
         const now = getMonthTimestamp(new Date());
 
-        for (let i = 0; i < 3; i++) {
+        // ✅ 外层循环改为 4 行，内层循环改为 3 列
+        for (let i = 0; i < 4; i++) {
           const row = rows[i];
-          for (let j = 0; j < 4; j++) {
+          for (let j = 0; j < 3; j++) {
             let cell = row[j];
             if (!cell) {
               cell = { row: i, column: j, type: 'normal', inRange: false, start: false, end: false };
@@ -244,16 +227,15 @@
 
             cell.type = 'normal';
 
-            const index = i * 4 + j;
+            // ✅ 索引计算改为 i * 3 + j
+            const index = i * 3 + j;
             const time = new Date(this.date.getFullYear(), index).getTime();
             cell.inRange = time >= getMonthTimestamp(this.minDate) && time <= getMonthTimestamp(this.maxDate);
             cell.start = this.minDate && time === getMonthTimestamp(this.minDate);
             cell.end = this.maxDate && time === getMonthTimestamp(this.maxDate);
-            const isToday = time === now;
 
-            if (isToday) {
-              cell.type = 'today';
-            }
+            if (time === now) cell.type = 'today';
+
             cell.text = index;
             let cellDate = new Date(time);
             cell.disabled = typeof disabledDate === 'function' && disabledDate(cellDate);

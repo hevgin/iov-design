@@ -10,14 +10,57 @@
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">
-          <button
-            type="button"
+          <div
             class="el-picker-panel__shortcut"
             v-for="(shortcut, key) in shortcuts"
             :key="key"
-            @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
+            @click="handleShortcutClick(shortcut)">{{shortcut.text}}</div>
         </div>
         <div class="el-picker-panel__body">
+          <div class="el-date-range-picker__header">
+            <div class="el-date-picker__header">
+              <i
+                @click="leftPrevYear"
+                class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-double-left-mini"></i>
+              <i
+                @click="leftPrevMonth"
+                class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-left"></i>
+              <i
+                @click="leftNextYear"
+                v-if="unlinkPanels"
+                :disabled="!enableYearArrow"
+                :class="{ 'is-disabled': !enableYearArrow }"
+                class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-double-right-mini"></i>
+              <i
+                @click="leftNextMonth"
+                v-if="unlinkPanels"
+                :disabled="!enableMonthArrow"
+                :class="{ 'is-disabled': !enableMonthArrow }"
+                class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-right"></i>
+              <div class="el-date-picker__header-label">{{ leftLabel }}</div>
+            </div>
+            <div class="el-date-picker__header">
+              <i
+                @click="rightPrevYear"
+                v-if="unlinkPanels"
+                :disabled="!enableYearArrow"
+                :class="{ 'is-disabled': !enableYearArrow }"
+                class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-double-left-mini"></i>
+              <i
+                @click="rightPrevMonth"
+                v-if="unlinkPanels"
+                :disabled="!enableMonthArrow"
+                :class="{ 'is-disabled': !enableMonthArrow }"
+                class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-left"></i>
+              <i
+                @click="rightNextYear"
+                class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-double-right-mini"></i>
+              <i
+                @click="rightNextMonth"
+                class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-right"></i>
+              <div class="el-date-picker__header-label">{{ rightLabel }}</div>
+            </div>
+          </div>
           <div class="el-date-range-picker__time-header" v-if="showTime">
             <span class="el-date-range-picker__editors-wrap">
               <span class="el-date-range-picker__time-picker-wrap">
@@ -84,85 +127,37 @@
               </span>
             </span>
           </div>
-          <div class="el-picker-panel__content el-date-range-picker__content is-left">
-            <div class="el-date-range-picker__header">
-              <button
-                type="button"
-                @click="leftPrevYear"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
-              <button
-                type="button"
-                @click="leftPrevMonth"
-                class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
-              <button
-                type="button"
-                @click="leftNextYear"
-                v-if="unlinkPanels"
-                :disabled="!enableYearArrow"
-                :class="{ 'is-disabled': !enableYearArrow }"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-              <button
-                type="button"
-                @click="leftNextMonth"
-                v-if="unlinkPanels"
-                :disabled="!enableMonthArrow"
-                :class="{ 'is-disabled': !enableMonthArrow }"
-                class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
-              <div>{{ leftLabel }}</div>
+          <div class="el-date-range-picker__content">
+            <div class="el-picker-panel__content is-left">
+              <date-table
+                selection-mode="range"
+                :date="leftDate"
+                :default-value="defaultValue"
+                :min-date="minDate"
+                :max-date="maxDate"
+                :range-state="rangeState"
+                :disabled-date="disabledDate"
+                :cell-class-name="cellClassName"
+                @changerange="handleChangeRange"
+                :first-day-of-week="firstDayOfWeek"
+                @pick="handleRangePick">
+              </date-table>
             </div>
-            <date-table
-              selection-mode="range"
-              :date="leftDate"
-              :default-value="defaultValue"
-              :min-date="minDate"
-              :max-date="maxDate"
-              :range-state="rangeState"
-              :disabled-date="disabledDate"
-              :cell-class-name="cellClassName"
-              @changerange="handleChangeRange"
-              :first-day-of-week="firstDayOfWeek"
-              @pick="handleRangePick">
-            </date-table>
-          </div>
-          <div class="el-picker-panel__content el-date-range-picker__content is-right">
-            <div class="el-date-range-picker__header">
-              <button
-                type="button"
-                @click="rightPrevYear"
-                v-if="unlinkPanels"
-                :disabled="!enableYearArrow"
-                :class="{ 'is-disabled': !enableYearArrow }"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
-              <button
-                type="button"
-                @click="rightPrevMonth"
-                v-if="unlinkPanels"
-                :disabled="!enableMonthArrow"
-                :class="{ 'is-disabled': !enableMonthArrow }"
-                class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
-              <button
-                type="button"
-                @click="rightNextYear"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-              <button
-                type="button"
-                @click="rightNextMonth"
-                class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
-              <div>{{ rightLabel }}</div>
+            <div class="el-picker-panel__content is-right">
+              <date-table
+                selection-mode="range"
+                :date="rightDate"
+                :default-value="defaultValue"
+                :min-date="minDate"
+                :max-date="maxDate"
+                :range-state="rangeState"
+                :disabled-date="disabledDate"
+                :cell-class-name="cellClassName"
+                @changerange="handleChangeRange"
+                :first-day-of-week="firstDayOfWeek"
+                @pick="handleRangePick">
+              </date-table>
             </div>
-            <date-table
-              selection-mode="range"
-              :date="rightDate"
-              :default-value="defaultValue"
-              :min-date="minDate"
-              :max-date="maxDate"
-              :range-state="rangeState"
-              :disabled-date="disabledDate"
-              :cell-class-name="cellClassName"
-              @changerange="handleChangeRange"
-              :first-day-of-week="firstDayOfWeek"
-              @pick="handleRangePick">
-            </date-table>
           </div>
         </div>
       </div>
@@ -231,11 +226,11 @@
       },
 
       leftLabel() {
-        return this.leftDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.leftDate.getMonth() + 1 }`);
+        return this.leftDate.getFullYear() + '-' + ((this.leftDate.getMonth() + 1) < 10 ? '0' + (this.leftDate.getMonth() + 1) : (this.leftDate.getMonth() + 1));
       },
 
       rightLabel() {
-        return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.rightDate.getMonth() + 1 }`);
+        return this.rightDate.getFullYear() + '-' + ((this.rightDate.getMonth() + 1) < 10 ? '0' + (this.rightDate.getMonth() + 1) : (this.rightDate.getMonth() + 1));
       },
 
       leftYear() {

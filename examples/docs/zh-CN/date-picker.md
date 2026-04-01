@@ -14,6 +14,7 @@
     <span class="demonstration">默认</span>
     <el-date-picker
       v-model="value1"
+      :picker-options="pickerOptions1"
       type="date"
       placeholder="选择日期">
       <template slot="prefixLabel">选择日期</template>
@@ -26,7 +27,7 @@
       align="right"
       type="date"
       placeholder="选择日期"
-      :picker-options="pickerOptions">
+      :picker-options="pickerOptions2">
     </el-date-picker>
   </div>
 </template>
@@ -35,7 +36,12 @@
   export default {
     data() {
       return {
-        pickerOptions: {
+        pickerOptions1: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          }
+        },
+        pickerOptions2: {
           disabledDate(time) {
             return time.getTime() > Date.now();
           },
@@ -80,6 +86,7 @@
     <span class="demonstration">周</span>
     <el-date-picker
       v-model="value1"
+      :picker-options="pickerOptions"
       type="week"
       format="yyyy 第 WW 周"
       placeholder="选择周">
@@ -90,6 +97,7 @@
     <el-date-picker
       v-model="value2"
       type="month"
+      :picker-options="pickerOptions"
       placeholder="选择月">
     </el-date-picker>
   </div>
@@ -100,6 +108,7 @@
     <el-date-picker
       v-model="value3"
       type="year"
+      :picker-options="pickerOptions"
       placeholder="选择年">
     </el-date-picker>
   </div>
@@ -135,6 +144,11 @@
   export default {
     data() {
       return {
+        pickerOptions: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          }
+        },
         value1: '',
         value2: '',
         value3: '',
@@ -185,7 +199,7 @@
       return {
         pickerOptions: {
           shortcuts: [{
-            text: '最近一周',
+            text: '近7天',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -193,7 +207,7 @@
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: '最近一个月',
+            text: '近1个月',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -201,7 +215,7 @@
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: '最近三个月',
+            text: '近3个月',
             onClick(picker) {
               const end = new Date();
               const start = new Date();

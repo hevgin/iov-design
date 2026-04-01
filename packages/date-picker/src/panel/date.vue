@@ -5,17 +5,18 @@
       class="el-picker-panel el-date-picker el-popper"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
-        'has-time': showTime
+        'has-time': showTime,
+        [`el-picker-panel--${selectionMode}`]: true
       }, popperClass]">
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">
-          <button
+          <div
             type="button"
             class="el-picker-panel__shortcut"
             v-for="(shortcut, key) in shortcuts"
             :key="key"
-            @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</button>
+            @click="handleShortcutClick(shortcut)">{{ shortcut.text }}</div>
         </div>
         <div class="el-picker-panel__body">
           <div class="el-date-picker__time-header" v-if="showTime">
@@ -49,42 +50,41 @@
             class="el-date-picker__header"
             :class="{ 'el-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
             v-show="currentView !== 'time'">
-            <button
-              type="button"
+            <i
               @click="prevYear"
               :aria-label="t(`el.datepicker.prevYear`)"
-              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-d-arrow-left">
-            </button>
-            <button
-              type="button"
+              class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-double-left-mini">
+            </i>
+            <i
               @click="prevMonth"
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.prevMonth`)"
-              class="el-picker-panel__icon-btn el-date-picker__prev-btn el-icon-arrow-left">
-            </button>
+              class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-left">
+            </i>
             <span
               @click="showYearPicker"
               role="button"
               class="el-date-picker__header-label">{{ yearLabel }}</span>
+              <span
+              v-show="currentView === 'date'"
+              class="el-date-picker__header-label">-</span>
             <span
               @click="showMonthPicker"
               v-show="currentView === 'date'"
               role="button"
               class="el-date-picker__header-label"
-              :class="{ active: currentView === 'month' }">{{t(`el.datepicker.month${ month + 1 }`)}}</span>
-            <button
-              type="button"
+              :class="{ active: currentView === 'month' }">{{monthLabel}}</span>
+            <i
               @click="nextYear"
               :aria-label="t(`el.datepicker.nextYear`)"
-              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-d-arrow-right">
-            </button>
-            <button
-              type="button"
+              class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-double-right-mini">
+            </i>
+            <i
               @click="nextMonth"
               v-show="currentView === 'date'"
               :aria-label="t(`el.datepicker.nextMonth`)"
-              class="el-picker-panel__icon-btn el-date-picker__next-btn el-icon-arrow-right">
-            </button>
+              class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-right">
+            </i>
           </div>
 
           <div class="el-picker-panel__content">
@@ -92,6 +92,7 @@
               v-show="currentView === 'date'"
               @pick="handleDatePick"
               :selection-mode="selectionMode"
+              :show-week-number="selectionMode === 'week'"
               :first-day-of-week="firstDayOfWeek"
               :value="value"
               :default-value="defaultValue ? new Date(defaultValue) : null"
@@ -121,19 +122,27 @@
         </div>
       </div>
 
+      <div v-if="showToday" class="el-picker-panel__footer">
+        <el-link type="primary" size="small" @click="changeToToday">{{ t('el.datepicker.today') }}</el-link>
+      </div>
+
       <div
         class="el-picker-panel__footer"
+        :class="[{
+          'el-picker-panel__footer--flex-between': selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years',
+          'el-picker-panel__footer--flex-end': !(selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years')
+        }]"
         v-show="footerVisible && (currentView === 'date' || currentView === 'month' || currentView === 'year')">
-        <el-button
-          size="mini"
-          type="text"
+        <el-link
+          type="primary"
+          size="small"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
           v-show="selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years'">
           {{ t('el.datepicker.now') }}
-        </el-button>
+        </el-link>
         <el-button
-          plain
+          type="info"
           size="mini"
           class="el-picker-panel__link-btn"
           @click="confirm">
@@ -293,7 +302,7 @@
 
       prevYear() {
         if (this.currentView === 'year') {
-          this.date = prevYear(this.date, 10);
+          this.date = prevYear(this.date, 12);
         } else {
           this.date = prevYear(this.date);
         }
@@ -301,7 +310,7 @@
 
       nextYear() {
         if (this.currentView === 'year') {
-          this.date = nextYear(this.date, 10);
+          this.date = nextYear(this.date, 12);
         } else {
           this.date = nextYear(this.date);
         }
@@ -375,6 +384,13 @@
           // TODO: should emit intermediate value ??
           // this.emit(this.date, true);
           this.currentView = 'month';
+        }
+      },
+
+      changeToToday() {
+        if ((!this.disabledDate || !this.disabledDate(new Date())) && this.checkDateWithinRange(new Date())) {
+          this.date = new Date();
+          this.emit(this.date);
         }
       },
 
@@ -523,7 +539,7 @@
         defaultValue: null, // use getDefaultValue() for time computation
         defaultTime: null,
         showTime: false,
-        selectionMode: 'day',
+        selectionMode: 'day', // day, dates, week, month, months, year, years
         shortcuts: '',
         visible: false,
         currentView: 'date',
@@ -557,6 +573,10 @@
         return this.date.getDate();
       },
 
+      showToday() {
+        return this.currentView === 'date' && this.shortcuts.length === 0 && !['dates', 'months', 'years', 'week'].includes(this.selectionMode);
+      },
+
       footerVisible() {
         return this.showTime || this.selectionMode === 'dates' || this.selectionMode === 'months' || this.selectionMode === 'years';
       },
@@ -578,15 +598,16 @@
       },
 
       yearLabel() {
-        const yearTranslation = this.t('el.datepicker.year');
         if (this.currentView === 'year') {
-          const startYear = Math.floor(this.year / 10) * 10;
-          if (yearTranslation) {
-            return startYear + ' ' + yearTranslation + ' - ' + (startYear + 9) + ' ' + yearTranslation;
-          }
-          return startYear + ' - ' + (startYear + 9);
+          const startYear = Math.floor(this.year / 12) * 12;
+          return startYear + ' - ' + (startYear + 11);
         }
-        return this.year + ' ' + yearTranslation;
+        return this.year;
+      },
+
+      monthLabel() {
+        const value = this.month + 1;
+        return value < 10 ? '0' + value : '' + value;
       },
 
       timeFormat() {

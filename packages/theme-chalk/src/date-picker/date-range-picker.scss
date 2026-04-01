@@ -1,10 +1,10 @@
 @import "../common/var";
 
 @include b(date-range-picker) {
-  width: 646px;
+  width: 536px;
 
   &.has-sidebar {
-    width: 756px;
+    width: 634px;
   }
 
   table {
@@ -13,49 +13,27 @@
   }
 
   .el-picker-panel__body {
-    min-width: 513px;
-  }
-
-  .el-picker-panel__content {
-    margin: 0;
+    min-width: 536px;
   }
 
   @include e(header) {
     position: relative;
-    text-align: center;
-    height: 28px;
-
-    [class*=arrow-left] {
+    display: flex;
+    .el-date-picker__header {
+      flex: 1;
+    }
+    [class*=double-left-mini] {
       float: left;
     }
-
-    [class*=arrow-right] {
+    [class*=double-right-mini] {
       float: right;
-    }
-
-    div {
-      font-size: 16px;
-      font-weight: 500;
-      margin-right: 50px;
     }
   }
 
   @include e(content) {
-    float: left;
-    width: 50%;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 16px;
-
-    @include when(left) {
-      border-right: 1px solid $--datepicker-inner-border-color;
-    }
-    .el-date-range-picker__header {
-
-      div {
-        margin-left: 50px;
-        margin-right: 50px;
-      }
+    display: flex;
+    .el-picker-panel__content {
+      flex: 1;
     }
   }
 

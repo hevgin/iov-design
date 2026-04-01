@@ -9,67 +9,71 @@
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">
-          <button
+          <div
             type="button"
             class="el-picker-panel__shortcut"
             v-for="(shortcut, key) in shortcuts"
             :key="key"
-            @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
+            @click="handleShortcutClick(shortcut)">{{shortcut.text}}</div>
         </div>
         <div class="el-picker-panel__body">
-          <div class="el-picker-panel__content el-date-range-picker__content is-left">
-            <div class="el-date-range-picker__header">
-              <button
+          <div class="el-date-range-picker__header">
+            <div class="el-date-picker__header">
+              <i
                 type="button"
                 @click="leftPrevYear"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
-              <button
+                class="el-picker-panel__icon-btn iov-icon-double-left-mini"></i>
+              <i
                 type="button"
                 v-if="unlinkPanels"
                 @click="leftNextYear"
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-              <div>{{ leftLabel }}</div>
+                class="el-picker-panel__icon-btn iov-icon-double-right-mini"></i>
+              <span class="el-date-picker__header-label">{{ leftLabel }}</span>
             </div>
-            <month-table
-              selection-mode="range"
-              :date="leftDate"
-              :default-value="defaultValue"
-              :min-date="minDate"
-              :max-date="maxDate"
-              :range-state="rangeState"
-              :disabled-date="disabledDate"
-              @changerange="handleChangeRange"
-              @pick="handleRangePick">
-            </month-table>
-          </div>
-          <div class="el-picker-panel__content el-date-range-picker__content is-right">
-            <div class="el-date-range-picker__header">
-              <button
+            <div class="el-date-picker__header">
+              <i
                 type="button"
                 v-if="unlinkPanels"
                 @click="rightPrevYear"
                 :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
-              <button
+                class="el-picker-panel__icon-btn iov-icon-double-left-mini"></i>
+              <i
                 type="button"
                 @click="rightNextYear"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-              <div>{{ rightLabel }}</div>
+                class="el-picker-panel__icon-btn iov-icon-double-right-mini"></i>
+              <span class="el-date-picker__header-label">{{ rightLabel }}</span>
             </div>
-            <month-table
-              selection-mode="range"
-              :date="rightDate"
-              :default-value="defaultValue"
-              :min-date="minDate"
-              :max-date="maxDate"
-              :range-state="rangeState"
-              :disabled-date="disabledDate"
-              @changerange="handleChangeRange"
-              @pick="handleRangePick">
-            </month-table>
+          </div>
+          <div class="el-date-range-picker__content">
+            <div class="el-picker-panel__content">
+              <month-table
+                selection-mode="range"
+                :date="leftDate"
+                :default-value="defaultValue"
+                :min-date="minDate"
+                :max-date="maxDate"
+                :range-state="rangeState"
+                :disabled-date="disabledDate"
+                @changerange="handleChangeRange"
+                @pick="handleRangePick">
+              </month-table>
+            </div>
+            <div class="el-picker-panel__content">
+              <month-table
+                selection-mode="range"
+                :date="rightDate"
+                :default-value="defaultValue"
+                :min-date="minDate"
+                :max-date="maxDate"
+                :range-state="rangeState"
+                :disabled-date="disabledDate"
+                @changerange="handleChangeRange"
+                @pick="handleRangePick">
+              </month-table>
+            </div>
           </div>
         </div>
       </div>
@@ -111,11 +115,11 @@
       },
 
       leftLabel() {
-        return this.leftDate.getFullYear() + ' ' + this.t('el.datepicker.year');
+        return this.leftDate.getFullYear();
       },
 
       rightLabel() {
-        return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year');
+        return this.rightDate.getFullYear();
       },
 
       leftYear() {
