@@ -157,6 +157,71 @@
           { color: '#6B707A', label: 'grey-6', desc: '常规' },
           { color: '#49546F', label: 'grey-7', desc: '点击色' },
         ],
+        iovDesignOther: [
+          [
+            { color: '#E8EFFF', label: 'Darkblue-1', desc: '' },
+            { color: '#CAD9FF', label: 'Darkblue-2', desc: '' },
+            { color: '#ADC1FF', label: 'Darkblue-3', desc: '' },
+            { color: '#8FA7FF', label: 'Darkblue-4', desc: '' },
+            { color: '#728CFF', label: 'Darkblue-5', desc: '' },
+            { color: '#546EFF', label: 'Darkblue-6', desc: '' },
+            { color: '#3446D2', label: 'Darkblue-7', desc: '' },
+          ],
+          [
+            { color: '#E8F7FF', label: 'Blue-1', desc: '' },
+            { color: '#BEE7FF', label: 'Blue-2', desc: '' },
+            { color: '#94D4FF', label: 'Blue-3', desc: '' },
+            { color: '#6ABEFF', label: 'Blue-4', desc: '' },
+            { color: '#40A6FF', label: 'Blue-5', desc: '' },
+            { color: '#168CFF', label: 'Blue-6', desc: '' },
+            { color: '#0E69D2', label: 'Blue-7', desc: '' },
+          ],
+          [
+            { color: '#FFFCE8', label: 'Gold-1', desc: '' },
+            { color: '#FDF4BF', label: 'Gold-2', desc: '' },
+            { color: '#FCE996', label: 'Gold-3', desc: '' },
+            { color: '#FADC6D', label: 'Gold-4', desc: '' },
+            { color: '#F9CC45', label: 'Gold-5', desc: '' },
+            { color: '#F7BA1E', label: 'Gold-6', desc: '' },
+            { color: '#CC9213', label: 'Gold-7', desc: '' },
+          ],
+          [
+            { color: '#F5E8FF', label: 'Purple-1', desc: '' },
+            { color: '#DDBEF6', label: 'Purple-2', desc: '' },
+            { color: '#C396ED', label: 'Purple-3', desc: '' },
+            { color: '#A871E3', label: 'Purple-4', desc: '' },
+            { color: '#8D4EDA', label: 'Purple-5', desc: '' },
+            { color: '#722ED1', label: 'Purple-6', desc: '' },
+            { color: '#551DB0', label: 'Purple-7', desc: '' },
+          ],
+          [
+            { color: '#F0E8FF', label: 'Mauve-1', desc: '' },
+            { color: '#DDCEFF', label: 'Mauve-2', desc: '' },
+            { color: '#C8B4FF', label: 'Mauve-3', desc: '' },
+            { color: '#B29AFF', label: 'Mauve-4', desc: '' },
+            { color: '#9980FF', label: 'Mauve-5', desc: '' },
+            { color: '#8066FF', label: 'Mauve-6', desc: '' },
+            { color: '#533FD2', label: 'Mauve-7', desc: '' },
+          ],
+          [
+            { color: '#FFE8FB', label: 'Pink-1', desc: '' },
+            { color: '#F7BAEF', label: 'Pink-2', desc: '' },
+            { color: '#F08EE6', label: 'Pink-3', desc: '' },
+            { color: '#E865DF', label: 'Pink-4', desc: '' },
+            { color: '#E13EDB', label: 'Pink-5', desc: '' },
+            { color: '#D91AD9', label: 'Pink-6', desc: '' },
+            { color: '#B010B6', label: 'Pink-7', desc: '' },
+          ],
+          [
+            { color: '#FFF1E8', label: 'Salmon-1', desc: '' },
+            { color: '#FFDAC4', label: 'Salmon-2', desc: '' },
+            { color: '#FFC0A1', label: 'Salmon-3', desc: '' },
+            { color: '#FEA47D', label: 'Salmon-4', desc: '' },
+            { color: '#FE8559', label: 'Salmon-5', desc: '' },
+            { color: '#FE6536', label: 'Salmon-6', desc: '' },
+            { color: '#D24521', label: 'Salmon-7', desc: '' },
+          ]
+        ],
       }
     },
     watch: {
@@ -499,6 +564,33 @@ Element 主要品牌颜色是鲜艳、友好的蓝色。
 <el-row type="flex" class="iov-design-color" :gutter="12">
   <el-col
     v-for="(item, index) in iovDesignError"
+    :key="index"
+    :span="6"
+    :xs="{span: 12}"
+  >
+    <div
+      class="demo-color-box"
+      :style="{'background-color': item.color}"
+    >
+      <div>{{item.color}}</div>
+    </div>
+    <div class="iov-design-color-desc-box">
+      <div>
+        <span>css变量: $--color-{{item.label}}</span>
+        <i class="el-icon-copy-document" @click="copyText(item.label)"></i>
+      </div>
+      <div class="color-desc">{{item.desc}}</div>
+    </div>
+  </el-col>
+</el-row>
+
+#### 扩展色
+
+扩展色是一系列由功能色扩展而成的颜色。在有更多颜色需求的场景中（如数据可视化场景、插画场景）。同样采用了 HCT 及插值拟合曲线的方法，除了功能色蓝、红、黄、绿之外，IOV Design 色彩体系也增加了其余色系的辅助扩展色。
+
+<el-row type="flex" class="iov-design-color" :gutter="12" v-for="(value, key) in iovDesignOther" :key="key">
+  <el-col
+    v-for="(item, index) in value"
     :key="index"
     :span="6"
     :xs="{span: 12}"
