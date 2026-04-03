@@ -16,6 +16,7 @@ import './demo-styles/index.scss';
 import './assets/styles/common.css';
 import './assets/styles/fonts/style.css';
 import icon from './icon.json';
+import iovDesignIcon from './iovDesignIcon.json';
 
 Vue.use(Element);
 Vue.use(VueRouter);
@@ -39,6 +40,17 @@ Vue.mixin({
 });
 
 Vue.prototype.$icon = icon; // Icon 列表页用
+Vue.prototype.$iovDesignLine = iovDesignIcon.iovDesignLine; // Icon 列表页用
+Vue.prototype.$iovDesignTips = iovDesignIcon.iovDesignTips; // Icon 列表页用
+Vue.prototype.$iovDesignChangeBtn = iovDesignIcon.iovDesignChangeBtn; // Icon 列表页用
+Vue.prototype.$iovDesignEdit = iovDesignIcon.iovDesignEdit; // Icon 列表页用
+Vue.prototype.$iovDesignCommon = iovDesignIcon.iovDesignCommon; // Icon 列表页用
+Vue.prototype.$iovDesignOperation = iovDesignIcon.iovDesignOperation; // Icon 列表页用
+Vue.prototype.$iovDesignEntityDirection = iovDesignIcon.iovDesignEntityDirection; // Icon 列表页用
+Vue.prototype.$iovDesignEntityTips = iovDesignIcon.iovDesignEntityTips; // Icon 列表页用
+Vue.prototype.$iovDesignEntityButton = iovDesignIcon.iovDesignEntityButton; // Icon 列表页用
+Vue.prototype.$iovDesignEntityCommon = iovDesignIcon.iovDesignEntityCommon; // Icon 列表页用
+// Vue.prototype.$iovDesignMultiColorCommon = iovDesignIcon.iovDesignMultiColorCommon; // Icon 列表页用
 
 const router = new VueRouter({
   mode: 'hash',
