@@ -16,15 +16,16 @@
         </time-spinner>
       </div>
       <div class="el-time-panel__footer">
-        <button
-          type="button"
+        <el-link
+          type="primary"
           class="el-time-panel__btn cancel"
-          @click="handleCancel">{{ t('el.datepicker.cancel') }}</button>
-        <button
-          type="button"
+          @click="handleCancel">{{ t('el.datepicker.cancel') }}</el-link>
+        <el-button
+          type="info"
+          size="mini"
           class="el-time-panel__btn"
-          :class="{confirm: !disabled}"
-          @click="handleConfirm()">{{ t('el.datepicker.confirm') }}</button>
+          :disabled="disabled"
+          @click="handleConfirm()">{{ t('el.datepicker.confirm') }}</el-button>
       </div>
     </div>
   </transition>

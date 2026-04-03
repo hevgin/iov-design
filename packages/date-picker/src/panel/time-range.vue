@@ -8,7 +8,7 @@
       :class="popperClass">
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">{{ t('el.datepicker.startTime') }}</div>
+          <div class="el-time-range-picker__header">选择时间</div>
           <div
             :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
             class="el-time-range-picker__body el-time-panel__content">
@@ -22,9 +22,13 @@
               :date="minDate">
             </time-spinner>
           </div>
+          <div class="el-time-range-picker__now">
+            <div class="el-time-range-picker__date"><i class="iov-icon-date"></i>{{ minDateLabel }}</div>
+            <div class="el-time-range-picker__time"><i class="iov-icon-time"></i>{{ minTimeLabel }}</div>
+          </div>
         </div>
         <div class="el-time-range-picker__cell">
-          <div class="el-time-range-picker__header">{{ t('el.datepicker.endTime') }}</div>
+          <div class="el-time-range-picker__header">选择时间</div>
           <div
             :class="{ 'has-seconds': showSeconds, 'is-arrow': arrowControl }"
             class="el-time-range-picker__body el-time-panel__content">
@@ -38,18 +42,24 @@
               :date="maxDate">
             </time-spinner>
           </div>
+          <div class="el-time-range-picker__now">
+            <div class="el-time-range-picker__date"><i class="iov-icon-date"></i>{{ maxDateLabel }}</div>
+            <div class="el-time-range-picker__time"><i class="iov-icon-time"></i>{{ maxTimeLabel }}</div>
+          </div>
         </div>
       </div>
       <div class="el-time-panel__footer">
-        <button
-          type="button"
+        <el-link
+          type="primary"
+          size="small"
           class="el-time-panel__btn cancel"
-          @click="handleCancel()">{{ t('el.datepicker.cancel') }}</button>
-        <button
-          type="button"
+          @click="handleCancel()">{{ t('el.datepicker.cancel') }}</el-link>
+        <el-button
+          type="info"
           class="el-time-panel__btn confirm"
+          size="mini"
           @click="handleConfirm()"
-          :disabled="btnDisabled">{{ t('el.datepicker.confirm') }}</button>
+          :disabled="btnDisabled">{{ t('el.datepicker.confirm') }}</el-button>
       </div>
     </div>
   </transition>
@@ -61,7 +71,8 @@
     limitTimeRange,
     modifyDate,
     clearMilliseconds,
-    timeWithinRange
+    timeWithinRange,
+    formatDate
   } from 'iov-design/src/utils/date-util';
   import Locale from 'iov-design/src/mixins/locale';
   import TimeSpinner from '../basic/time-spinner';
@@ -107,6 +118,18 @@
         if ((this.format || '').indexOf('A') !== -1) return 'A';
         if ((this.format || '').indexOf('a') !== -1) return 'a';
         return '';
+      },
+      minDateLabel() {
+        return formatDate(this.minDate, 'yyyy-MM-dd');
+      },
+      maxDateLabel() {
+        return formatDate(this.maxDate, 'yyyy-MM-dd');
+      },
+      minTimeLabel() {
+        return formatDate(this.minDate, 'HH:mm:ss');
+      },
+      maxTimeLabel() {
+        return formatDate(this.maxDate, 'HH:mm:ss');
       }
     },
 

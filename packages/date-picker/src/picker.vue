@@ -67,7 +67,7 @@
       <span v-if="$slots['range-separator']" class="el-range-separator">
         <slot name="range-separator"></slot>
       </span>
-      <span v-else-if="rangeSeparator" class="el-range-separator">
+      <span v-else-if="rangeSeparator && rangeSeparator !== '-'" class="el-range-separator">
         {{ rangeSeparator }}
       </span>
       <span v-else class="el-range-separator">
@@ -415,7 +415,7 @@ export default {
     defaultValue: {},
     defaultTime: {},
     rangeSeparator: {
-      default: ''
+      default: '-'
     },
     pickerOptions: {},
     unlinkPanels: Boolean,

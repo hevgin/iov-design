@@ -1,31 +1,80 @@
 @import "../common/var";
 
 @include b(time-range-picker) {
-  width: 354px;
+  width: 536px;
   overflow: visible;
 
   @include e(content) {
     position: relative;
     text-align: center;
-    padding: 10px;
+    font-size: 0;
   }
 
   @include e(cell) {
     box-sizing: border-box;
     margin: 0;
-    padding: 4px 7px 7px;
+    padding: 0;
     width: 50%;
     display: inline-block;
+    &:first-child {
+      border-right: 1px solid $--color-line-1;
+    }
   }
 
   @include e(header) {
-    margin-bottom: 5px;
+    padding: 11px 0;
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
+    color: $--color-text-6;
+    font-weight: 500;
+    border-bottom: 1px solid $--color-line-1;
   }
 
   @include e(body) {
-    border-radius:2px;
-    border: 1px solid $--datepicker-border-color;
+    .el-time-spinner__wrapper {
+      width: 80px;
+    }
+    .el-time-spinner__column {
+      margin-left: 0;
+      padding: 10px 0 6px 0;
+      width: 80px;
+      &:before {
+        display: none;
+      }
+    }
+    &.is-arrow {
+      .el-time-spinner__column {
+        padding-top: 6px;
+      }
+    }
+  }
+
+  @include e(now) {
+    text-align: center;
+    border-top: 1px solid $--color-line-1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    .iov-icon-date,
+    .iov-icon-time {
+      font-size: 13px;
+      margin-right: 4px;
+    }
+  }
+
+  @include e(date) {
+    padding: 16px 0;
+    font-size: 13px;
+    color: $--color-text-2;
+    flex: 1;
+  }
+
+  @include e(time) {
+    padding: 16px 0;
+    font-size: 13px;
+    color: $--color-text-6;
+    flex: 1;
+    border-left: 1px solid $--color-line-1;
   }
 }

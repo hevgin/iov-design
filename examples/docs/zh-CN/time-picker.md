@@ -40,7 +40,7 @@
   <el-time-picker
     v-model="value1"
     :picker-options="{
-      selectableRange: '18:30:00 - 20:30:00'
+      selectableRange: '00:00:00 - 23:59:59'
     }"
     placeholder="任意时间点">
   </el-time-picker>
