@@ -848,12 +848,11 @@ export default {
       }
       this.pickerVisible = this.picker.visible = true;
 
-      this.updatePopper();
-
       this.picker.value = this.parsedValue;
       this.picker.resetView && this.picker.resetView();
 
       this.$nextTick(() => {
+        this.updatePopper();
         this.picker.adjustSpinners && this.picker.adjustSpinners();
       });
     },

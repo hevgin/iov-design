@@ -110,6 +110,7 @@
     mounted() {
       this.$nextTick(() => {
         this.bindScrollEvent();
+        this.adjustSpinners();
       });
     },
 

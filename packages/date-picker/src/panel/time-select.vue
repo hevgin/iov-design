@@ -1,11 +1,12 @@
 <template>
   <transition name="el-zoom-in-top" @before-enter="handleMenuEnter" @after-leave="$emit('dodestroy')">
+    <div class="el-picker-panel__main el-popper">
     <div
       ref="popper"
       v-show="visible"
       :style="{ width: width + 'px' }"
       :class="popperClass"
-      class="el-picker-panel time-select el-popper">
+      class="el-picker-panel time-select">
       <el-scrollbar noresize wrap-class="el-picker-panel__content">
         <div class="time-select-item"
           v-for="item in items"
@@ -14,6 +15,7 @@
           :key="item.value"
           @click="handleClick(item)">{{ item.value }}</div>
       </el-scrollbar>
+    </div>
     </div>
   </transition>
 </template>

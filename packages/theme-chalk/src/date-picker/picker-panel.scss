@@ -1,15 +1,16 @@
 @import "../common/var";
 
-@include b(picker-panel) {
-  color: $--color-text-6;
+.el-picker-panel__main {
   border: 1px solid $--color-line-1;
   box-shadow: 0px 2px 8px 0px rgba(73,75,83,0.12);
-  background: $--color-white;
+  background: #fff;
   border-radius: 4px;
+  color: $--color-text-6;
   .popper__arrow {
     display: none !important;
   }
-
+}
+@include b(picker-panel) {
   @include e((body, body-wrapper)) {
     &::after {
       content: "";
@@ -31,6 +32,8 @@
   @include e(content) {
     position: relative;
     margin: 12px 16px;
+    width: 236px;
+    box-sizing: border-box;
   }
 
   @include e(footer) {
@@ -80,23 +83,6 @@
     }
   }
 
-  @include e(btn) {
-    border: 1px solid #dcdcdc;
-    color: #333;
-    line-height: 24px;
-    border-radius: 2px;
-    padding: 0 20px;
-    cursor: pointer;
-    background-color: transparent;
-    outline: none;
-    font-size: 12px;
-
-    &[disabled] {
-      color: #cccccc;
-      cursor: not-allowed;
-    }
-  }
-
   @include e(icon-btn) {
     font-size: 14px;
     color: $--color-fill-5;
@@ -120,7 +106,7 @@
     }
 
     @include when(disabled) {
-      color: $--font-color-disabled-base;
+      color: $--color-fill-2;
 
       &:hover {
         cursor: not-allowed;
@@ -128,9 +114,9 @@
     }
   }
 
-  @include e(link-btn) {
-    vertical-align: middle;
-  }
+  // @include e(link-btn) {
+  //   vertical-align: middle;
+  // }
 }
 
 .el-picker-panel *[slot=sidebar],

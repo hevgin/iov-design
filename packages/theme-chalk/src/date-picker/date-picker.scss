@@ -3,18 +3,11 @@
 @import "./picker-panel.scss";
 
 @include b(date-picker) {
-  width: 268px;
-
-  &.has-sidebar.has-time {
-    width: 434px;
-  }
-
-  &.has-sidebar {
-    width: 366px;
-  }
-
-  &.has-time .el-picker-panel__body-wrapper {
-    position: relative;
+  &.has-time {
+    .el-picker-panel__body-wrapper {
+      position: relative;
+      display: flex;
+    }
   }
 
   table {
@@ -28,14 +21,18 @@
     padding: 0 5px;
   }
 
-  @include e(time-header) {
-    position: relative;
-    border-bottom: 1px solid $--datepicker-inner-border-color;
-    font-size: 12px;
-    padding: 8px 5px 5px 5px;
-    display: table;
-    width: 100%;
-    box-sizing: border-box;
+  @include e(time-content) {
+    border-left: 1px solid $--color-line-1;
+    // .el-time-spinner {
+    //   margin-top: 40px;
+    //   border-top: 1px solid $--color-line-1;
+    // }
+    .el-time-spinner__wrapper {
+      height: 260px;
+    }
+    .el-time-spinner__list:after {
+      height: 236px;
+    }
   }
 
   @include e(header) {

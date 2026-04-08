@@ -2,9 +2,10 @@
   <transition
     name="el-zoom-in-top"
     @after-leave="$emit('dodestroy')">
+    <div class="el-picker-panel__main el-popper">
     <div
       v-show="visible"
-      class="el-time-range-picker el-picker-panel el-popper"
+      class="el-time-range-picker el-picker-panel"
       :class="popperClass">
       <div class="el-time-range-picker__content">
         <div class="el-time-range-picker__cell">
@@ -61,6 +62,7 @@
           @click="handleConfirm()"
           :disabled="btnDisabled">{{ t('el.datepicker.confirm') }}</el-button>
       </div>
+    </div>
     </div>
   </transition>
 </template>
