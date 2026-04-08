@@ -106,10 +106,11 @@
     }
 
     @include when(disabled) {
-      color: $--color-fill-2;
+      color: $--color-fill-4;
 
       &:hover {
         cursor: not-allowed;
+        background: none;
       }
     }
   }

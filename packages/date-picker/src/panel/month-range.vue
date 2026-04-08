@@ -1,8 +1,9 @@
 <template>
   <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
+    <div class="el-picker-panel__main el-popper">
     <div
       v-show="visible"
-      class="el-picker-panel el-date-range-picker el-popper"
+      class="el-picker-panel el-date-range-picker"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts
       }, popperClass]">
@@ -77,6 +78,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </transition>
 </template>

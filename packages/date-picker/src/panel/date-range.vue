@@ -27,30 +27,26 @@
                 @click="leftPrevMonth"
                 class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-left"></i>
               <i
-                @click="leftNextYear"
+                @click="enableYearArrow && leftNextYear()"
                 v-if="unlinkPanels"
-                :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
                 class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-double-right-mini"></i>
               <i
-                @click="leftNextMonth"
+                @click="enableMonthArrow && leftNextMonth()"
                 v-if="unlinkPanels"
-                :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
                 class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-right"></i>
               <div class="el-date-picker__header-label">{{ leftLabel }}</div>
             </div>
             <div class="el-date-picker__header">
               <i
-                @click="rightPrevYear"
+                @click="enableYearArrow && rightPrevYear()"
                 v-if="unlinkPanels"
-                :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
                 class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-double-left-mini"></i>
               <i
-                @click="rightPrevMonth"
+                @click="enableMonthArrow && rightPrevMonth()"
                 v-if="unlinkPanels"
-                :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
                 class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-left"></i>
               <i
@@ -370,6 +366,10 @@
       },
 
       handleRangePick(val, close = true) {
+        // 第一次点击只选了开始日期，不关闭弹窗
+        if (!val.maxDate) {
+          close = false;
+        }
         const defaultTime = this.defaultTime || ['00:00:00', '00:00:00'];
         const startTime = defaultTime[0] || '00:00:00';
         const endTime = defaultTime.length > 1 ? (defaultTime[1] || startTime) : startTime;
