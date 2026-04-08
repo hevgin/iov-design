@@ -6,6 +6,14 @@
   &.has-sidebar {
     width: 634px;
   }
+  &.has-time {
+    .el-time-spinner__wrapper {
+      height: 256px;
+    } 
+    .el-time-spinner__list:after {
+        height: 176px;
+    }
+  }
 
   table {
     table-layout: fixed;
@@ -74,6 +82,47 @@
       right: 0;
       z-index: 1;
       background: $--color-white;
+    }
+  }
+
+  @include e(now) {
+    text-align: center;
+    border-top: 1px solid $--color-line-1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    flex: 1;
+    .iov-icon-date,
+    .iov-icon-time {
+      font-size: 13px;
+      margin-right: 4px;
+    }
+    &:last-child {
+      border-left: 1px solid $--color-line-1;
+    }
+  }
+
+  @include e(date) {
+    padding: 16px 0;
+    font-size: 13px;
+    color: $--color-text-2;
+    flex: 1;
+    cursor: pointer;
+    &.is-active {
+      color: $--color-text-6; 
+    }
+  }
+
+  @include e(time) {
+    padding: 16px 0;
+    font-size: 13px;
+    color: $--color-text-2;
+    flex: 1;
+    border-left: 1px solid $--color-line-1;
+    cursor: pointer;
+    &.is-active {
+      color: $--color-text-6; 
     }
   }
 }

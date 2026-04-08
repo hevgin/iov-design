@@ -511,7 +511,7 @@ export default {
     },
 
     triggerClass() {
-      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'iov-icon-time' : 'iov-icon-date');
+      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'iov-icon-date' : 'iov-icon-date');
     },
 
     selectionMode() {

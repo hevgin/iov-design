@@ -140,13 +140,13 @@
       },
 
       emitSelectRange(type) {
-        if (type === 'hours') {
-          this.$emit('select-range', 0, 2);
-        } else if (type === 'minutes') {
-          this.$emit('select-range', 3, 5);
-        } else if (type === 'seconds') {
-          this.$emit('select-range', 6, 8);
-        }
+        // if (type === 'hours') {
+        //   this.$emit('select-range', 0, 2);
+        // } else if (type === 'minutes') {
+        //   this.$emit('select-range', 3, 5);
+        // } else if (type === 'seconds') {
+        //   this.$emit('select-range', 6, 8);
+        // }
         this.currentScrollbar = type;
       },
 
