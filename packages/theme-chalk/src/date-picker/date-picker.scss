@@ -15,25 +15,25 @@
     width: 100%;
   }
 
-  @include e(editor-wrap) {
-    position: relative;
-    display: table-cell;
-    padding: 0 5px;
-  }
+  // @include e(editor-wrap) {
+  //   position: relative;
+  //   display: table-cell;
+  //   padding: 0 5px;
+  // }
 
-  @include e(time-content) {
-    border-left: 1px solid $--color-line-1;
-    // .el-time-spinner {
-    //   margin-top: 40px;
-    //   border-top: 1px solid $--color-line-1;
-    // }
-    .el-time-spinner__wrapper {
-      height: 260px;
-    }
-    .el-time-spinner__list:after {
-      height: 236px;
-    }
-  }
+  // @include e(time-content) {
+  //   border-left: 1px solid $--color-line-1;
+  //   // .el-time-spinner {
+  //   //   margin-top: 40px;
+  //   //   border-top: 1px solid $--color-line-1;
+  //   // }
+  //   .el-time-spinner__wrapper {
+  //     height: 260px;
+  //   }
+  //   .el-time-spinner__list:after {
+  //     height: 236px;
+  //   }
+  // }
 
   @include e(header) {
     padding: 8px 12px;
@@ -62,15 +62,15 @@
     margin-left: 4px;
   }
 
-  @include e(time-wrap) {
-    padding: 10px;
-    text-align: center;
-  }
+  // @include e(time-wrap) {
+  //   padding: 10px;
+  //   text-align: center;
+  // }
 
-  @include e(time-label) {
-    float: left;
-    cursor: pointer;
-    line-height: 30px;
-    margin-left: 10px;
-  }
+  // @include e(time-label) {
+  //   float: left;
+  //   cursor: pointer;
+  //   line-height: 30px;
+  //   margin-left: 10px;
+  // }
 }

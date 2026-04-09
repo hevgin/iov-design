@@ -77,10 +77,10 @@
       background: $--color-fill-1;
     }
 
-    &.active {
-      background-color: #e6f1fe;
-      color: $--datepicker-active-color;
-    }
+    // &.active {
+    //   background-color: #e6f1fe;
+    //   color: $--datepicker-active-color;
+    // }
   }
 
   @include e(icon-btn) {

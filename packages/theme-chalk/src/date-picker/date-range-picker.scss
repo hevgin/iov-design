@@ -48,45 +48,45 @@
     }
   }
 
-  @include e(editors-wrap) {
-    box-sizing: border-box;
-    display: table-cell;
+  // @include e(editors-wrap) {
+  //   box-sizing: border-box;
+  //   display: table-cell;
 
-    @include when(right) {
-      text-align: right;
-    }
-  }
+  //   @include when(right) {
+  //     text-align: right;
+  //   }
+  // }
 
-  @include e(time-header) {
-    position: relative;
-    border-bottom: 1px solid $--datepicker-inner-border-color;
-    font-size: 12px;
-    padding: 8px 5px 5px 5px;
-    display: table;
-    width: 100%;
-    box-sizing: border-box;
+  // @include e(time-header) {
+  //   position: relative;
+  //   border-bottom: 1px solid $--datepicker-inner-border-color;
+  //   font-size: 12px;
+  //   padding: 8px 5px 5px 5px;
+  //   display: table;
+  //   width: 100%;
+  //   box-sizing: border-box;
 
-    > .el-icon-arrow-right {
-      font-size: 20px;
-      vertical-align: middle;
-      display: table-cell;
-      color: $--datepicker-icon-color;
-    }
-  }
+  //   > .el-icon-arrow-right {
+  //     font-size: 20px;
+  //     vertical-align: middle;
+  //     display: table-cell;
+  //     color: $--datepicker-icon-color;
+  //   }
+  // }
 
-  @include e(time-picker-wrap) {
-    position: relative;
-    display: table-cell;
-    padding: 0 5px;
+  // @include e(time-picker-wrap) {
+  //   position: relative;
+  //   display: table-cell;
+  //   padding: 0 5px;
 
-    .el-picker-panel {
-      position: absolute;
-      top: 13px;
-      right: 0;
-      z-index: 1;
-      background: $--color-white;
-    }
-  }
+  //   .el-picker-panel {
+  //     position: absolute;
+  //     top: 13px;
+  //     right: 0;
+  //     z-index: 1;
+  //     background: $--color-white;
+  //   }
+  // }
 
   @include e(now) {
     text-align: center;

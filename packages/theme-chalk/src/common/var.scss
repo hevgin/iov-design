@@ -588,26 +588,6 @@ $--rate-icon-size: 18px !default;
 $--rate-icon-margin: 6px !default;
 $--rate-icon-color: $--color-text-placeholder !default;
 
-/* DatePicker
---------------------------*/
-$--datepicker-font-color: $--color-text-regular !default;
-/// color|1|Color|0
-$--datepicker-off-font-color: $--color-text-placeholder !default;
-/// color||Color|0
-$--datepicker-header-font-color: $--color-text-regular !default;
-$--datepicker-icon-color: $--color-text-primary !default;
-$--datepicker-border-color: $--disabled-border-base !default;
-$--datepicker-inner-border-color: #e4e4e4 !default;
-/// color||Color|0
-$--datepicker-inrange-background-color: $--border-color-extra-light !default;
-/// color||Color|0
-$--datepicker-inrange-hover-background-color: $--border-color-extra-light !default;
-/// color||Color|0
-$--datepicker-active-color: $--color-primary !default;
-/// color||Color|0
-$--datepicker-hover-font-color: $--color-primary !default;
-$--datepicker-cell-hover-color: #fff !default;
-
 
 /* Scrollbar
 --------------------------*/
