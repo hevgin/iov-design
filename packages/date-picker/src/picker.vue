@@ -2,7 +2,7 @@
   <el-input
     class="el-date-editor"
     :class="'el-date-editor--' + type"
-    :readonly="!editable || readonly || type === 'dates' || type === 'week' || type === 'years' || type === 'months'"
+    :readonly="!editable || readonly || type === 'dates' || type === 'week' || type === 'years' || type === 'months' || type === 'quarters'"
     :disabled="pickerDisabled"
     :size="pickerSize"
     :name="name"
@@ -127,7 +127,8 @@ const DEFAULT_FORMATS = {
   week: 'yyyywWW',
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
-  monthrange: 'yyyy-MM',
+  quarter: 'yyyy-QQQ',
+  quarterrange: 'yyyy-QQQ',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
   year: 'yyyy',
   years: 'yyyy'
@@ -142,6 +143,9 @@ const HAVE_TRIGGER_TYPES = [
   'year',
   'daterange',
   'monthrange',
+  'quarter',
+  'quarters',
+  'quarterrange',
   'timerange',
   'datetimerange',
   'dates',
@@ -227,6 +231,10 @@ const TYPE_VALUE_RESOLVER_MAP = {
     formatter: RANGE_FORMATTER,
     parser: RANGE_PARSER
   },
+  quarterrange: {
+    formatter: RANGE_FORMATTER,
+    parser: RANGE_PARSER
+  },
   datetimerange: {
     formatter: RANGE_FORMATTER,
     parser: RANGE_PARSER
@@ -240,6 +248,10 @@ const TYPE_VALUE_RESOLVER_MAP = {
     parser: DATE_PARSER
   },
   month: {
+    formatter: DATE_FORMATTER,
+    parser: DATE_PARSER
+  },
+  quarter: {
     formatter: DATE_FORMATTER,
     parser: DATE_PARSER
   },
@@ -281,6 +293,15 @@ const TYPE_VALUE_RESOLVER_MAP = {
     }
   },
   years: {
+    formatter(value, format) {
+      return value.map(date => DATE_FORMATTER(date, format));
+    },
+    parser(value, format) {
+      return (typeof value === 'string' ? value.split(', ') : value)
+        .map(date => date instanceof Date ? date : DATE_PARSER(date, format));
+    }
+  },
+  quarters: {
     formatter(value, format) {
       return value.map(date => DATE_FORMATTER(date, format));
     },
@@ -525,6 +546,10 @@ export default {
         return 'dates';
       } else if (this.type === 'months') {
         return 'months';
+      } else if (this.type === 'quarters') {
+        return 'quarters';
+      } else if (this.type === 'quarter') {
+        return 'quarter';
       } else if (this.type === 'years') {
         return 'years';
       }
@@ -549,7 +574,7 @@ export default {
       } else if (this.userInput !== null) {
         return this.userInput;
       } else if (formattedValue) {
-        return (this.type === 'dates' || this.type === 'years' || this.type === 'months')
+        return (this.type === 'dates' || this.type === 'years' || this.type === 'months' || this.type === 'quarters')
           ? formattedValue.join(', ')
           : formattedValue;
       } else {
@@ -751,7 +776,7 @@ export default {
       if (!this.pickerVisible) return;
       this.pickerVisible = false;
 
-      if (this.type === 'dates' || this.type === 'years' || this.type === 'months') {
+      if (this.type === 'dates' || this.type === 'years' || this.type === 'months' || this.type === 'quarters') {
         // restore to former value
         const oldValue = parseAsFormatAndType(this.valueOnOpen, this.valueFormat, this.type, this.rangeSeparator) || this.valueOnOpen;
         this.emitInput(oldValue);

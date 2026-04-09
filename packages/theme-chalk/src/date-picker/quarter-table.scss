@@ -1,0 +1,134 @@
+@import "../common/var";
+
+@include b(quarter-table) {
+  font-size: 13px;
+  border-collapse: collapse;
+
+//   tr td:first-child {
+//     &.start-date {
+//       .quarter-grid {
+//         border-top-left-radius: 24px;
+//         border-bottom-left-radius: 24px;
+//       }
+//       .quarter-cell {
+//         margin-left: 4px;
+//       }
+//     }
+//   }
+
+//   tr td:last-child {
+//     &.end-date {
+//       .quarter-grid {
+//         border-top-right-radius: 24px;
+//         border-bottom-right-radius: 24px;
+//       }
+//       .quarter-cell {
+//         margin-right: 4px;
+//       }
+//     }
+//   }
+
+  td {
+    width: 59px;
+    height: 32px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: 500;
+    .quarter-grid {
+      height: 32px;
+      margin: 2px 0;
+      padding: 4px 0;
+      box-sizing: border-box;
+    }
+    .quarter-cell {
+      margin: 0 auto;
+      width: 51px;
+    }
+    &.today {
+      .cell {
+        position: relative;
+        &:after {
+          content: '';
+          width: 4px;
+          height: 4px;
+          border-radius: 2px;
+          background: $--color-primary-6;
+          position: absolute;
+          bottom: -4px;
+          left: 50%;
+          margin-left: -2px;
+        }
+      }
+      &.start-date .cell,
+      &.end-date .cell {
+        color: #fff;
+      }
+    }
+
+    &.disabled div {
+      background-color: $--color-fill-1;
+      cursor: not-allowed;
+      .cell {
+        color: $--color-text-2;
+        &:hover {
+          background: none;
+        }
+      }
+    }
+
+    .cell {
+      width: 51px;
+      height: 24px;
+      display: block;
+      line-height: 24px;
+      color: $--color-text-6;
+      margin: 0 auto;
+      border-radius: 12px;
+      transition: background .2s ease;
+      &:hover {
+        background: $--color-fill-2;
+      }
+    }
+
+    &.in-range {
+      .quarter-grid {
+        background-color: $--color-primary-2;
+      }
+    }
+    &.in-range:not(.start-date):not(.end-date) {
+      .cell:hover {
+        background: none;
+      }
+    }
+    &.start-date .cell,
+    &.end-date .cell {
+      color: #fff;
+      background-color: $--color-primary-6;
+      &:after {
+        display: none;
+      }
+    }
+
+    &.start-date {
+      .quarter-grid {
+        border-top-left-radius: 24px;
+        border-bottom-left-radius: 24px;
+      }
+    }
+
+    &.end-date {
+      .quarter-grid {
+        border-top-right-radius: 24px;
+        border-bottom-right-radius: 24px;
+      }
+    }
+
+    &.current:not(.disabled) .cell {
+      background: $--color-primary-6;
+      color: #fff;
+      &:after {
+        display: none;
+      }
+    }
+  }
+}

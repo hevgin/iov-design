@@ -22,7 +22,7 @@
         <div class="el-picker-panel__body">
           <div
             class="el-date-picker__header"
-            :class="{ 'el-date-picker__header--bordered': currentView === 'year' || currentView === 'month' }"
+            :class="{ 'el-date-picker__header--bordered': currentView === 'year' || currentView === 'month' || currentView === 'quarter' }"
             v-show="currentView !== 'time'">
             <i
               @click="prevYear"
@@ -61,7 +61,8 @@
             </i>
           </div>
 
-          <div class="el-picker-panel__content">
+          <div
+            class="el-picker-panel__content">
             <date-table
               v-show="currentView === 'date'"
               @pick="handleDatePick"
@@ -92,6 +93,15 @@
               :date="date"
               :disabled-date="disabledDate">
             </month-table>
+            <quarter-table
+              v-show="currentView === 'quarter'"
+              @pick="handleQuarterPick"
+              :selection-mode="selectionMode"
+              :value="value"
+              :default-value="defaultValue ? new Date(defaultValue) : null"
+              :date="date"
+              :disabled-date="disabledDate">
+            </quarter-table>
           </div>
         </div>
         <div class="el-date-picker__time-content" v-if="showTime">
@@ -115,16 +125,16 @@
       <div
         class="el-picker-panel__footer"
         :class="[{
-          'el-picker-panel__footer--flex-between': selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years',
-          'el-picker-panel__footer--flex-end': !(selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years')
+          'el-picker-panel__footer--flex-between': selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years' && selectionMode !== 'quarters',
+          'el-picker-panel__footer--flex-end': !(selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years' && selectionMode !== 'quarters')
         }]"
-        v-show="footerVisible && (currentView === 'date' || currentView === 'month' || currentView === 'year')">
+        v-show="footerVisible && (currentView === 'date' || currentView === 'month' || currentView === 'year' || currentView === 'quarter')">
         <el-link
           type="primary"
           size="small"
           class="el-picker-panel__link-btn"
           @click="changeToNow"
-          v-show="selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years'">
+          v-show="selectionMode !== 'dates' && selectionMode !== 'months' && selectionMode !== 'years' && selectionMode !== 'quarters'">
           {{ t('el.datepicker.now') }}
         </el-link>
         <el-button
@@ -164,6 +174,7 @@
   import TimeSpinner from '../basic/time-spinner';
   import YearTable from '../basic/year-table';
   import MonthTable from '../basic/month-table';
+  import QuarterTable from '../basic/quarter-table';
   import DateTable from '../basic/date-table';
 
   export default {
@@ -175,6 +186,7 @@
       TimeSpinner,
       YearTable,
       MonthTable,
+      QuarterTable,
       DateTable
     },
 
@@ -195,6 +207,7 @@
       value(val) {
         if (this.selectionMode === 'dates' && this.value) return;
         if (this.selectionMode === 'months' && this.value) return;
+        if (this.selectionMode === 'quarters' && this.value) return;
         if (this.selectionMode === 'years' && this.value) return;
         if (isDate(val)) {
           this.date = new Date(val);
@@ -220,6 +233,10 @@
           this.currentView = 'year';
         } else if (newVal === 'months') {
           this.currentView = 'month';
+        } else if (newVal === 'quarters') {
+          this.currentView = 'quarter';
+        } else if (newVal === 'quarter') {
+          this.currentView = 'quarter';
         }
       }
     },
@@ -312,6 +329,15 @@
         }
       },
 
+      handleQuarterPick(quarter) {
+        if (this.selectionMode === 'quarter') {
+          this.date = new Date(this.year, quarter * 3, 1);
+          this.emit(this.date);
+        } else if (this.selectionMode === 'quarters') {
+          this.emit(quarter, true);
+        }
+      },
+
       handleDatePick(value) {
         if (this.selectionMode === 'day') {
           let newDate = this.value
@@ -336,6 +362,9 @@
           this.emit(this.date);
         } else if (this.selectionMode === 'years') {
           this.emit(year, true);
+        } else if (this.selectionMode === 'quarter' || this.selectionMode === 'quarters') {
+          this.date = modifyDate(this.date, year, 0, 1);
+          this.currentView = 'quarter';
         } else {
           this.date = changeYearMonthAndClampDate(this.date, year, this.month);
           // TODO: should emit intermediate value ??
@@ -361,7 +390,7 @@
       },
 
       confirm() {
-        if (this.selectionMode === 'dates' || this.selectionMode === 'months' || this.selectionMode === 'years') {
+        if (this.selectionMode === 'dates' || this.selectionMode === 'months' || this.selectionMode === 'years' || this.selectionMode === 'quarters') {
           this.emit(this.value);
         } else {
           this.emit(this.date);
@@ -371,6 +400,8 @@
       resetView() {
         if (this.selectionMode === 'month' || this.selectionMode === 'months') {
           this.currentView = 'month';
+        } else if (this.selectionMode === 'quarter' || this.selectionMode === 'quarters') {
+          this.currentView = 'quarter';
         } else if (this.selectionMode === 'year' || this.selectionMode === 'years') {
           this.currentView = 'year';
         } else {
@@ -494,11 +525,11 @@
       },
 
       showToday() {
-        return this.currentView === 'date' && !this.showTime && this.shortcuts.length === 0 && !['dates', 'months', 'years', 'week'].includes(this.selectionMode);
+        return this.currentView === 'date' && !this.showTime && this.shortcuts.length === 0 && !['dates', 'months', 'years', 'quarters', 'week'].includes(this.selectionMode);
       },
 
       footerVisible() {
-        return this.showTime || this.selectionMode === 'dates' || this.selectionMode === 'months' || this.selectionMode === 'years';
+        return this.showTime || this.selectionMode === 'dates' || this.selectionMode === 'months' || this.selectionMode === 'years' || this.selectionMode === 'quarters';
       },
 
       yearLabel() {
