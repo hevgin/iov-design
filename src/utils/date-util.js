@@ -51,7 +51,17 @@ export const formatDate = function(date, format) {
 };
 
 export const parseDate = function(string, format) {
-  return fecha.parse(string, format || 'yyyy-MM-dd', getI18nSettings());
+  format = format || 'yyyy-MM-dd';
+  if (format.indexOf('Q') !== -1) {
+    const match = string.match(/^(\d{4})[-/]Q?(\d)$/);
+    if (match) {
+      const year = parseInt(match[1], 10);
+      const quarter = parseInt(match[2], 10);
+      const month = (quarter - 1) * 3;
+      return new Date(year, month, 1);
+    }
+  }
+  return fecha.parse(string, format, getI18nSettings());
 };
 
 export const getDayCountOfMonth = function(year, month) {

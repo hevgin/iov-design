@@ -128,10 +128,12 @@ const DEFAULT_FORMATS = {
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
   quarter: 'yyyy-QQQ',
+  quarters: 'yyyy-QQQ',
   quarterrange: 'yyyy-QQQ',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
   year: 'yyyy',
-  years: 'yyyy'
+  years: 'yyyy',
+  yearrange: 'yyyy'
 };
 const HAVE_TRIGGER_TYPES = [
   'date',
@@ -146,6 +148,7 @@ const HAVE_TRIGGER_TYPES = [
   'quarter',
   'quarters',
   'quarterrange',
+  'yearrange',
   'timerange',
   'datetimerange',
   'dates',
@@ -158,6 +161,12 @@ const DATE_FORMATTER = function(value, format) {
 };
 const DATE_PARSER = function(text, format) {
   if (format === 'timestamp') return new Date(Number(text));
+  return parseDate(text, format);
+};
+const QUARTER_FORMATTER = function(value, format) {
+  return formatDate(value, format);
+};
+const QUARTER_PARSER = function(text, format) {
   return parseDate(text, format);
 };
 const RANGE_FORMATTER = function(value, format) {
@@ -235,6 +244,10 @@ const TYPE_VALUE_RESOLVER_MAP = {
     formatter: RANGE_FORMATTER,
     parser: RANGE_PARSER
   },
+  yearrange: {
+    formatter: RANGE_FORMATTER,
+    parser: RANGE_PARSER
+  },
   datetimerange: {
     formatter: RANGE_FORMATTER,
     parser: RANGE_PARSER
@@ -252,8 +265,8 @@ const TYPE_VALUE_RESOLVER_MAP = {
     parser: DATE_PARSER
   },
   quarter: {
-    formatter: DATE_FORMATTER,
-    parser: DATE_PARSER
+    formatter: QUARTER_FORMATTER,
+    parser: QUARTER_PARSER
   },
   year: {
     formatter: DATE_FORMATTER,
@@ -303,11 +316,13 @@ const TYPE_VALUE_RESOLVER_MAP = {
   },
   quarters: {
     formatter(value, format) {
-      return value.map(date => DATE_FORMATTER(date, format));
+      if (!value || !Array.isArray(value)) return '';
+      return value.map(date => QUARTER_FORMATTER(date, format));
     },
     parser(value, format) {
-      return (typeof value === 'string' ? value.split(', ') : value)
-        .map(date => date instanceof Date ? date : DATE_PARSER(date, format));
+      if (!value) return [];
+      const arr = typeof value === 'string' ? value.split(', ') : value;
+      return arr.map(date => date instanceof Date ? date : QUARTER_PARSER(date, format));
     }
   }
 };

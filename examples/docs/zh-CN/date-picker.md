@@ -384,6 +384,74 @@
 ```
 ::::
 
+### 选择年范围
+
+可在一个选择器中便捷地选择一个年份范围
+
+::::demo 在选择年范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前年代，可以使用`unlink-panels`属性解除联动。
+```html
+<template>
+  <div class="block">
+    <span class="demonstration">默认</span>
+    <el-date-picker
+      v-model="value1"
+      type="yearrange"
+      start-placeholder="开始年份"
+      end-placeholder="结束年份">
+    </el-date-picker>
+  </div>
+  <div class="block">
+    <span class="demonstration">带快捷选项</span>
+    <el-date-picker
+      v-model="value2"
+      type="yearrange"
+      align="right"
+      unlink-panels
+      start-placeholder="开始年份"
+      end-placeholder="结束年份"
+      :picker-options="pickerOptions">
+    </el-date-picker>
+  </div>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        pickerOptions: {
+          shortcuts: [{
+            text: '今年',
+            onClick(picker) {
+              const start = new Date(new Date().getFullYear(), 0, 1);
+              const end = new Date(new Date().getFullYear(), 11, 31);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近十年',
+            onClick(picker) {
+              const end = new Date(new Date().getFullYear(), 11, 31);
+              const start = new Date(new Date().getFullYear() - 9, 0, 1);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近五年',
+            onClick(picker) {
+              const end = new Date(new Date().getFullYear(), 11, 31);
+              const start = new Date(new Date().getFullYear() - 4, 0, 1);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value1: '',
+        value2: ''
+      };
+    }
+  };
+</script>
+```
+::::
+
+
 ###  日期格式
 
 使用`format`指定输入框的格式；使用`value-format`指定绑定值的格式。
@@ -400,7 +468,8 @@
 | `M`  | 月 | 不补0 | 1 |
 | `MM` | 月 | | 01 |
 | `Q`  | 季度 | 不补0 | 1 |
-| `QQ` | 季度 | 仅季度选择器的 `format` 可用 | 01 |
+| `QQ` | 季度 | 补0 | 01 |
+| `QQQ` | 季度 | 仅季度选择器的 `format` 可用 | Q1 |
 | `W`  | 周 | 仅周选择器的 `format` 可用；不补0 | 1 |
 | `WW` | 周 | 仅周选择器的 `format` 可用 | 01 |
 | `d`  | 日 | 不补0 | 2 |
@@ -512,7 +581,7 @@
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
-| type | 显示类型 | string | year/month/quarter/date/dates/months/quarters/years week/datetime/datetimerange/ daterange/monthrange/quarterrange | date |
+| type | 显示类型 | string | year/month/quarter/date/dates/months/quarters/years week/datetime/datetimerange/ daterange/monthrange/quarterrange/yearrange | date |
 | format | 显示在输入框中的格式 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DatePicker 下拉框的类名 | string | — | — |

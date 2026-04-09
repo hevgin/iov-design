@@ -1,5 +1,5 @@
 <template>
-  <table @click="handleYearTableClick" class="el-year-table" cellspacing="0" cellpadding="0">
+  <table @click="handleYearTableClick" @mousemove="handleMouseMove" class="el-year-table" cellspacing="0" cellpadding="0">
     <tbody>
     <tr>
       <td class="available" :class="getCellStyle(startYear + 0)">
@@ -119,7 +119,24 @@
         }
       },
       date: {},
-      selectionMode: {}
+      selectionMode: {},
+      minDate: {},
+      maxDate: {},
+      rangeState: {
+        default() {
+          return {
+            endDate: null,
+            selecting: false
+          };
+        }
+      }
+    },
+
+    data() {
+      return {
+        lastRow: null,
+        lastColumn: null
+      };
     },
 
     computed: {
@@ -140,7 +157,60 @@
         style.today = today.getFullYear() === year;
         style.default = this.defaultValue && this.defaultValue.getFullYear() === year;
 
+        const minTimestamp = this.minDate ? new Date(this.minDate).getTime() : null;
+        const maxTimestamp = this.maxDate ? new Date(this.maxDate).getTime() : null;
+
+        if (this.selectionMode === 'range') {
+          if (minTimestamp && maxTimestamp) {
+            const minYear = new Date(minTimestamp).getFullYear();
+            const maxYear = new Date(maxTimestamp).getFullYear();
+            const min = Math.min(minYear, maxYear);
+            const max = Math.max(minYear, maxYear);
+            style['in-range'] = year >= min && year <= max;
+            style['start-date'] = year === min;
+            style['end-date'] = year === max;
+          } else if (minTimestamp) {
+            const minYear = new Date(minTimestamp).getFullYear();
+            const rangeEndYear = this.rangeState.endDate ? this.rangeState.endDate.getFullYear() : null;
+            if (rangeEndYear !== null) {
+              const s = Math.min(minYear, rangeEndYear);
+              const e = Math.max(minYear, rangeEndYear);
+              style['in-range'] = year >= s && year <= e;
+              style['start-date'] = year === s;
+              style['end-date'] = year === e;
+            }
+          }
+        }
+
         return style;
+      },
+
+      handleMouseMove(event) {
+        if (!this.rangeState.selecting) return;
+
+        let target = event.target;
+        if (target.tagName === 'A') target = target.parentNode.parentNode;
+        if (target.tagName === 'DIV') target = target.parentNode;
+        if (target.tagName !== 'TD') return;
+
+        const row = target.parentNode.rowIndex;
+        const column = target.cellIndex;
+        const year = this.startYear + row * 3 + column;
+
+        if (typeof this.disabledDate === 'function' && datesInYear(year).every(this.disabledDate)) return;
+
+        if (row !== this.lastRow || column !== this.lastColumn) {
+          this.lastRow = row;
+          this.lastColumn = column;
+          this.$emit('changerange', {
+            minDate: this.minDate,
+            maxDate: this.maxDate,
+            rangeState: {
+              selecting: true,
+              endDate: new Date(year, 0, 1)
+            }
+          });
+        }
       },
 
       handleYearTableClick(event) {
@@ -149,16 +219,30 @@
         if (target.tagName === 'DIV') target = target.parentNode;
         if (target.tagName !== 'TD') return;
         if (hasClass(target, 'disabled')) return;
-        const year = target.textContent || target.innerText;
-        if (this.selectionMode === 'years') {
+        const row = target.parentNode.rowIndex;
+        const column = target.cellIndex;
+        const year = this.startYear + row * 3 + column;
+
+        if (this.selectionMode === 'range') {
+          if (!this.rangeState.selecting) {
+            this.$emit('pick', { minDate: new Date(year, 0, 1), maxDate: null });
+            this.rangeState.selecting = true;
+          } else {
+            const minYear = this.minDate.getFullYear();
+            const newStart = Math.min(minYear, year);
+            const newEnd = Math.max(minYear, year);
+            this.$emit('pick', { minDate: new Date(newStart, 0, 1), maxDate: new Date(newEnd, 11, 31) });
+            this.rangeState.selecting = false;
+          }
+        } else if (this.selectionMode === 'years') {
           const value = this.value || [];
-          const idx = arrayFindIndex(value, date => date.getFullYear() === Number(year));
+          const idx = arrayFindIndex(value, date => date.getFullYear() === year);
           const newValue = idx > -1
             ? [...value.slice(0, idx), ...value.slice(idx + 1)]
-            : [...value, new Date(year)];
+            : [...value, new Date(year, 0, 1)];
           this.$emit('pick', newValue);
         } else {
-          this.$emit('pick', Number(year));
+          this.$emit('pick', year);
         }
       }
     }

@@ -3,6 +3,7 @@ import DatePanel from '../panel/date';
 import DateRangePanel from '../panel/date-range';
 import MonthRangePanel from '../panel/month-range';
 import QuarterRangePanel from '../panel/quarter-range';
+import YearRangePanel from '../panel/year-range';
 
 const getPanel = function(type) {
   if (type === 'daterange' || type === 'datetimerange') {
@@ -11,6 +12,8 @@ const getPanel = function(type) {
     return MonthRangePanel;
   } else if (type === 'quarterrange') {
     return QuarterRangePanel;
+  } else if (type === 'yearrange') {
+    return YearRangePanel;
   }
   return DatePanel;
 };

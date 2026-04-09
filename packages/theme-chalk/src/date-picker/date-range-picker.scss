@@ -5,6 +5,9 @@
 
   &.has-sidebar {
     width: 634px;
+    .el-picker-panel__sidebar {
+      bottom: 42px;
+    }
   }
   &.has-time {
     .el-time-spinner__wrapper {
