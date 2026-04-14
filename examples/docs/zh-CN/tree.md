@@ -4,11 +4,103 @@
 
 ### 基础用法
 
-基础的树形结构展示。
+基础的树形结构展示, 在数据中使用`iconClass`字段展示不同节点icon, 使用`size`属性控制树形结构大小
 
 :::demo
 ```html
-<el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+<el-row :gutter="10">
+  <el-col :span="6">
+    <el-tree :data="data" size="large" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+  </el-col>
+  <el-col :span="6">
+    <el-tree :data="data" size="medium" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+  </el-col>
+  <el-col :span="6">
+    <el-tree :data="data" size="small" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+  </el-col>
+  <el-col :span="6">
+    <el-tree :data="data" size="mini" :props="defaultProps" @node-click="handleNodeClick"></el-tree>
+  </el-col>
+</el-row>
+
+<script>
+  export default {
+    data() {
+      return {
+        data: [{
+          label: '一级 1',
+          iconClass: 'iov-icon-data-role',
+          children: [{
+            label: '二级 1-1',
+            iconClass: 'iov-icon-role',
+            children: [{
+              label: '三级 1-1-1',
+              disabled: true,
+              iconClass: 'iov-icon-user',
+            }]
+          }]
+        }, {
+          label: '一级 2',
+          children: [{
+            label: '二级 2-1',
+            children: [{
+              label: '三级 2-1-1'
+            }]
+          }, {
+            label: '二级 2-2',
+            children: [{
+              label: '三级 2-2-1'
+            }]
+          }]
+        }, {
+          label: '一级 3',
+          children: [{
+            label: '二级 3-1',
+            children: [{
+              label: '三级 3-1-1'
+            }]
+          }, {
+            label: '二级 3-2',
+            children: [{
+              label: '三级 3-2-1'
+            }]
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+      };
+    },
+    methods: {
+      handleNodeClick(data) {
+        console.log(data);
+      }
+    }
+  };
+</script>
+```
+:::
+
+
+### 连接线
+
+基础的树形结构展示, 使用`show-line`属性展示连接线, 使用`switcher-icon`属性控制连接线树展开折叠的ICON。
+
+:::demo
+```html
+
+<el-row :gutter="10">
+  <el-col :span="6">
+    <el-tree :data="data" :props="defaultProps" show-line @node-click="handleNodeClick"></el-tree>
+  </el-col>
+  <el-col :span="6">
+    <el-tree :data="data" :props="defaultProps" show-line show-checkbox @node-click="handleNodeClick"></el-tree>
+  </el-col>
+  <el-col :span="6">
+    <el-tree :data="data" :props="defaultProps" show-line show-checkbox :switcher-icon="false" @node-click="handleNodeClick"></el-tree>
+  </el-col>
+</el-row>
 
 <script>
   export default {
@@ -19,7 +111,17 @@
           children: [{
             label: '二级 1-1',
             children: [{
-              label: '三级 1-1-1'
+              label: '三级 1-1-1',
+              children: [{
+                label: '四级 1-1-1-1'
+              },{
+                label: '四级 1-1-1-2'
+              },{
+                label: '四级 1-1-1-3',
+                disabled: true
+              }]
+            }, {
+              label: '二级 1-2'
             }]
           }]
         }, {
@@ -76,6 +178,7 @@
   :load="loadNode"
   lazy
   show-checkbox
+  show-line
   @check-change="handleCheckChange">
 </el-tree>
 
@@ -820,6 +923,10 @@
 | draggable             | 是否开启拖拽节点功能                                   | boolean            | —    | false |
 | allow-drag            | 判断节点能否被拖拽                  | Function(node)  | —  | —  |
 | allow-drop            | 拖拽时判定目标节点能否被放置。`type` 参数有三种情况：'prev'、'inner' 和 'next'，分别表示放置在目标节点前、插入至目标节点和放置在目标节点后 | Function(draggingNode, dropNode, type)  | —    | —     |
+| size            | 树节点大小                  | string  | large(36px)、medium(32px)、small(28px)、mini(24px)  | medium  |
+| show-line            | 是否显示带连接线的树                  | Boolean  | true、false  | false  |
+| switcher-icon            | 判断带连接线树展开折叠icon                 | Boolean  | true、false  | true  |
+
 
 ### props
 | 参数       | 说明                | 类型     | 可选值  | 默认值  |
