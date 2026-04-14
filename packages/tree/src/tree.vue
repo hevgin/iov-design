@@ -53,6 +53,7 @@
         root: null,
         currentNode: null,
         treeItems: null,
+        filterText: '',
         checkboxItems: [],
         dragState: {
           showDropIndicator: false,
@@ -195,6 +196,7 @@
     methods: {
       filter(value) {
         if (!this.filterNodeMethod) throw new Error('[Tree] filterNodeMethod is required when filter');
+        this.filterText = value || '';
         this.store.filter(value);
       },
 

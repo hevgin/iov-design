@@ -129,7 +129,20 @@
           const node = this.node;
           const { data, store, childNodes = [] } = node;
           const { iconClass = '' } = data;
-          console.log(iconClass, childNodes, !!iconClass && childNodes.length === 0, '======')
+          const filterText = tree.filterText || '';
+          const label = node.label;
+
+          // 高亮过滤关键字
+          const renderLabel = () => {
+            if (!filterText || typeof label !== 'string') return <span>{ label }</span>;
+            const index = label.toLowerCase().indexOf(filterText.toLowerCase());
+            if (index === -1) return <span>{ label }</span>;
+            const before = label.slice(0, index);
+            const match = label.slice(index, index + filterText.length);
+            const after = label.slice(index + filterText.length);
+            return <span>{ before }<span class="el-tree-node__filter-highlight">{ match }</span>{ after }</span>;
+          };
+
           return (
             parent.renderContent
               ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
@@ -138,7 +151,7 @@
                 : <div class={`el-tree-node__label ${!!node.disabled ? 'is-disabled' : ''}`}>
                     <div class='el-tree-node__label-text'>
                       { !!iconClass ? <i class={`el-tree-node__custom-icon ${iconClass}`}></i> : null }
-                      <span>{ node.label }</span>
+                      { renderLabel() }
                     </div>
                 </div>
           );

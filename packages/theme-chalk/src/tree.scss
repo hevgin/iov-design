@@ -209,6 +209,10 @@
     align-items: center;
   }
 
+  @include e(filter-highlight) {
+    color: $--color-primary-6;
+  }
+
   @include e(loading-icon) {
     padding: 1px 0 0 1px;
     width: 16px;
