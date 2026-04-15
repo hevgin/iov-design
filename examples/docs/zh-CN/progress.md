@@ -4,7 +4,9 @@
 
 ### 线形进度条
 
-:::demo Progress 组件设置`percentage`属性即可，表示进度条对应的百分比，**必填**，必须在 0-100。通过 `format` 属性来指定进度条文字内容。
+Progress 组件设置`percentage`属性即可，表示进度条对应的百分比，**必填**，必须在 0-100。通过 `format` 属性来指定进度条文字内容。
+
+:::demo 
 
 ```html
 <el-progress :percentage="50"></el-progress>
@@ -27,9 +29,9 @@
 
 ### 百分比内显
 
-百分比不占用额外控件，适用于文件上传等场景。
+百分比不占用额外控件，适用于文件上传等场景。Progress 组件可通过 `stroke-width` 属性更改进度条的高度，并可通过 `text-inside` 属性来将进度条描述置于进度条内部。
 
-:::demo Progress 组件可通过 `stroke-width` 属性更改进度条的高度，并可通过 `text-inside` 属性来将进度条描述置于进度条内部。
+:::demo 
 
 ```html
 <el-progress :text-inside="true" :stroke-width="26" :percentage="70"></el-progress>
@@ -118,7 +120,9 @@ Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形
 
 ### 仪表盘形进度条
 
-:::demo 通过 `type` 属性来指定使用仪表盘形进度条。
+通过 `type` 属性来指定使用仪表盘形进度条。
+
+:::demo 
 
 ```html
 

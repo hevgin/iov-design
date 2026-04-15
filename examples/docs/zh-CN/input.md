@@ -36,7 +36,9 @@ export default {
 
 ### 禁用状态
 
-:::demo 通过 `disabled` 属性指定是否禁用 input 组件
+通过 `disabled` 属性指定是否禁用 input 组件
+
+:::demo 
 ```html
 <el-row :gutter="12">
   <el-col :span="12">
@@ -64,7 +66,9 @@ export default {
 
 ### 可清空
 
-:::demo 使用`clearable`属性即可得到一个可清空的输入框
+使用`clearable`属性即可得到一个可清空的输入框
+
+:::demo 
 
 ```html
 <el-row :gutter="12">
@@ -97,7 +101,9 @@ export default {
 
 ### 密码框
 
-:::demo 使用`show-password`属性即可得到一个可切换显示隐藏的密码框
+使用`show-password`属性即可得到一个可切换显示隐藏的密码框
+
+:::demo 
 
 ```html
 <el-row :gutter="12">
@@ -122,7 +128,9 @@ export default {
 
 带有图标标记输入类型
 
-:::demo 可以通过 `prefix-icon` 和 `suffix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
+可以通过 `prefix-icon` 和 `suffix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
+
+:::demo 
 ```html
 
 <el-row :gutter="12">
@@ -165,9 +173,9 @@ export default {
 
 ### 文本域
 
-用于输入多行文本信息，通过将 `type` 属性的值指定为 textarea。
+用于输入多行文本信息，通过将 `type` 属性的值指定为 textarea。文本域高度可通过 `rows` 属性控制
 
-:::demo 文本域高度可通过 `rows` 属性控制
+:::demo 
 ```html
 <el-row :gutter="12">
   <el-col :span="12">
@@ -506,7 +514,9 @@ export default {
 
 ### 尺寸
 
-:::demo 可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 medium、small 和 mini 三种尺寸。
+可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 medium、small 和 mini 三种尺寸。
+
+:::demo 
 ```html
 <div class="demo-input-size">
   <el-input
@@ -551,9 +561,9 @@ export default {
 
 ### 带输入建议
 
-根据输入内容提供对应的输入建议
+根据输入内容提供对应的输入建议。autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
 
-:::demo autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
+:::demo 
 ```html
 <el-row>
   <el-col :span="12">
@@ -667,9 +677,9 @@ export default {
 
 ### 自定义模板
 
-可自定义输入建议的显示
+可自定义输入建议的显示。使用`scoped slot`自定义输入建议的模板。该 scope 的参数为`item`，表示当前输入建议对象。
 
-:::demo 使用`scoped slot`自定义输入建议的模板。该 scope 的参数为`item`，表示当前输入建议对象。
+:::demo 
 ```html
 <el-autocomplete
   popper-class="my-autocomplete"
@@ -899,7 +909,9 @@ export default {
 
 ### 输入长度限制
 
-:::demo  `maxlength` 和 `minlength` 是原生属性，用来限制输入框的字符长度，其中字符长度是用 Javascript 的字符串长度统计的。对于类型为 `text` 或 `textarea` 的输入框，在使用 `maxlength` 属性限制最大输入长度的同时，可通过设置 `show-word-limit` 属性来展示字数统计。
+`maxlength` 和 `minlength` 是原生属性，用来限制输入框的字符长度，其中字符长度是用 Javascript 的字符串长度统计的。对于类型为 `text` 或 `textarea` 的输入框，在使用 `maxlength` 属性限制最大输入长度的同时，可通过设置 `show-word-limit` 属性来展示字数统计。
+
+:::demo  
 ```html
 <el-input
   type="text"

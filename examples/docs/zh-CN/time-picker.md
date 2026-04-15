@@ -4,9 +4,9 @@
 
 ### 固定时间点
 
-提供几个固定的时间点供用户选择
+提供几个固定的时间点供用户选择。使用 el-time-select 标签，分别通过`start`、`end`和`step`指定可选的起始时间、结束时间和步长
 
-:::demo 使用 el-time-select 标签，分别通过`start`、`end`和`step`指定可选的起始时间、结束时间和步长
+:::demo 
 ```html
 <el-time-select
   v-model="value"
@@ -32,9 +32,9 @@
 
 ### 任意时间点
 
-可以选择任意时间
+可以选择任意时间。使用 el-time-picker 标签，通过`selectableRange`限制可选时间范围。提供了两种交互方式：默认情况下通过鼠标滚轮进行选择，打开`arrow-control`属性则通过界面上的箭头进行选择。
 
-:::demo 使用 el-time-picker 标签，通过`selectableRange`限制可选时间范围。提供了两种交互方式：默认情况下通过鼠标滚轮进行选择，打开`arrow-control`属性则通过界面上的箭头进行选择。
+:::demo 
 ```html
 <template>
   <el-time-picker
@@ -110,9 +110,9 @@
 
 ### 任意时间范围
 
-可选择任意的时间范围
+可选择任意的时间范围。添加`is-range`属性即可选择时间范围，同样支持`arrow-control`属性。
 
-:::demo 添加`is-range`属性即可选择时间范围，同样支持`arrow-control`属性。
+:::demo 
 ```html
 <template>
   <el-time-picker

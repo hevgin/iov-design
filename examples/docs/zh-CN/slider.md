@@ -4,9 +4,9 @@
 
 ### 基础用法
 
-在拖动滑块时，显示当前值
+在拖动滑块时，显示当前值。通过设置绑定值自定义滑块的初始值
 
-:::demo 通过设置绑定值自定义滑块的初始值
+:::demo 
 ```html
 <template>
   <div class="block">
@@ -54,9 +54,9 @@
 
 ### 离散值
 
-选项可以是离散的
+选项可以是离散的。改变`step`的值可以改变步长，通过设置`show-stops`属性可以显示间断点
 
-:::demo 改变`step`的值可以改变步长，通过设置`show-stops`属性可以显示间断点
+:::demo 
 ```html
 <template>
   <div class="block">
@@ -91,9 +91,9 @@
 
 ### 带有输入框
 
-通过输入框设置精确数值
+通过输入框设置精确数值。设置`show-input`属性会在右侧显示一个输入框
 
-:::demo 设置`show-input`属性会在右侧显示一个输入框
+:::demo 
 ```html
 <template>
   <div class="block">
@@ -118,9 +118,9 @@
 
 ### 范围选择
 
-支持选择某一数值范围
+支持选择某一数值范围。设置`range`即可开启范围选择，此时绑定值是一个数组，其元素分别为最小边界值和最大边界值
 
-:::demo 设置`range`即可开启范围选择，此时绑定值是一个数组，其元素分别为最小边界值和最大边界值
+:::demo 
 ```html
 <template>
   <div class="block">
@@ -147,7 +147,9 @@
 
 ### 竖向模式
 
-:::demo 设置`vertical`可使 Slider 变成竖向模式，此时必须设置高度`height`属性
+设置`vertical`可使 Slider 变成竖向模式，此时必须设置高度`height`属性
+
+:::demo 
 ```html
 <template>
   <div class="block">
@@ -173,7 +175,9 @@
 
 ### 展示标记
 
-:::demo 设置 `marks` 属性可以展示标记
+设置 `marks` 属性可以展示标记
+
+:::demo 
 ```html
 <template>
   <div class="block">

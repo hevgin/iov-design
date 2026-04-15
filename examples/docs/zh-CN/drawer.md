@@ -4,9 +4,9 @@
 
 ### 基本用法
 
-呼出一个临时的侧边栏, 可以从多个方向呼出
+呼出一个临时的侧边栏, 可以从多个方向呼出。需要设置 `visible` 属性，它的**类型**是 `boolean`,当为 **true** 时显示 Drawer。Drawer 分为两个部分：`title` 和 `body`，`title` 需要具名为 **title** 的 `slot`, 也可以通过 `title` 属性来定义，默认值为空。需要注意的是, Drawer 默认是从右往左打开, 当然可以设置对应的 `direction`, 详细请参考 `direction` 用法 最后，本例还展示了 `before-close` 的用法
 
-:::demo 需要设置 `visible` 属性，它的**类型**是 `boolean`,当为 **true** 时显示 Drawer。Drawer 分为两个部分：`title` 和 `body`，`title` 需要具名为 **title** 的 `slot`, 也可以通过 `title` 属性来定义，默认值为空。需要注意的是, Drawer 默认是从右往左打开, 当然可以设置对应的 `direction`, 详细请参考 `direction` 用法 最后，本例还展示了 `before-close` 的用法
+:::demo 
 
 ```html
 <el-radio-group v-model="direction">
@@ -52,9 +52,9 @@
 
 ### 不添加 Title
 
-当你不需要标题到时候, 你还可以去掉标题
+当你不需要标题到时候, 你还可以去掉标题。当遇到不需要 title 的场景时, 可以通过 `withHeader` 这个属性来关闭掉 title 的显示, 这样可以留出更大的空间给到用户, 为了用户的可访问性, 请务必设定 `title` 的值
 
-:::demo 当遇到不需要 title 的场景时, 可以通过 `withHeader` 这个属性来关闭掉 title 的显示, 这样可以留出更大的空间给到用户, 为了用户的可访问性, 请务必设定 `title` 的值
+:::demo 
 
 ```html
 <el-button @click="drawer = true" type="primary" style="margin-left: 16px;">
@@ -198,9 +198,9 @@ export default {
 
 ### 多层嵌套
 
-`Drawer` 组件也拥有多层嵌套的方法
+`Drawer` 组件也拥有多层嵌套的方法。同样, 如果你需要嵌套多层 `Drawer` 请一定要设置 `append-to-body` 属性为 **true**
 
-:::demo 同样, 如果你需要嵌套多层 `Drawer` 请一定要设置 `append-to-body` 属性为 **true**
+:::demo 
 
 ```html
 

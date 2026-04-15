@@ -4,9 +4,9 @@
 
 ### 基础用法
 
-基础的、简洁的标签页。
+基础的、简洁的标签页。Tabs 组件提供了选项卡功能，默认选中第一个标签页，你也可以通过 `value` 属性来指定当前选中的标签页。
 
-:::demo Tabs 组件提供了选项卡功能，默认选中第一个标签页，你也可以通过 `value` 属性来指定当前选中的标签页。
+:::demo 
 
 ```html
 <template>
@@ -98,9 +98,9 @@
 
 ### 选项卡样式
 
-选项卡样式的标签页。
+选项卡样式的标签页。只需要设置 `type` 属性为 `card` 就可以使选项卡改变为标签风格。
 
-:::demo 只需要设置 `type` 属性为 `card` 就可以使选项卡改变为标签风格。
+:::demo 
 
 ```html
 <template>
@@ -151,9 +151,9 @@
 
 ### 选项卡蓝色样式
 
-选项卡样式的标签页。
+选项卡样式的标签页。只需要设置 `type` 属性为 `card`, 增加 `primary`属性, 就可以使选项卡改变为标签风格。
 
-:::demo 只需要设置 `type` 属性为 `card`, 增加 `primary`属性, 就可以使选项卡改变为标签风格。
+:::demo 
 
 ```html
 <template>
@@ -204,9 +204,9 @@
 
 ### 胶囊样式
 
-选项卡样式的标签页。
+选项卡样式的标签页。只需要设置 `type` 属性为 `capsule` 就可以使选项卡改变为标签风格。
 
-:::demo 只需要设置 `type` 属性为 `capsule` 就可以使选项卡改变为标签风格。
+:::demo 
 
 ```html
 <template>
@@ -257,9 +257,9 @@
 
 ### 卡片化
 
-卡片化的标签页。
+卡片化的标签页。将`type`设置为`border-card`。
 
-:::demo 将`type`设置为`border-card`。
+:::demo 
 ```html
 <el-tabs type="border-card">
   <el-tab-pane label="用户管理"></el-tab-pane>
@@ -272,9 +272,9 @@
 
 ### 位置
 
-可以通过 `tab-position` 设置标签的位置
+可以通过 `tab-position` 设置标签的位置。标签一共有四个方向的设置 `tabPosition="left|right|top|bottom"`
 
-:::demo 标签一共有四个方向的设置 `tabPosition="left|right|top|bottom"`
+:::demo 
 
 ```html
 <template>

@@ -4,9 +4,9 @@
 
 ### 基础用法
 
-由于选项默认可见，不宜过多，若选项过多，建议使用 Select 选择器。
+由于选项默认可见，不宜过多，若选项过多，建议使用 Select 选择器。要使用 Radio 组件，只需要设置`v-model`绑定变量，选中意味着变量的值为相应 Radio `label`属性的值，`label`可以是`String`、`Number`或`Boolean`。
 
-:::demo 要使用 Radio 组件，只需要设置`v-model`绑定变量，选中意味着变量的值为相应 Radio `label`属性的值，`label`可以是`String`、`Number`或`Boolean`。
+:::demo 
 
 ```html
 <template>
@@ -28,9 +28,9 @@
 
 ### 禁用状态
 
-单选框不可用的状态。
+单选框不可用的状态。只要在`el-radio`元素中设置`disabled`属性即可，它接受一个`Boolean`，`true`为禁用。
 
-:::demo 只要在`el-radio`元素中设置`disabled`属性即可，它接受一个`Boolean`，`true`为禁用。
+:::demo 
 ```html
 <template>
   <el-radio disabled v-model="radio" label="禁用">备选项</el-radio>
@@ -51,9 +51,9 @@
 
 ### 单选框组
 
-适用于在多个互斥的选项中选择的场景
+适用于在多个互斥的选项中选择的场景。结合`el-radio-group`元素和子元素`el-radio`可以实现单选组，在`el-radio-group`中绑定`v-model`，在`el-radio`中设置好`label`即可，无需再给每一个`el-radio`绑定变量，另外，还提供了`change`事件来响应变化，它会传入一个参数`value`。
 
-:::demo 结合`el-radio-group`元素和子元素`el-radio`可以实现单选组，在`el-radio-group`中绑定`v-model`，在`el-radio`中设置好`label`即可，无需再给每一个`el-radio`绑定变量，另外，还提供了`change`事件来响应变化，它会传入一个参数`value`。
+:::demo 
 
 ```html
 <template>
@@ -78,9 +78,9 @@
 
 ### 按钮样式
 
-按钮样式的单选组合。
+按钮样式的单选组合。只需要把`el-radio`元素换成`el-radio-button`元素即可，此外，Element 还提供了`size`属性。
 
-:::demo 只需要把`el-radio`元素换成`el-radio-button`元素即可，此外，Element 还提供了`size`属性。
+:::demo 
 ```html
 <template>
   <div>
@@ -134,7 +134,9 @@
 
 ### 带有边框
 
-:::demo 设置`border`属性可以渲染为带有边框的单选框。
+设置`border`属性可以渲染为带有边框的单选框。
+
+:::demo 
 ```html
 <template>
   <div>
@@ -177,7 +179,9 @@
 
 ### 卡片
 
-:::demo 设置`card`属性可以渲染为卡片的单选框。
+设置`card`属性可以渲染为卡片的单选框。
+
+:::demo 
 ```html
 <template>
   <div>
@@ -220,7 +224,9 @@
 
 ### 带有填充
 
-:::demo 设置`button`属性可以渲染为带有边框的单选框。
+设置`button`属性可以渲染为带有边框的单选框。
+
+:::demo 
 ```html
 <template>
   <div>

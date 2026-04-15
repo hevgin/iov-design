@@ -4,9 +4,9 @@
 
 ### 基础用法
 
-在这里我们提供 9 种不同方向的展示方式，可以通过以下完整示例来理解，选择你要的效果。
+在这里我们提供 9 种不同方向的展示方式，可以通过以下完整示例来理解，选择你要的效果。使用`content`属性来决定`hover`时的提示信息。由`placement`属性决定展示效果：`placement`属性值为：`方向-对齐位置`；四个方向：`top`、`left`、`right`、`bottom`；三种对齐位置：`start`, `end`，默认为空。如`placement="left-end"`，则提示信息出现在目标元素的左侧，且提示信息的底部与目标元素的底部对齐。
 
-:::demo 使用`content`属性来决定`hover`时的提示信息。由`placement`属性决定展示效果：`placement`属性值为：`方向-对齐位置`；四个方向：`top`、`left`、`right`、`bottom`；三种对齐位置：`start`, `end`，默认为空。如`placement="left-end"`，则提示信息出现在目标元素的左侧，且提示信息的底部与目标元素的底部对齐。
+:::demo 
 
 ```html
 <div class="box">
@@ -95,10 +95,10 @@
 
 ### 主题
 
-Tooltip 组件提供了两个不同的主题：`dark`和`light`。
+Tooltip 组件提供了两个不同的主题：`dark`和`light`。通过设置`effect`属性来改变主题，默认为`dark`。
 
 
-:::demo 通过设置`effect`属性来改变主题，默认为`dark`。
+:::demo 
 ```html
 <el-tooltip content="Top center" placement="top">
   <el-button>Dark</el-button>
@@ -114,9 +114,9 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`。
 
 ### 更多 Content
 
-展示多行文本或者是设置文本内容的格式
+展示多行文本或者是设置文本内容的格式。用具名 slot 分发`content`，替代`tooltip`中的`content`属性。
 
-:::demo 用具名 slot 分发`content`，替代`tooltip`中的`content`属性。
+:::demo 
 ```html
 <el-tooltip placement="top">
   <div slot="content">多行信息<br/>第二行信息</div>

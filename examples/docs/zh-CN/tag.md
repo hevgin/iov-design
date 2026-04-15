@@ -4,7 +4,9 @@
 
 ### 基础用法
 
-:::demo 由`type`属性来选择tag的类型，也可以通过`color`属性来自定义背景色。
+由`type`属性来选择tag的类型，也可以通过`color`属性来自定义背景色。
+
+:::demo 
 
 ```html
 <div class="tag-group">
@@ -99,7 +101,9 @@
 
 ### 可移除标签
 
-:::demo 设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`disable-transitions`属性，它接受一个`Boolean`，true 为关闭。
+设置`closable`属性可以定义一个标签是否可移除。默认的标签移除时会附带渐变动画，如果不想使用，可以设置`disable-transitions`属性，它接受一个`Boolean`，true 为关闭。
+
+:::demo 
 
 ```html
 <div class="tag-group">
@@ -205,9 +209,9 @@
 
 ### 不同尺寸
 
-Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。
+Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
 
-:::demo 额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
+:::demo 
 
 ```html
 <el-tag closable>默认标签</el-tag>
@@ -219,9 +223,9 @@ Tag 组件提供除了默认值以外的三种尺寸，可以在不同场景下�
 
 ### 不同主题
 
-Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`
+Tag 组件提供了三个不同的主题：`dark`、`light` 和 `plain`。通过设置`effect`属性来改变主题，默认为 `light`
 
-:::demo 通过设置`effect`属性来改变主题，默认为 `light`
+:::demo 
 ```html
 <div class="tag-group">
   <span class="tag-group__title">Dark</span>

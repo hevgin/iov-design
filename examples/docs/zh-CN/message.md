@@ -4,9 +4,9 @@
 
 ### 基础用法
 
-从顶部出现，3 秒后自动消失。
+从顶部出现，3 秒后自动消失。Message 在配置上与 Notification 非常类似，所以部分 options 在此不做详尽解释，文末有 options 列表，可以结合 Notification 的文档理解它们。Element 注册了一个`$message`方法用于调用，Message 可以接收一个字符串或一个 VNode 作为参数，它会被显示为正文内容。
 
-:::demo Message 在配置上与 Notification 非常类似，所以部分 options 在此不做详尽解释，文末有 options 列表，可以结合 Notification 的文档理解它们。Element 注册了一个`$message`方法用于调用，Message 可以接收一个字符串或一个 VNode 作为参数，它会被显示为正文内容。
+:::demo 
 
 ```html
 <template>
@@ -38,9 +38,9 @@
 
 ### 不同状态
 
-用来显示「成功、警告、消息、错误」类的操作反馈。
+用来显示「成功、警告、消息、错误」类的操作反馈。当需要自定义更多属性时，Message 也可以接收一个对象为参数。比如，设置`type`字段可以定义不同的状态，默认为`info`。此时正文内容以`message`的值传入。同时，我们也为 Message 的各种 type 注册了方法，可以在不传入`type`字段的情况下像`open4`那样直接调用。
 
-:::demo 当需要自定义更多属性时，Message 也可以接收一个对象为参数。比如，设置`type`字段可以定义不同的状态，默认为`info`。此时正文内容以`message`的值传入。同时，我们也为 Message 的各种 type 注册了方法，可以在不传入`type`字段的情况下像`open4`那样直接调用。
+:::demo 
 ```html
 <template>
   <el-button :plain="true" @click="open2">成功</el-button>
@@ -80,9 +80,9 @@
 
 ### 可关闭
 
-可以添加关闭按钮。
+可以添加关闭按钮。默认的 Message 是不可以被人工关闭的，如果需要可手动关闭的 Message，可以使用`showClose`字段。此外，和 Notification 一样，Message 拥有可控的`duration`，设置`0`为不会被自动关闭，默认为 3000 毫秒。
 
-:::demo 默认的 Message 是不可以被人工关闭的，如果需要可手动关闭的 Message，可以使用`showClose`字段。此外，和 Notification 一样，Message 拥有可控的`duration`，设置`0`为不会被自动关闭，默认为 3000 毫秒。
+:::demo 
 ```html
 <template>
   <el-button :plain="true" @click="open1">消息</el-button>
@@ -156,9 +156,9 @@
 :::
 
 ### 使用 HTML 片段
-`message` 属性支持传入 HTML 片段
+`message` 属性支持传入 HTML 片段。将`dangerouslyUseHTMLString`属性设置为 true，`message` 就会被当作 HTML 片段处理。
 
-:::demo 将`dangerouslyUseHTMLString`属性设置为 true，`message` 就会被当作 HTML 片段处理。
+:::demo 
 
 ```html
 <template>

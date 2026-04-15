@@ -3,7 +3,9 @@
 
 ### 基础用法
 
-:::demo 可通过`fit`确定图片如何适应到容器框，同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)。
+可通过`fit`确定图片如何适应到容器框，同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)。
+
+:::demo 
 ```html
 <div class="demo-image">
   <div class="block" v-for="fit in fits" :key="fit">
@@ -30,7 +32,9 @@
 
 ### 带边框
 
-:::demo 可通过`border`属性给图片增加边框
+可通过`border`属性给图片增加边框
+
+:::demo 
 ```html
 <div class="demo-image">
   <div class="block" v-for="fit in fits" :key="fit">
@@ -58,7 +62,9 @@
 
 ### 占位内容
 
-:::demo 可通过`slot = placeholder`可自定义占位内容
+可通过`slot = placeholder`可自定义占位内容
+
+:::demo 
 ```html
 <div class="demo-image__placeholder">
   <div class="block">
@@ -89,7 +95,9 @@
 
 ### 加载失败
 
-:::demo 可通过`slot = error`可自定义加载失败内容
+可通过`slot = error`可自定义加载失败内容
+
+:::demo 
 ```html
 <div class="demo-image__error">
   <div class="block">
@@ -110,7 +118,9 @@
 
 ### 懒加载
 
-:::demo 可通过`lazy`开启懒加载功能，当图片滚动到可视范围内才会加载。可通过`scroll-container`来设置滚动容器，若未定义，则为最近一个`overflow`值为`auto`或`scroll`的父元素。
+可通过`lazy`开启懒加载功能，当图片滚动到可视范围内才会加载。可通过`scroll-container`来设置滚动容器，若未定义，则为最近一个`overflow`值为`auto`或`scroll`的父元素。
+
+:::demo 
 ```html
 <div class="demo-image__lazy">
   <el-image v-for="url in urls" :key="url" :src="url" lazy></el-image>
@@ -138,7 +148,9 @@
 
 ### 大图预览
 
-:::demo 可通过 `previewSrcList` 开启预览大图的功能。
+可通过 `previewSrcList` 开启预览大图的功能。
+
+:::demo 
 ```html
 <div class="demo-image__preview">
   <el-image

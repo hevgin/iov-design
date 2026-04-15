@@ -4,9 +4,9 @@
 
 ### 基础用法
 
-移动到下拉菜单上，展开更多操作。
+移动到下拉菜单上，展开更多操作。通过组件`slot`来设置下拉触发的元素以及需要通过具名`slot`为`dropdown` 来设置下拉菜单。默认情况下，下拉按钮只要`hover`即可，无需点击也会显示下拉菜单。
 
-:::demo 通过组件`slot`来设置下拉触发的元素以及需要通过具名`slot`为`dropdown` 来设置下拉菜单。默认情况下，下拉按钮只要`hover`即可，无需点击也会显示下拉菜单。
+:::demo 
 
 ```html
 <el-dropdown>
@@ -36,9 +36,9 @@
 
 ### 触发对象
 
-可使用按钮触发下拉菜单。
+可使用按钮触发下拉菜单。设置`split-button`属性来让触发下拉元素呈现为按钮组，左边是功能按钮，右边是触发下拉菜单的按钮，设置为`true`即可。
 
-:::demo 设置`split-button`属性来让触发下拉元素呈现为按钮组，左边是功能按钮，右边是触发下拉菜单的按钮，设置为`true`即可。
+:::demo 
 
 ```html
 <el-dropdown>
@@ -91,9 +91,9 @@
 
 ### 触发方式
 
-可以配置 click 激活或者 hover 激活。
+可以配置 click 激活或者 hover 激活。在`trigger`属性设置为`click`即可。
 
-:::demo 在`trigger`属性设置为`click`即可。
+:::demo 
 ```html
 <el-row class="block-col-2">
   <el-col :span="12">
@@ -141,9 +141,9 @@
 
 ### 菜单隐藏方式
 
-可以`hide-on-click`属性来配置。
+可以`hide-on-click`属性来配置。下拉菜单默认在点击菜单项后会被隐藏，将`hide-on-click`属性默认为`false`可以关闭此功能。
 
-:::demo 下拉菜单默认在点击菜单项后会被隐藏，将`hide-on-click`属性默认为`false`可以关闭此功能。
+:::demo 
 ```html
 <el-dropdown :hide-on-click="false">
   <el-link>
@@ -209,9 +209,9 @@
 
 ### 不同尺寸
 
-Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的尺寸。
+Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的尺寸。额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
 
-:::demo 额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
+:::demo 
 
 ```html
 <el-dropdown split-button type="primary">

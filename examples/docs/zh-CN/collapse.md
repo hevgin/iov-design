@@ -46,9 +46,9 @@
 
 ### 手风琴效果
 
-每次只能展开一个面板
+每次只能展开一个面板。通过 `accordion` 属性来设置是否以手风琴模式显示。
 
-:::demo 通过 `accordion` 属性来设置是否以手风琴模式显示。
+:::demo 
 ```html
 <el-collapse v-model="activeName" accordion>
   <el-collapse-item title="一致性 Consistency" name="1">

@@ -3,9 +3,9 @@
 出现在按钮、图标旁的数字或状态标记。
 
 ### 基础用法
-展示新消息数量。
+展示新消息数量。定义`value`属性，它接受`Number`或者`String`。
 
-:::demo 定义`value`属性，它接受`Number`或者`String`。
+:::demo 
 
 ```html
 <el-badge :value="12" class="item">
@@ -47,9 +47,9 @@
 :::
 
 ### 最大值
-可自定义最大值。
+可自定义最大值。由`max`属性定义，它接受一个`Number`，需要注意的是，只有当`value`为`Number`时，它才会生效。
 
-:::demo 由`max`属性定义，它接受一个`Number`，需要注意的是，只有当`value`为`Number`时，它才会生效。
+:::demo 
 
 ```html
 <el-badge :value="200" :max="99" class="item">
@@ -69,9 +69,9 @@
 :::
 
 ### 自定义内容
-可以显示数字以外的文本内容。
+可以显示数字以外的文本内容。定义`value`为`String`类型是时可以用于显示自定义文本。
 
-:::demo 定义`value`为`String`类型是时可以用于显示自定义文本。
+:::demo 
 
 ```html
 <el-badge value="new" class="item">
@@ -91,9 +91,9 @@
 :::
 
 ### 小红点
-以红点的形式标注需要关注的内容。
+以红点的形式标注需要关注的内容。除了数字外，设置`is-dot`属性，它接受一个`Boolean`。
 
-:::demo 除了数字外，设置`is-dot`属性，它接受一个`Boolean`。
+:::demo 
 
 ```html
 <el-badge is-dot class="item">数据查询</el-badge>
