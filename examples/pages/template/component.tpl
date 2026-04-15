@@ -17,7 +17,7 @@
     }
 
     .page-component__nav {
-      width: 280px;
+      width: 300px;
       position: fixed;
       top: 0;
       left: 0;
@@ -56,7 +56,7 @@
 
     /* 新增：右侧锚点导航样式 */
     .page-component__anchor-nav {
-      width: 200px;
+      width: 300px;
       height: calc(100vh - 80px);
       position: fixed;
       top: 80px;
@@ -105,13 +105,13 @@
 
       .anchor-level-3 {
         padding-left: 20px;
-        font-size: 12px;
+        font-size: 14px;
         color: #909399;
       }
 
       .anchor-level-4 {
         padding-left: 30px;
-        font-size: 12px;
+        font-size: 14px;
         color: #909399;
       }
 
@@ -128,7 +128,7 @@
 
     .content {
       padding-top: 50px;
-      max-width: 900px; /* 限制内容宽度，提升阅读体验 */
+      /* max-width: 900px; */
 
       > {
         h3 {
