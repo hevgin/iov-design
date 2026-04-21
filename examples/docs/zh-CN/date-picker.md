@@ -1,34 +1,36 @@
 
 ## DatePicker 日期选择器
 
-用于选择或输入日期
+用于选择或输入日期的核心组件，支持日 / 周 / 月 / 年等多种选择单位、日期 / 月份范围选择、自定义格式、默认时间配置，可搭配快捷选项、禁用日期实现复杂业务场景，交互灵活且扩展性强。
 
 ###  选择日
 
-以「日」为基本单位，基础的日期选择控件。基本单位由`type`属性指定。快捷选项需配置`picker-options`对象中的`shortcuts`，禁用日期通过 `disabledDate` 设置，传入函数
+以**日**为基本单位，支持默认选择、快捷选项、禁用日期配置；通过 `type="date"` 定义类型，`picker-options` 配置快捷选项与禁用规则。
 
 :::demo 
 ```html
 <template>
-  <div class="block">
-    <span class="demonstration">默认</span>
-    <el-date-picker
-      v-model="value1"
-      type="date"
-      placeholder="选择日期">
-      <template slot="prefixLabel">选择日期</template>
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">带快捷选项</span>
-    <el-date-picker
-      v-model="value2"
-      align="right"
-      type="date"
-      placeholder="选择日期"
-      :picker-options="pickerOptions">
-    </el-date-picker>
-  </div>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认日期选择</div>
+      <el-date-picker
+        v-model="value1"
+        type="date"
+        placeholder="选择日期">
+        <template slot="prefixLabel">选择日期</template>
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">带快捷选项+禁用未来日期</div>
+      <el-date-picker
+        v-model="value2"
+        align="right"
+        type="date"
+        placeholder="选择日期"
+        :picker-options="pickerOptions">
+      </el-date-picker>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -71,65 +73,67 @@
 
 ###  其他日期单位
 
-通过扩展基础的日期选择，可以选择周、月、年或多个日期
+支持**周**、**月**、**年**、**多日期**、**多月**、**多年**选择模式，通过 `type` 属性切换单位，满足不同时间维度选择需求。
 
 :::demo
 ```html
-<div class="container">
-  <div class="block">
-    <span class="demonstration">周</span>
-    <el-date-picker
-      v-model="value1"
-      type="week"
-      format="yyyy 第 WW 周"
-      placeholder="选择周">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">月</span>
-    <el-date-picker
-      v-model="value2"
-      type="month"
-      placeholder="选择月">
-    </el-date-picker>
-  </div>
-</div>
-<div class="container">
-  <div class="block">
-    <span class="demonstration">年</span>
-    <el-date-picker
-      v-model="value3"
-      type="year"
-      placeholder="选择年">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">多个日期</span>
-    <el-date-picker
-      type="dates"
-      v-model="value4"
-      placeholder="选择一个或多个日期">
-    </el-date-picker>
-  </div>
-</div>
-<div class="container">
-  <div class="block">
-    <span class="demonstration">多个月</span>
-    <el-date-picker
-      type="months"
-      v-model="value5"
-      placeholder="选择一个或多个月">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">多个年</span>
-    <el-date-picker
-      type="years"
-      v-model="value6"
-      placeholder="选择一个或多个年">
-    </el-date-picker>
-  </div>
-</div>
+<template>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">周选择</div>
+      <el-date-picker
+        v-model="value1"
+        type="week"
+        format="yyyy 第 WW 周"
+        placeholder="选择周">
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">月选择</div>
+      <el-date-picker
+        v-model="value2"
+        type="month"
+        placeholder="选择月">
+      </el-date-picker>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">年选择</div>
+      <el-date-picker
+        v-model="value3"
+        type="year"
+        placeholder="选择年">
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">多个日期</div>
+      <el-date-picker
+        type="dates"
+        v-model="value4"
+        placeholder="选择一个或多个日期">
+      </el-date-picker>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">多个月</div>
+      <el-date-picker
+        type="months"
+        v-model="value5"
+        placeholder="选择一个或多个月">
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">多个年</div>
+      <el-date-picker
+        type="years"
+        v-model="value6"
+        placeholder="选择一个或多个年">
+      </el-date-picker>
+    </el-col>
+  </el-row>
+</template>
 
 <script>
   export default {
@@ -150,13 +154,14 @@
 
 ### 选择日期范围
 
-可在一个选择器中便捷地选择一个时间范围。在选择日期范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前月份，可以使用`unlink-panels`属性解除联动。
+支持快速选择日期区间，`type="daterange"` 开启范围选择，`unlink-panels` 可解除左右面板联动，支持快捷选项配置。
 
 :::demo 
 ```html
 <template>
-  <el-row :gutter="12">
+  <el-row :gutter="20">
     <el-col :span="12">
+      <div class="component-content-title mgb-10">默认日期范围</div>
       <el-date-picker
         v-model="value1"
         type="daterange"
@@ -166,6 +171,7 @@
       </el-date-picker>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">解除面板联动+快捷选项</div>
       <el-date-picker
         v-model="value2"
         type="daterange"
@@ -222,32 +228,34 @@
 
 ### 选择月份范围
 
-可在一个选择器中便捷地选择一个月份范围。在选择月份范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前年份，可以使用`unlink-panels`属性解除联动。
+支持月份区间选择，`type="monthrange"` 开启月份范围，可配置快捷选项、解除面板联动(`unlink-panels`)。
 
 :::demo 
 ```html
 <template>
-  <div class="block">
-    <span class="demonstration">默认</span>
-    <el-date-picker
-      v-model="value1"
-      type="monthrange"
-      start-placeholder="开始月份"
-      end-placeholder="结束月份">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">带快捷选项</span>
-    <el-date-picker
-      v-model="value2"
-      type="monthrange"
-      align="right"
-      unlink-panels
-      start-placeholder="开始月份"
-      end-placeholder="结束月份"
-      :picker-options="pickerOptions">
-    </el-date-picker>
-  </div>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认月份范围</div>
+      <el-date-picker
+        v-model="value1"
+        type="monthrange"
+        start-placeholder="开始月份"
+        end-placeholder="结束月份">
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">快捷选项+解除联动</div>
+      <el-date-picker
+        v-model="value2"
+        type="monthrange"
+        align="right"
+        unlink-panels
+        start-placeholder="开始月份"
+        end-placeholder="结束月份"
+        :picker-options="pickerOptions">
+      </el-date-picker>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -322,38 +330,42 @@
 :::demo
 ```html
 <template>
-  <div class="block">
-    <span class="demonstration">默认为 Date 对象</span>
-    <div class="demonstration">值：{{ value1 }}</div>
-    <el-date-picker
-      v-model="value1"
-      type="date"
-      placeholder="选择日期"
-      format="yyyy 年 MM 月 dd 日">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">使用 value-format</span>
-    <div class="demonstration">值：{{ value2 }}</div>
-    <el-date-picker
-      v-model="value2"
-      type="date"
-      placeholder="选择日期"
-      format="yyyy 年 MM 月 dd 日"
-      value-format="yyyy-MM-dd">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">时间戳</span>
-    <div class="demonstration">值：{{ value3 }}</div>
-    <el-date-picker
-      v-model="value3"
-      type="date"
-      placeholder="选择日期"
-      format="yyyy 年 MM 月 dd 日"
-      value-format="timestamp">
-    </el-date-picker>
-  </div>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认值（Date 对象）</div>
+      <div class="component-content-title mgb-10">值：{{ value1 }}</div>
+      <el-date-picker
+        v-model="value1"
+        type="date"
+        placeholder="选择日期"
+        format="yyyy 年 MM 月 dd 日">
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">自定义字符串格式</div>
+      <div class="component-content-title mgb-10">值：{{ value2 }}</div>
+      <el-date-picker
+        v-model="value2"
+        type="date"
+        placeholder="选择日期"
+        format="yyyy 年 MM 月 dd 日"
+        value-format="yyyy-MM-dd">
+      </el-date-picker>
+    </el-col>
+  </el-row>
+  <el-row>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">时间戳格式</div>
+      <div class="component-content-title mgb-10">值：{{ value3 }}</div>
+      <el-date-picker
+        v-model="value3"
+        type="date"
+        placeholder="选择日期"
+        format="yyyy 年 MM 月 dd 日"
+        value-format="timestamp">
+      </el-date-picker>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -377,16 +389,19 @@
 :::demo 
 ```html
 <template>
-  <div class="block">
-    <p>组件值：{{ value }}</p>
-    <el-date-picker
-      v-model="value"
-      type="daterange"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      :default-time="['00:00:00', '23:59:59']">
-    </el-date-picker>
-  </div>
+  <el-row>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认时间：00:00:00 至 23:59:59</div>
+      <p>组件值：{{ value }}</p>
+      <el-date-picker
+        v-model="value"
+        type="daterange"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        :default-time="['00:00:00', '23:59:59']">
+      </el-date-picker>
+    </el-col>
+  </el-row>
 </template>
 
 <script>

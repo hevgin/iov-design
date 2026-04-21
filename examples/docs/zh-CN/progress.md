@@ -1,23 +1,28 @@
 ## Progress 进度条
 
-用于展示操作进度，告知用户当前状态和预期。
+用于展示操作的实时进度，清晰告知用户当前执行状态与完成预期，支持线形、环形、仪表盘等多种展示形态，可自定义颜色、尺寸、文案样式，适配文件上传、任务加载、流程进度等各类场景。
 
 ### 线形进度条
 
-Progress 组件设置`percentage`属性即可，表示进度条对应的百分比，**必填**，必须在 0-100。通过 `format` 属性来指定进度条文字内容。
+Progress 组件必填 `percentage` 属性，用于定义进度百分比，取值范围 0-100；通过 `status` 属性快速设置预设状态（`success`/`warning`/`exception`），通过 `format` 属性自定义进度文案
 
 :::demo 
 
 ```html
 <el-progress :percentage="50"></el-progress>
+<!-- 自定义进度文案 -->
 <el-progress :percentage="100" :format="format"></el-progress>
+<!-- 成功状态 -->
 <el-progress :percentage="100" status="success"></el-progress>
+<!-- 警告状态 -->
 <el-progress :percentage="100" status="warning"></el-progress>
+<!-- 异常状态 -->
 <el-progress :percentage="50" status="exception"></el-progress>
 
 <script>
   export default {
     methods: {
+      // 自定义进度文案格式化函数
       format(percentage) {
         return percentage === 100 ? '满' : `${percentage}%`;
       }
@@ -29,7 +34,7 @@ Progress 组件设置`percentage`属性即可，表示进度条对应的百分�
 
 ### 百分比内显
 
-百分比不占用额外控件，适用于文件上传等场景。Progress 组件可通过 `stroke-width` 属性更改进度条的高度，并可通过 `text-inside` 属性来将进度条描述置于进度条内部。
+百分比不占用额外控件，适用于文件上传等场景。通过 `stroke-width` 设置进度条高度，`text-inside` 开启内显模式。
 
 :::demo 
 
@@ -43,15 +48,16 @@ Progress 组件设置`percentage`属性即可，表示进度条对应的百分�
 
 ### 自定义颜色
 
-可以通过 `color` 设置进度条的颜色，`color` 可以接受颜色字符串，函数和数组。
+通过 `color` 属性自定义进度条颜色，支持**颜色字符串**、**自定义函数**、**分段颜色数组** 三种用法，满足多样化视觉需求。
 
 :::demo
 
 ```html
+<!-- 固定颜色 -->
 <el-progress :percentage="percentage" :color="customColor"></el-progress>
-
+<!-- 函数动态配色 -->
 <el-progress :percentage="percentage" :color="customColorMethod"></el-progress>
-
+<!-- 分段渐变配色 -->
 <el-progress :percentage="percentage" :color="customColors"></el-progress>
 <div>
   <el-button-group>
@@ -76,6 +82,7 @@ Progress 组件设置`percentage`属性即可，表示进度条对应的百分�
       };
     },
     methods: {
+      // 根据进度动态返回颜色
       customColorMethod(percentage) {
         if (percentage < 30) {
           return '#909399';
@@ -105,7 +112,7 @@ Progress 组件设置`percentage`属性即可，表示进度条对应的百分�
 
 ### 环形进度条
 
-Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形进度条中，还可以通过 `width` 属性来设置其大小。
+设置 `type="circle"` 切换为环形进度条，`width` 属性可自定义环形尺寸，适配数据可视化、状态展示等场景。
 
 :::demo
 
@@ -120,7 +127,7 @@ Progress 组件可通过 `type` 属性来指定使用环形进度条，在环形
 
 ### 仪表盘形进度条
 
-通过 `type` 属性来指定使用仪表盘形进度条。
+设置 `type="dashboard"` 切换为仪表盘形态，风格更简约现代，支持分段颜色、动态调整进度。
 
 :::demo 
 

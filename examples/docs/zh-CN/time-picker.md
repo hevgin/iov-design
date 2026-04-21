@@ -1,23 +1,28 @@
 ## TimePicker 时间选择器
 
- 用于选择或输入时间
+ 用于快速选择或手动输入标准时间的组件，支持固定时间点、任意时间点、固定时间范围、任意时间范围四种核心模式，可配置时间步长、可选范围、交互样式，满足各类时间选择业务场景。
 
 ### 固定时间点
 
-提供几个固定的时间点供用户选择。使用 el-time-select 标签，分别通过`start`、`end`和`step`指定可选的起始时间、结束时间和步长
+提供预设的固定时间点供选择，分别通过`start`、`end`和`step`指定可选的起始时间、结束时间和步长
 
 :::demo 
 ```html
-<el-time-select
-  v-model="value"
-  :picker-options="{
-    start: '08:30',
-    step: '00:15',
-    end: '18:30'
-  }"
-  placeholder="选择时间">
-</el-time-select>
-
+<template>
+  <el-row>
+    <el-col :span="12">
+      <el-time-select
+        v-model="value"
+        :picker-options="{
+          start: '08:30',
+          step: '00:15',
+          end: '18:30'
+        }"
+        placeholder="选择时间">
+      </el-time-select>
+    </el-col>
+  </el-row>
+</template>
 <script>
   export default {
     data() {
@@ -37,23 +42,30 @@
 :::demo 
 ```html
 <template>
-  <el-time-picker
-    v-model="value1"
-    :picker-options="{
-      selectableRange: '18:30:00 - 20:30:00'
-    }"
-    placeholder="任意时间点">
-  </el-time-picker>
-  <el-time-picker
-    arrow-control
-    v-model="value2"
-    :picker-options="{
-      selectableRange: '18:30:00 - 20:30:00'
-    }"
-    placeholder="任意时间点">
-  </el-time-picker>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">滚轮选择模式</div>
+      <el-time-picker
+        v-model="value1"
+        :picker-options="{
+          selectableRange: '18:30:00 - 20:30:00'
+        }"
+        placeholder="任意时间点">
+      </el-time-picker>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">箭头控制模式</div>
+      <el-time-picker
+        arrow-control
+        v-model="value2"
+        :picker-options="{
+          selectableRange: '18:30:00 - 20:30:00'
+        }"
+        placeholder="任意时间点">
+      </el-time-picker>
+    </el-col>
+  </el-row>
 </template>
-
 <script>
   export default {
     data() {
@@ -69,32 +81,39 @@
 
 ### 固定时间范围
 
-若先选择开始时间，则结束时间内备选项的状态会随之改变
+选择起始时间后，结束时间会自动联动限制可选范围，实现固定步长的时间区间选择，适用于标准化时段配置
 
 :::demo
 ```html
 <template>
-  <el-time-select
-    placeholder="起始时间"
-    v-model="startTime"
-    :picker-options="{
-      start: '08:30',
-      step: '00:15',
-      end: '18:30'
-    }">
-  </el-time-select>
-  <el-time-select
-    placeholder="结束时间"
-    v-model="endTime"
-    :picker-options="{
-      start: '08:30',
-      step: '00:15',
-      end: '18:30',
-      minTime: startTime
-    }">
-  </el-time-select>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">起始时间</div>
+      <el-time-select
+        placeholder="起始时间"
+        v-model="startTime"
+        :picker-options="{
+          start: '08:30',
+          step: '00:15',
+          end: '18:30'
+        }">
+      </el-time-select>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">结束时间</div>
+      <el-time-select
+        placeholder="结束时间"
+        v-model="endTime"
+        :picker-options="{
+          start: '08:30',
+          step: '00:15',
+          end: '18:30',
+          minTime: startTime
+        }">
+      </el-time-select>
+    </el-col>
+  </el-row>
 </template>
-
 <script>
   export default {
     data() {
@@ -115,23 +134,30 @@
 :::demo 
 ```html
 <template>
-  <el-time-picker
-    is-range
-    v-model="value1"
-    start-placeholder="开始时间"
-    end-placeholder="结束时间"
-    placeholder="选择时间范围">
-  </el-time-picker>
-  <el-time-picker
-    is-range
-    arrow-control
-    v-model="value2"
-    start-placeholder="开始时间"
-    end-placeholder="结束时间"
-    placeholder="选择时间范围">
-  </el-time-picker>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">滚轮选择-时间范围</div>
+      <el-time-picker
+        is-range
+        v-model="value1"
+        start-placeholder="开始时间"
+        end-placeholder="结束时间"
+        placeholder="选择时间范围">
+      </el-time-picker>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">箭头控制-时间范围</div>
+      <el-time-picker
+        is-range
+        arrow-control
+        v-model="value2"
+        start-placeholder="开始时间"
+        end-placeholder="结束时间"
+        placeholder="选择时间范围">
+      </el-time-picker>
+    </el-col>
+  </el-row>
 </template>
-
 <script>
   export default {
     data() {

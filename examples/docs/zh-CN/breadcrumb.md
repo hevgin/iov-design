@@ -1,15 +1,20 @@
 ## Breadcrumb 面包屑
-显示当前页面的路径，快速返回之前的任意页面。
+
+用于清晰展示当前页面的层级路径，支持快速跳转至路径中的任意上级页面，提升页面导航效率。
 
 ### 基础用法
 
-适用广泛的基础用法。在`el-breadcrumb`中使用`el-breadcrumb-item`标签表示从首页开始的每一级。Element 提供了一个`separator`属性，在`el-breadcrumb`标签中设置它来决定分隔符，它只能是字符串，默认为斜杠`/`。
+最常用的基础面包屑，通过 el-breadcrumb 包裹 el-breadcrumb-item 定义每一级导航。
+- `separator`：设置文本分隔符，仅支持字符串，默认值为 /
+- 导航项支持路由跳转（to 属性）和原生链接（a 标签）两种方式
 
 :::demo 
 
 ```html
 <el-breadcrumb separator="/">
+  <!-- 路由跳转：配合 Vue Router 使用 -->
   <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+  <!-- 原生链接：使用 a 标签实现跳转 -->
   <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
   <el-breadcrumb-item>活动列表</el-breadcrumb-item>
   <el-breadcrumb-item>活动详情</el-breadcrumb-item>

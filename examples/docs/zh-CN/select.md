@@ -42,7 +42,7 @@
 
 ### 有禁用选项
 
-在`el-option`中，设定`disabled`值为 true，即可禁用该选项
+通过给 `el-option` 设置 `disabled` 属性，可单独禁用某一个下拉选项。
 
 :::demo 
 ```html
@@ -78,7 +78,7 @@
 
 选择器不可用状态
 
-为`el-select`设置`disabled`属性，则整个选择器不可用
+给 `el-select` 直接设置 `disabled` 属性，可将整个选择器置为不可用状态。
 
 :::demo 
 ```html
@@ -118,7 +118,7 @@
 
 ### 可清空单选
 
-包含清空按钮，可将选择器清空为初始状态。为`el-select`设置`clearable`属性，则可将选择器清空。需要注意的是，`clearable`属性仅适用于单选。
+选择器支持一键清空已选内容，添加 `clearable` 属性即可显示清空按钮，仅适用于单选场景。
 
 :::demo 
 ```html
@@ -152,8 +152,10 @@
 
 
 ### 标签内嵌
-标签内嵌样式的选择器
-:::demo为`el-select`设置`prefixLabel`和`prefix`属性，即可在选项前添加标签。
+
+通过 `prefix` 和 `prefixLabel` 插槽，可在选择器输入框前添加图标或固定标签，丰富展示样式。
+
+:::demo
 ```html
 <template>
   <el-row :gutter="12">

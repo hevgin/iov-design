@@ -1,15 +1,19 @@
 ## InputNumber 计数器
 
-仅允许输入标准的数字值，可定义范围
+用于输入标准数字值的计数器组件，支持数值范围限定、步长控制、精度设置、尺寸调整、按钮位置自定义等功能，可满足各类数字输入场景的交互需求，操作便捷且输入规范。
 
 ### 基础用法
 
-要使用它，只需要在`el-input-number`元素中使用`v-model`绑定变量即可，变量的初始值即为默认值。
+通过 `v-model` 绑定变量即可快速使用，变量初始值为组件默认值，支持配置数值上下限，数值变化时可通过 `change` 事件监听。
 
 :::demo 
 ```html
 <template>
-  <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+  <el-row>
+    <el-col :span="12">
+      <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="描述文字"></el-input-number>
+    </el-col>
+  </el-row>
 </template>
 <script>
   export default {
@@ -30,13 +34,17 @@
 
 ### 禁用状态
 
-`disabled`属性接受一个`Boolean`，设置为`true`即可禁用整个组件，如果你只需要控制数值在某一范围内，可以设置`min`属性和`max`属性，不设置`min`和`max`时，最小值为 0。
+通过 `disabled` 属性控制组件禁用状态，接收布尔值；未配置 `min`/`max` 时，组件默认最小值为 0。
 
 :::demo 
 
 ```html
 <template>
-  <el-input-number v-model="num" :disabled="true"></el-input-number>
+  <el-row>
+    <el-col :span="12">
+      <el-input-number v-model="num" :disabled="true"></el-input-number>
+    </el-col>
+  </el-row>
 </template>
 <script>
   export default {
@@ -52,13 +60,17 @@
 
 ### 步数
 
-允许定义递增递减的步数控制。设置`step`属性可以控制步长，接受一个`Number`。
+通过 `step` 属性定义数值递增 / 递减的步长，接收`Number`，可自定义每次增减的数值幅度
 
 :::demo 
 
 ```html
 <template>
-  <el-input-number v-model="num" :step="2"></el-input-number>
+  <el-row>
+    <el-col :span="12">
+      <el-input-number v-model="num" :step="2"></el-input-number>
+    </el-col>
+  </el-row>
 </template>
 <script>
   export default {
@@ -74,13 +86,17 @@
 
 ### 严格步数
 
-`step-strictly`属性接受一个`Boolean`。如果这个属性被设置为`true`，则只能输入步数的倍数。
+`step-strictly`属性接受一个`Boolean`。如果这个属性被设置为`true`，开启后仅允许输入步长的倍数，强制规范输入格式。
 
 :::demo 
 
 ```html
 <template>
-  <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
+  <el-row>
+    <el-col :span="12">
+      <el-input-number v-model="num" :step="2" step-strictly></el-input-number>
+    </el-col>
+  </el-row>
 </template>
 <script>
   export default {
@@ -96,13 +112,17 @@
 
 ### 精度
 
-设置 `precision` 属性可以控制数值精度，接收一个 `Number`。
+通过 `precision` 属性控制数值精度，接收非负整数，精度值不能小于 `step` 的小数位数，适配小数输入场景
 
 :::demo 
 
 ```html
 <template>
-  <el-input-number v-model="num" :precision="2" :step="0.1" :max="10"></el-input-number>
+  <el-row>
+    <el-col :span="12">
+      <el-input-number v-model="num" :precision="2" :step="0.1" :max="10"></el-input-number>
+    </el-col>
+  </el-row>
 </template>
 <script>
   export default {
@@ -123,16 +143,32 @@
 
 ### 尺寸
 
-额外提供了 `medium`、`small`、`mini` 三种尺寸的数字输入框
+组件提供默认、`medium`、`small`、`mini` 四种尺寸，通过 size 属性灵活适配不同页面布局需求。
 
 :::demo
 
 ```html
 <template>
-  <el-input-number v-model="num1"></el-input-number>
-  <el-input-number size="medium" v-model="num2"></el-input-number>
-  <el-input-number size="small" v-model="num3"></el-input-number>
-  <el-input-number size="mini" v-model="num4"></el-input-number>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认尺寸</div>
+      <el-input-number v-model="num1"></el-input-number>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">medium 尺寸</div>
+      <el-input-number size="medium" v-model="num2"></el-input-number>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">small 尺寸</div>
+      <el-input-number size="small" v-model="num3"></el-input-number>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">mini 尺寸</div>
+      <el-input-number size="mini" v-model="num4"></el-input-number>
+    </el-col>
+  </el-row>
 </template>
 <script>
   export default {
@@ -151,15 +187,31 @@
 
 ### 按钮位置
 
-设置 `controls-position` 属性可以控制按钮位置。
+通过 `controls-position` 属性自定义增减按钮位置，支持将按钮设置在输入框右侧，兼容不同尺寸和状态。
 
 :::demo 
 ```html
 <template>
-  <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
-  <el-input-number v-model="num" disabled controls-position="right" @change="handleChange" :min="1" :max="10" size="medium"></el-input-number>
-  <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10" size="small"></el-input-number>
-  <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10" size="mini"></el-input-number>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认尺寸+右侧按钮</div>
+      <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10"></el-input-number>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">medium尺寸+右侧按钮+禁用</div>
+      <el-input-number v-model="num" disabled controls-position="right" @change="handleChange" :min="1" :max="10" size="medium"></el-input-number>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">small尺寸+右侧按钮</div>
+      <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10" size="small"></el-input-number>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">mini尺寸+右侧按钮</div>
+      <el-input-number v-model="num" controls-position="right" @change="handleChange" :min="1" :max="10" size="mini"></el-input-number>
+    </el-col>
+  </el-row>
 </template>
 <script>
   export default {

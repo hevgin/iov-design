@@ -1,4 +1,5 @@
 ## MessageBox 弹框
+
 模拟系统的消息提示框而实现的一套模态对话框组件，用于消息提示、确认消息和提交内容。
 
 :::tip
@@ -37,7 +38,10 @@
 
 ### 确认消息
 
-提示用户确认其已经触发的动作，并询问是否进行此操作时会用到此对话框。调用`$confirm`方法即可打开消息提示，它模拟了系统的 `confirm`。Message Box 组件也拥有极高的定制性，我们可以传入`options`作为第三个参数，它是一个字面量对象。`type`字段表明消息类型，可以为`success`，`error`，`info`和`warning`，无效的设置将会被忽略。注意，第二个参数`title`必须定义为`String`类型，如果是`Object`，会被理解为`options`。在这里我们用了 Promise 来处理后续响应。
+提示用户确认其已经触发的动作，并询问是否进行此操作时会用到此对话框。调用`$confirm`方法即可打开消息提示，它模拟了系统的 `confirm`。可以传入`options`作为第三个参数，它是一个字面量对象。
+- `type`字段表明消息类型，可以为`success`，`error`，`info`和`warning`，无效的设置将会被忽略。
+- `title`必须定义为`String`类型，如果是`Object`，会被理解为`options`。
+在这里我们用了 Promise 来处理后续响应。
 
 :::demo 
 
@@ -197,7 +201,7 @@
 
 ### 区分取消与关闭
 
-有些场景下，点击取消按钮与点击关闭按钮有着不同的含义。默认情况下，当用户触发取消（点击取消按钮）和触发关闭（点击关闭按钮或遮罩层、按下 ESC 键）时，Promise 的 reject 回调和`callback`回调的参数均为 'cancel'。如果将`distinguishCancelAndClose`属性设置为 true，则上述两种行为的参数分别为 'cancel' 和 'close'。
+有些场景下，点击取消按钮与点击关闭按钮有着不同的含义。默认情况下，当用户触发取消（点击取消按钮）和触发关闭（点击关闭按钮或遮罩层、按下 ESC 键）时，Promise 的 `reject` 回调和`callback`回调的参数均为 `cancel`。如果将`distinguishCancelAndClose`属性设置为 `true`，则上述两种行为的参数分别为 `cancel` 和 `close`。
 
 :::demo 
 

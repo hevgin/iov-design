@@ -1,17 +1,17 @@
 ## Avatar 头像
 
-用图标、图片或者字符的形式展示用户或事物信息。
+以图标、图片或字符形式展示用户、事物标识，支持圆形 / 方形、多尺寸配置，自带图片加载失败降级处理，适用于个人中心、消息列表、评论区、用户卡片等场景。
 
 ### 基本用法
 
-通过 `shape` 和 `size` 设置头像的形状和大小。
+通过 `shape` 设置头像形状（默认圆形 `circle` / 方形 `square`），通过 `size` 设置尺寸，支持预设值 `large`/`medium`/`small` 和自定义像素值。
 
 :::demo
 ```html
 <template>
   <el-row class="demo-avatar demo-basic">
     <el-col :span="12">
-      <div class="sub-title">circle</div>
+      <div class="sub-title">圆形（circle）</div>
       <div class="demo-basic--circle">
         <div class="block"><el-avatar :size="50" :src="circleUrl"></el-avatar></div>
         <div class="block" v-for="size in sizeList" :key="size">
@@ -20,7 +20,7 @@
       </div>
     </el-col>  
     <el-col :span="12">
-      <div class="sub-title">square</div>
+      <div class="sub-title">方形（square）</div>
       <div class="demo-basic--circle">
         <div class="block"><el-avatar shape="square" :size="50" :src="squareUrl"></el-avatar></div>
         <div class="block" v-for="size in sizeList" :key="size">
@@ -47,19 +47,22 @@
 
 ### 展示类型
 
-支持三种类型：图标、图片和字符
+支持图标、图片、字符三种展示类型，可灵活适配无头像、默认头像、用户昵称等场景
 
 :::demo
 ```html
 <template>
   <div class="demo-type">
     <div>
+      <div class="sub-title">图标头像</div>
       <el-avatar icon="el-icon-user-solid"></el-avatar>
     </div>
     <div>
+      <div class="sub-title">图片头像</div>
       <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
     </div>
     <div>
+      <div class="sub-title">字符头像</div>
       <el-avatar> user </el-avatar>
     </div>
   </div>
@@ -69,7 +72,7 @@
 
 ### 图片加载失败的 fallback 行为
 
-当展示类型为图片的时候，图片加载失败的 fallback 行为
+图片加载失败时会自动降级显示，可通过插槽自定义备用内容，`error` 事件返回 `true` 可触发内置降级逻辑。
 
 :::demo
 ```html

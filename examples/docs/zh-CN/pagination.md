@@ -1,6 +1,6 @@
 ## Pagination 分页
 
-当数据量过多时，使用分页分解数据。
+当数据量过大无法单屏展示时，使用分页组件对数据进行拆分展示，提升页面加载效率与用户浏览体验，支持自定义布局、尺寸、功能模块，适配各类数据列表场景。
 
 ### 基础用法
 
@@ -9,14 +9,14 @@
 :::demo 
 ```html
 <div class="block">
-  <span>页数较少时的效果</span>
+  <span class="component-content-title mgb-10">页数较少时的效果</span>
   <el-pagination
     layout="prev, pager, next"
     :total="50">
   </el-pagination>
 </div>
 <div class="block">
-  <span class="demonstration">大于 7 页时的效果</span>
+  <span class="demonstration component-content-title mgb-10">大于 7 页时的效果</span>
   <el-pagination
     layout="prev, pager, next"
     :total="1000">
@@ -42,7 +42,7 @@
 
 ### 带有背景色的分页
 
-设置`background`属性可以为分页按钮添加背景色。
+添加 `background` 属性，为分页按钮添加填充背景色，视觉辨识度更高。
 
 :::demo 
 ```html
@@ -56,7 +56,7 @@
 
 ### 小型分页
 
-在空间有限的情况下，可以使用简单的小型分页。只需要一个`small`属性，它接受一个`Boolean`，默认为`false`，设为`true`即可启用。
+在空间有限的情况下，可以使用简单的小型分页。设置 `small` 属性即可启用。
 
 :::demo 
 ```html
@@ -104,7 +104,7 @@
 ```html
 <template>
   <div class="block">
-    <span class="demonstration">显示总数</span>
+    <span class="demonstration component-content-title mgb-10">显示总数</span>
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -115,7 +115,7 @@
     </el-pagination>
   </div>
   <div class="block">
-    <span class="demonstration">调整每页显示条数</span>
+    <span class="demonstration component-content-title mgb-10">调整每页显示条数</span>
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -127,7 +127,7 @@
     </el-pagination>
   </div>
   <div class="block">
-    <span class="demonstration">直接前往</span>
+    <span class="demonstration component-content-title mgb-10">直接前往</span>
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -138,7 +138,7 @@
     </el-pagination>
   </div>
   <div class="block">
-    <span class="demonstration">完整功能</span>
+    <span class="demonstration component-content-title mgb-10">完整功能</span>
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"

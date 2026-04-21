@@ -1,20 +1,21 @@
 ## DateTimePicker 日期时间选择器
 
-在同一个选择器里选择日期和时间
+集成日期与时间选择功能的复合组件，在同一选择器内完成日期 + 时间选择，由 `DatePicker` 和 `TimePicker` 派生而来，配置项完全兼容两者，适用于需要精准选择日期时间的业务场景。
 
 :::tip
-DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其他选项可以参照 DatePicker 和 TimePicker。
+`DateTimePicker` 由 `DatePicker` 和 `TimePicker` 派生，`Picker Options` 或者其他选项可以参照 `DatePicker` 和 `TimePicker。`
 :::
 
 ###  日期和时间点
 
-通过设置`type`属性为`datetime`，即可在同一个选择器里同时进行日期和时间的选择。快捷选项的使用方法与 Date Picker 相同。
+设置 `type="datetime"` 即可实现日期 + 时间点选择，支持默认时间、快捷选项、对齐方式等配置，用法与 DatePicker 保持一致。
 
 :::demo 
 ```html
 <template>
-  <el-row :gutter="12">
+  <el-row :gutter="20">
     <el-col :span="12">
+      <div class="component-content-title mgb-10">基础日期时间选择</div>
       <el-date-picker
         v-model="value1"
         type="datetime"
@@ -22,8 +23,8 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
         <template slot="prefixLabel">选择时间</template>
       </el-date-picker>
     </el-col>
-
     <el-col :span="12">
+      <div class="component-content-title mgb-10">带快捷选项</div>
       <el-date-picker
         v-model="value2"
         type="datetime"
@@ -33,8 +34,10 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
         <template slot="prefixLabel">快捷选项</template>
       </el-date-picker>
     </el-col>
-
+  </el-row>
+  <el-row>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">设置默认时间</div>
       <el-date-picker
         v-model="value3"
         type="datetime"
@@ -84,31 +87,33 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 
 ### 日期和时间范围
 
-设置`type`为`datetimerange`即可选择日期和时间范围
+设置 `type="datetimerange"` 开启日期 + 时间范围选择，支持快捷选项配置，可快速选择时间区间。
 
 :::demo 
 ```html
 <template>
-  <div class="block">
-    <span class="demonstration">默认</span>
-    <el-date-picker
-      v-model="value1"
-      type="datetimerange"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期">
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">带快捷选项</span>
-    <el-date-picker
-      v-model="value2"
-      type="datetimerange"
-      :picker-options="pickerOptions"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      align="right">
-    </el-date-picker>
-  </div>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认日期时间范围</div>
+      <el-date-picker
+        v-model="value1"
+        type="datetimerange"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期">
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">带快捷选项</div>
+      <el-date-picker
+        v-model="value2"
+        type="datetimerange"
+        :picker-options="pickerOptions"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        align="right">
+      </el-date-picker>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -158,28 +163,30 @@ DateTimePicker 由 DatePicker 和 TimePicker 派生，`Picker Options` 或者其
 :::demo 
 ```html
 <template>
-  <div class="block">
-    <span class="demonstration">起始日期时刻为 12:00:00</span>
-    <el-date-picker
-      v-model="value1"
-      type="datetimerange"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      :default-time="['12:00:00']">
-      <template slot="prefixLabel">选择时间</template>
-    </el-date-picker>
-  </div>
-  <div class="block">
-    <span class="demonstration">起始日期时刻为 12:00:00，结束日期时刻为 08:00:00</span>
-    <el-date-picker
-      v-model="value2"
-      type="datetimerange"
-      align="right"
-      start-placeholder="开始日期"
-      end-placeholder="结束日期"
-      :default-time="['12:00:00', '08:00:00']">
-    </el-date-picker>
-  </div>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">起始时间默认为 12:00:00</div>
+      <el-date-picker
+        v-model="value1"
+        type="datetimerange"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        :default-time="['12:00:00']">
+        <template slot="prefixLabel">选择时间</template>
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">起始12:00:00 / 结束08:00:00</div>
+      <el-date-picker
+        v-model="value2"
+        type="datetimerange"
+        align="right"
+        start-placeholder="开始日期"
+        end-placeholder="结束日期"
+        :default-time="['12:00:00', '08:00:00']">
+      </el-date-picker>
+    </el-col>
+  </el-row>
 </template>
 
 <script>

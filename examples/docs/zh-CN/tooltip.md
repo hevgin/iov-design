@@ -1,10 +1,15 @@
 ## Tooltip 文字提示
 
-常用于展示鼠标 hover 时的提示信息。
+鼠标悬浮时展示额外提示信息，适用于文字省略、操作说明、状态解释等场景，不占用页面空间。
 
 ### 基础用法
 
-在这里我们提供 9 种不同方向的展示方式，可以通过以下完整示例来理解，选择你要的效果。使用`content`属性来决定`hover`时的提示信息。由`placement`属性决定展示效果：`placement`属性值为：`方向-对齐位置`；四个方向：`top`、`left`、`right`、`bottom`；三种对齐位置：`start`, `end`，默认为空。如`placement="left-end"`，则提示信息出现在目标元素的左侧，且提示信息的底部与目标元素的底部对齐。
+提供 9 种展示方位，通过 placement 控制，格式为：方向-对齐位置。
+- 4 个基础方向：`top` / `bottom` / `left` / `right`
+- 3 种对齐方式：`start`（起始）、`end`（结束）、默认居中
+- `content`：设置提示文字内容
+- `effect`：设置提示框主题
+
 
 :::demo 
 
@@ -114,7 +119,7 @@ Tooltip 组件提供了两个不同的主题：`dark`和`light`。通过设置`e
 
 ### 更多 Content
 
-展示多行文本或者是设置文本内容的格式。用具名 slot 分发`content`，替代`tooltip`中的`content`属性。
+需要展示多行文本、富文本、自定义格式时，使用 `slot="content"` 替代 `content` 属性。
 
 :::demo 
 ```html

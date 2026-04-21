@@ -1,6 +1,6 @@
 ## Input 输入框
 
-通过鼠标或键盘输入字符
+通过鼠标或键盘输入字符，支持单行输入、文本域、密码框、搜索框、带建议输入等多种场景。
 
 :::warning
 Input 为受控组件，它**总会显示 Vue 绑定值**。
@@ -12,10 +12,11 @@ Input 为受控组件，它**总会显示 Vue 绑定值**。
 
 ### 基础用法
 
+基础文本输入框，支持占位提示与尺寸控制。
+
 :::demo
 ```html
-
-<el-row :gutter="12">
+<el-row :gutter="20">
   <el-col :span="12">
     <el-input v-model="input" placeholder="请输入内容" size="small"></el-input>
   </el-col>
@@ -36,18 +37,18 @@ export default {
 
 ### 禁用状态
 
-通过 `disabled` 属性指定是否禁用 input 组件
+通过 `disabled` 属性指定是否禁用输入框，禁用后不可编辑。
 
 :::demo 
 ```html
-<el-row :gutter="12">
+<el-row :gutter="20">
   <el-col :span="12">
-    <div class="sub-title">禁用未输入</div>
-    <el-input v-model="input1" placeholder="请输入内容" :disabled="true" size="small" clearable></el-input>
+    <div class="component-content-title mgb-10">禁用未输入</div>
+    <el-input v-model="input1" placeholder="请输入内容" disabled size="small" clearable></el-input>
   </el-col>
   <el-col :span="12">
-    <div class="sub-title">禁用已输入</div>
-    <el-input v-model="input2" placeholder="请输入内容" :disabled="true" size="small" clearable></el-input>
+    <div class="component-content-title mgb-10">禁用已输入</div>
+    <el-input v-model="input2" placeholder="请输入内容" disabled size="small" clearable></el-input>
   </el-col>
 </el-row>
 
@@ -66,92 +67,91 @@ export default {
 
 ### 可清空
 
-使用`clearable`属性即可得到一个可清空的输入框
+使用 `clearable` 属性显示清空按钮，一键清除已输入内容，支持字数统计展示。
 
 :::demo 
-
 ```html
-<el-row :gutter="12">
+<el-row :gutter="20">
   <el-col :span="12">
+    <div class="component-content-title mgb-10">基础可清空</div>
     <el-input v-model="input1" placeholder="请输入内容" size="small" clearable></el-input>
   </el-col>
   <el-col :span="12">
-    <el-input v-model="input2" placeholder="请输入内容" size="small" clearable type="text" maxlength="10" show-word-limit></el-input>
+    <div class="component-content-title mgb-10">可清空+字数限制</div>
+    <el-input v-model="input2" placeholder="请输入内容" size="small" clearable maxlength="10" show-word-limit></el-input>
   </el-col>
   <el-col :span="12">
+    <div class="component-content-title mgb-10">后置按钮+可清空</div>
     <el-input v-model="input3" placeholder="请输入内容" size="small" clearable>
-      <el-button slot="append" size="small" icon="el-icon-search" type="primary"></el-button>
+      <el-button slot="append" size="small" icon="iov-icon-search" type="primary"></el-button>
     </el-input>
   </el-col>
 </el-row>
 
 <script>
-  export default {
-    data() {
-      return {
-        input1: '',
-        input2: '',
-        input3: ''
-      }
+export default {
+  data() {
+    return {
+      input1: '',
+      input2: '',
+      input3: ''
     }
   }
+}
 </script>
 ```
 :::
 
 ### 密码框
 
-使用`show-password`属性即可得到一个可切换显示隐藏的密码框
+使用 `show-password` 属性开启密码可见切换，支持明文 / 密文切换。
 
 :::demo 
 
 ```html
-<el-row :gutter="12">
+<el-row :gutter="20">
   <el-col :span="12">
     <el-input v-model="input" placeholder="请输入密码" show-password size="small" clearable></el-input>
   </el-col>
 </el-row>
 
 <script>
-  export default {
-    data() {
-      return {
-        input: ''
-      }
+export default {
+  data() {
+    return {
+      input: ''
     }
   }
+}
 </script>
 ```
 :::
 
 ### 带 icon 的输入框
 
-带有图标标记输入类型
-
-可以通过 `prefix-icon` 和 `suffix-icon` 属性在 input 组件首部和尾部增加显示图标，也可以通过 slot 来放置图标。
+通过前缀`prefix-icon` / 后缀`suffix-icon`图标强化输入类型标识，支持属性配置与插槽两种方式
 
 :::demo 
 ```html
-
-<el-row :gutter="12">
+<el-row :gutter="20">
   <el-col :span="12">
-    <div class="sub-title">属性方式：</div>
-    <el-input placeholder="请选择日期" suffix-icon="el-icon-date" v-model="input1" size="small"></el-input>
+    <div class="component-content-title mgb-10">后缀图标（属性）</div>
+    <el-input placeholder="请选择日期" suffix-icon="iov-icon-date" v-model="input1" size="small"></el-input>
   </el-col>
   <el-col :span="12">
-    <div class="sub-title">属性方式：</div>
-    <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="input2" size="small"></el-input>
+    <div class="component-content-title mgb-10">前缀图标（属性）</div>
+    <el-input placeholder="请输入内容" prefix-icon="iov-icon-search" v-model="input2" size="small"></el-input>
   </el-col>
   <el-col :span="12">
-    <div class="sub-title">slot 方式：</div>
+    <div class="component-content-title mgb-10">后缀图标（插槽）</div>
     <el-input placeholder="请选择日期" v-model="input3" size="small">
-      <i slot="suffix" class="el-input__icon el-icon-date"></i>
+      <i slot="suffix" class="el-input__icon iov-icon-date"></i>
     </el-input>
   </el-col>
   <el-col :span="12">
-    <div class="sub-title">slot 方式：</div>
+    <div class="component-content-title mgb-10">前缀图标（插槽）</div>
     <el-input placeholder="请输入内容" v-model="input4" size="small">
-      <i slot="prefix" class="el-input__icon el-icon-search"></i>
+      <i slot="prefix" class="el-input__icon iov-icon-search"></i>
     </el-input>
   </el-col>
 </el-row>
@@ -173,11 +173,11 @@ export default {
 
 ### 文本域
 
-用于输入多行文本信息，通过将 `type` 属性的值指定为 textarea。文本域高度可通过 `rows` 属性控制
+用于多行文本输入，通过 `type="textarea"` 启用，可通过 rows 控制初始高度。
 
 :::demo 
 ```html
-<el-row :gutter="12">
+<el-row :gutter="20">
   <el-col :span="12">
     <el-input type="textarea" :rows="2" placeholder="请输入内容" v-model="textarea"></el-input>
   </el-col>
@@ -195,16 +195,20 @@ export default {
 ```
 :::
 
-### 可自适应文本高度的文本域
-通过设置 `autosize` 属性可以使得文本域的高度能够根据文本内容自动进行调整，并且 `autosize` 还可以设定为一个对象，指定最小行数和最大行数。
+### 自适应高度文本域
+
+设置 `autosize` 实现高度随内容自适应，支持配置最小 / 最大行数。
+
 :::demo
 ```html
-<el-row :gutter="12">
-  <el-col :span="24">
+<el-row :gutter="20">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">自由自适应</div>
     <el-input type="textarea" autosize placeholder="请输入内容" v-model="textarea1"></el-input>
   </el-col>
-  <el-col :span="24">
-    <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4}" placeholder="请输入内容" v-model="textarea2"></el-input>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">限制最大最小行数</div>
+    <el-input type="textarea" :autosize="{ minRows: 2, maxRows: 4 }" placeholder="请输入内容" v-model="textarea2"></el-input>
   </el-col>
 </el-row>
 
@@ -222,11 +226,14 @@ export default {
 :::
 
 ### 前置/后置标签
-在输入框前/后图标、文字或其他元素。
+
+在输入框外侧添加固定标签、下拉选择器，常用于 URL、金额、电话等场景。
+
 :::demo
 ```html
 <el-row :gutter="12">
   <el-col :span="24">
+    <div class="component-content-title mgb-10">前后置文字标签</div>
     <el-input placeholder="请输入内容" v-model="input1" size="small">
       <template slot="prepend">http://</template>
       <template slot="append">.com</template>
@@ -234,17 +241,20 @@ export default {
   </el-col>
 
   <el-col :span="12">
+    <div class="component-content-title mgb-10">仅前置标签</div>
     <el-input placeholder="请输入内容" v-model="input2" size="small">
       <template slot="prepend">http://</template>
     </el-input>
   </el-col>
   <el-col :span="12">
+    <div class="component-content-title mgb-10">仅后置标签</div>
     <el-input placeholder="请输入内容" v-model="input3" size="small">
       <template slot="append">.com</template>
     </el-input>
   </el-col>
 
   <el-col :span="24">
+    <div class="component-content-title mgb-10">前后置select组件</div>
     <el-input placeholder="请输入内容" v-model="input4" size="small">
       <el-select v-model="select1" style="width:80px;" slot="prepend" placeholder="请选择">
         <el-option label="http://" value="1"></el-option>
@@ -258,6 +268,7 @@ export default {
   </el-col>
 
   <el-col :span="12">
+    <div class="component-content-title mgb-10">前置select组件</div>
     <el-input placeholder="请输入内容" v-model="input5" size="small">
       <el-select v-model="select3" style="width:80px;" slot="prepend" placeholder="请选择">
         <el-option label="+86" value="1"></el-option>
@@ -266,6 +277,7 @@ export default {
     </el-input>
   </el-col>
   <el-col :span="12">
+    <div class="component-content-title mgb-10">后置select组件</div>
     <el-input placeholder="请输入内容" v-model="input6" size="small">
       <el-select v-model="select4" style="width:80px;" slot="append" placeholder="请选择">
         <el-option label="万元" value="1"></el-option>
@@ -298,8 +310,10 @@ export default {
 :::
 
 
-### 标签内嵌
-在输入框内添加图标、文字或其他元素。
+### 内嵌标签
+
+在输入框内部嵌入前缀 / 后缀标签，不占用外部宽度，界面更紧凑。
+
 :::demo
 ```html
 <el-row :gutter="12">
@@ -474,26 +488,28 @@ export default {
 
 
 
-### 前置/后置标签2
+### 搜索框
 
-带有搜索功能的输入框，用于内容检索。
+组合前置筛选、搜索图标、搜索按钮，适用于内容检索场景。
 
 :::demo
 ```html
-<el-row :gutter="12">
+<el-row :gutter="20">
   <el-col :span="12">
+    <div class="component-content-title mgb-10">带分类筛选搜索框</div>
     <el-input placeholder="请输入搜索内容" v-model="input1" size="small">
-      <el-select v-model="select" slot="prepend" placeholder="请选择地区">
+      <el-select v-model="select" slot="prepend" placeholder="地区" style="width: 100px;">
         <el-option label="北京市" value="1"></el-option>
         <el-option label="上海市" value="2"></el-option>
       </el-select>
-      <el-button slot="append" icon="el-icon-search" type="primary" size="small"></el-button>
+      <el-button slot="append" icon="iov-icon-search" type="primary" size="small"></el-button>
     </el-input>
   </el-col>
   <el-col :span="12">
+    <div class="component-content-title mgb-10">图标+文字搜索按钮</div>
     <el-input placeholder="请输入搜索内容" v-model="input2" size="small">
-      <i slot="prefix" class="el-input__icon el-icon-search"></i>
-      <el-button slot="append" type="primary" size="small">Search</el-button>
+      <i slot="prefix" class="el-input__icon iov-icon-search"></i>
+      <el-button slot="append" type="primary" size="small">搜索</el-button>
     </el-input>
   </el-col>
 </el-row>
@@ -514,35 +530,30 @@ export default {
 
 ### 尺寸
 
-可通过 `size` 属性指定输入框的尺寸，除了默认的大小外，还提供了 medium、small 和 mini 三种尺寸。
+可通过 `size` 属性指定输入框的尺寸, 提供 `large` / `medium` / `small` / `mini` 四种尺寸，适配不同布局场景。
 
 :::demo 
 ```html
-<div class="demo-input-size">
-  <el-input
-    placeholder="请输入内容"
-    suffix-icon="el-icon-date"
-    v-model="input1">
-  </el-input>
-  <el-input
-    size="medium"
-    placeholder="请输入内容"
-    suffix-icon="el-icon-date"
-    v-model="input2">
-  </el-input>
-  <el-input
-    size="small"
-    placeholder="请输入内容"
-    suffix-icon="el-icon-date"
-    v-model="input3">
-  </el-input>
-  <el-input
-    size="mini"
-    placeholder="请输入内容"
-    suffix-icon="el-icon-date"
-    v-model="input4">
-  </el-input>
-</div>
+<el-row :gutter="20">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">large 尺寸</div>
+    <el-input placeholder="请输入内容" size="large" v-model="input1"></el-input>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">medium 尺寸</div>
+    <el-input placeholder="请输入内容" size="medium" v-model="input2"></el-input>
+  </el-col>
+</el-row>
+<el-row :gutter="20">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">small 尺寸</div>
+    <el-input placeholder="请输入内容" size="small" v-model="input3"></el-input>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">mini 尺寸</div>
+    <el-input placeholder="请输入内容" size="mini" v-model="input4"></el-input>
+  </el-col>
+</el-row>
 
 <script>
 export default {
@@ -561,27 +572,23 @@ export default {
 
 ### 带输入建议
 
-根据输入内容提供对应的输入建议。autocomplete 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 querySearch(queryString, cb)，在该方法中你可以在你的输入建议数据准备好时通过 cb(data) 返回到 autocomplete 组件中。
+根据输入内容实时匹配下拉建议，支持激活即显示与输入后匹配两种模式。。`autocomplete` 是一个可带输入建议的输入框组件，`fetch-suggestions` 是一个返回输入建议的方法属性，如 `querySearch(queryString, cb)`，在该方法中你可以在你的输入建议数据准备好时通过 `cb(data)` 返回到 `autocomplete` 组件中。
 
 :::demo 
 ```html
-<el-row>
+<el-row :gutter="20">
   <el-col :span="12">
-    <div class="sub-title">激活即列出输入建议</div>
+    <div class="component-content-title mgb-10">激活即显示建议</div>
     <el-autocomplete
-      class="inline-input"
       v-model="state1"
       :fetch-suggestions="querySearch"
       placeholder="请输入内容"
       @select="handleSelect"
-    >
-    <template slot="prefixLabel">请选择</template>
-    </el-autocomplete>
+    ></el-autocomplete>
   </el-col>
   <el-col :span="12">
-    <div class="sub-title">输入后匹配输入建议</div>
+    <div class="component-content-title mgb-10">输入后匹配建议</div>
     <el-autocomplete
-      class="inline-input"
       v-model="state2"
       :fetch-suggestions="querySearch"
       placeholder="请输入内容"
@@ -590,6 +597,7 @@ export default {
     ></el-autocomplete>
   </el-col>
 </el-row>
+
 <script>
   export default {
     data() {
@@ -677,26 +685,30 @@ export default {
 
 ### 自定义模板
 
-可自定义输入建议的显示。使用`scoped slot`自定义输入建议的模板。该 scope 的参数为`item`，表示当前输入建议对象。
+可通过 `scoped slot` 自定义输入建议的显示内容，作用域参数为 `item`（当前建议对象），支持多字段组合展示与样式定制。
 
 :::demo 
 ```html
-<el-autocomplete
-  popper-class="my-autocomplete"
-  v-model="state"
-  :fetch-suggestions="querySearch"
-  placeholder="请输入内容"
-  @select="handleSelect">
-  <i
-    class="el-icon-edit el-input__icon"
-    slot="suffix"
-    @click="handleIconClick">
-  </i>
-  <template slot-scope="{ item }">
-    <div class="name">{{ item.value }}</div>
-    <span class="addr">{{ item.address }}</span>
-  </template>
-</el-autocomplete>
+<el-row :gutter="20">
+  <el-col :span="12">
+    <el-autocomplete
+      popper-class="my-autocomplete"
+      v-model="state"
+      :fetch-suggestions="querySearch"
+      placeholder="请输入内容"
+      @select="handleSelect">
+      <i
+        class="el-icon-edit el-input__icon"
+        slot="suffix"
+        @click="handleIconClick">
+      </i>
+      <template slot-scope="{ item }">
+        <div class="name">{{ item.value }}</div>
+        <span class="addr">{{ item.address }}</span>
+      </template>
+    </el-autocomplete>
+  </el-col>
+</el-row>
 
 <style>
 .my-autocomplete {
@@ -809,16 +821,22 @@ export default {
 
 ### 远程搜索
 
-从服务端搜索数据
+通过异步请求从服务端获取搜索建议，内置防抖控制避免频繁请求，适配大数据量远程检索场景。
 
 :::demo
 ```html
-<el-autocomplete
-  v-model="state"
-  :fetch-suggestions="querySearchAsync"
-  placeholder="请输入内容"
-  @select="handleSelect"
-></el-autocomplete>
+<el-row :gutter="20">
+  <el-col :span="12">
+    <el-autocomplete
+      v-model="state"
+      :fetch-suggestions="querySearchAsync"
+      placeholder="请输入内容"
+      @select="handleSelect"
+      clearable
+    ></el-autocomplete>
+  </el-col>
+</el-row>
+
 <script>
   export default {
     data() {
@@ -909,27 +927,32 @@ export default {
 
 ### 输入长度限制
 
-`maxlength` 和 `minlength` 是原生属性，用来限制输入框的字符长度，其中字符长度是用 Javascript 的字符串长度统计的。对于类型为 `text` 或 `textarea` 的输入框，在使用 `maxlength` 属性限制最大输入长度的同时，可通过设置 `show-word-limit` 属性来展示字数统计。
+通过 `maxlength`/`minlength` 限制字符数，搭配 `show-word-limit` 展示字数统计。
 
 :::demo  
 ```html
-<el-input
-  type="text"
-  placeholder="请输入内容"
-  v-model="text"
-  maxlength="10"
-  show-word-limit
->
-</el-input>
-<div style="margin: 20px 0;"></div>
-<el-input
-  type="textarea"
-  placeholder="请输入内容"
-  v-model="textarea"
-  maxlength="30"
-  show-word-limit
->
-</el-input>
+<el-row :gutter="20">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">文本输入限制</div>
+    <el-input
+      type="text"
+      placeholder="最多输入10字符"
+      v-model="text"
+      maxlength="10"
+      show-word-limit
+    ></el-input>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">文本域限制</div>
+    <el-input
+      type="textarea"
+      placeholder="最多输入30字符"
+      v-model="textarea"
+      maxlength="30"
+      show-word-limit
+    ></el-input>
+  </el-col>
+</el-row>
 
 <script>
 export default {

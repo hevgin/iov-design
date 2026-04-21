@@ -19,6 +19,7 @@
       class="demo-block-control"
       ref="control"
       :class="{ 'is-fixed': fixedControl }"
+      :style="{width: fixedControl ? `${controlWidth}px` : 'auto'}"
       @click="isExpanded = !isExpanded">
       <transition name="arrow-slide">
         <i :class="[iconClass, { 'hovering': hovering }]"></i>
@@ -197,7 +198,8 @@
         hovering: false,
         isExpanded: false,
         fixedControl: false,
-        scrollParent: null
+        scrollParent: null,
+        controlWidth: 0
       };
     },
 
@@ -322,6 +324,7 @@
 
     mounted() {
       this.$nextTick(() => {
+        this.controlWidth = this.$refs.control.offsetWidth
         let highlight = this.$el.getElementsByClassName('highlight')[0];
         if (this.$el.getElementsByClassName('description').length === 0) {
           highlight.style.width = '100%';

@@ -1,9 +1,15 @@
 ## Dialog 对话框
-在保留当前页面状态的情况下，告知用户并承载相关操作。
+
+在保留当前页面状态的前提下，弹出浮层展示信息、表单、表格等内容，承载轻量级交互操作，不跳转页面。
 
 ### 基本用法
 
-Dialog 弹出一个对话框，适合需要定制性更大的场景。需要设置`visible`属性，它接收`Boolean`，当为`true`时显示 Dialog。Dialog 分为两个部分：`body`和`footer`，`footer`需要具名为`footer`的`slot`。`title`属性用于定义标题，它是可选的，默认值为空。最后，本例还展示了`before-close`的用法。
+Dialog 弹出一个对话框，适合需要定制性更大的场景。
+通过 visible.sync 控制对话框显示 / 隐藏，支持自定义标题、宽度、关闭拦截等配置。
+- `visible.sync`：双向绑定显示状态，true 显示，false 隐藏
+- `before-close`：关闭前的拦截回调，可做确认、校验等逻辑
+- `body`和`footer`，`footer`需要具名为`footer`的`slot
+- `title`属性用于定义标题，它是可选的，默认值为空
 
 :::demo 
 
@@ -49,7 +55,7 @@ Dialog 弹出一个对话框，适合需要定制性更大的场景。需要设�
 
 ### 自定义内容
 
-Dialog 组件的内容可以是任意的，甚至可以是表格或表单，如果内容是非表单，则需手动补齐内容`padding-bottom: 20px`或 设置  `type='desc'`, 下面是应用了 Element Table 和 Form 组件的两个样例。
+Dialog 组件的内容可以是任意的，甚至可以是表格或表单，如果内容是非表单，则需手动补齐内容`padding-bottom: 20px`或 设置  `type='desc'`。
 
 :::demo
 ```html
@@ -128,7 +134,11 @@ Dialog 组件的内容可以是任意的，甚至可以是表格或表单，如�
 
 ### 嵌套的 Dialog
 
-如果需要在一个 Dialog 内部嵌套另一个 Dialog，需要使用 `append-to-body` 属性。正常情况下，我们不建议使用嵌套的 Dialog，如果需要在页面上同时显示多个 Dialog，可以将它们平级放置。对于确实需要嵌套 Dialog 的场景，我们提供了`append-to-body`属性。将内层 Dialog 的该属性设置为 true，它就会插入至 body 元素上，从而保证内外层 Dialog 和遮罩层级关系的正确。
+如果需要在一个 Dialog 内部嵌套另一个 Dialog，需要使用 `:append-to-body="true"` 属性。保证层级、遮罩、滚动正常。
+
+:::tip
+建议：尽量避免多层嵌套，优先使用平级多对话框。
+:::
 
 :::demo 
 ```html

@@ -1,75 +1,63 @@
 ## Cascader 级联选择器
 
-当一个数据集合有清晰的层级结构时，可通过级联选择器逐级查看并选择。
+当数据集合具备清晰的层级结构时，可通过级联选择器逐级查看并选择目标选项，满足多层级数据的选择需求。
 
 ### 基础用法
 
-有两种触发子菜单的方式。只需为 Cascader 的`options`属性指定选项数组即可渲染出一个级联选择器。通过`props.expandTrigger`可以定义展开子级菜单的触发方式。
+级联选择器支持两种触发子菜单的交互方式，核心通过 options 属性绑定层级选项数据，可通过 props.expandTrigger 自定义子菜单展开触发方式；同时支持尺寸、禁用、前缀图标 / 标签等个性化配置。
 
 :::demo 
 ```html
-
-<el-row :gutter="20" style="width:100%;">
+<el-row :gutter="20" style="width:100%;margin-bottom:20px;">
   <el-col :span="12">
-    默认 click 触发子菜单
+    <div class="component-content-title mgb-10">click 触发子菜单（默认）</div>
     <el-cascader
-    v-model="value"
-    :options="options"
-    @change="handleChange" clearable>
+      v-model="value"
+      :options="options"
+      @change="handleChange"
+      clearable>
       <i slot="prefix" class="el-input__icon iov-icon-search"></i>
     </el-cascader>
   </el-col>
   <el-col :span="12">
-    hover 触发子菜单
+    <div class="component-content-title mgb-10">hover 触发子菜单</div>
     <el-cascader
       v-model="value"
       :options="options"
       :props="{ expandTrigger: 'hover' }"
       size="small"
       @change="handleChange">
-        <template slot="prefixLabel">分类</template>
-      </el-cascader>
+      <template slot="prefixLabel">分类</template>
+    </el-cascader>
   </el-col>
-  <el-col :span="24" style="margin-top: 20px">
+</el-row>
+<el-row :gutter="20" style="width:100%;">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">禁用状态 + 小尺寸</div>
     <el-cascader
-    v-model="value"
-    :options="options"
-    size="small"
-    disabled
-    @change="handleChange" clearable>
+      v-model="value"
+      :options="options"
+      size="small"
+      disabled
+      @change="handleChange"
+      clearable>
       <i slot="prefix" class="el-input__icon iov-icon-search"></i>
       <template slot="prefixLabel">分类</template>
     </el-cascader>
   </el-col>
-  <el-col :span="24" style="margin-top: 20px">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">迷你尺寸 + 前缀标签</div>
     <el-cascader
-    v-model="value"
-    :options="options"
-    size="mini"
-    @change="handleChange" clearable>
+      v-model="value"
+      :options="options"
+      size="mini"
+      @change="handleChange"
+      clearable>
       <i slot="prefix" class="el-input__icon iov-icon-search"></i>
       <template slot="prefixLabel">分类</template>
     </el-cascader>
   </el-col>
 </el-row>
-<!-- <div class="block">
-  <span class="demonstration">默认 click 触发子菜单</span>
-  <el-cascader
-    v-model="value"
-    :options="options"
-    @change="handleChange" clearable>
-      <i slot="prefix" class="el-input__icon el-icon-search"></i>
-      <template slot="prefixLabel">分类</template>
-    </el-cascader>
-</div>
-<div class="block">
-  <span class="demonstration">hover 触发子菜单</span>
-  <el-cascader
-    v-model="value"
-    :options="options"
-    :props="{ expandTrigger: 'hover' }"
-    @change="handleChange"></el-cascader>
-</div> -->
 
 <script>
   export default {
@@ -286,11 +274,15 @@
 
 ### 禁用选项
 
-通过在数据源中设置 `disabled` 字段来声明该选项是禁用的。本例中，`options`指定的数组中的第一个元素含有`disabled: true`键值对，因此是禁用的。在默认情况下，Cascader 会检查数据中每一项的`disabled`字段是否为`true`，如果你的数据中表示禁用含义的字段名不为`disabled`，可以通过`props.disabled`属性来指定（详见下方 API 表格）。当然，`value`、`label`和`children`这三个字段名也可以通过同样的方式指定。
+通过在层级数据源中为指定节点配置 disabled: true，可禁用该节点的选择操作；若数据源中禁用字段非 disabled，可通过 props.disabled 自定义字段名。同时 value、label、children 等核心字段也支持自定义配置。
 
 :::demo 
 ```html
-<el-cascader :options="options"></el-cascader>
+<el-row :gutter="20" style="width:100%;">
+  <el-col :span="12">
+    <el-cascader :options="options"></el-cascader>
+  </el-col>
+</el-row>
 
 <script>
   export default {
@@ -299,7 +291,7 @@
         options: [{
           value: 'zhinan',
           label: '指南',
-          disabled: true,
+          disabled: true, // 禁用一级节点“指南”
           children: [{
             value: 'shejiyuanze',
             label: '设计原则',
@@ -501,11 +493,15 @@
 
 ### 可清空
 
-通过 `clearable` 设置输入框可清空
+为级联选择器添加 `clearable` 属性，可在输入框右侧显示清空按钮，点击后快速清空已选中的层级数据，提升交互便捷性。
 
 :::demo
 ```html
-<el-cascader :options="options" clearable></el-cascader>
+<el-row :gutter="20" style="width:100%;">
+  <el-col :span="12">
+    <el-cascader :options="options" clearable></el-cascader>
+  </el-col>
+</el-row>
 
 <script>
   export default {
@@ -715,11 +711,15 @@
 
 ### 仅显示最后一级
 
-可以仅在输入框中显示选中项最后一级的标签，而不是选中项所在的完整路径。属性`show-all-levels`定义了是否显示完整的路径，将其赋值为`false`则仅显示最后一级
+默认情况下输入框展示选中项的完整层级路径，通过设置 `show-all-levels="false"`，可仅显示选中项最后一级的标签，简化展示内容，适配简洁展示场景。
 
 :::demo 
 ```html
-<el-cascader :options="options" :show-all-levels="false"></el-cascader>
+<el-row :gutter="20" style="width:100%;">
+  <el-col :span="12">
+    <el-cascader :options="options" :show-all-levels="false"></el-cascader>
+  </el-col>
+</el-row>
 
 <script>
   export default {
@@ -927,31 +927,39 @@
 ```
 :::
 
-### 多选
-
-可通过 `props.multiple = true` 来开启多选模式。在开启多选模式后，默认情况下会展示所有已选中的选项的Tag，你可以使用`collapse-tags`来折叠Tag
+### 多选模式
+可通过 `props.multiple = true` 开启多选模式，支持选择多个层级节点；可结合 `collapse-tags` 折叠已选标签，同时支持 `collapseTagsFixed`（固定折叠标签）、`multipleLimitShow`（指定折叠展示数量）、`multipleTagMaxWidth`（标签最大宽度）等属性自定义标签展示样式。
 
 :::demo 
 ```html
-<el-row :gutter="12">
-  <el-col :span="24">
-     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" disabled></el-cascader>
-  </el-col>
-  <el-col :span="24">
-     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small"></el-cascader>
+<el-row :gutter="20" style="width:100%;margin-bottom:10px;">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">禁用状态 + 多选</div>
+    <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" disabled></el-cascader>
   </el-col>
   <el-col :span="12">
-     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags></el-cascader>
+    <div class="component-content-title mgb-10">基础多选 + 筛选</div>
+    <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small"></el-cascader>
+  </el-col>
+</el-row>
+<el-row :gutter="20" style="width:100%;margin-bottom:10px;">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">多选 + 折叠标签</div>
+    <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags></el-cascader>
   </el-col>
   <el-col :span="12">
-     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags collapseTagsFixed></el-cascader>
+    <div class="component-content-title mgb-10">多选 + 固定折叠标签</div>
+    <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags collapseTagsFixed></el-cascader>
+  </el-col>
+</el-row>
+<el-row :gutter="20" style="width:100%;">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">多选 + 自定义折叠文案</div>
+    <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags :multipleLimitShow="4" collapseTagsSuffix=" more"></el-cascader>
   </el-col>
   <el-col :span="12">
-     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags :multipleLimitShow="4" collapseTagsSuffix=" more">
-     </el-cascader>
-  </el-col>
-  <el-col :span="12">
-     <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags multipleTagMaxWidth="40px"></el-cascader>
+    <div class="component-content-title mgb-10">多选 + 标签最大宽度</div>
+    <el-cascader v-model="value" filterable :options="options" :props="props" clearable size="small" collapse-tags multipleTagMaxWidth="40px"></el-cascader>
   </el-col>
 </el-row>
 
@@ -1015,27 +1023,28 @@
 ```
 :::
 
-
 ### 选择任意一级选项
 
-在单选模式下，你只能选择叶子节点；而在多选模式下，勾选父节点真正选中的都是叶子节点。启用该功能后，可让父子节点取消关联，选择任意一级选项。可通过 `props.checkStrictly = true` 来设置父子节点取消选中关联，从而达到选择任意一级选项的目的。
+默认单选模式仅可选择叶子节点、多选模式勾选父节点会选中所有子节点；通过 `props.checkStrictly = true` 取消父子节点选中关联，支持选择任意一级节点，适配非叶子节点选择场景。
 
 :::demo 
 ```html
-<div class="block">
-  <span class="demonstration">单选选择任意一级选项</span>
-  <el-cascader
-    :options="options"
-    :props="{ checkStrictly: true }"
-    clearable></el-cascader>
-</div>
-<div class="block">
-  <span class="demonstration">多选选择任意一级选项</span>
-  <el-cascader
-    :options="options"
-    :props="{ multiple: true, checkStrictly: true }"
-    clearable></el-cascader>
-</div>
+<el-row :gutter="20" style="width:100%;margin-bottom:10px;">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">单选 - 选择任意一级</div>
+    <el-cascader
+      :options="options"
+      :props="{ checkStrictly: true }"
+      clearable></el-cascader>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">多选 - 选择任意一级</div>
+    <el-cascader
+      :options="options"
+      :props="{ multiple: true, checkStrictly: true }"
+      clearable></el-cascader>
+  </el-col>
+</el-row>
 
 <script>
   export default {
@@ -1245,11 +1254,15 @@
 
 ### 动态加载
 
-当选中某一级时，动态加载该级下的选项。通过`lazy`开启动态加载，并通过`lazyload`来设置加载数据源的方法。`lazyload`方法有两个参数，第一个参数`node`为当前点击的节点，第二个`resolve`为数据加载完成的回调(必须调用)。为了更准确的显示节点的状态，还可以对节点数据添加是否为叶子节点的标志位 (默认字段为`leaf`，可通过`props.leaf`修改)，否则会简单的以有无子节点来判断是否为叶子节点。
+针对大数据量层级场景，通过 `lazy` 开启动态加载，`lazyload` 方法接收当前点击节点 `node` 和加载完成回调 `resolve`，选中某一级时异步加载该级下的子节点数据；建议为节点配置 leaf 字段标识是否为叶子节点，提升节点状态展示准确性（可通过 props.leaf 自定义字段名）。
 
 :::demo 
 ```html
-<el-cascader :props="props"></el-cascader>
+<el-row :gutter="20" style="width:100%;">
+  <el-col :span="12">
+    <el-cascader :props="props"></el-cascader>
+  </el-col>
+</el-row>
 
 <script>
   let id = 0;
@@ -1282,25 +1295,29 @@
 
 ### 可搜索
 
-可以快捷地搜索选项并选择。将`filterable`赋值为`true`即可打开搜索功能，默认会匹配节点的`label`或所有父节点的`label`(由`show-all-levels`决定)中包含输入值的选项。你也可以用`filter-method`自定义搜索逻辑，接受一个函数，第一个参数是节点`node`，第二个参数是搜索关键词`keyword`，通过返回布尔值表示是否命中。
+支持快速搜索并定位层级选项，通过 `filterable` 属性开启搜索功能；默认匹配节点 `label` 字段，也可通过 `filter-method` 自定义搜索逻辑，满足个性化检索需求。
 
 :::demo 
 ```html
-<div class="block">
-  <span class="demonstration">单选可搜索</span>
-  <el-cascader
-    placeholder="试试搜索：指南"
-    :options="options"
-    filterable></el-cascader>
-</div>
-<div class="block">
-  <span class="demonstration">多选可搜索</span>
-  <el-cascader
-    placeholder="试试搜索：指南"
-    :options="options"
-    :props="{ multiple: true }"
-    filterable></el-cascader>
-</div>
+<el-row :gutter="20" style="width:100%;">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">单选 - 支持搜索</div>
+    <el-cascader
+      placeholder="试试搜索：指南"
+      :options="options"
+      filterable>
+    </el-cascader>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">多选 - 支持搜索</div>
+    <el-cascader
+      placeholder="试试搜索：指南"
+      :options="options"
+      :props="{ multiple: true }"
+      filterable>
+    </el-cascader>
+  </el-col>
+</el-row>
 
 <script>
   export default {
@@ -1510,16 +1527,20 @@
 
 ### 自定义节点内容
 
-可以自定义备选项的节点内容。可以通过`scoped slot`对级联选择器的备选项的节点内容进行自定义，scoped slot会传入两个字段 `node` 和 `data`，分别表示当前节点的 Node 对象和数据。
+支持通过作用域插槽 `scoped slot` 自定义选项节点展示内容，插槽会注入 `node`（节点对象）和 `data`（节点数据），可灵活定制节点展示样式。
 
 :::demo 
 ```html
-<el-cascader :options="options">
-  <template slot-scope="{ node, data }">
-    <span>{{ data.label }}</span>
-    <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
-  </template>
-</el-cascader>
+<el-row :gutter="20" style="width:100%;">
+  <el-col :span="12">
+    <el-cascader :options="options">
+      <template slot-scope="{ node, data }">
+        <span>{{ data.label }}</span>
+        <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
+      </template>
+    </el-cascader>
+  </el-col>
+</el-row>
 
 <script>
   export default {
@@ -1729,11 +1750,16 @@
 
 ### 级联面板
 
-级联面板是级联选择器的核心组件，与级联选择器一样，有单选、多选、动态加载等多种功能。和级联选择器一样，通过`options`来指定选项，也可通过`props`来设置多选、动态加载等功能，具体详情见下方API表格。
+级联面板是级联选择器的核心展示组件，支持单选、多选、动态加载等全部功能，通过 options 绑定数据、props 配置属性，适配面板直展场景。
 
 :::demo 
 ```html
-<el-cascader-panel :options="options"></el-cascader-panel>
+<el-row :gutter="20" style="width:100%;">
+  <el-col :span="12">
+    <el-cascader-panel :options="options"></el-cascader-panel>
+  </el-col>
+</el-row>
+
 
 <script>
   export default {

@@ -1,6 +1,6 @@
 ## Loading 加载
 
-加载数据时显示动效。
+在数据加载、请求等待、页面处理等过程中展示加载动画，提供等待反馈，防止用户重复操作，支持**区域加载**、**全屏加载**，可自定义文案、图标、背景。
 
 ### 全屏加载
 
@@ -102,7 +102,11 @@
 
 ### 自定义
 
-可自定义加载文案、图标和背景色。在绑定了`v-loading`指令的元素上添加`element-loading-text`属性，其值会被渲染为加载文案，并显示在加载图标的下方。类似地，`element-loading-spinner`和`element-loading-background`属性分别用来设定图标类名和背景色值。
+支持自定义加载文案、图标、背景色、图标尺寸，通过指令属性快速配置：
+- `element-loading-tex`t：加载文案
+- `element-loading-spinner`：自定义图标类名
+- `element-loading-background`：遮罩背景色
+- `element-loading-size`：图标大小
 
 :::demo 
 ```html
@@ -159,7 +163,7 @@
 
 ### 整页加载
 
-页面数据加载时显示。当使用指令方式时，全屏遮罩需要添加`fullscreen`修饰符（遮罩会插入至 body 上），此时若需要锁定屏幕的滚动，可以使用`lock`修饰符；当使用服务方式时，遮罩默认即为全屏，无需额外设置。
+使用 `v-loading.fullscreen` 实现全屏覆盖加载，添加 `.lock` 可禁止页面滚动，适用于页面初始化、全局提交等场景。
 
 :::demo 
 

@@ -1,24 +1,56 @@
 ## Switch 开关
 
-表示两种相互对立的状态间的切换，多用于触发「开/关」。
+用于两种对立状态的快速切换，核心适用于开启 / 关闭类交互场景，支持尺寸、样式、文字 / 图标描述、自定义值、禁用状态等配置，交互简洁直观。
 
 ### 基本用法
 
-绑定`v-model`到一个`Boolean`类型的变量。可以使用`active-color`属性与`inactive-color`属性来设置开关的背景色。
+通过 `v-model` 绑定`Boolean`实现状态切换，支持 `size` 控制尺寸、`type` 切换开关样式，可以使用`active-color`属性与`inactive-color`属性来设置开关的背景色。
 
 :::demo 
 
 ```html
-<el-switch v-model="value"></el-switch>
-<el-switch v-model="value" size="medium"></el-switch>
-<el-switch v-model="value" size="small"></el-switch>
-<el-switch v-model="value" size="mini"></el-switch>
-
-<el-switch v-model="value" type="rect"></el-switch>
-<el-switch v-model="value" type="rect" size="medium"></el-switch>
-<el-switch v-model="value" type="rect" size="small"></el-switch>
-<el-switch v-model="value" type="rect" size="mini"></el-switch>
-
+<template>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认圆角-默认尺寸</div>
+      <el-switch v-model="value"></el-switch>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认圆角-medium尺寸</div>
+      <el-switch v-model="value" size="medium"></el-switch>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认圆角-small尺寸</div>
+      <el-switch v-model="value" size="small"></el-switch>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">默认圆角-mini尺寸</div>
+      <el-switch v-model="value" size="mini"></el-switch>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">直角矩形-默认尺寸</div>
+      <el-switch v-model="value" type="rect"></el-switch>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">直角矩形-medium尺寸</div>
+      <el-switch v-model="value" type="rect" size="medium"></el-switch>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">直角矩形-small尺寸</div>
+      <el-switch v-model="value" type="rect" size="small"></el-switch>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">直角矩形-mini尺寸</div>
+      <el-switch v-model="value" type="rect" size="mini"></el-switch>
+    </el-col>
+  </el-row>
+</template>
 <script>
   export default {
     data() {
@@ -33,20 +65,53 @@
 
 ### 文字描述
 
-使用`active-text`属性与`inactive-text`属性来设置开关的文字描述。
+支持 `active-text`/`inactive-text` 设置开关文字描述，也可通过图标类名自定义开关状态图标，适配不同展示需求。
 
 :::demo 
 
 ```html
-<el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail"></el-switch>
-<el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="medium"></el-switch>
-<el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="small"></el-switch>
-<el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="mini"></el-switch>
-<el-switch v-model="value2" active-text="开" inactive-text="关"></el-switch>
-<el-switch v-model="value2" active-text="开" inactive-text="关" size="medium"></el-switch>
-<el-switch v-model="value2" active-text="开" inactive-text="关" size="small"></el-switch>
-<el-switch v-model="value2" active-text="开" inactive-text="关" size="mini"></el-switch>
-
+<template>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">图标描述-默认尺寸</div>
+      <el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail"></el-switch>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">图标描述-medium尺寸</div>
+      <el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="medium"></el-switch>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">图标描述-small尺寸</div>
+      <el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="small"></el-switch>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">图标描述-mini尺寸</div>
+      <el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="mini"></el-switch>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">文字描述-默认尺寸</div>
+      <el-switch v-model="value2" active-text="开" inactive-text="关"></el-switch>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">文字描述-medium尺寸</div>
+      <el-switch v-model="value2" active-text="开" inactive-text="关" size="medium"></el-switch>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">文字描述-small尺寸</div>
+      <el-switch v-model="value2" active-text="开" inactive-text="关" size="small"></el-switch>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">文字描述-mini尺寸</div>
+      <el-switch v-model="value2" active-text="开" inactive-text="关" size="mini"></el-switch>
+    </el-col>
+  </el-row>
+</template>
 <script>
   export default {
     data() {
@@ -62,21 +127,26 @@
 
 ### 扩展的 value 类型
 
-设置`active-value`和`inactive-value`属性，接受`Boolean`, `String`或`Number`类型的值。
+支持自定义开关状态值，通过 `active-value`/`inactive-value` 配置，可接收`Boolean`, `String`或`Number`类型，满足业务数据绑定需求
 
 :::demo 
 
 ```html
-<el-tooltip :content="'Switch value: ' + value" placement="top">
-  <el-switch
-    v-model="value"
-    active-color="#13ce66"
-    inactive-color="#ff4949"
-    active-value="100"
-    inactive-value="0">
-  </el-switch>
-</el-tooltip>
-
+<template>
+  <el-row>
+    <el-col :span="12">
+      <el-tooltip :content="'Switch value: ' + value" placement="top">
+        <el-switch
+          v-model="value"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+          active-value="100"
+          inactive-value="0">
+        </el-switch>
+      </el-tooltip>
+    </el-col>
+  </el-row>
+</template>
 <script>
   export default {
     data() {
@@ -92,20 +162,24 @@
 
 ### 禁用状态
 
-设置`disabled`属性，接受一个`Boolean`，设置`true`即可禁用。
+通过 `disabled` 属性开启禁用模式，设置为 `true` 后无法操作开关，支持开启 / 关闭两种禁用状态展示。
 
 :::demo 
 
 
 ```html
-<el-switch
-  v-model="value1"
-  disabled>
-</el-switch>
-<el-switch
-  v-model="value2"
-  disabled>
-</el-switch>
+<template>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">禁用-开启状态</div>
+      <el-switch v-model="value1" disabled></el-switch>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">禁用-关闭状态</div>
+      <el-switch v-model="value2" disabled></el-switch>
+    </el-col>
+  </el-row>
+</template>
 <script>
   export default {
     data() {
