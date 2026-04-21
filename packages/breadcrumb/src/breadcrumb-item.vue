@@ -1,7 +1,7 @@
 <template>
   <span class="el-breadcrumb__item">
     <span
-      :class="['el-breadcrumb__inner', to ? 'is-link' : '']"
+      :class="['el-breadcrumb__inner', (to || hasLinkSlot) ? 'is-link' : '']"
       ref="link"
       role="link">
       <slot></slot>
@@ -20,7 +20,8 @@
     data() {
       return {
         separator: '',
-        separatorClass: ''
+        separatorClass: '',
+        hasLinkSlot: false
       };
     },
 
@@ -31,6 +32,8 @@
       this.separatorClass = this.elBreadcrumb.separatorClass;
       const link = this.$refs.link;
       link.setAttribute('role', 'link');
+      const firstChild = link.firstElementChild;
+      this.hasLinkSlot = firstChild && firstChild.tagName.toLowerCase() === 'a';
       link.addEventListener('click', _ => {
         const { to, $router } = this;
         if (!to || !$router) return;
