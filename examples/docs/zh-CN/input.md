@@ -19,6 +19,9 @@ Input 为受控组件，它**总会显示 Vue 绑定值**。
   <el-col :span="12">
     <el-input v-model="input" placeholder="请输入内容" size="small"></el-input>
   </el-col>
+  <el-col :span="12">
+    <el-input v-model="input" placeholder="请输入内容" size="small" fill></el-input>
+  </el-col>
 </el-row>
 
 <script>

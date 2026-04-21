@@ -48,6 +48,17 @@
 ```
 :::
 
+### 简洁分页
+
+:::demo 设置 layout `simple`属性为简洁风格。
+```html
+<el-pagination
+  layout="prev, simple, next"
+  :total="1000">
+</el-pagination>
+```
+:::
+
 ### 小型分页
 
 在空间有限的情况下，可以使用简单的小型分页。
@@ -205,7 +216,7 @@
 | page-count | 总页数，total 和 page-count 设置任意一个就可以达到显示页码的功能；如果要支持 page-sizes 的更改，则需要使用 total 属性 | Number | — | — |
 | pager-count | 页码按钮的数量，当总页数超过该值时会折叠 | number | 大于等于 5 且小于等于 21 的奇数 | 7 |
 | current-page | 当前页数，支持 .sync 修饰符 | number | — | 1 |
-| layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `->`, `total`, `slot` | 'prev, pager, next, jumper, ->, total'  |
+| layout | 组件布局，子组件名用逗号分隔| String | `sizes`, `prev`, `pager`, `next`, `jumper`, `simple`, `->`, `total`, `slot` | 'prev, pager, next, jumper, simple, ->, total'  |
 | page-sizes | 每页显示个数选择器的选项设置 | number[] | — |  [10, 20, 30, 40, 50, 100] |
 | popper-class | 每页显示个数选择器的下拉框类名 | string | — | — |
 | prev-text | 替代图标显示的上一页文字 | string | — | — |

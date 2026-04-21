@@ -162,6 +162,8 @@
         }
       }
     }
+    .el-input.is-fill .el-input__inner,
+    .el-select.is-fill .el-input__inner,
     .el-input__inner,
     .el-textarea__inner {
       & {
