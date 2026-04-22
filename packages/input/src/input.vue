@@ -3,6 +3,7 @@
     type === 'textarea' ? 'el-textarea' : 'el-input',
     inputSize ? 'el-input--' + inputSize : '',
     {
+      'is-fill': fill,
       'is-disabled': inputDisabled,
       'is-exceed': inputExceed,
       'el-input-group': $slots.prepend || $slots.append || $slots.prefixLabel || $slots.suffixLabel,
@@ -188,7 +189,8 @@
         type: Boolean,
         default: false
       },
-      tabindex: String
+      tabindex: String,
+      fill: Boolean
     },
 
     computed: {

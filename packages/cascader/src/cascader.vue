@@ -79,6 +79,7 @@
       </el-tag>
       <input
         v-if="filterable && !isDisabled"
+        key="search-input1"
         v-model.trim="inputValue"
         type="text"
         class="el-cascader__search-input"
@@ -104,6 +105,7 @@
       </template>
       <input
         v-if="filterable && !isDisabled"
+        key="search-input2"
         v-model.trim="inputValue"
         type="text"
         class="el-cascader__search-input"

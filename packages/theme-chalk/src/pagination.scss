@@ -125,6 +125,27 @@
     color: $--color-text-6;
   }
 
+  @include e(simple) {
+    margin: 0 8px;
+    .el-pagination__editor {
+      padding: 0;
+      margin: 0;
+      &.el-input {
+        width: 40px;
+      }
+    }
+    span.el-pagination__simple-separator {
+      margin: 0 8px;
+      min-width: auto;
+    }
+    span.el-pagination__simple-total {
+      min-width: auto;
+    }
+    + .btn-next {
+      margin-left: 0;
+    }
+  }
+
   @include e(rightwrapper) {
     float: right;
   }

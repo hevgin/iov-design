@@ -230,6 +230,23 @@
     }
   }
 
+  @include when(fill) {
+    .el-input__inner {
+      background: $--color-fill-1;
+      border-color: $--color-fill-1;
+      transition:  all ease-in .2s;
+      &:hover {
+        background: $--color-fill-2;
+        border-color: $--color-fill-2;
+      }
+      &:focus {
+        background: #fff;
+        border-color: $--input-focus-border;
+        box-shadow: $--input-box-shadow;
+      }
+    }
+  }
+
   @include when(disabled) {
     .el-input-group__inner.is-disabled {
       .el-input__inner {
