@@ -2,7 +2,7 @@
   <el-input
     class="el-date-editor"
     :class="'el-date-editor--' + type"
-    :readonly="!editable || readonly || type === 'dates' || type === 'week' || type === 'years' || type === 'months'"
+    :readonly="!editable || readonly || type === 'dates' || type === 'week' || type === 'years' || type === 'months' || type === 'quarters'"
     :disabled="pickerDisabled"
     :size="pickerSize"
     :name="name"
@@ -67,7 +67,7 @@
       <span v-if="$slots['range-separator']" class="el-range-separator">
         <slot name="range-separator"></slot>
       </span>
-      <span v-else-if="rangeSeparator" class="el-range-separator">
+      <span v-else-if="rangeSeparator && rangeSeparator !== '-'" class="el-range-separator">
         {{ rangeSeparator }}
       </span>
       <span v-else class="el-range-separator">
@@ -127,10 +127,13 @@ const DEFAULT_FORMATS = {
   week: 'yyyywWW',
   timerange: 'HH:mm:ss',
   daterange: 'yyyy-MM-dd',
-  monthrange: 'yyyy-MM',
+  quarter: 'yyyy-QQQ',
+  quarters: 'yyyy-QQQ',
+  quarterrange: 'yyyy-QQQ',
   datetimerange: 'yyyy-MM-dd HH:mm:ss',
   year: 'yyyy',
-  years: 'yyyy'
+  years: 'yyyy',
+  yearrange: 'yyyy'
 };
 const HAVE_TRIGGER_TYPES = [
   'date',
@@ -142,6 +145,10 @@ const HAVE_TRIGGER_TYPES = [
   'year',
   'daterange',
   'monthrange',
+  'quarter',
+  'quarters',
+  'quarterrange',
+  'yearrange',
   'timerange',
   'datetimerange',
   'dates',
@@ -154,6 +161,12 @@ const DATE_FORMATTER = function(value, format) {
 };
 const DATE_PARSER = function(text, format) {
   if (format === 'timestamp') return new Date(Number(text));
+  return parseDate(text, format);
+};
+const QUARTER_FORMATTER = function(value, format) {
+  return formatDate(value, format);
+};
+const QUARTER_PARSER = function(text, format) {
   return parseDate(text, format);
 };
 const RANGE_FORMATTER = function(value, format) {
@@ -227,6 +240,14 @@ const TYPE_VALUE_RESOLVER_MAP = {
     formatter: RANGE_FORMATTER,
     parser: RANGE_PARSER
   },
+  quarterrange: {
+    formatter: RANGE_FORMATTER,
+    parser: RANGE_PARSER
+  },
+  yearrange: {
+    formatter: RANGE_FORMATTER,
+    parser: RANGE_PARSER
+  },
   datetimerange: {
     formatter: RANGE_FORMATTER,
     parser: RANGE_PARSER
@@ -242,6 +263,10 @@ const TYPE_VALUE_RESOLVER_MAP = {
   month: {
     formatter: DATE_FORMATTER,
     parser: DATE_PARSER
+  },
+  quarter: {
+    formatter: QUARTER_FORMATTER,
+    parser: QUARTER_PARSER
   },
   year: {
     formatter: DATE_FORMATTER,
@@ -287,6 +312,17 @@ const TYPE_VALUE_RESOLVER_MAP = {
     parser(value, format) {
       return (typeof value === 'string' ? value.split(', ') : value)
         .map(date => date instanceof Date ? date : DATE_PARSER(date, format));
+    }
+  },
+  quarters: {
+    formatter(value, format) {
+      if (!value || !Array.isArray(value)) return '';
+      return value.map(date => QUARTER_FORMATTER(date, format));
+    },
+    parser(value, format) {
+      if (!value) return [];
+      const arr = typeof value === 'string' ? value.split(', ') : value;
+      return arr.map(date => date instanceof Date ? date : QUARTER_PARSER(date, format));
     }
   }
 };
@@ -415,7 +451,7 @@ export default {
     defaultValue: {},
     defaultTime: {},
     rangeSeparator: {
-      default: ''
+      default: '-'
     },
     pickerOptions: {},
     unlinkPanels: Boolean,
@@ -511,7 +547,7 @@ export default {
     },
 
     triggerClass() {
-      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'iov-icon-time' : 'iov-icon-date');
+      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'iov-icon-date' : 'iov-icon-date');
     },
 
     selectionMode() {
@@ -525,6 +561,10 @@ export default {
         return 'dates';
       } else if (this.type === 'months') {
         return 'months';
+      } else if (this.type === 'quarters') {
+        return 'quarters';
+      } else if (this.type === 'quarter') {
+        return 'quarter';
       } else if (this.type === 'years') {
         return 'years';
       }
@@ -549,7 +589,7 @@ export default {
       } else if (this.userInput !== null) {
         return this.userInput;
       } else if (formattedValue) {
-        return (this.type === 'dates' || this.type === 'years' || this.type === 'months')
+        return (this.type === 'dates' || this.type === 'years' || this.type === 'months' || this.type === 'quarters')
           ? formattedValue.join(', ')
           : formattedValue;
       } else {
@@ -751,7 +791,7 @@ export default {
       if (!this.pickerVisible) return;
       this.pickerVisible = false;
 
-      if (this.type === 'dates' || this.type === 'years' || this.type === 'months') {
+      if (this.type === 'dates' || this.type === 'years' || this.type === 'months' || this.type === 'quarters') {
         // restore to former value
         const oldValue = parseAsFormatAndType(this.valueOnOpen, this.valueFormat, this.type, this.rangeSeparator) || this.valueOnOpen;
         this.emitInput(oldValue);
@@ -848,12 +888,11 @@ export default {
       }
       this.pickerVisible = this.picker.visible = true;
 
-      this.updatePopper();
-
       this.picker.value = this.parsedValue;
       this.picker.resetView && this.picker.resetView();
 
       this.$nextTick(() => {
+        this.updatePopper();
         this.picker.adjustSpinners && this.picker.adjustSpinners();
       });
     },

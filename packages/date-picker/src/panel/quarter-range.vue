@@ -27,8 +27,7 @@
               <i
                 type="button"
                 v-if="unlinkPanels"
-                @click="leftNextYear"
-                :disabled="!enableYearArrow"
+                @click="enableYearArrow && leftNextYear()"
                 :class="{ 'is-disabled': !enableYearArrow }"
                 class="el-picker-panel__icon-btn iov-icon-double-right-mini"></i>
               <span class="el-date-picker__header-label">{{ leftLabel }}</span>
@@ -37,8 +36,7 @@
               <i
                 type="button"
                 v-if="unlinkPanels"
-                @click="rightPrevYear"
-                :disabled="!enableYearArrow"
+                @click="enableYearArrow && rightPrevYear()"
                 :class="{ 'is-disabled': !enableYearArrow }"
                 class="el-picker-panel__icon-btn iov-icon-double-left-mini"></i>
               <i
@@ -50,7 +48,7 @@
           </div>
           <div class="el-date-range-picker__content">
             <div class="el-picker-panel__content">
-              <month-table
+              <quarter-table
                 selection-mode="range"
                 :date="leftDate"
                 :default-value="defaultValue"
@@ -60,10 +58,10 @@
                 :disabled-date="disabledDate"
                 @changerange="handleChangeRange"
                 @pick="handleRangePick">
-              </month-table>
+              </quarter-table>
             </div>
             <div class="el-picker-panel__content">
-              <month-table
+              <quarter-table
                 selection-mode="range"
                 :date="rightDate"
                 :default-value="defaultValue"
@@ -73,7 +71,7 @@
                 :disabled-date="disabledDate"
                 @changerange="handleChangeRange"
                 @pick="handleRangePick">
-              </month-table>
+              </quarter-table>
             </div>
           </div>
         </div>
@@ -88,32 +86,27 @@
     isDate,
     modifyWithTimeString,
     prevYear,
-    nextYear,
-    nextMonth
+    nextYear
   } from 'iov-design/src/utils/date-util';
-  import Clickoutside from 'iov-design/src/utils/clickoutside';
   import Locale from 'iov-design/src/mixins/locale';
-  import MonthTable from '../basic/month-table';
-  import ElInput from 'iov-design/packages/input';
-  import ElButton from 'iov-design/packages/button';
+  import QuarterTable from '../basic/quarter-table';
 
   const calcDefaultValue = (defaultValue) => {
     if (Array.isArray(defaultValue)) {
       return [new Date(defaultValue[0]), new Date(defaultValue[1])];
     } else if (defaultValue) {
-      return [new Date(defaultValue), nextMonth(new Date(defaultValue))];
+      return [new Date(defaultValue), new Date(defaultValue.getFullYear(), defaultValue.getMonth() + 3)];
     } else {
-      return [new Date(), nextMonth(new Date())];
+      return [new Date(), new Date(new Date().getFullYear(), new Date().getMonth() + 3)];
     }
   };
+
   export default {
     mixins: [Locale],
 
-    directives: { Clickoutside },
-
     computed: {
       btnDisabled() {
-        return !(this.minDate && this.maxDate && !this.selecting && this.isValidValue([this.minDate, this.maxDate]));
+        return !(this.minDate && this.maxDate && !this.rangeState.selecting && this.isValidValue([this.minDate, this.maxDate]));
       },
 
       leftLabel() {
@@ -200,14 +193,6 @@
     },
 
     methods: {
-      handleClear() {
-        this.minDate = null;
-        this.maxDate = null;
-        this.leftDate = calcDefaultValue(this.defaultValue)[0];
-        this.rightDate = nextYear(this.leftDate);
-        this.$emit('pick', null);
-      },
-
       handleChangeRange(val) {
         this.minDate = val.minDate;
         this.maxDate = val.maxDate;
@@ -215,6 +200,9 @@
       },
 
       handleRangePick(val, close = true) {
+        if (!val.maxDate) {
+          close = false;
+        }
         const defaultTime = this.defaultTime || [];
         const minDate = modifyWithTimeString(val.minDate, defaultTime[0]);
         const maxDate = modifyWithTimeString(val.maxDate, defaultTime[1]);
@@ -225,7 +213,6 @@
         this.maxDate = maxDate;
         this.minDate = minDate;
 
-        // workaround for https://github.com/ElemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
         setTimeout(() => {
           this.maxDate = maxDate;
           this.minDate = minDate;
@@ -240,7 +227,6 @@
         }
       },
 
-      // leftPrev*, rightNext* need to take care of `unlinkPanels`
       leftPrevYear() {
         this.leftDate = prevYear(this.leftDate);
         if (!this.unlinkPanels) {
@@ -255,7 +241,6 @@
         this.rightDate = nextYear(this.rightDate);
       },
 
-      // leftNext*, rightPrev* are called when `unlinkPanels` is true
       leftNextYear() {
         this.leftDate = nextYear(this.leftDate);
       },
@@ -282,14 +267,11 @@
       },
 
       resetView() {
-        // NOTE: this is a hack to reset {min, max}Date on picker open.
-        // TODO: correct way of doing so is to refactor {min, max}Date to be dependent on value and internal selection state
-        //       an alternative would be resetView whenever picker becomes visible, should also investigate date-panel's resetView
         this.minDate = this.value && isDate(this.value[0]) ? new Date(this.value[0]) : null;
-        this.maxDate = this.value && isDate(this.value[0]) ? new Date(this.value[1]) : null;
+        this.maxDate = this.value && isDate(this.value[1]) ? new Date(this.value[1]) : null;
       }
     },
 
-    components: { MonthTable, ElInput, ElButton }
+    components: { QuarterTable }
   };
 </script>

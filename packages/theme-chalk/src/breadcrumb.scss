@@ -3,36 +3,49 @@
 @import "common/var";
 
 @include b(breadcrumb) {
-  font-size: 14px;
-  line-height: 1;
-  @include utils-clearfix;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
 
   @include e(separator) {
-    margin: 0 9px;
-    font-weight: bold;
-    color: $--color-text-placeholder;
+    padding: 0 4px;
+    color: $--color-fill-4;
 
     &[class*=icon] {
-      margin: 0 6px;
+      padding: 0;
       font-weight: normal;
+      font-size: 16px;
     }
   }
 
   @include e(item) {
-    float: left;
-
+    display: flex;
+    align-items: center;
     @include e(inner) {
-      color: $--color-text-regular;
+      padding: 0 4px;
+      color: $--color-text-3;
+      line-height: 26px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+
+      [class*=icon] {
+        margin-right: 4px;
+        padding: 0;
+        font-weight: normal;
+        font-size: 16px;
+        color: $--color-fill-5;
+      }
 
       &.is-link, & a {
-        font-weight: bold;
         text-decoration: none;
-        transition: $--color-transition-base;
-        color: $--color-text-primary;
+        transition: all ease-in .3s;
+        color: $--color-text-3;
 
         &:hover {
-          color: $--color-primary;
+          color: $--color-text-5;
           cursor: pointer;
+          background: $--color-fill-1;
         }
       }
     }
@@ -40,10 +53,10 @@
     &:last-child {
       .el-breadcrumb__inner,
       .el-breadcrumb__inner a {
-        &, &:hover {
-          font-weight: normal;
-          color: $--color-text-regular;
+        color: $--color-text-5;
+        &:hover {
           cursor: text;
+          background: none;
         }
       }
 

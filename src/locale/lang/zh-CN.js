@@ -56,6 +56,12 @@ export default {
         oct: '十月',
         nov: '十一月',
         dec: '十二月'
+      },
+      quarters: {
+        q1: 'Q1',
+        q2: 'Q2',
+        q3: 'Q3',
+        q4: 'Q4'
       }
     },
     select: {

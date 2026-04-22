@@ -10,11 +10,13 @@
 <template>
   <el-row :gutter="12">
     <el-col :span="12">
+      <div class="component-content-title mgb-10">基础用法</div>
       <el-select v-model="value" placeholder="请选择" size="small" clearable>
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">无边框填</div>
       <el-select v-model="value" placeholder="请选择" fill size="small" clearable>
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
@@ -85,11 +87,13 @@
 <template>
   <el-row :gutter="12">
     <el-col :span="12">
+      <div class="component-content-title mgb-10">无值禁用</div>
       <el-select v-model="value1" disabled placeholder="请选择" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">有值禁用</div>
       <el-select v-model="value2" disabled placeholder="请选择" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
@@ -160,18 +164,21 @@
 <template>
   <el-row :gutter="12">
     <el-col :span="12">
+      <div class="component-content-title mgb-10">前置图标</div>
       <el-select v-model="value1" placeholder="请选择" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
       </el-select>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">前置label</div>
       <el-select v-model="value2" placeholder="请选择" multiple size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
         <template slot="prefixLabel">分类</template>
       </el-select>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">前置图标+label</div>
       <el-select v-model="value3" placeholder="请选择" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
@@ -179,6 +186,7 @@
       </el-select>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">前置图标+label+禁用</div>
       <el-select v-model="value4" placeholder="请选择" size="small" disabled>
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
@@ -220,26 +228,31 @@
 <template>
   <el-row :gutter="12">
     <el-col :span="12">
+      <div class="component-content-title mgb-10">多选数量在右侧</div>
       <el-select v-model="value1" multiple filterable collapse-tags :collapseTagsFixed="true" placeholder="多选数量在右侧" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
       </el-select>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">多选数量跟随</div>
       <el-select v-model="value1" multiple collapse-tags filterable placeholder="多选数量跟随" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">自定义显示TAG数及数量内容</div>
       <el-select v-model="value1" multiple collapse-tags :multipleLimitShow="6" collapseTagsSuffix=" more" filterable placeholder="自定义显示TAG数及数量内容" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">固定TAG宽度</div>
       <el-select v-model="value1" multiple collapse-tags filterable multipleTagMaxWidth="50px" placeholder="固定TAG宽度" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">默认多选</div>
       <el-select v-model="value1" multiple :multiple-limit="3" placeholder="默认多选" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
       </el-select>
@@ -353,6 +366,7 @@
 <template>
   <el-row :gutter="12">
     <el-col :span="12">
+      <div class="component-content-title mgb-10">单选分组</div>
       <el-select v-model="value1" placeholder="请选择" size="small">
           <el-option-group v-for="group in options"  :key="group.label" :label="group.label">
             <el-option v-for="item in group.options" :key="item.value" :label="item.label" :value="item.value"></el-option>
@@ -360,6 +374,7 @@
         </el-select>
     </el-col>
     <el-col :span="12">
+      <div class="component-content-title mgb-10">多选分组</div>
       <el-select v-model="value2" placeholder="请选择" size="small" multiple>
           <el-option-group v-for="group in options"  :key="group.label" :label="group.label">
             <el-option v-for="item in group.options" :key="item.value" :label="item.label" :value="item.value"></el-option>

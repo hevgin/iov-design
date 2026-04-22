@@ -9,9 +9,62 @@
 :::demo
 
 ```html
-<el-empty description="描述文字"></el-empty>
+  <el-empty description="描述文字"></el-empty>
 ```
 :::
+
+### 图片类型
+
+`type`为不同值展示不同图片。具体查下下方 type图片类型
+
+:::demo
+```html
+<el-row :gutter="20">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10 text-center">type值为0</div>
+    <el-empty type="0" description="小容器暂无数据"></el-empty>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10 text-center">type值为1</div>
+    <el-empty type="1" description="暂无数据"></el-empty>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10 text-center">type值为2</div>
+    <el-empty type="2" description="内容未配置"></el-empty>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10 text-center">type值为3</div>
+    <el-empty type="3" description="暂无权限"></el-empty>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10 text-center">type值为4</div>
+    <el-empty type="4" description="页面不存在"></el-empty>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10 text-center">type值为5</div>
+    <el-empty type="5" description="网络异常"></el-empty>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10 text-center">type值为6</div>
+    <el-empty type="6" description="服务器出错"></el-empty>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10 text-center">type值为7</div>
+    <el-empty type="7" description="正在施工"></el-empty>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10 text-center">type值为8</div>
+    <el-empty type="8" description="浏览器版本过低"></el-empty>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10 text-center">type值为9</div>
+    <el-empty type="9" description="暂无资源"></el-empty>
+  </el-col>
+</el-row>
+```
+:::
+
+
 
 ### 自定义图片
 

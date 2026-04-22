@@ -1,109 +1,132 @@
 @import "../common/var";
 
 @include b(time-spinner) {
-  &.has-seconds {
-    .el-time-spinner__wrapper {
-      width: 33.3%;
+  @include e(column) {
+    padding: 6px 0;
+    width: 48px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    width: 48px;
+    vertical-align: top;
+    position: relative;
+    margin-left: 1px;
+    &:first-child {
+      margin-left: 0;
+      &:before {
+        display: none;
+      }
+    }
+    &:before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 100%;
+      background-color: $--color-line-1;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -1px;
     }
   }
 
   @include e(wrapper) {
-    max-height: 190px;
+    height: 192px;
     overflow: auto;
-    display: inline-block;
-    width: 50%;
-    vertical-align: top;
-    position: relative;
-
-    & .el-scrollbar__wrap:not(.el-scrollbar__wrap--hidden-default) {
-      padding-bottom: 15px;
+    width: 48px;
+    box-sizing: border-box;
+    overscroll-behavior: contain;
+    contain: layout paint;
+    &::-webkit-scrollbar {
+      width: 0;
     }
 
-    @include when(arrow) {
-      box-sizing: border-box;
-      text-align: center;
-      overflow: hidden;
+    &.is-snap {
+      scroll-snap-type: y mandatory;
+    }
 
-      .el-time-spinner__list {
-        transform: translateY(-32px);
-      }
-
-      .el-time-spinner__item:hover:not(.disabled):not(.active) {
-        background: $--color-white;
-        cursor: default;
-      }
+    &.is-smooth {
+      scroll-behavior: smooth;
     }
   }
 
   @include e(arrow) {
-    font-size: 12px;
-    color: $--color-text-secondary;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    z-index: $--index-normal;
+    font-size: 14px;
+    color: $--color-fill-5;
+    width: 48px;
+    height: 14px;
+    line-height: 14px;
     text-align: center;
-    height: 30px;
-    line-height: 30px;
     cursor: pointer;
 
     &:hover {
-      color: $--color-primary;
+      color: $--color-primary-6;
     }
 
-    &.el-icon-arrow-up {
-      top: 10px;
+    &.iov-icon-arrow-up {
+      margin-bottom: 4px;
     }
 
-    &.el-icon-arrow-down {
-      bottom: 10px;
-    }
-  }
-
-  @include e(input) {
-    &.el-input {
-      width: 70%;
-
-      .el-input__inner {
-        padding: 0;
-        text-align: center;
-      }
+    &.iov-icon-arrow-down {
+      margin-top: 4px;
     }
   }
+
+  // @include e(input) {
+  //   &.el-input {
+  //     width: 70%;
+
+  //     .el-input__inner {
+  //       padding: 0;
+  //       text-align: center;
+  //     }
+  //   }
+  // }
 
   @include e(list) {
-    padding: 0;
+    padding: 0 4px;
     margin: 0;
     list-style: none;
     text-align: center;
-
-    &::after,
-    &::before {
+    box-sizing: border-box;
+    &:after {
       content: '';
       display: block;
       width: 100%;
-      height: 80px;
+      height: 168px;
     }
   }
 
   @include e(item) {
-    height: 32px;
-    line-height: 32px;
-    font-size: 12px;
-    color: $--color-text-regular;
+    height: 24px;
+    line-height: 24px;
+    font-size: 13px;
+    color: $--color-text-6;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
+    list-style: none;
+    margin: 0 0 4px 0;
+    padding: 0;
+    scroll-snap-align: start;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     &:hover:not(.disabled):not(.active) {
-      background: $--background-color-base;
+      background: $--color-fill-2;
       cursor: pointer;
     }
 
     &.active:not(.disabled) {
-      color: $--color-text-primary;
-      font-weight: bold;
+      color: $--color-text-6;
+      font-weight: 600;
+      background: $--color-primary-2;
     }
 
     &.disabled {
-      color: $--color-text-placeholder;
+      color: $--color-text-2;
       cursor: not-allowed;
     }
   }

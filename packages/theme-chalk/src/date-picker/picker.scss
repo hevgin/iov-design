@@ -76,10 +76,16 @@
     display: inline-block;
     height: 100%;
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 8px;
     width: 100%;
     font-size: $--input-font-size;
     color: $--input-font-color;
+    border-radius: 2px;
+    transition: background ease .3s;
+
+    &:focus {
+      background: $--color-fill-1;
+    }
 
     &::placeholder {
       color: $--input-placeholder-color;
@@ -88,7 +94,7 @@
 
   .el-range-separator {
     margin: 0;
-    padding: 0 12px;
+    padding: 0 4px;
     display: flex;
     height: 100%;
     text-align: center;
@@ -101,14 +107,15 @@
 @include b(range-editor) {
   position: relative;
   .el-input-group__prefix-label {
-    padding: 0 12px 0 0;
+    padding: 0 4px 0 8px;
     font-size: $--input-font-size;
   }
 
   &.el-input__inner {
     display: inline-flex;
     align-items: center;
-    padding: 3px 12px;
+    padding: 3px 26px 3px 3px;
+    box-sizing: border-box;
   }
 
   .el-range-input {

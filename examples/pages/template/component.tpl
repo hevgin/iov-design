@@ -117,12 +117,12 @@
 
       /* 高亮当前锚点 */
       .anchor-nav__item.is-active {
-        color: #409eff;
+        color: #3F57FF;
         background-color: #f5f7fa;
       }
 
       .anchor-nav__item:hover {
-        color: #409eff;
+        color: #3F57FF;
       }
     }
 

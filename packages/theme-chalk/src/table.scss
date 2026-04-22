@@ -538,6 +538,10 @@
   @include e((header-wrapper, footer-wrapper)) {
     overflow: hidden;
 
+    .el-table__header-column-label {
+      display: inline-block;
+      vertical-align: middle;
+    }
     & tbody td.el-table__cell {
       background-color: $--table-row-hover-background-color;
       color: $--table-font-color;

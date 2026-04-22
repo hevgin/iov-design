@@ -48,13 +48,13 @@
       <el-time-picker
         v-model="value1"
         :picker-options="{
-          selectableRange: '18:30:00 - 20:30:00'
+          selectableRange: '00:00:00 - 23:59:59'
         }"
         placeholder="任意时间点">
       </el-time-picker>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">箭头控制模式</div>
+      <div class="component-content-title mgb-10">滚轮+箭头选择模式</div>
       <el-time-picker
         arrow-control
         v-model="value2"
@@ -146,7 +146,7 @@
       </el-time-picker>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">箭头控制-时间范围</div>
+      <div class="component-content-title mgb-10">箭头+滚轮控制-时间范围</div>
       <el-time-picker
         is-range
         arrow-control

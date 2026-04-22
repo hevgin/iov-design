@@ -2,48 +2,69 @@
 @import "../mixins/mixins";
 
 @include b(date-table) {
-  font-size: 12px;
+  font-size: 13px;
   user-select: none;
 
   @include when(week-mode) {
     .el-date-table__row {
-      &:hover {
+      td.in-range {
         div {
-          background-color: $--datepicker-inrange-background-color;
+          background: none;
         }
-        td.available:hover {
-          color: $--datepicker-font-color;
+        span {
+          background: $--color-primary-6;
+          color: #fff;
         }
-        td:first-child div {
-          margin-left: 5px;
-          border-top-left-radius: 15px;
-          border-bottom-left-radius: 15px;
-        }
-        td:last-child div {
-          margin-right: 5px;
-          border-top-right-radius: 15px;
-          border-bottom-right-radius: 15px;
+        &.today {
+          span:after {
+            display: none;
+          }
         }
       }
-
-      &.current div {
-        background-color: $--datepicker-inrange-background-color;
+      span {
+        width: 34px;
+        border-radius: 0;
+      }
+      td:nth-child(2) div {
+        span {
+          border-top-left-radius: 12px;
+          border-bottom-left-radius: 12px;
+          transform: translateX(calc(-50% + 4px));
+        }
+      }
+      td:last-child div {
+        span {
+          border-top-right-radius: 12px;
+          border-bottom-right-radius: 12px;
+          transform: translateX(calc(-50% - 4px));
+        }
+      }
+      &:hover {
+        span {
+          background-color: $--color-fill-2;
+        }
+        td.available:hover {
+          color: $--color-text-6;
+        }
+        td:first-child div span {
+          background: none;
+        }
       }
     }
   }
 
   td {
     width: 32px;
-    height: 30px;
-    padding: 4px 0;
-    box-sizing: border-box;
+    height: 32px;
     text-align: center;
     cursor: pointer;
     position: relative;
+    font-weight: 500;
 
     & div {
-      height: 30px;
-      padding: 3px 0;
+      height: 32px;
+      margin: 2px 0;
+      padding: 4px 0;
       box-sizing: border-box;
     }
 
@@ -57,95 +78,124 @@
       left: 50%;
       transform: translateX(-50%);
       border-radius: 50%;
+      transition: background ease .2s;
+      &:hover {
+        background: $--color-fill-2;
+      }
     }
 
     &.next-month,
     &.prev-month {
-      color: $--datepicker-off-font-color;
+      color: $--color-text-2;
     }
 
     &.today {
       position: relative;
+      &.selected {
+        span:after {
+          display: none;
+        }
+      }
       span {
-        color: $--color-primary;
-        font-weight: bold;
+        &:after {
+          content: '';
+          width: 4px;
+          height: 4px;
+          border-radius: 2px;
+          background: $--color-primary-6;
+          position: absolute;
+          bottom: -4px;
+          left: 50%;
+          margin-left: -2px;
+        }
       }
       &.start-date span,
       &.end-date span {
-        color: $--color-white;
+        color: #fff;
       }
     }
 
-    &.available:hover {
-      color: $--datepicker-hover-font-color;
+    &.in-range div {
+      background-color: $--color-primary-2;
+      span:hover {
+        background: none;
+      }
+      &:hover {
+        background-color: $--color-primary-2;
+      }
     }
 
-    &.in-range div {
-      background-color: $--datepicker-inrange-background-color;
-      &:hover {
-        background-color: $--datepicker-inrange-hover-background-color;
+    &.in-range.start-date div,
+    &.in-range.end-date div  {
+      span:hover {
+        background-color: $--color-primary-6;
       }
     }
 
     &.current:not(.disabled) span {
-      color: $--color-white;
-      background-color: $--datepicker-active-color;
+      color: #fff;
+      background-color: $--color-primary-6;
+      &:after {
+        display: none;
+      }
+    }
+
+    &.start-date.today span,
+    &.end-date.today span {
+      &:after {
+        display: none;
+      }
     }
     &.start-date div,
     &.end-date div {
-      color: $--color-white;
+      color: #fff;
     }
 
     &.start-date span,
     &.end-date span {
-      background-color: $--datepicker-active-color;
+      background-color: $--color-primary-6;
     }
 
     &.start-date div {
-      margin-left: 5px;
-      border-top-left-radius: 15px;
-      border-bottom-left-radius: 15px;
+      border-top-left-radius: 16px;
+      border-bottom-left-radius: 16px;
     }
 
     &.end-date div {
-      margin-right: 5px;
-      border-top-right-radius: 15px;
-      border-bottom-right-radius: 15px;
+      border-top-right-radius: 16px;
+      border-bottom-right-radius: 16px;
     }
 
     &.disabled div {
-      background-color: $--background-color-base;
+      background-color: $--color-fill-1;
       opacity: 1;
       cursor: not-allowed;
-      color: $--color-text-placeholder;
-    }
-
-    &.selected div {
-      margin-left: 5px;
-      margin-right: 5px;
-      background-color: $--datepicker-inrange-background-color;
-      border-radius: 15px;
-      &:hover {
-        background-color: $--datepicker-inrange-hover-background-color;
+      color: $--color-text-2;
+      span:hover {
+        background: none;
       }
     }
 
+    &.selected div {
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+
     &.selected span {
-      background-color: $--datepicker-active-color;
-      color: $--color-white;
-      border-radius: 15px;
+      background-color: $--color-primary-6;
+      color: #fff;
+      border-radius: 12px;
     }
 
     &.week {
-      font-size: 80%;
-      color: $--datepicker-header-font-color;
+      color: $--color-text-2;
     }
   }
 
   th {
-    padding: 5px;
-    color: $--datepicker-header-font-color;
+    width: 32px;
+    height: 32px;
+    color: $--color-text-3;
     font-weight: 400;
-    border-bottom: solid 1px $--border-color-lighter;
   }
 }

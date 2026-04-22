@@ -4,24 +4,32 @@
 
 ### 基础用法
 
-设置`layout`，表示需要显示的内容，用逗号分隔，布局元素会依次显示。`prev`表示上一页，`next`为下一页，`pager`表示页码列表，除此以外还提供了`jumper`和`total`，`sizes`和特殊的布局符号`->`，`->`后的元素会靠右显示，`jumper`表示跳页元素，`total`表示总条目数，`sizes`用于设置每页显示的页码数量。
+设置`layout`，表示需要显示的内容，用逗号分隔，布局元素会依次显示。
+- `prev`：上一页
+- `next`：下一页
+- `pager`：页码列表
+- `jumper`：跳页元素
+- `total`：总条目数
+- `sizes`：每页显示的页码数量
 
 :::demo 
 ```html
-<div class="block">
-  <span class="component-content-title mgb-10">页数较少时的效果</span>
-  <el-pagination
-    layout="prev, pager, next"
-    :total="50">
-  </el-pagination>
-</div>
-<div class="block">
-  <span class="demonstration component-content-title mgb-10">大于 7 页时的效果</span>
-  <el-pagination
-    layout="prev, pager, next"
-    :total="1000">
-  </el-pagination>
-</div>
+<el-row :gutter="20">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">页数较少时的效果</div>
+    <el-pagination
+      layout="prev, pager, next"
+      :total="50">
+    </el-pagination>
+  </el-col>
+  <el-col :span="12">
+    <div class="demonstration component-content-title mgb-10">大于 7 页时的效果</div>
+    <el-pagination
+      layout="prev, pager, next"
+      :total="1000">
+    </el-pagination>
+  </el-col>
+</el-row>
 ```
 :::
 
@@ -60,21 +68,29 @@
 
 :::demo 
 ```html
-<el-pagination
-  small
-  layout="prev, pager, next"
-  :total="50">
-</el-pagination>
-<el-pagination
-  small
-  @size-change="handleSizeChange"
-  @current-change="handleCurrentChange"
-  :current-page="currentPage"
-  :page-sizes="[10, 20, 30, 40]"
-  :page-size="10"
-  layout="total, sizes, prev, pager, next, jumper"
-  :total="400">
-</el-pagination>
+<el-row :gutter="20">
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">简单分页</div>
+    <el-pagination
+      small
+      layout="prev, pager, next"
+      :total="50">
+    </el-pagination>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">完整分页</div>
+    <el-pagination
+      small
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[10, 20, 30, 40]"
+      :page-size="10"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="400">
+    </el-pagination>
+  </el-col>
+</el-row>
 <script>
   export default {
     methods: {
@@ -103,52 +119,56 @@
 
 ```html
 <template>
-  <div class="block">
-    <span class="demonstration component-content-title mgb-10">显示总数</span>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page.sync="currentPage1"
-      :page-size="100"
-      layout="total, prev, pager, next"
-      :total="1000">
-    </el-pagination>
-  </div>
-  <div class="block">
-    <span class="demonstration component-content-title mgb-10">调整每页显示条数</span>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page.sync="currentPage2"
-      :page-sizes="[100, 200, 300, 400]"
-      :page-size="100"
-      layout="sizes, prev, pager, next"
-      :total="1000">
-    </el-pagination>
-  </div>
-  <div class="block">
-    <span class="demonstration component-content-title mgb-10">直接前往</span>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page.sync="currentPage3"
-      :page-size="100"
-      layout="prev, pager, next, jumper"
-      :total="1000">
-    </el-pagination>
-  </div>
-  <div class="block">
-    <span class="demonstration component-content-title mgb-10">完整功能</span>
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage4"
-      :page-sizes="[10, 20, 30, 40]"
-      :page-size="10"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="400">
-    </el-pagination>
-  </div>
+  <el-row :gutter="20" class="mgb-10">
+    <el-col :span="12">
+      <div class="demonstration component-content-title mgb-10">显示总数</div>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage1"
+        :page-size="100"
+        layout="total, prev, pager, next"
+        :total="1000">
+      </el-pagination>
+    </el-col>
+    <el-col :span="12">
+      <div class="demonstration component-content-title mgb-10">调整每页显示条数</div>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage2"
+        :page-sizes="[100, 200, 300, 400]"
+        :page-size="100"
+        layout="sizes, prev, pager, next"
+        :total="1000">
+      </el-pagination>
+    </el-col>
+  </el-row>
+  <el-row :gutter="20" class="mgb-10">
+    <el-col :span="12">
+      <div class="demonstration component-content-title mgb-10">直接前往</div>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage3"
+        :page-size="100"
+        layout="prev, pager, next, jumper"
+        :total="1000">
+      </el-pagination>
+    </el-col>
+    <el-col :span="12">
+      <div class="demonstration component-content-title mgb-10">完整功能</div>
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="currentPage4"
+        :page-sizes="[10, 20, 30, 40]"
+        :page-size="10"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="400">
+      </el-pagination>
+    </el-col>
+  </el-row>
 </template>
 <script>
   export default {
@@ -179,7 +199,7 @@
 
 :::demo
 ```html
-<div>
+<div class="one-page-demo">
  <el-switch v-model="value">
  </el-switch>
  <el-pagination

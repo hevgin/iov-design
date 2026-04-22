@@ -12,6 +12,7 @@
 
 ```html
 <template>
+  <div class="component-content-title mgb-10">size为default</div>
   <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -19,7 +20,7 @@
     <el-tab-pane label="定时任务" name="fourth" disabled></el-tab-pane>
   </el-tabs>
 
-
+  <div class="component-content-title mgb-10">size为medium</div>
   <el-tabs v-model="activeName" @tab-click="handleClick" size="medium">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -27,7 +28,7 @@
     <el-tab-pane label="定时任务" name="fourth" disabled></el-tab-pane>
   </el-tabs>
 
-
+  <div class="component-content-title mgb-10">size为small</div>
   <el-tabs v-model="activeName" @tab-click="handleClick" size="small">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -35,7 +36,7 @@
     <el-tab-pane label="定时任务" name="fourth" disabled></el-tab-pane>
   </el-tabs>
 
-
+  <div class="component-content-title mgb-10">size为mini</div>
   <el-tabs v-model="activeName" @tab-click="handleClick" size="mini">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -103,12 +104,13 @@
 
 ### 选项卡样式
 
-选项卡样式的标签页。只需要设置 `type` 属性为 `card` 就可以使选项卡改变为标签风格。
+选项卡样式的标签页。只需要设置 `type="card"`。
 
 :::demo 
 
 ```html
 <template>
+  <div class="component-content-title mgb-10">卡片 + size为deaful</div>
   <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -116,6 +118,7 @@
     <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
+  <div class="component-content-title mgb-10">卡片 + size为medium</div>
   <el-tabs v-model="activeName" type="card" size="medium" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -123,6 +126,7 @@
     <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
+  <div class="component-content-title mgb-10">卡片 + size为small</div>
   <el-tabs v-model="activeName" type="card" size="small" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -130,6 +134,7 @@
     <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
+  <div class="component-content-title mgb-10">卡片 + size为mini</div>
   <el-tabs v-model="activeName" type="card" size="mini" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -156,12 +161,13 @@
 
 ### 选项卡蓝色样式
 
-选项卡样式的标签页。只需要设置 `type` 属性为 `card`, 增加 `primary`属性, 就可以使选项卡改变为标签风格。
+选项卡样式的标签页。只需要设置 `type="card"`, 并且增加 `primary`属性。
 
 :::demo 
 
 ```html
 <template>
+  <div class="component-content-title mgb-10">卡片 + primary + size为default</div>
   <el-tabs v-model="activeName" type="card" primary @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -169,6 +175,7 @@
     <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
+  <div class="component-content-title mgb-10">卡片 + primary + size为medium</div>
   <el-tabs v-model="activeName" type="card" primary size="medium" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -176,6 +183,7 @@
     <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
+  <div class="component-content-title mgb-10">卡片 + primary + size为small</div>
   <el-tabs v-model="activeName" type="card" primary size="small" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -183,6 +191,7 @@
     <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
+  <div class="component-content-title mgb-10">卡片 + primary + size为mini</div>
   <el-tabs v-model="activeName" type="card" primary size="mini" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -209,12 +218,13 @@
 
 ### 胶囊样式
 
-选项卡样式的标签页。只需要设置 `type` 属性为 `capsule` 就可以使选项卡改变为标签风格。
+选项卡样式的标签页。只需要设置 `type="capsule"`。
 
 :::demo 
 
 ```html
 <template>
+  <div class="component-content-title mgb-10">卡片 + size为deaful</div>
   <el-tabs v-model="activeName" type="capsule" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -222,6 +232,7 @@
     <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
+  <div class="component-content-title mgb-10 mgt-10">卡片 + size为medium</div>
   <el-tabs v-model="activeName" type="capsule" size="medium" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -229,6 +240,7 @@
     <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
+  <div class="component-content-title mgb-10 mgt-10">卡片 + size为small</div>
   <el-tabs v-model="activeName" type="capsule" size="small" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>
@@ -236,6 +248,7 @@
     <el-tab-pane label="定时任务" name="fourth"></el-tab-pane>
   </el-tabs>
 
+  <div class="component-content-title mgb-10 mgt-10">卡片 + size为mini</div>
   <el-tabs v-model="activeName" type="capsule" size="mini" @tab-click="handleClick">
     <el-tab-pane label="用户管理" name="first"></el-tab-pane>
     <el-tab-pane label="配置管理" name="second"></el-tab-pane>

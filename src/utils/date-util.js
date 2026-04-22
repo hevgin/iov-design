@@ -40,11 +40,28 @@ export const isDateObject = function(val) {
 export const formatDate = function(date, format) {
   date = toDate(date);
   if (!date) return '';
+  if (format && format.indexOf('Q') !== -1) {
+    const quarter = Math.floor(date.getMonth() / 3) + 1;
+    return fecha.format(date, format.replace(/Q+/g, (match) => {
+      const q = '' + quarter;
+      return match.length >= 3 ? 'Q' + q : match.length >= 2 ? (quarter < 10 ? '0' + q : q) : q;
+    }), getI18nSettings());
+  }
   return fecha.format(date, format || 'yyyy-MM-dd', getI18nSettings());
 };
 
 export const parseDate = function(string, format) {
-  return fecha.parse(string, format || 'yyyy-MM-dd', getI18nSettings());
+  format = format || 'yyyy-MM-dd';
+  if (format.indexOf('Q') !== -1) {
+    const match = string.match(/^(\d{4})[-/]Q?(\d)$/);
+    if (match) {
+      const year = parseInt(match[1], 10);
+      const quarter = parseInt(match[2], 10);
+      const month = (quarter - 1) * 3;
+      return new Date(year, month, 1);
+    }
+  }
+  return fecha.parse(string, format, getI18nSettings());
 };
 
 export const getDayCountOfMonth = function(year, month) {

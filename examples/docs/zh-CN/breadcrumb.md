@@ -24,14 +24,30 @@
 
 ### 图标分隔符
 
-通过设置 `separator-class` 可使用相应的 `iconfont` 作为分隔符，注意这将使 `separator` 设置失效
+通过设置 `separator-class` 可使用相应的 `iconfont` 作为分隔符，注意这将使 `separator` 设置失效。支持自定义图标样式、项目内联图标等场景。
 
 :::demo 
 
 ```html
-<el-breadcrumb separator-class="el-icon-arrow-right">
+
+<div class="component-content-title mgb-10 mgt-10">基础箭头图标分隔符</div>
+<el-breadcrumb separator-class="iov-icon-separator">
   <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
   <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+  <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+  <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+</el-breadcrumb>
+<div class="component-content-title mgb-10 mgt-10">右箭头图标分隔符</div>
+<el-breadcrumb separator-class="iov-icon-right">
+  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+  <el-breadcrumb-item>活动管理</el-breadcrumb-item>
+  <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+  <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+</el-breadcrumb>
+<div class="component-content-title mgb-10 mgt-10">自定义文字/图标 + 专属分隔符</div>
+<el-breadcrumb separator-class="iov-icon-to">
+  <el-breadcrumb-item :to="{ path: '/' }"><i class="iov-icon-company"></i>首页</el-breadcrumb-item>
+  <el-breadcrumb-item><i class="iov-icon-notice"></i>活动管理</el-breadcrumb-item>
   <el-breadcrumb-item>活动列表</el-breadcrumb-item>
   <el-breadcrumb-item>活动详情</el-breadcrumb-item>
 </el-breadcrumb>

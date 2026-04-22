@@ -1,49 +1,24 @@
 @import "../common/var";
 
-@include b(year-table) {
+@include b(quarter-table) {
   font-size: 13px;
   border-collapse: collapse;
 
-  tr td:nth-child(2) {
-    width: 100px;
-    &.start-date {
-      .year-grid {
-        margin-left: 16px;
-        border-top-left-radius: 24px;
-        border-bottom-left-radius: 24px;
-      }
-      .year-cell {
-        margin-left: 4px;
-      }
-    }
-
-    &.end-date {
-      .year-grid {
-        margin-right: 16px;
-        border-top-right-radius: 24px;
-        border-bottom-right-radius: 24px;
-      }
-      .year-cell {
-        margin-right: 4px;
-      }
-    }
-  }
-
   td {
-    width: 68px;
+    width: 59px;
     height: 32px;
     text-align: center;
     cursor: pointer;
     font-weight: 500;
-    .year-grid {
+    .quarter-grid {
       height: 32px;
-      margin: 4px 0;
+      margin: 2px 0;
       padding: 4px 0;
       box-sizing: border-box;
     }
-    .year-cell {
+    .quarter-cell {
       margin: 0 auto;
-      width: 60px;
+      width: 51px;
     }
     &.today {
       .cell {
@@ -78,7 +53,7 @@
     }
 
     .cell {
-      width: 60px;
+      width: 51px;
       height: 24px;
       display: block;
       line-height: 24px;
@@ -92,7 +67,7 @@
     }
 
     &.in-range {
-      .year-grid {
+      .quarter-grid {
         background-color: $--color-primary-2;
       }
     }
@@ -111,14 +86,14 @@
     }
 
     &.start-date {
-      .year-grid {
+      .quarter-grid {
         border-top-left-radius: 24px;
         border-bottom-left-radius: 24px;
       }
     }
 
     &.end-date {
-      .year-grid {
+      .quarter-grid {
         border-top-right-radius: 24px;
         border-bottom-right-radius: 24px;
       }

@@ -166,7 +166,7 @@ export default {
 
 :::demo 
 ```html
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">large（默认）</div>
     <el-checkbox-group v-model="checkboxGroup1">
@@ -180,7 +180,7 @@ export default {
     </el-checkbox-group>
   </el-col>
 </el-row>
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">small + 禁用项</div>
     <el-checkbox-group v-model="checkboxGroup3" size="small">
@@ -218,7 +218,7 @@ export default {
 
 :::demo 
 ```html
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">默认尺寸</div>
     <el-checkbox v-model="checked1" label="选项1" border></el-checkbox>
@@ -230,7 +230,7 @@ export default {
     <el-checkbox v-model="checked4" label="选项2" border size="medium"></el-checkbox>
   </el-col>
 </el-row>
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">small 尺寸 + 禁用</div>
     <el-checkbox-group v-model="checkboxGroup1" size="small">
@@ -270,7 +270,7 @@ export default {
 
 :::demo 
 ```html
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">基础卡片</div>
     <el-checkbox v-model="checkbox2" label="1" card>主标题</el-checkbox>
@@ -281,6 +281,8 @@ export default {
     <el-checkbox v-model="checkbox1" label="1" card desc="辅助描述信息">主标题</el-checkbox>
     <el-checkbox v-model="checkbox1" label="2" card desc="辅助描述信息">主标题</el-checkbox>
   </el-col>
+</el-row>
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">卡片组 + 禁用项</div>
     <el-checkbox-group v-model="checkbox3">
@@ -319,7 +321,7 @@ export default {
 
 :::demo
 ```html
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">默认尺寸</div>
     <el-checkbox v-model="checked1" label="选项1" button></el-checkbox>
@@ -331,7 +333,7 @@ export default {
     <el-checkbox v-model="checked4" label="选项2" button size="medium"></el-checkbox>
   </el-col>
 </el-row>
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">small 尺寸 + 禁用</div>
     <el-checkbox-group v-model="checkboxGroup1" size="small">

@@ -12,23 +12,24 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="12">
-      <div class="component-content-title mgb-10">默认日期选择</div>
+      <span class="demonstration">默认</span>
       <el-date-picker
         v-model="value1"
+        :picker-options="pickerOptions1"
         type="date"
         placeholder="选择日期">
         <template slot="prefixLabel">选择日期</template>
       </el-date-picker>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">带快捷选项+禁用未来日期</div>
-      <el-date-picker
-        v-model="value2"
-        align="right"
-        type="date"
-        placeholder="选择日期"
-        :picker-options="pickerOptions">
-      </el-date-picker>
+      <span class="demonstration">带快捷选项</span>
+    <el-date-picker
+      v-model="value2"
+      align="right"
+      type="date"
+      placeholder="选择日期"
+      :picker-options="pickerOptions2">
+    </el-date-picker>
     </el-col>
   </el-row>
 </template>
@@ -37,7 +38,12 @@
   export default {
     data() {
       return {
-        pickerOptions: {
+        pickerOptions1: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          }
+        },
+        pickerOptions2: {
           disabledDate(time) {
             return time.getTime() > Date.now();
           },
@@ -73,12 +79,12 @@
 
 ###  其他日期单位
 
-支持**周**、**月**、**年**、**多日期**、**多月**、**多年**选择模式，通过 `type` 属性切换单位，满足不同时间维度选择需求。
+通过扩展基础的日期选择，可以选择周、月、年或多个日期
 
 :::demo
 ```html
 <template>
-  <el-row :gutter="20">
+  <el-row :gutter="20" class="mgb-10">
     <el-col :span="12">
       <div class="component-content-title mgb-10">周选择</div>
       <el-date-picker
@@ -97,7 +103,7 @@
       </el-date-picker>
     </el-col>
   </el-row>
-  <el-row :gutter="20">
+  <el-row :gutter="20" class="mgb-10">
     <el-col :span="12">
       <div class="component-content-title mgb-10">年选择</div>
       <el-date-picker
@@ -115,7 +121,7 @@
       </el-date-picker>
     </el-col>
   </el-row>
-  <el-row :gutter="20">
+  <el-row :gutter="20" class="mgb-10">
     <el-col :span="12">
       <div class="component-content-title mgb-10">多个月</div>
       <el-date-picker
@@ -139,12 +145,19 @@
   export default {
     data() {
       return {
+        pickerOptions: {
+          disabledDate(time) {
+            return time.getTime() > Date.now();
+          }
+        },
         value1: '',
         value2: '',
         value3: '',
         value4: '',
         value5: '',
-        value6: ''
+        value6: '',
+        value7: '',
+        value8: ''
       };
     }
   };
@@ -191,7 +204,7 @@
       return {
         pickerOptions: {
           shortcuts: [{
-            text: '最近一周',
+            text: '近7天',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -199,7 +212,7 @@
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: '最近一个月',
+            text: '近1个月',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -207,7 +220,7 @@
               picker.$emit('pick', [start, end]);
             }
           }, {
-            text: '最近三个月',
+            text: '近3个月',
             onClick(picker) {
               const end = new Date();
               const start = new Date();
@@ -295,6 +308,146 @@
 :::
 
 
+
+### 选择季度范围
+
+可在一个选择器中便捷地选择一个季度范围
+
+::::demo 在选择季度范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前年份，可以使用`unlink-panels`属性解除联动。
+```html
+<template>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <span class="demonstration">默认</span>
+      <el-date-picker
+        v-model="value1"
+        type="quarterrange"
+        start-placeholder="开始季度"
+        end-placeholder="结束季度">
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <span class="demonstration">带快捷选项</span>
+      <el-date-picker
+        v-model="value2"
+        type="quarterrange"
+        align="right"
+        unlink-panels
+        start-placeholder="开始季度"
+        end-placeholder="结束季度"
+        :picker-options="pickerOptions">
+      </el-date-picker>
+    </el-col>
+  </el-row>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        pickerOptions: {
+          shortcuts: [{
+            text: '本季度',
+            onClick(picker) {
+              const now = new Date();
+              const quarterStart = new Date(now.getFullYear(), Math.floor(now.getMonth() / 3) * 3, 1);
+              picker.$emit('pick', [quarterStart, new Date(now.getFullYear(), Math.floor(now.getMonth() / 3) * 3 + 3, 0)]);
+            }
+          }, {
+            text: '今年至今',
+            onClick(picker) {
+              const now = new Date();
+              const start = new Date(now.getFullYear(), 0, 1);
+              picker.$emit('pick', [start, new Date()]);
+            }
+          }, {
+            text: '最近四个季度',
+            onClick(picker) {
+              const end = new Date();
+              const start = new Date(end.getFullYear() - 1, end.getMonth() - 3, 1);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value1: '',
+        value2: ''
+      };
+    }
+  };
+</script>
+```
+::::
+
+### 选择年范围
+
+可在一个选择器中便捷地选择一个年份范围
+
+::::demo 在选择年范围时，默认情况下左右面板会联动。如果希望两个面板各自独立切换当前年代，可以使用`unlink-panels`属性解除联动。
+```html
+<template>
+  <el-row :gutter="20">
+    <el-col :span="12">
+      <span class="demonstration">默认</span>
+      <el-date-picker
+        v-model="value1"
+        type="yearrange"
+        start-placeholder="开始年份"
+        end-placeholder="结束年份">
+      </el-date-picker>
+    </el-col>
+    <el-col :span="12">
+      <span class="demonstration">带快捷选项</span>
+      <el-date-picker
+        v-model="value2"
+        type="yearrange"
+        align="right"
+        unlink-panels
+        start-placeholder="开始年份"
+        end-placeholder="结束年份"
+        :picker-options="pickerOptions">
+      </el-date-picker>
+    </el-col>
+  </el-row>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        pickerOptions: {
+          shortcuts: [{
+            text: '今年',
+            onClick(picker) {
+              const start = new Date(new Date().getFullYear(), 0, 1);
+              const end = new Date(new Date().getFullYear(), 11, 31);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近十年',
+            onClick(picker) {
+              const end = new Date(new Date().getFullYear(), 11, 31);
+              const start = new Date(new Date().getFullYear() - 9, 0, 1);
+              picker.$emit('pick', [start, end]);
+            }
+          }, {
+            text: '最近五年',
+            onClick(picker) {
+              const end = new Date(new Date().getFullYear(), 11, 31);
+              const start = new Date(new Date().getFullYear() - 4, 0, 1);
+              picker.$emit('pick', [start, end]);
+            }
+          }]
+        },
+        value1: '',
+        value2: ''
+      };
+    }
+  };
+</script>
+```
+::::
+
+
 ###  日期格式
 
 使用`format`指定输入框的格式；使用`value-format`指定绑定值的格式。
@@ -310,6 +463,9 @@
 | `yyyy` | 年 | | 2017 |
 | `M`  | 月 | 不补0 | 1 |
 | `MM` | 月 | | 01 |
+| `Q`  | 季度 | 不补0 | 1 |
+| `QQ` | 季度 | 补0 | 01 |
+| `QQQ` | 季度 | 仅季度选择器的 `format` 可用 | Q1 |
 | `W`  | 周 | 仅周选择器的 `format` 可用；不补0 | 1 |
 | `WW` | 周 | 仅周选择器的 `format` 可用 | 01 |
 | `d`  | 日 | 不补0 | 2 |
@@ -428,7 +584,7 @@
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |
 | end-placeholder | 范围选择时结束日期的占位内容 | string | — | — |
-| type | 显示类型 | string | year/month/date/dates/months/years week/datetime/datetimerange/ daterange/monthrange | date |
+| type | 显示类型 | string | year/month/quarter/date/dates/months/quarters/years week/datetime/datetimerange/ daterange/monthrange/quarterrange/yearrange | date |
 | format | 显示在输入框中的格式 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | yyyy-MM-dd |
 | align | 对齐方式 | string | left, center, right | left |
 | popper-class | DatePicker 下拉框的类名 | string | — | — |

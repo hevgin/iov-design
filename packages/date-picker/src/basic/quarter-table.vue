@@ -1,11 +1,11 @@
 <template>
-  <table @click="handleMonthTableClick" @mousemove="handleMouseMove" cellspacing="0" cellpadding="0" class="el-month-table">
+  <table @click="handleQuarterTableClick" @mousemove="handleMouseMove" cellspacing="0" cellpadding="0" class="el-quarter-table">
     <tbody>
     <tr v-for="(row, key) in rows" :key="key">
       <td :class="getCellStyle(cell)" v-for="(cell, key) in row" :key="key">
-        <div class="month-grid">
-          <div class="month-cell">
-            <a class="cell">{{ t('el.datepicker.months.' + months[cell.text]) }}</a>
+        <div class="quarter-grid">
+          <div class="quarter-cell">
+            <a class="cell">{{ t('el.datepicker.quarters.q' + (cell.text + 1)) }}</a>
           </div>
         </div>
       </td>
@@ -16,21 +16,15 @@
 
 <script type="text/babel">
   import Locale from 'iov-design/src/mixins/locale';
-  import { isDate, range, getDayCountOfMonth, nextDate } from 'iov-design/src/utils/date-util';
+  import { isDate } from 'iov-design/src/utils/date-util';
   import { hasClass } from 'iov-design/src/utils/dom';
   import { arrayFindIndex, coerceTruthyValueToArray, arrayFind } from 'iov-design/src/utils/util';
 
-  const datesInMonth = (year, month) => {
-    const numOfDays = getDayCountOfMonth(year, month);
-    const firstDay = new Date(year, month, 1);
-    return range(numOfDays).map(n => nextDate(firstDay, n));
-  };
-
   const clearDate = (date) => {
-    return new Date(date.getFullYear(), date.getMonth());
+    return new Date(date.getFullYear(), Math.floor(date.getMonth() / 3) * 3);
   };
 
-  const getMonthTimestamp = function(time) {
+  const getQuarterTimestamp = function(time) {
     if (typeof time === 'number' || typeof time === 'string') {
       return clearDate(new Date(time)).getTime();
     } else if (time instanceof Date) {
@@ -50,7 +44,7 @@
       disabledDate: {},
       value: {},
       selectionMode: {
-        default: 'month'
+        default: 'quarter'
       },
       minDate: {},
       maxDate: {},
@@ -77,12 +71,12 @@
         this.markRange(this.minDate, newVal);
       },
       minDate(newVal, oldVal) {
-        if (getMonthTimestamp(newVal) !== getMonthTimestamp(oldVal)) {
+        if (getQuarterTimestamp(newVal) !== getQuarterTimestamp(oldVal)) {
           this.markRange(this.minDate, this.maxDate);
         }
       },
       maxDate(newVal, oldVal) {
-        if (getMonthTimestamp(newVal) !== getMonthTimestamp(oldVal)) {
+        if (getQuarterTimestamp(newVal) !== getQuarterTimestamp(oldVal)) {
           this.markRange(this.minDate, this.maxDate);
         }
       }
@@ -90,10 +84,7 @@
 
     data() {
       return {
-        months: ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'],
-        // ✅ 改为 4 行
-        tableRows: [ [], [], [], [] ],
-        lastRow: null,
+        tableRows: [[]],
         lastColumn: null
       };
     },
@@ -101,19 +92,34 @@
     methods: {
       cellMatchesDate(cell, date) {
         const value = new Date(date);
-        return this.date.getFullYear() === value.getFullYear() && Number(cell.text) === value.getMonth();
+        return this.date.getFullYear() === value.getFullYear() && Number(cell.text) === Math.floor(value.getMonth() / 3);
       },
       getCellStyle(cell) {
         const style = {};
         const year = this.date.getFullYear();
         const today = new Date();
-        const month = cell.text;
+        const quarter = cell.text;
+        const quarterStartMonth = quarter * 3;
         const defaultValue = this.defaultValue ? Array.isArray(this.defaultValue) ? this.defaultValue : [this.defaultValue] : [];
+
+        const quarterStartDate = new Date(year, quarterStartMonth, 1);
+        const quarterEndDate = new Date(year, quarterStartMonth + 3, 0);
+
         style.disabled = typeof this.disabledDate === 'function'
-          ? datesInMonth(year, month).every(this.disabledDate)
+          ? (() => {
+            const dates = [];
+            const d = new Date(quarterStartDate);
+            while (d <= quarterEndDate) {
+              dates.push(new Date(d));
+              d.setDate(d.getDate() + 1);
+            }
+            return dates.every(this.disabledDate);
+          })()
           : false;
-        style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date => date.getFullYear() === year && date.getMonth() === month) >= 0;
-        style.today = today.getFullYear() === year && today.getMonth() === month;
+        style.current = arrayFindIndex(coerceTruthyValueToArray(this.value), date =>
+          date.getFullYear() === year && Math.floor(date.getMonth() / 3) === quarter
+        ) >= 0;
+        style.today = today.getFullYear() === year && Math.floor(today.getMonth() / 3) === quarter;
         style.default = defaultValue.some(date => this.cellMatchesDate(cell, date));
 
         if (cell.inRange) {
@@ -123,26 +129,21 @@
         }
         return style;
       },
-      getMonthOfCell(month) {
+      getQuarterOfCell(quarter) {
         const year = this.date.getFullYear();
-        return new Date(year, month, 1);
+        return new Date(year, quarter * 3, 1);
       },
       markRange(minDate, maxDate) {
-        minDate = getMonthTimestamp(minDate);
-        maxDate = getMonthTimestamp(maxDate) || minDate;
+        minDate = getQuarterTimestamp(minDate);
+        maxDate = getQuarterTimestamp(maxDate) || minDate;
         [minDate, maxDate] = [Math.min(minDate, maxDate), Math.max(minDate, maxDate)];
-        const rows = this.rows;
-        for (let i = 0, k = rows.length; i < k; i++) {
-          const row = rows[i];
-          for (let j = 0, l = row.length; j < l; j++) {
-            const cell = row[j];
-            // ✅ 每行 3 列，索引计算改为 i * 3 + j
-            const index = i * 3 + j;
-            const time = new Date(this.date.getFullYear(), index).getTime();
-            cell.inRange = minDate && time >= minDate && time <= maxDate;
-            cell.start = minDate && time === minDate;
-            cell.end = maxDate && time === maxDate;
-          }
+        const row = this.rows[0];
+        for (let j = 0, l = row.length; j < l; j++) {
+          const cell = row[j];
+          const time = new Date(this.date.getFullYear(), j * 3).getTime();
+          cell.inRange = minDate && time >= minDate && time <= maxDate;
+          cell.start = minDate && time === minDate;
+          cell.end = maxDate && time === maxDate;
         }
       },
       handleMouseMove(event) {
@@ -153,25 +154,22 @@
         if (target.tagName === 'DIV') target = target.parentNode;
         if (target.tagName !== 'TD') return;
 
-        const row = target.parentNode.rowIndex;
         const column = target.cellIndex;
-        if (this.rows[row][column].disabled) return;
+        if (this.rows[0][column].disabled) return;
 
-        if (row !== this.lastRow || column !== this.lastColumn) {
-          this.lastRow = row;
+        if (column !== this.lastColumn) {
           this.lastColumn = column;
           this.$emit('changerange', {
             minDate: this.minDate,
             maxDate: this.maxDate,
             rangeState: {
               selecting: true,
-              // ✅ 改为 row * 3 + column
-              endDate: this.getMonthOfCell(row * 3 + column)
+              endDate: this.getQuarterOfCell(column)
             }
           });
         }
       },
-      handleMonthTableClick(event) {
+      handleQuarterTableClick(event) {
         let target = event.target;
         if (target.tagName === 'A') target = target.parentNode.parentNode;
         if (target.tagName === 'DIV') target = target.parentNode;
@@ -179,32 +177,32 @@
         if (hasClass(target, 'disabled')) return;
 
         const column = target.cellIndex;
-        const row = target.parentNode.rowIndex;
-        // ✅ 改为 row * 3 + column
-        const month = row * 3 + column;
-        const newDate = this.getMonthOfCell(month);
+        const quarter = column;
+        const newDate = this.getQuarterOfCell(quarter);
 
         if (this.selectionMode === 'range') {
           if (!this.rangeState.selecting) {
-            this.$emit('pick', {minDate: newDate, maxDate: null});
+            this.$emit('pick', { minDate: newDate, maxDate: null });
             this.rangeState.selecting = true;
           } else {
             if (newDate >= this.minDate) {
-              this.$emit('pick', {minDate: this.minDate, maxDate: newDate});
+              this.$emit('pick', { minDate: this.minDate, maxDate: newDate });
             } else {
-              this.$emit('pick', {minDate: newDate, maxDate: this.minDate});
+              this.$emit('pick', { minDate: newDate, maxDate: this.minDate });
             }
             this.rangeState.selecting = false;
           }
-        } else if (this.selectionMode === 'months') {
+        } else if (this.selectionMode === 'quarters') {
           const value = this.value || [];
           const year = this.date.getFullYear();
-          const newValue = arrayFindIndex(value, date => date.getFullYear() === year && date.getMonth() === month) >= 0
+          const newValue = arrayFindIndex(value, date =>
+            date.getFullYear() === year && Math.floor(date.getMonth() / 3) === quarter
+          ) >= 0
             ? removeFromArray(value, date => date.getTime() === newDate.getTime())
             : [...value, newDate];
           this.$emit('pick', newValue);
         } else {
-          this.$emit('pick', month);
+          this.$emit('pick', quarter);
         }
       }
     },
@@ -214,35 +212,29 @@
         const rows = this.tableRows;
         const disabledDate = this.disabledDate;
         const selectedDate = [];
-        const now = getMonthTimestamp(new Date());
+        const now = getQuarterTimestamp(new Date());
+        const row = rows[0];
 
-        // ✅ 外层循环改为 4 行，内层循环改为 3 列
-        for (let i = 0; i < 4; i++) {
-          const row = rows[i];
-          for (let j = 0; j < 3; j++) {
-            let cell = row[j];
-            if (!cell) {
-              cell = { row: i, column: j, type: 'normal', inRange: false, start: false, end: false };
-            }
-
-            cell.type = 'normal';
-
-            // ✅ 索引计算改为 i * 3 + j
-            const index = i * 3 + j;
-            const time = new Date(this.date.getFullYear(), index).getTime();
-            cell.inRange = time >= getMonthTimestamp(this.minDate) && time <= getMonthTimestamp(this.maxDate);
-            cell.start = this.minDate && time === getMonthTimestamp(this.minDate);
-            cell.end = this.maxDate && time === getMonthTimestamp(this.maxDate);
-
-            if (time === now) cell.type = 'today';
-
-            cell.text = index;
-            let cellDate = new Date(time);
-            cell.disabled = typeof disabledDate === 'function' && disabledDate(cellDate);
-            cell.selected = arrayFind(selectedDate, date => date.getTime() === cellDate.getTime());
-
-            this.$set(row, j, cell);
+        for (let j = 0; j < 4; j++) {
+          let cell = row[j];
+          if (!cell) {
+            cell = { row: 0, column: j, type: 'normal', inRange: false, start: false, end: false };
           }
+
+          cell.type = 'normal';
+          const time = new Date(this.date.getFullYear(), j * 3).getTime();
+          cell.inRange = time >= getQuarterTimestamp(this.minDate) && time <= getQuarterTimestamp(this.maxDate);
+          cell.start = this.minDate && time === getQuarterTimestamp(this.minDate);
+          cell.end = this.maxDate && time === getQuarterTimestamp(this.maxDate);
+
+          if (time === now) cell.type = 'today';
+
+          cell.text = j;
+          let cellDate = new Date(time);
+          cell.disabled = typeof disabledDate === 'function' && disabledDate(cellDate);
+          cell.selected = arrayFind(selectedDate, date => date.getTime() === cellDate.getTime());
+
+          this.$set(row, j, cell);
         }
         return rows;
       }

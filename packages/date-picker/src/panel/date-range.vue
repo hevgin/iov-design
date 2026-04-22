@@ -1,8 +1,9 @@
 <template>
   <transition name="el-zoom-in-top" @after-leave="$emit('dodestroy')">
+    <div class="el-picker-panel__main el-popper">
     <div
       v-show="visible"
-      class="el-picker-panel el-date-range-picker el-popper"
+      class="el-picker-panel el-date-range-picker"
       :class="[{
         'has-sidebar': $slots.sidebar || shortcuts,
         'has-time': showTime
@@ -10,172 +11,118 @@
       <div class="el-picker-panel__body-wrapper">
         <slot name="sidebar" class="el-picker-panel__sidebar"></slot>
         <div class="el-picker-panel__sidebar" v-if="shortcuts">
-          <button
-            type="button"
+          <div
             class="el-picker-panel__shortcut"
             v-for="(shortcut, key) in shortcuts"
             :key="key"
-            @click="handleShortcutClick(shortcut)">{{shortcut.text}}</button>
+            @click="handleShortcutClick(shortcut)">{{shortcut.text}}</div>
         </div>
         <div class="el-picker-panel__body">
-          <div class="el-date-range-picker__time-header" v-if="showTime">
-            <span class="el-date-range-picker__editors-wrap">
-              <span class="el-date-range-picker__time-picker-wrap">
-                <el-input
-                  size="small"
-                  :disabled="rangeState.selecting"
-                  ref="minInput"
-                  :placeholder="t('el.datepicker.startDate')"
-                  class="el-date-range-picker__editor"
-                  :value="minVisibleDate"
-                  @input="val => handleDateInput(val, 'min')"
-                  @change="val => handleDateChange(val, 'min')" />
-              </span>
-              <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMinTimeClose">
-                <el-input
-                  size="small"
-                  class="el-date-range-picker__editor"
-                  :disabled="rangeState.selecting"
-                  :placeholder="t('el.datepicker.startTime')"
-                  :value="minVisibleTime"
-                  @focus="minTimePickerVisible = true"
-                  @input="val => handleTimeInput(val, 'min')"
-                  @change="val => handleTimeChange(val, 'min')" />
-                <time-picker
-                  ref="minTimePicker"
-                  @pick="handleMinTimePick"
-                  :time-arrow-control="arrowControl"
-                  :visible="minTimePickerVisible"
-                  @mounted="$refs.minTimePicker.format=timeFormat">
-                </time-picker>
-              </span>
-            </span>
-            <span class="el-icon-arrow-right"></span>
-            <span class="el-date-range-picker__editors-wrap is-right">
-              <span class="el-date-range-picker__time-picker-wrap">
-                <el-input
-                  size="small"
-                  class="el-date-range-picker__editor"
-                  :disabled="rangeState.selecting"
-                  :placeholder="t('el.datepicker.endDate')"
-                  :value="maxVisibleDate"
-                  :readonly="!minDate"
-                  @input="val => handleDateInput(val, 'max')"
-                  @change="val => handleDateChange(val, 'max')" />
-              </span>
-              <span class="el-date-range-picker__time-picker-wrap" v-clickoutside="handleMaxTimeClose">
-                <el-input
-                  size="small"
-                  class="el-date-range-picker__editor"
-                  :disabled="rangeState.selecting"
-                  :placeholder="t('el.datepicker.endTime')"
-                  :value="maxVisibleTime"
-                  :readonly="!minDate"
-                  @focus="minDate && (maxTimePickerVisible = true)"
-                  @input="val => handleTimeInput(val, 'max')"
-                  @change="val => handleTimeChange(val, 'max')" />
-                <time-picker
-                  ref="maxTimePicker"
-                  @pick="handleMaxTimePick"
-                  :time-arrow-control="arrowControl"
-                  :visible="maxTimePickerVisible"
-                  @mounted="$refs.maxTimePicker.format=timeFormat">
-                </time-picker>
-              </span>
-            </span>
-          </div>
-          <div class="el-picker-panel__content el-date-range-picker__content is-left">
-            <div class="el-date-range-picker__header">
-              <button
-                type="button"
+          <div class="el-date-range-picker__header" v-show="currentView === 'date'">
+            <div class="el-date-picker__header">
+              <i
                 @click="leftPrevYear"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
-              <button
-                type="button"
+                class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-double-left-mini"></i>
+              <i
                 @click="leftPrevMonth"
-                class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
-              <button
-                type="button"
-                @click="leftNextYear"
+                class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-left"></i>
+              <i
+                @click="enableYearArrow && leftNextYear()"
                 v-if="unlinkPanels"
-                :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-              <button
-                type="button"
-                @click="leftNextMonth"
+                class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-double-right-mini"></i>
+              <i
+                @click="enableMonthArrow && leftNextMonth()"
                 v-if="unlinkPanels"
-                :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
-              <div>{{ leftLabel }}</div>
+                class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-right"></i>
+              <div class="el-date-picker__header-label">{{ leftLabel }}</div>
             </div>
-            <date-table
-              selection-mode="range"
-              :date="leftDate"
-              :default-value="defaultValue"
-              :min-date="minDate"
-              :max-date="maxDate"
-              :range-state="rangeState"
-              :disabled-date="disabledDate"
-              :cell-class-name="cellClassName"
-              @changerange="handleChangeRange"
-              :first-day-of-week="firstDayOfWeek"
-              @pick="handleRangePick">
-            </date-table>
-          </div>
-          <div class="el-picker-panel__content el-date-range-picker__content is-right">
-            <div class="el-date-range-picker__header">
-              <button
-                type="button"
-                @click="rightPrevYear"
+            <div class="el-date-picker__header">
+              <i
+                @click="enableYearArrow && rightPrevYear()"
                 v-if="unlinkPanels"
-                :disabled="!enableYearArrow"
                 :class="{ 'is-disabled': !enableYearArrow }"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-left"></button>
-              <button
-                type="button"
-                @click="rightPrevMonth"
+                class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-double-left-mini"></i>
+              <i
+                @click="enableMonthArrow && rightPrevMonth()"
                 v-if="unlinkPanels"
-                :disabled="!enableMonthArrow"
                 :class="{ 'is-disabled': !enableMonthArrow }"
-                class="el-picker-panel__icon-btn el-icon-arrow-left"></button>
-              <button
-                type="button"
+                class="el-picker-panel__icon-btn el-date-picker__prev-btn iov-icon-left"></i>
+              <i
                 @click="rightNextYear"
-                class="el-picker-panel__icon-btn el-icon-d-arrow-right"></button>
-              <button
-                type="button"
+                class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-double-right-mini"></i>
+              <i
                 @click="rightNextMonth"
-                class="el-picker-panel__icon-btn el-icon-arrow-right"></button>
-              <div>{{ rightLabel }}</div>
+                class="el-picker-panel__icon-btn el-date-picker__next-btn iov-icon-right"></i>
+              <div class="el-date-picker__header-label">{{ rightLabel }}</div>
             </div>
-            <date-table
-              selection-mode="range"
-              :date="rightDate"
-              :default-value="defaultValue"
-              :min-date="minDate"
-              :max-date="maxDate"
-              :range-state="rangeState"
-              :disabled-date="disabledDate"
-              :cell-class-name="cellClassName"
-              @changerange="handleChangeRange"
-              :first-day-of-week="firstDayOfWeek"
-              @pick="handleRangePick">
-            </date-table>
+          </div>
+          <div class="el-date-range-picker__content" v-show="currentView === 'date'">
+            <div class="el-picker-panel__content is-left">
+              <date-table
+                selection-mode="range"
+                :date="leftDate"
+                :default-value="defaultValue"
+                :min-date="minDate"
+                :max-date="maxDate"
+                :range-state="rangeState"
+                :disabled-date="disabledDate"
+                :cell-class-name="cellClassName"
+                @changerange="handleChangeRange"
+                :first-day-of-week="firstDayOfWeek"
+                @pick="handleRangePick">
+              </date-table>
+            </div>
+            <div class="el-picker-panel__content is-right">
+              <date-table
+                selection-mode="range"
+                :date="rightDate"
+                :default-value="defaultValue"
+                :min-date="minDate"
+                :max-date="maxDate"
+                :range-state="rangeState"
+                :disabled-date="disabledDate"
+                :cell-class-name="cellClassName"
+                @changerange="handleChangeRange"
+                :first-day-of-week="firstDayOfWeek"
+                @pick="handleRangePick">
+              </date-table>
+            </div>
+          </div>
+          <time-range-content
+            v-if="showTime"
+            ref="timeRangeContent"
+            v-show="currentView === 'time'"
+            :min-date="minDate || new Date()"
+            :max-date="maxDate || new Date()"
+            :format="timeFormat"
+            :arrow-control="arrowControl"
+            @pick="handleTimePick"
+            @select-range="handleTimeSelectRange">
+          </time-range-content>
+          <div v-if="showTime" class="el-date-range-picker__content">
+            <div class="el-date-range-picker__now">
+              <div class="el-date-range-picker__date" :class="{ 'is-active': currentView === 'date' }" @click="switchToDateView"><i class="iov-icon-date"></i>{{ minDateLabel }}</div>
+              <div class="el-date-range-picker__time" :class="{ 'is-active': currentView === 'time' }" @click="switchToTimeView"><i class="iov-icon-time"></i>{{ minTimeLabel }}</div>
+            </div>
+            <div class="el-date-range-picker__now">
+              <div class="el-date-range-picker__date" :class="{ 'is-active': currentView === 'date' }" @click="switchToDateView"><i class="iov-icon-date"></i>{{ maxDateLabel }}</div>
+              <div class="el-date-range-picker__time" :class="{ 'is-active': currentView === 'time' }" @click="switchToTimeView"><i class="iov-icon-time"></i>{{ maxTimeLabel }}</div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="el-picker-panel__footer" v-if="showTime">
-        <el-button
-          size="mini"
-          type="text"
+      <div class="el-picker-panel__footer el-picker-panel__footer--flex-end" v-if="showTime">
+        <!-- <el-link
+          type="primary"
+          size="small"
           class="el-picker-panel__link-btn"
           @click="handleClear">
           {{ t('el.datepicker.clear') }}
-        </el-button>
+        </el-link> -->
         <el-button
-          plain
+          type="info"
           size="mini"
           class="el-picker-panel__link-btn"
           :disabled="btnDisabled"
@@ -184,16 +131,14 @@
         </el-button>
       </div>
     </div>
+    </div>
   </transition>
 </template>
 
 <script type="text/babel">
   import {
     formatDate,
-    parseDate,
     isDate,
-    modifyDate,
-    modifyTime,
     modifyWithTimeString,
     prevYear,
     nextYear,
@@ -203,11 +148,9 @@
     extractDateFormat,
     extractTimeFormat
   } from 'iov-design/src/utils/date-util';
-  import Clickoutside from 'iov-design/src/utils/clickoutside';
   import Locale from 'iov-design/src/mixins/locale';
-  import TimePicker from './time';
   import DateTable from '../basic/date-table';
-  import ElInput from 'iov-design/packages/input';
+  import TimeRangeContent from './time-range-content';
   import ElButton from 'iov-design/packages/button';
 
   const calcDefaultValue = (defaultValue) => {
@@ -223,19 +166,46 @@
   export default {
     mixins: [Locale],
 
-    directives: { Clickoutside },
-
     computed: {
       btnDisabled() {
-        return !(this.minDate && this.maxDate && !this.selecting && this.isValidValue([this.minDate, this.maxDate]));
+        return !(this.minDate && this.maxDate && !this.rangeState.selecting && this.isValidValue([this.minDate, this.maxDate]));
+      },
+
+      minDateLabel() {
+        if (this.minDate) {
+          return formatDate(this.minDate, this.dateFormat);
+        }
+        return formatDate(new Date(), this.dateFormat);
+      },
+
+      maxDateLabel() {
+        if (this.minDate && this.rangeState && this.rangeState.selecting && this.rangeState.endDate) {
+          return formatDate(this.rangeState.endDate, this.dateFormat);
+        }
+        if (this.maxDate) {
+          return formatDate(this.maxDate, this.dateFormat);
+        }
+        return formatDate(new Date(), this.dateFormat);
+      },
+
+      minTimeLabel() {
+        if (this.minDate) return formatDate(this.minDate, this.timeFormat);
+        const defaultTime = this.defaultTime || [];
+        return defaultTime[0] || this.timeFormat.replace(/[Hms]/g, '0');
+      },
+
+      maxTimeLabel() {
+        if (this.maxDate) return formatDate(this.maxDate, this.timeFormat);
+        const defaultTime = this.defaultTime || [];
+        return (defaultTime.length > 1 ? defaultTime[1] : defaultTime[0]) || this.timeFormat.replace(/[Hms]/g, '0');
       },
 
       leftLabel() {
-        return this.leftDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.leftDate.getMonth() + 1 }`);
+        return this.leftDate.getFullYear() + '-' + ((this.leftDate.getMonth() + 1) < 10 ? '0' + (this.leftDate.getMonth() + 1) : (this.leftDate.getMonth() + 1));
       },
 
       rightLabel() {
-        return this.rightDate.getFullYear() + ' ' + this.t('el.datepicker.year') + ' ' + this.t(`el.datepicker.month${ this.rightDate.getMonth() + 1 }`);
+        return this.rightDate.getFullYear() + '-' + ((this.rightDate.getMonth() + 1) < 10 ? '0' + (this.rightDate.getMonth() + 1) : (this.rightDate.getMonth() + 1));
       },
 
       leftYear() {
@@ -260,30 +230,6 @@
 
       rightMonthDate() {
         return this.rightDate.getDate();
-      },
-
-      minVisibleDate() {
-        if (this.dateUserInput.min !== null) return this.dateUserInput.min;
-        if (this.minDate) return formatDate(this.minDate, this.dateFormat);
-        return '';
-      },
-
-      maxVisibleDate() {
-        if (this.dateUserInput.max !== null) return this.dateUserInput.max;
-        if (this.maxDate || this.minDate) return formatDate(this.maxDate || this.minDate, this.dateFormat);
-        return '';
-      },
-
-      minVisibleTime() {
-        if (this.timeUserInput.min !== null) return this.timeUserInput.min;
-        if (this.minDate) return formatDate(this.minDate, this.timeFormat);
-        return '';
-      },
-
-      maxVisibleTime() {
-        if (this.timeUserInput.max !== null) return this.timeUserInput.max;
-        if (this.maxDate || this.minDate) return formatDate(this.maxDate || this.minDate, this.timeFormat);
-        return '';
       },
 
       timeFormat() {
@@ -335,72 +281,14 @@
         disabledDate: '',
         cellClassName: '',
         firstDayOfWeek: 7,
-        minTimePickerVisible: false,
-        maxTimePickerVisible: false,
         format: '',
         arrowControl: false,
         unlinkPanels: false,
-        dateUserInput: {
-          min: null,
-          max: null
-        },
-        timeUserInput: {
-          min: null,
-          max: null
-        }
+        currentView: 'date'
       };
     },
 
     watch: {
-      minDate(val) {
-        this.dateUserInput.min = null;
-        this.timeUserInput.min = null;
-        this.$nextTick(() => {
-          if (this.$refs.maxTimePicker && this.maxDate && this.maxDate < this.minDate) {
-            const format = 'HH:mm:ss';
-            this.$refs.maxTimePicker.selectableRange = [
-              [
-                parseDate(formatDate(this.minDate, format), format),
-                parseDate('23:59:59', format)
-              ]
-            ];
-          }
-        });
-        if (val && this.$refs.minTimePicker) {
-          this.$refs.minTimePicker.date = val;
-          this.$refs.minTimePicker.value = val;
-        }
-      },
-
-      maxDate(val) {
-        this.dateUserInput.max = null;
-        this.timeUserInput.max = null;
-        if (val && this.$refs.maxTimePicker) {
-          this.$refs.maxTimePicker.date = val;
-          this.$refs.maxTimePicker.value = val;
-        }
-      },
-
-      minTimePickerVisible(val) {
-        if (val) {
-          this.$nextTick(() => {
-            this.$refs.minTimePicker.date = this.minDate;
-            this.$refs.minTimePicker.value = this.minDate;
-            this.$refs.minTimePicker.adjustSpinners();
-          });
-        }
-      },
-
-      maxTimePickerVisible(val) {
-        if (val) {
-          this.$nextTick(() => {
-            this.$refs.maxTimePicker.date = this.maxDate;
-            this.$refs.maxTimePicker.value = this.maxDate;
-            this.$refs.maxTimePicker.adjustSpinners();
-          });
-        }
-      },
-
       value(newVal) {
         if (!newVal) {
           this.minDate = null;
@@ -440,6 +328,29 @@
     },
 
     methods: {
+      switchToTimeView() {
+        if (!this.showTime) return;
+        this.currentView = 'time';
+        this.$nextTick(() => {
+          this.$refs.timeRangeContent && this.$refs.timeRangeContent.adjustSpinners();
+        });
+      },
+
+      switchToDateView() {
+        this.currentView = 'date';
+      },
+
+      handleTimePick(val) {
+        if (Array.isArray(val) && val.length === 2) {
+          this.minDate = val[0];
+          this.maxDate = val[1];
+        }
+      },
+
+      handleTimeSelectRange(start, end, pos) {
+        this.$emit('select-range', start, end, pos);
+      },
+
       handleClear() {
         this.minDate = null;
         this.maxDate = null;
@@ -454,90 +365,34 @@
         this.rangeState = val.rangeState;
       },
 
-      handleDateInput(value, type) {
-        this.dateUserInput[type] = value;
-        if (value.length !== this.dateFormat.length) return;
-        const parsedValue = parseDate(value, this.dateFormat);
-
-        if (parsedValue) {
-          if (typeof this.disabledDate === 'function' &&
-            this.disabledDate(new Date(parsedValue))) {
-            return;
-          }
-          if (type === 'min') {
-            this.minDate = modifyDate(this.minDate || new Date(), parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
-            this.leftDate = new Date(parsedValue);
-            if (!this.unlinkPanels) {
-              this.rightDate = nextMonth(this.leftDate);
-            }
-          } else {
-            this.maxDate = modifyDate(this.maxDate || new Date(), parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
-            this.rightDate = new Date(parsedValue);
-            if (!this.unlinkPanels) {
-              this.leftDate = prevMonth(parsedValue);
-            }
-          }
-        }
-      },
-
-      handleDateChange(value, type) {
-        const parsedValue = parseDate(value, this.dateFormat);
-        if (parsedValue) {
-          if (type === 'min') {
-            this.minDate = modifyDate(this.minDate, parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
-            if (this.minDate > this.maxDate) {
-              this.maxDate = this.minDate;
-            }
-          } else {
-            this.maxDate = modifyDate(this.maxDate, parsedValue.getFullYear(), parsedValue.getMonth(), parsedValue.getDate());
-            if (this.maxDate < this.minDate) {
-              this.minDate = this.maxDate;
-            }
-          }
-        }
-      },
-
-      handleTimeInput(value, type) {
-        this.timeUserInput[type] = value;
-        if (value.length !== this.timeFormat.length) return;
-        const parsedValue = parseDate(value, this.timeFormat);
-
-        if (parsedValue) {
-          if (type === 'min') {
-            this.minDate = modifyTime(this.minDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
-            this.$nextTick(_ => this.$refs.minTimePicker.adjustSpinners());
-          } else {
-            this.maxDate = modifyTime(this.maxDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
-            this.$nextTick(_ => this.$refs.maxTimePicker.adjustSpinners());
-          }
-        }
-      },
-
-      handleTimeChange(value, type) {
-        const parsedValue = parseDate(value, this.timeFormat);
-        if (parsedValue) {
-          if (type === 'min') {
-            this.minDate = modifyTime(this.minDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
-            if (this.minDate > this.maxDate) {
-              this.maxDate = this.minDate;
-            }
-            this.$refs.minTimePicker.value = this.minDate;
-            this.minTimePickerVisible = false;
-          } else {
-            this.maxDate = modifyTime(this.maxDate, parsedValue.getHours(), parsedValue.getMinutes(), parsedValue.getSeconds());
-            if (this.maxDate < this.minDate) {
-              this.minDate = this.maxDate;
-            }
-            this.$refs.maxTimePicker.value = this.minDate;
-            this.maxTimePickerVisible = false;
-          }
-        }
-      },
-
       handleRangePick(val, close = true) {
-        const defaultTime = this.defaultTime || [];
-        const minDate = modifyWithTimeString(val.minDate, defaultTime[0]);
-        const maxDate = modifyWithTimeString(val.maxDate, defaultTime[1]);
+        // 第一次点击只选了开始日期，不关闭弹窗
+        if (!val.maxDate) {
+          close = false;
+        }
+        const defaultTime = this.defaultTime || ['00:00:00', '00:00:00'];
+        const startTime = defaultTime[0] || '00:00:00';
+        const endTime = defaultTime.length > 1 ? (defaultTime[1] || startTime) : startTime;
+        let minDate = val.minDate;
+        let maxDate = val.maxDate || val.minDate;
+
+        // 如果结束时间小于开始时间，则交换
+        if (maxDate < minDate) {
+          [minDate, maxDate] = [maxDate, minDate];
+        }
+
+        // 如果已有默认值，保留原有时间；否则使用 defaultTime
+        if (this.minDate && this.value && this.value[0]) {
+          minDate = modifyWithTimeString(minDate, formatDate(this.value[0], 'HH:mm:ss'));
+        } else {
+          minDate = modifyWithTimeString(minDate, startTime);
+        }
+
+        if (this.maxDate && this.value && this.value[1]) {
+          maxDate = modifyWithTimeString(maxDate, formatDate(this.value[1], 'HH:mm:ss'));
+        } else {
+          maxDate = modifyWithTimeString(maxDate, endTime);
+        }
 
         if (this.maxDate === maxDate && this.minDate === minDate) {
           return;
@@ -546,7 +401,6 @@
         this.maxDate = maxDate;
         this.minDate = minDate;
 
-        // workaround for https://github.com/ElemeFE/element/issues/7539, should remove this block when we don't have to care about Chromium 55 - 57
         setTimeout(() => {
           this.maxDate = maxDate;
           this.minDate = minDate;
@@ -559,43 +413,6 @@
         if (shortcut.onClick) {
           shortcut.onClick(this);
         }
-      },
-
-      handleMinTimePick(value, visible, first) {
-        this.minDate = this.minDate || new Date();
-        if (value) {
-          this.minDate = modifyTime(this.minDate, value.getHours(), value.getMinutes(), value.getSeconds());
-        }
-
-        if (!first) {
-          this.minTimePickerVisible = visible;
-        }
-
-        if (!this.maxDate || this.maxDate && this.maxDate.getTime() < this.minDate.getTime()) {
-          this.maxDate = new Date(this.minDate);
-        }
-      },
-
-      handleMinTimeClose() {
-        this.minTimePickerVisible = false;
-      },
-
-      handleMaxTimePick(value, visible, first) {
-        if (this.maxDate && value) {
-          this.maxDate = modifyTime(this.maxDate, value.getHours(), value.getMinutes(), value.getSeconds());
-        }
-
-        if (!first) {
-          this.maxTimePickerVisible = visible;
-        }
-
-        if (this.maxDate && this.minDate && this.minDate.getTime() > this.maxDate.getTime()) {
-          this.minDate = new Date(this.maxDate);
-        }
-      },
-
-      handleMaxTimeClose() {
-        this.maxTimePickerVisible = false;
       },
 
       // leftPrev*, rightNext* need to take care of `unlinkPanels`
@@ -671,10 +488,11 @@
         //       an alternative would be resetView whenever picker becomes visible, should also investigate date-panel's resetView
         if (this.minDate && this.maxDate == null) this.rangeState.selecting = false;
         this.minDate = this.value && isDate(this.value[0]) ? new Date(this.value[0]) : null;
-        this.maxDate = this.value && isDate(this.value[0]) ? new Date(this.value[1]) : null;
+        this.maxDate = this.value && isDate(this.value[1]) ? new Date(this.value[1]) : null;
+        this.currentView = 'date';
       }
     },
 
-    components: { TimePicker, DateTable, ElInput, ElButton }
+    components: { DateTable, TimeRangeContent, ElButton }
   };
 </script>

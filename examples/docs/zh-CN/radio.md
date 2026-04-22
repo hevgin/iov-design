@@ -91,7 +91,7 @@ export default {
 
 :::demo 
 ```html
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">large（默认）</div>
     <el-radio-group v-model="radio1">
@@ -111,7 +111,7 @@ export default {
     </el-radio-group>
   </el-col>
 </el-row>
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">small</div>
     <el-radio-group v-model="radio3" size="small">
@@ -153,7 +153,7 @@ export default {
 
 :::demo 
 ```html
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">默认尺寸</div>
     <el-radio v-model="radio1" label="1" border>选项一</el-radio>
@@ -165,7 +165,7 @@ export default {
     <el-radio v-model="radio2" label="2" border size="medium">选项二</el-radio>
   </el-col>
 </el-row>
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">small 尺寸 + 禁用</div>
     <el-radio-group v-model="radio3" size="small">
@@ -204,7 +204,7 @@ export default {
 
 :::demo 
 ```html
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">基础卡片</div>
     <el-radio v-model="radio1" label="1" card>主标题</el-radio>
@@ -215,6 +215,8 @@ export default {
     <el-radio v-model="radio2" label="1" card desc="这是一段辅助描述信息">主标题</el-radio>
     <el-radio v-model="radio2" label="2" card desc="这是一段辅助描述信息">主标题</el-radio>
   </el-col>
+</el-row>
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">卡片组 + 禁用项</div>
     <el-radio-group v-model="radio3">
@@ -253,7 +255,7 @@ export default {
 
 :::demo 
 ```html
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">默认尺寸</div>
     <el-radio v-model="radio1" label="1" button>选项一</el-radio>
@@ -267,7 +269,7 @@ export default {
     <el-radio v-model="radio2" label="3" button size="medium" disabled>选项三</el-radio>
   </el-col>
 </el-row>
-<el-row :gutter="20">
+<el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
     <div class="component-content-title mgb-10">small 尺寸</div>
     <el-radio-group v-model="radio3" size="small">

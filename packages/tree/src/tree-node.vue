@@ -23,17 +23,33 @@
     @drop.stop="handleDrop"
     ref="node"
   >
-    <div class="el-tree-node__content"
+    <div
+      :class="[
+        'el-tree-node__content',
+        {'is-leaf': node.isLeaf, 'el-tree-node__content--expanded': !node.isLeaf && expanded },
+      ]"
       :style="{ 'padding-left': (node.level - 1) * tree.indent + 'px' }">
-      <span
+      <i v-if="tree.draggable" class="el-tree-node__drag-icon iov-icon-line-drag"></i>
+      <i v-if="!node.loading && tree.showLine && tree.switcherIcon" :class="[
+          'el-tree-node__line-icon',
+          {'is-leaf': node.isLeaf, 'is-expanded': !node.isLeaf && expanded },
+        ]">
+      </i>
+      <i v-if="tree.showLine && !node.isLeaf" class="el-tree-node__line" :style="{ 'left': (node.level - 1) * tree.indent + 7 + 'px' }"></i>
+      <i
         @click.stop="handleExpandIconClick"
+        v-if="!node.loading && (!tree.showLine || !tree.switcherIcon && tree.showLine)"
         :class="[
           { 'is-leaf': node.isLeaf, expanded: !node.isLeaf && expanded },
           'el-tree-node__expand-icon',
-          tree.iconClass ? tree.iconClass : 'el-icon-caret-right'
+          tree.iconClass ? tree.iconClass : 'iov-icon-page-right'
         ]"
       >
-      </span>
+      </i>
+      <i
+        v-if="node.loading"
+        class="el-tree-node__loading-icon iov-icon-loading">
+      </i>
       <el-checkbox
         v-if="showCheckbox"
         v-model="node.checked"
@@ -43,10 +59,6 @@
         @change="handleCheckChange"
       >
       </el-checkbox>
-      <span
-        v-if="node.loading"
-        class="el-tree-node__loading-icon el-icon-loading">
-      </span>
       <node-content :node="node"></node-content>
     </div>
     <el-collapse-transition>
@@ -115,13 +127,33 @@
           const parent = this.$parent;
           const tree = parent.tree;
           const node = this.node;
-          const { data, store } = node;
+          const { data, store, childNodes = [] } = node;
+          const { iconClass = '' } = data;
+          const filterText = tree.filterText || '';
+          const label = node.label;
+
+          // 高亮过滤关键字
+          const renderLabel = () => {
+            if (!filterText || typeof label !== 'string') return <span>{ label }</span>;
+            const index = label.toLowerCase().indexOf(filterText.toLowerCase());
+            if (index === -1) return <span>{ label }</span>;
+            const before = label.slice(0, index);
+            const match = label.slice(index, index + filterText.length);
+            const after = label.slice(index + filterText.length);
+            return <span>{ before }<span class="el-tree-node__filter-highlight">{ match }</span>{ after }</span>;
+          };
+
           return (
             parent.renderContent
               ? parent.renderContent.call(parent._renderProxy, h, { _self: tree.$vnode.context, node, data, store })
               : tree.$scopedSlots.default
                 ? tree.$scopedSlots.default({ node, data })
-                : <span class="el-tree-node__label">{ node.label }</span>
+                : <div class={`el-tree-node__label ${!!node.disabled ? 'is-disabled' : ''}`}>
+                    <div class='el-tree-node__label-text'>
+                      { !!iconClass ? <i class={`el-tree-node__custom-icon ${iconClass}`}></i> : null }
+                      { renderLabel() }
+                    </div>
+                </div>
           );
         }
       }

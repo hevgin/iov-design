@@ -1,12 +1,14 @@
 <template>
   <div
     class="el-tree"
-    :class="{
+    :class="[
+      treeSize ? 'el-tree--' + treeSize : '',
+      {
       'el-tree--highlight-current': highlightCurrent,
       'is-dragging': !!dragState.draggingNode,
       'is-drop-not-allow': !dragState.allowDrop,
       'is-drop-inner': dragState.dropType === 'inner'
-    }"
+    }]"
     role="tree"
   >
     <el-tree-node
@@ -19,9 +21,7 @@
       :render-content="renderContent"
       @node-expand="handleNodeExpand">
     </el-tree-node>
-    <div class="el-tree__empty-block" v-if="isEmpty">
-      <span class="el-tree__empty-text">{{ emptyText }}</span>
-    </div>
+    <el-empty :description="emptyText" v-if="isEmpty"></el-empty>
     <div
       v-show="dragState.showDropIndicator"
       class="el-tree__drop-indicator"
@@ -53,6 +53,7 @@
         root: null,
         currentNode: null,
         treeItems: null,
+        filterText: '',
         checkboxItems: [],
         dragState: {
           showDropIndicator: false,
@@ -101,6 +102,14 @@
         type: Boolean,
         default: false
       },
+      showLine: {
+        type: Boolean,
+        default: false
+      },
+      switcherIcon: {
+        type: Boolean,
+        default: true
+      },
       draggable: {
         type: Boolean,
         default: false
@@ -126,9 +135,13 @@
       accordion: Boolean,
       indent: {
         type: Number,
-        default: 18
+        default: 16
       },
-      iconClass: String
+      iconClass: String,
+      size: {
+        type: String,
+        default: 'medium'
+      }
     },
 
     computed: {
@@ -148,6 +161,10 @@
       isEmpty() {
         const { childNodes } = this.root;
         return !childNodes || childNodes.length === 0 || childNodes.every(({visible}) => !visible);
+      },
+
+      treeSize() {
+        return this.size || '';
       }
     },
 
@@ -179,6 +196,7 @@
     methods: {
       filter(value) {
         if (!this.filterNodeMethod) throw new Error('[Tree] filterNodeMethod is required when filter');
+        this.filterText = value || '';
         this.store.filter(value);
       },
 
@@ -425,12 +443,12 @@
         const iconPosition = dropNode.$el.querySelector('.el-tree-node__expand-icon').getBoundingClientRect();
         const dropIndicator = this.$refs.dropIndicator;
         if (dropType === 'before') {
-          indicatorTop = iconPosition.top - treePosition.top;
+          indicatorTop = iconPosition.top - treePosition.top - 4;
         } else if (dropType === 'after') {
-          indicatorTop = iconPosition.bottom - treePosition.top;
+          indicatorTop = iconPosition.bottom - treePosition.top + 4;
         }
         dropIndicator.style.top = indicatorTop + 'px';
-        dropIndicator.style.left = (iconPosition.right - treePosition.left) + 'px';
+        dropIndicator.style.left = (iconPosition.right - treePosition.left + 4) + 'px';
 
         if (dropType === 'inner') {
           addClass(dropNode.$el, 'is-drop-inner');

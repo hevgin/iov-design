@@ -13,11 +13,12 @@
 :::demo 
 ```html
 <template>
-  <el-row :gutter="20">
+  <el-row :gutter="20" class="mgb-10">
     <el-col :span="12">
       <div class="component-content-title mgb-10">基础日期时间选择</div>
       <el-date-picker
         v-model="value1"
+        format="yyyy-MM-dd HH:mm:ss"
         type="datetime"
         placeholder="选择日期时间">
         <template slot="prefixLabel">选择时间</template>
@@ -35,7 +36,7 @@
       </el-date-picker>
     </el-col>
   </el-row>
-  <el-row>
+  <el-row :gutter="20" class="mgb-10">
     <el-col :span="12">
       <div class="component-content-title mgb-10">设置默认时间</div>
       <el-date-picker

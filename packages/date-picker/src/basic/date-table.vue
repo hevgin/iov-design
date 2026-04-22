@@ -8,7 +8,7 @@
     :class="{ 'is-week-mode': selectionMode === 'week' }">
     <tbody>
     <tr>
-      <th v-if="showWeekNumber">{{ t('el.datepicker.week') }}</th>
+      <th v-if="showWeekNumber"></th>
       <th v-for="(week, key) in WEEKS" :key="key">{{ t('el.datepicker.weeks.' + week) }}</th>
     </tr>
     <tr
@@ -104,14 +104,18 @@
     },
 
     computed: {
+      realFirstDayOfWeek() {
+        return this.selectionMode === 'week' ? 1 : this.firstDayOfWeek;
+      },
+
       offsetDay() {
-        const week = this.firstDayOfWeek;
+        const week = this.realFirstDayOfWeek;
         // 周日为界限，左右偏移的天数，3217654 例如周一就是 -1，目的是调整前两行日期的位置
         return week > 3 ? 7 - week : -week;
       },
 
       WEEKS() {
-        const week = this.firstDayOfWeek;
+        const week = this.realFirstDayOfWeek;
         return WEEKS.concat(WEEKS).slice(week, week + 7);
       },
 
@@ -137,7 +141,7 @@
         day = (day === 0 ? 7 : day);
 
         const offset = this.offsetDay;
-        const rows = this.tableRows;
+        const rows = this.tableRows.map(() => []);
         let count = 1;
 
         const startDate = this.startDate;
@@ -165,9 +169,18 @@
 
             const index = i * 7 + j;
             const time = nextDate(startDate, index - offset).getTime();
-            cell.inRange = time >= getDateTimestamp(this.minDate) && time <= getDateTimestamp(this.maxDate);
-            cell.start = this.minDate && time === getDateTimestamp(this.minDate);
-            cell.end = this.maxDate && time === getDateTimestamp(this.maxDate);
+
+            if (this.rangeState.selecting && this.minDate && this.rangeState.endDate) {
+              const minTime = getDateTimestamp(this.minDate);
+              const maxTime = getDateTimestamp(this.rangeState.endDate);
+              cell.inRange = time >= Math.min(minTime, maxTime) && time <= Math.max(minTime, maxTime);
+              cell.start = time === minTime;
+              cell.end = time === maxTime;
+            } else {
+              cell.inRange = time >= getDateTimestamp(this.minDate) && time <= getDateTimestamp(this.maxDate);
+              cell.start = this.minDate && time === getDateTimestamp(this.minDate);
+              cell.end = this.maxDate && time === getDateTimestamp(this.maxDate);
+            }
             const isToday = time === now;
 
             if (isToday) {
@@ -202,11 +215,12 @@
           if (this.selectionMode === 'week') {
             const start = this.showWeekNumber ? 1 : 0;
             const end = this.showWeekNumber ? 7 : 6;
-            const isWeekActive = this.isWeekActive(row[start + 1]);
+            const isWeekActive = this.isWeekActive(row[start]);
 
-            row[start].inRange = isWeekActive;
+            for (let j = start; j <= end; j++) {
+              row[j].inRange = isWeekActive;
+            }
             row[start].start = isWeekActive;
-            row[end].inRange = isWeekActive;
             row[end].end = isWeekActive;
           }
         }
@@ -322,7 +336,7 @@
         newDate.setDate(parseInt(cell.text, 10));
 
         if (isDate(this.value)) {
-          const dayOffset = (this.value.getDay() - this.firstDayOfWeek + 7) % 7 - 1;
+          const dayOffset = (this.value.getDay() - this.realFirstDayOfWeek % 7 + 7) % 7;
           const weekDate = prevDate(this.value, dayOffset);
           return weekDate.getTime() === newDate.getTime();
         }
@@ -401,7 +415,16 @@
         const column = this.selectionMode === 'week' ? 1 : target.cellIndex;
         const cell = this.rows[row][column];
 
-        if (cell.disabled || cell.type === 'week') return;
+        if (cell.type === 'week') return;
+        if (cell.disabled) return;
+
+        // 如果一周中包含禁用日期，则不能选择
+        if (this.selectionMode === 'week') {
+          const start = this.showWeekNumber ? 1 : 0;
+          const end = this.showWeekNumber ? 7 : 6;
+          const hasDisabledInWeek = this.rows[row].slice(start, end + 1).some(c => c.disabled);
+          if (hasDisabledInWeek) return;
+        }
 
         const newDate = this.getDateOfCell(row, column);
 

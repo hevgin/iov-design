@@ -12,41 +12,41 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="12">
-      <div class="component-content-title mgb-10">默认圆角-默认尺寸</div>
+      <div class="component-content-title">默认圆角-默认尺寸</div>
       <el-switch v-model="value"></el-switch>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">默认圆角-medium尺寸</div>
+      <div class="component-content-title">默认圆角-medium尺寸</div>
       <el-switch v-model="value" size="medium"></el-switch>
     </el-col>
   </el-row>
   <el-row :gutter="20">
     <el-col :span="12">
-      <div class="component-content-title mgb-10">默认圆角-small尺寸</div>
+      <div class="component-content-title">默认圆角-small尺寸</div>
       <el-switch v-model="value" size="small"></el-switch>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">默认圆角-mini尺寸</div>
+      <div class="component-content-title">默认圆角-mini尺寸</div>
       <el-switch v-model="value" size="mini"></el-switch>
     </el-col>
   </el-row>
   <el-row :gutter="20">
     <el-col :span="12">
-      <div class="component-content-title mgb-10">直角矩形-默认尺寸</div>
+      <div class="component-content-title">直角矩形-默认尺寸</div>
       <el-switch v-model="value" type="rect"></el-switch>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">直角矩形-medium尺寸</div>
+      <div class="component-content-title">直角矩形-medium尺寸</div>
       <el-switch v-model="value" type="rect" size="medium"></el-switch>
     </el-col>
   </el-row>
   <el-row :gutter="20">
     <el-col :span="12">
-      <div class="component-content-title mgb-10">直角矩形-small尺寸</div>
+      <div class="component-content-title">直角矩形-small尺寸</div>
       <el-switch v-model="value" type="rect" size="small"></el-switch>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">直角矩形-mini尺寸</div>
+      <div class="component-content-title">直角矩形-mini尺寸</div>
       <el-switch v-model="value" type="rect" size="mini"></el-switch>
     </el-col>
   </el-row>
@@ -73,41 +73,41 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="12">
-      <div class="component-content-title mgb-10">图标描述-默认尺寸</div>
+      <div class="component-content-title">图标描述-默认尺寸</div>
       <el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail"></el-switch>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">图标描述-medium尺寸</div>
+      <div class="component-content-title">图标描述-medium尺寸</div>
       <el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="medium"></el-switch>
     </el-col>
   </el-row>
   <el-row :gutter="20">
     <el-col :span="12">
-      <div class="component-content-title mgb-10">图标描述-small尺寸</div>
+      <div class="component-content-title">图标描述-small尺寸</div>
       <el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="small"></el-switch>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">图标描述-mini尺寸</div>
+      <div class="component-content-title">图标描述-mini尺寸</div>
       <el-switch v-model="value1" inactive-icon-class="iov-icon-success" active-icon-class="iov-icon-fail" size="mini"></el-switch>
     </el-col>
   </el-row>
   <el-row :gutter="20">
     <el-col :span="12">
-      <div class="component-content-title mgb-10">文字描述-默认尺寸</div>
+      <div class="component-content-title">文字描述-默认尺寸</div>
       <el-switch v-model="value2" active-text="开" inactive-text="关"></el-switch>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">文字描述-medium尺寸</div>
+      <div class="component-content-title">文字描述-medium尺寸</div>
       <el-switch v-model="value2" active-text="开" inactive-text="关" size="medium"></el-switch>
     </el-col>
   </el-row>
   <el-row :gutter="20">
     <el-col :span="12">
-      <div class="component-content-title mgb-10">文字描述-small尺寸</div>
+      <div class="component-content-title">文字描述-small尺寸</div>
       <el-switch v-model="value2" active-text="开" inactive-text="关" size="small"></el-switch>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">文字描述-mini尺寸</div>
+      <div class="component-content-title">文字描述-mini尺寸</div>
       <el-switch v-model="value2" active-text="开" inactive-text="关" size="mini"></el-switch>
     </el-col>
   </el-row>
@@ -171,11 +171,11 @@
 <template>
   <el-row :gutter="20">
     <el-col :span="12">
-      <div class="component-content-title mgb-10">禁用-开启状态</div>
+      <div class="component-content-title">禁用-开启状态</div>
       <el-switch v-model="value1" disabled></el-switch>
     </el-col>
     <el-col :span="12">
-      <div class="component-content-title mgb-10">禁用-关闭状态</div>
+      <div class="component-content-title">禁用-关闭状态</div>
       <el-switch v-model="value2" disabled></el-switch>
     </el-col>
   </el-row>

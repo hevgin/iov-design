@@ -110,11 +110,13 @@ export default {
                     class={ this.getHeaderCellClass(rowIndex, cellIndex, columns, column) }
                     key={ column.id }>
                     <div class={ ['cell', column.filteredValue && column.filteredValue.length > 0 ? '' : '', column.labelClassName] }>
-                      {
-                        column.renderHeader
-                          ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
-                          : column.label
-                      }
+                      <span class="el-table__header-column-label">
+                        {
+                          column.renderHeader
+                            ? column.renderHeader.call(this._renderProxy, h, { column, $index: cellIndex, store: this.store, _self: this.$parent.$vnode.context })
+                            : column.label
+                        }
+                      </span>
                       {
                         column.sortable ? (
                           <el-tooltip effect="dark" content={ column.order === 'ascending' ? '点击降序' : column.order === 'descending' ? '取消降序' : '点击升序' } placement="top">
@@ -126,7 +128,7 @@ export default {
                       }
                       {
                         column.filterable ? (<span
-                          class={ ['el-table__column-filter-trigger', column.filterConfirmed && column.filteredValue && column.filteredValue.length > 0 ? 'is-filtered' : ''] }
+                          class={ ['el-table__column-filter-trigger', column.filterConfirmed ? 'is-filtered' : ''] }
                           on-click={ ($event) => this.handleFilterClick($event, column) }>
                           <i class={ ['iov-icon-fill-filter'] }></i>
                         </span>) : ''
@@ -135,7 +137,7 @@ export default {
                         column.searchable ? (<span
                           class={ ['el-table__column-search-trigger', column.searchedValue ? 'is-searched' : ''] }
                           on-click={ ($event) => this.handleSearchClick($event, column) }>
-                          <i class={ ['iov-icon-search'] }></i>
+                          <i class={ ['iov-icon-fill-search'] }></i>
                         </span>) : ''
                       }
                     </div>

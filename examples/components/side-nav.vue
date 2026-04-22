@@ -41,7 +41,7 @@
         font-weight: bold;
 
         &.active {
-          color: #409EFF;
+          color: #3F57FF;
         }
       }
 
@@ -59,7 +59,7 @@
 
           &:hover,
           &.active {
-            color: #409EFF;
+            color: #3F57FF;
           }
         }
       }
