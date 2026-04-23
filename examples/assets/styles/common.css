@@ -40,7 +40,7 @@ html, body {
 }
 
 a {
-  color: #409EFF;
+  color: #3F57FF;
   text-decoration: none;
 }
 
@@ -123,9 +123,9 @@ button, input, select, textarea {
 
   .tip {
     padding: 8px 16px;
-    background-color: #ECF8FF;
+    background-color: #F0F4FD;
     border-radius: 4px;
-    border-left: #50bfff 5px solid;
+    border-left: #3F57FF 5px solid;
     margin: 20px 0;
 
     code {
@@ -136,9 +136,9 @@ button, input, select, textarea {
 
   .warning {
     padding: 8px 16px;
-    background-color: #fff6f7;
+    background-color: #FFF7E8;
     border-radius: 4px;
-    border-left: #FE6C6F 5px solid;
+    border-left: #FF7D00 5px solid;
     margin: 20px 0;
 
     code {

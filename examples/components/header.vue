@@ -133,7 +133,7 @@
 
       a {
         text-decoration: none;
-        color: #1989FA;
+        color: #3F57FF;
         opacity: 0.5;
         display: block;
         padding: 0 22px;
@@ -151,7 +151,7 @@
           left: calc(50% - 15px);
           width: 30px;
           height: 2px;
-          background: #409EFF;
+          background: #3F57FF;
         }
       }
     }
