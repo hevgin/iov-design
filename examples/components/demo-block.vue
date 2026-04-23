@@ -324,7 +324,7 @@
 
     mounted() {
       this.$nextTick(() => {
-        this.controlWidth = this.$refs.control.offsetWidth
+        this.controlWidth = this.$refs.control.offsetWidth;
         let highlight = this.$el.getElementsByClassName('highlight')[0];
         if (this.$el.getElementsByClassName('description').length === 0) {
           highlight.style.width = '100%';
