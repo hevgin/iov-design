@@ -7,7 +7,7 @@
 
 以**日**为基本单位，支持默认选择、快捷选项、禁用日期配置；通过 `type="date"` 定义类型，`picker-options` 配置快捷选项与禁用规则。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="20">
@@ -169,7 +169,7 @@
 
 支持快速选择日期区间，`type="daterange"` 开启范围选择，`unlink-panels` 可解除左右面板联动，支持快捷选项配置。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="20">
@@ -243,7 +243,7 @@
 
 支持月份区间选择，`type="monthrange"` 开启月份范围，可配置快捷选项、解除面板联动(`unlink-panels`)。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="20">
@@ -326,18 +326,6 @@
         end-placeholder="结束季度">
       </el-date-picker>
     </el-col>
-    <el-col :span="12">
-      <span class="demonstration">带快捷选项</span>
-      <el-date-picker
-        v-model="value2"
-        type="quarterrange"
-        align="right"
-        unlink-panels
-        start-placeholder="开始季度"
-        end-placeholder="结束季度"
-        :picker-options="pickerOptions">
-      </el-date-picker>
-    </el-col>
   </el-row>
 </template>
 
@@ -345,32 +333,7 @@
   export default {
     data() {
       return {
-        pickerOptions: {
-          shortcuts: [{
-            text: '本季度',
-            onClick(picker) {
-              const now = new Date();
-              const quarterStart = new Date(now.getFullYear(), Math.floor(now.getMonth() / 3) * 3, 1);
-              picker.$emit('pick', [quarterStart, new Date(now.getFullYear(), Math.floor(now.getMonth() / 3) * 3 + 3, 0)]);
-            }
-          }, {
-            text: '今年至今',
-            onClick(picker) {
-              const now = new Date();
-              const start = new Date(now.getFullYear(), 0, 1);
-              picker.$emit('pick', [start, new Date()]);
-            }
-          }, {
-            text: '最近四个季度',
-            onClick(picker) {
-              const end = new Date();
-              const start = new Date(end.getFullYear() - 1, end.getMonth() - 3, 1);
-              picker.$emit('pick', [start, end]);
-            }
-          }]
-        },
-        value1: '',
-        value2: ''
+        value1: ''
       };
     }
   };
@@ -542,7 +505,7 @@
 
 在选择日期范围时，指定起始日期和结束日期的默认时刻。选择日期范围时，默认情况下，起始日期和结束日期的时间部分均为当天的 0 点 0 分 0 秒。通过`default-time`可以分别指定二者的具体时刻。`default-time`接受一个数组，其中的值为形如`12:00:00`的字符串，第一个值控制起始日期的时刻，第二个值控制结束日期的时刻。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row>

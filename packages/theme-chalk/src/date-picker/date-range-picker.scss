@@ -5,14 +5,16 @@
 
   &.has-sidebar {
     width: 634px;
-    .el-picker-panel__sidebar {
-      bottom: 42px;
-    }
   }
   &.has-time {
+    &.has-sidebar {
+      .el-picker-panel__sidebar {
+        bottom: 42px;
+      }
+    }
     .el-time-spinner__wrapper {
       height: 256px;
-    } 
+    }
     .el-time-spinner__list:after {
       height: 232px;
     }
@@ -113,7 +115,7 @@
     flex: 1;
     cursor: pointer;
     &.is-active {
-      color: $--color-text-6; 
+      color: $--color-text-6;
     }
   }
 
@@ -125,7 +127,7 @@
     border-left: 1px solid $--color-line-1;
     cursor: pointer;
     &.is-active {
-      color: $--color-text-6; 
+      color: $--color-text-6;
     }
   }
 }

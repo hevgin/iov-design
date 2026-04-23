@@ -21,19 +21,19 @@
   //   padding: 0 5px;
   // }
 
-  // @include e(time-content) {
-  //   border-left: 1px solid $--color-line-1;
-  //   // .el-time-spinner {
-  //   //   margin-top: 40px;
-  //   //   border-top: 1px solid $--color-line-1;
-  //   // }
-  //   .el-time-spinner__wrapper {
-  //     height: 260px;
-  //   }
-  //   .el-time-spinner__list:after {
-  //     height: 236px;
-  //   }
-  // }
+  @include e(time-content) {
+    border-left: 1px solid $--color-line-1;
+    // .el-time-spinner {
+    //   margin-top: 40px;
+    //   border-top: 1px solid $--color-line-1;
+    // }
+    .el-time-spinner__wrapper {
+      height: 260px;
+    }
+    .el-time-spinner__list:after {
+      height: 236px;
+    }
+  }
 
   @include e(header) {
     padding: 8px 12px;
