@@ -884,6 +884,7 @@
         if (this.multiple) {
           this.resetInputHeight();
           this.resetTagsLeft();
+          this.getMaxWidth();
         }
       },
 
