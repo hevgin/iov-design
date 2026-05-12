@@ -18,6 +18,7 @@
       :on-exceed="handleExceed"
       :file-list="fileList">
       <el-button size="small" icon="iov-icon-upload">选择文件</el-button>
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
     </el-upload>
   </el-col>
@@ -33,6 +34,10 @@
       :on-exceed="handleExceed"
       :file-list="fileList">
       <el-button size="small" type="primary" icon="iov-icon-upload">选择文件</el-button>
+      <div slot="header" class="el-upload__header">
+        <span>请下载模板按格式进行填写后上传</span>
+        <el-link style="margin-left: 8px;" type="primary" icon="iov-icon-download" size="mini" :underline="false" @click.stop="onDownloadTemplate">下载模板</el-link>
+      </div>
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
     </el-upload>
   </el-col>
@@ -86,6 +91,8 @@
       <i class="el-upload__icon iov-icon-img-default"></i>
       <div class="el-upload__desc">点击上传</div>
     </div>
+    <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
+    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
@@ -141,6 +148,9 @@
     <i class="el-upload__icon iov-icon-img-default"></i>
     <div class="el-upload__desc">点击上传</div>
   </div>
+
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
+   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
@@ -211,6 +221,9 @@
         </span>
       </div>
     </div>
+
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
+    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <el-dialog :visible.sync="dialogVisible">
   <img width="100%" :src="dialogImageUrl" alt="">
@@ -253,6 +266,8 @@
   :file-list="fileList"
   list-type="picture">
   <el-button size="small" type="primary" icon='iov-icon-upload'>点击上传</el-button>
+
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <script>
@@ -287,6 +302,8 @@
   :on-change="handleChange"
   :file-list="fileList">
   <el-button size="small" type="primary">点击上传</el-button>
+
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <script>
@@ -322,6 +339,8 @@
   multiple>
   <i class="el-upload__icon iov-icon-upload"></i>
   <div class="el-upload__text">点击或拖拽文件到此处上传</div>
+
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
   <div slot="tip" class="el-upload__tip">支持jpg/png/pdf格式，最多上传5个文件，单个文件≤5M</div>
 </el-upload>
 ```
@@ -343,6 +362,8 @@
       <template>
         <i class="el-upload__icon iov-icon-file-excel"></i>
         <el-button class="el-upload__btn" round size="small">点击上传</el-button>
+
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
         <div slot="tip" class="el-upload__tip">支持jpg/png/pdf格式，最多上传5个文件，单个文件≤5M</div>
       </template>
     </el-upload>
@@ -359,6 +380,8 @@
       <template>
         <i class="el-upload__icon iov-icon-file-excel"></i>
         <el-button class="el-upload__btn" round size="small">点击上传</el-button>
+
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
         <div slot="tip" class="el-upload__tip">支持jpg/png/pdf格式，最多上传5个文件，单个文件≤5M</div>
       </template>
     </el-upload>
@@ -396,6 +419,8 @@
       >
       <template>
         <el-link icon="iov-icon-upload">选择文件</el-link>
+
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
         <div slot="tip" class="el-upload__tip">点击或拖拽上传</div>
       </template>
     </el-upload>
@@ -411,6 +436,8 @@
       >
       <template>
         <el-link icon="iov-icon-upload">选择文件</el-link>
+
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
         <div slot="tip" class="el-upload__tip">点击或拖拽上传</div>
       </template>
     </el-upload>
@@ -447,6 +474,8 @@
   :auto-upload="false">
   <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
   <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+
+      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
 </el-upload>
 <script>
@@ -510,6 +539,7 @@
 |------|--------|
 | trigger | 触发文件选择框的内容 |
 | tip | 提示说明文字 |
+| header | 顶部提示插槽 |
 
 ### Methods
 | 方法名      | 说明          | 参数 |

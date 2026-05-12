@@ -10,6 +10,12 @@
     display: none;
   }
 
+  @include e(header) {
+    font-size: 12px;
+    color: $--color-text-4;
+    margin-bottom: 8px;
+  }
+
   @include e(tip) {
     font-size: 12px;
     color: $--color-text-2;

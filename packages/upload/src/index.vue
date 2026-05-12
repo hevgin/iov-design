@@ -416,6 +416,7 @@ export default {
     const uploadComponent = <upload {...uploadData}>{trigger}</upload>;
     return (
       <div class={{ 'el-upload--wrap': true, 'el-upload-bg': this.background }}>
+        { this.$slots.header }
         { this.listType === 'picture-card' ? uploadList : ''}
         {
           this.$slots.trigger
