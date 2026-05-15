@@ -6,13 +6,13 @@
 @include b(radio) {
   color: $--radio-font-color;
   font-weight: $--radio-font-weight;
-  line-height: 28px;
+  line-height: 30px;
   position: relative;
   cursor: pointer;
   display: inline-block;
   white-space: nowrap;
   outline: none;
-  font-size: $--font-size-base;
+  font-size: 0;
   margin-right: 32px;
   &:hover {
     .el-radio__inner {
@@ -180,6 +180,7 @@
   }
 
   @include m(medium) {
+    line-height: 28px;
     .el-radio__label {
       font-size: $--radio-font-medium-size;
     }
@@ -189,15 +190,13 @@
       border-radius: $--button-medium-border-radius;
       height: $--radio-bordered-medium-height;
       line-height: $--radio-bordered-medium-height;
-      .el-radio__label {
-        font-size: $--radio-font-medium-size;
-      }
     }
     &.is-button {
       line-height: $--radio-bordered-medium-height;
     }
   }
   @include m(small) {
+    line-height: 26px;
     .el-radio__label {
       font-size: $--radio-font-small-size;
     }
@@ -207,15 +206,13 @@
       border-radius: $--button-small-border-radius;
       height: $--radio-bordered-small-height;
       line-height: $--radio-bordered-small-height;
-      .el-radio__label {
-        font-size: $--radio-font-small-size;
-      }
     }
     &.is-button {
       line-height: $--radio-bordered-small-height;
     }
   }
   @include m(mini) {
+    line-height: 24px;
     .el-radio__label {
       font-size: $--radio-font-mini-size;
     }
@@ -224,10 +221,7 @@
       padding: $--radio-bordered-mini-padding;
       border-radius: $--button-mini-border-radius;
       height: $--radio-bordered-mini-height;
-      line-height: $--radio-bordered-mini-height;
-      .el-radio__label {
-        font-size: $--radio-font-mini-size;
-      }
+      line-height: $--radio-bordered-mini-height - 2px;
     }
     &.is-button {
       line-height: $--radio-bordered-mini-height;
@@ -247,6 +241,8 @@
     line-height: 1;
     position: relative;
     vertical-align: middle;
+    width: 16px;
+    height: 16px;
 
     @include when(disabled) {
       .el-radio__inner {
@@ -341,6 +337,8 @@
     right: 0;
     bottom: 0;
     margin: 0;
+    width: 16px;
+    height: 16px;
   }
 
   // &:focus:not(.is-focus):not(:active):not(.is-disabled) { /*获得焦点时 样式提醒*/
@@ -351,5 +349,7 @@
 
   @include e(label) {
     font-size: $--radio-font-size;
+    display: inline-block;
+    vertical-align: middle;
   }
 }

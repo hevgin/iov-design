@@ -10,12 +10,24 @@
 
 使用 `v-model` 绑定选中值，选中后变量值等于对应 `label`。`label` 支持 `String` / `Number` / `Boolean` 类型。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20">
-  <el-col :span="12">
-    <el-radio v-model="radio" label="1">选项一</el-radio>
-    <el-radio v-model="radio" label="2">选项二</el-radio>
+  <el-col :span="6">
+    <div class="component-content-title mgb-10">large（默认）</div>
+    <el-radio v-model="radio" label="1" size="large">选项一</el-radio>
+  </el-col>
+  <el-col :span="6">
+    <div class="component-content-title mgb-10">medium</div>
+    <el-radio v-model="radio" label="2" size="medium">选项二</el-radio>
+  </el-col>
+  <el-col :span="6">
+    <div class="component-content-title mgb-10">small</div>
+    <el-radio v-model="radio" label="3" size="small">选项三</el-radio>
+  </el-col>
+  <el-col :span="6">
+    <div class="component-content-title mgb-10">mini</div>
+    <el-radio v-model="radio" label="4" size="mini">选项四</el-radio>
   </el-col>
 </el-row>
 
@@ -35,7 +47,7 @@ export default {
 
 添加 `disabled` 属性即可禁用单选框，禁用后不可点击、不可修改。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20">
   <el-col :span="12">
@@ -60,7 +72,7 @@ export default {
 
 使用 `el-radio-group` 包裹实现互斥单选组，统一绑定 `v-model`，支持 `change` 事件监听值变化。
 
-:::demo 
+:::demo
 
 ```html
 <el-row :gutter="20">
@@ -89,7 +101,7 @@ export default {
 
 使用 `el-radio-button` 实现按钮形态单选组，支持 `size` 尺寸控制。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
@@ -151,7 +163,7 @@ export default {
 
 添加 `border` 属性渲染带边框的单选框，支持尺寸与禁用。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
@@ -202,7 +214,7 @@ export default {
 
 添加 `card` 属性渲染卡片形态单选框，支持 `desc` 描述文案，视觉更醒目
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
@@ -253,7 +265,7 @@ export default {
 
 添加 button 属性实现填充风格单选框，简洁紧凑，适合表单内联场景。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" class="mgb-10">
   <el-col :span="12">

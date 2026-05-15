@@ -2,7 +2,7 @@
   <label
     class="el-checkbox"
     :class="[
-      (border || button) && checkboxSize ? 'el-checkbox--' + checkboxSize : '',
+      checkboxSize ? 'el-checkbox--' + checkboxSize : '',
       { 'is-disabled': isDisabled },
       { 'is-bordered': border },
       { 'is-card': card},

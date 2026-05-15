@@ -9,12 +9,28 @@
 
 单独使用表示开关状态，`v-model` 绑定布尔值，选中为 `true`，未选中为 `false`。
 
-:::demo 
+:::demo
 
 ```html
 <template>
-  <!-- `checked` 为 true 或 false -->
-  <el-checkbox v-model="checked">备选项</el-checkbox>
+  <el-row :gutter="20">
+    <!-- `checked` 为 true 或 false --><el-col :span="6">
+    <div class="component-content-title mgb-10">large（默认）</div>
+      <el-checkbox v-model="checked" size="large">选项一</el-checkbox>
+    </el-col>
+    <el-col :span="6">
+      <div class="component-content-title mgb-10">medium</div>
+      <el-checkbox v-model="checked" size="medium">选项二</el-checkbox>
+    </el-col>
+    <el-col :span="6">
+      <div class="component-content-title mgb-10">small</div>
+      <el-checkbox v-model="checked" size="small">选项三</el-checkbox>
+    </el-col>
+    <el-col :span="6">
+      <div class="component-content-title mgb-10">mini</div>
+      <el-checkbox v-model="checked" size="mini">选项四</el-checkbox>
+    </el-col>
+  </el-row>
 </template>
 <script>
   export default {
@@ -32,7 +48,7 @@
 
 添加 `disabled` 属性即可禁用多选框，支持未选中禁用和选中禁用两种状态。
 
-:::demo 
+:::demo
 
 ```html
 <el-row :gutter="20">
@@ -59,7 +75,7 @@ export default {
 
 使用 `el-checkbox-group` 实现多选组，`v-model` 绑定数组，自动管理选中项，支持单个选项禁用。
 
-:::demo 
+:::demo
 
 ```html
 <el-row :gutter="20">
@@ -164,7 +180,7 @@ export default {
 
 使用 `el-checkbox-button` 实现按钮形态多选组，支持 `large`/`medium`/`small`/`mini` 四种尺寸。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
@@ -216,7 +232,7 @@ export default {
 
 添加 `border` 属性渲染带边框多选框，支持尺寸、禁用、组合使用。添加 `border` 属性渲染带边框多选框，支持尺寸、禁用、组合使用。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
@@ -268,7 +284,7 @@ export default {
 
 添加 `card` 属性渲染卡片式多选框，支持 `desc` 描述文案，视觉醒目，适合配置选择场景。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" class="mgb-10">
   <el-col :span="12">
