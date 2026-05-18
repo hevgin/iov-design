@@ -4,18 +4,30 @@
     :class="[
       'el-upload-list',
       'el-upload-list--' + listType,
-      { 'is-disabled': disabled }
+      { 'is-disabled': disabled, 'is-sortable': sortable && listType === 'picture-card' }
     ]"
     name="el-list"
   >
     <li
       v-for="file in files"
-      :class="['el-upload-list__item', 'el-upload-list__item-' + size, 'is-' + file.status, focusing ? 'focusing' : '']"
+      :class="[
+        'el-upload-list__item',
+        'el-upload-list__item-' + size,
+        'is-' + file.status,
+        focusing ? 'focusing' : '',
+        { 'is-dragging': dragState.draggingFile && dragState.draggingFile.uid === file.uid }
+      ]"
       :key="file.uid"
       tabindex="0"
+      :draggable="sortable && listType === 'picture-card' && file.status === 'success' && !disabled"
       @focus="focusing = true"
       @blur="focusing = false"
       @click="focusing = false"
+      @dragstart="handleDragStart($event, file)"
+      @dragover="handleDragOver($event, file)"
+      @dragleave="handleDragLeave($event, file)"
+      @drop="handleDrop($event, file)"
+      @dragend="handleDragEnd($event, file)"
     >
       <slot :file="file">
         <div class="el-upload-list__file">
@@ -75,7 +87,11 @@
     data() {
       return {
         focusing: false,
-        iconStyle
+        iconStyle,
+        dragState: {
+          draggingFile: null,
+          dropFile: null
+        }
       };
     },
     components: { ElProgress },
@@ -102,7 +118,11 @@
       size: String,
       handlePreview: null,
       listType: String,
-      actions: Array
+      actions: Array,
+      sortable: {
+        type: Boolean,
+        default: false
+      }
     },
     methods: {
       parsePercentage(val) {
@@ -113,6 +133,48 @@
       },
       onUpdate() {
         this.$parent.$refs['upload-inner'].handleClick();
+      },
+      handleDragStart(event, file) {
+        if (!this.sortable || this.disabled) return;
+        this.dragState.draggingFile = file;
+        event.dataTransfer.effectAllowed = 'move';
+        try {
+          event.dataTransfer.setData('text/plain', file.uid);
+        } catch (e) {}
+        this.$emit('drag-start', file, event);
+      },
+      handleDragOver(event, file) {
+        if (!this.sortable || this.disabled) return;
+        event.preventDefault();
+        const { draggingFile } = this.dragState;
+        if (!draggingFile || draggingFile.uid === file.uid) return;
+        event.dataTransfer.dropEffect = 'move';
+        this.dragState.dropFile = file;
+      },
+      handleDragLeave(event, file) {
+        if (!this.sortable || this.disabled) return;
+        if (this.dragState.dropFile && this.dragState.dropFile.uid === file.uid) {
+          this.dragState.dropFile = null;
+        }
+      },
+      handleDrop(event, file) {
+        if (!this.sortable || this.disabled) return;
+        event.preventDefault();
+        const { draggingFile } = this.dragState;
+        if (!draggingFile || draggingFile.uid === file.uid) return;
+        const oldIndex = this.files.findIndex(f => f.uid === draggingFile.uid);
+        const newIndex = this.files.findIndex(f => f.uid === file.uid);
+        if (oldIndex !== -1 && newIndex !== -1) {
+          this.$emit('sort', { oldIndex, newIndex, file: draggingFile, targetFile: file });
+        }
+        this.dragState.draggingFile = null;
+        this.dragState.dropFile = null;
+      },
+      handleDragEnd(event, file) {
+        if (!this.sortable || this.disabled) return;
+        this.dragState.draggingFile = null;
+        this.dragState.dropFile = null;
+        this.$emit('drag-end', file, event);
       }
     }
   };

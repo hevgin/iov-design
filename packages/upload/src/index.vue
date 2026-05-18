@@ -126,6 +126,14 @@ export default {
       default() {
         return ['preview', 'update', 'remove'];
       }
+    },
+    sortable: {
+      type: Boolean,
+      default: false
+    },
+    onSort: {
+      type: Function,
+      default: noop
     }
   },
 
@@ -279,6 +287,13 @@ export default {
           'thumbnail-mode': 'thumbnail-mode has been deprecated, you can implement the same effect according to this case: http://element.eleme.io/#/zh-CN/component/upload#yong-hu-tou-xiang-shang-chuan'
         }
       };
+    },
+    handleSort({ oldIndex, newIndex, file, targetFile }) {
+      const fileList = this.uploadFiles;
+      const movedFile = fileList[oldIndex];
+      fileList.splice(oldIndex, 1);
+      fileList.splice(newIndex, 0, movedFile);
+      this.onSort({ oldIndex, newIndex, file, targetFile, files: fileList });
     }
   },
 
@@ -348,7 +363,9 @@ export default {
           size={this.size}
           on-remove={this.handleRemove}
           actions={this.actions}
-          handlePreview={this.onPreview}>
+          handlePreview={this.onPreview}
+          sortable={this.sortable}
+          on-sort={this.handleSort}>
           {
             (props) => {
               if (this.$scopedSlots.file) {

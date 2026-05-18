@@ -142,6 +142,8 @@
   action="https://jsonplaceholder.typicode.com/posts/"
   list-type="picture-card"
   :fileList="fileList"
+  sortable
+  :on-sort="handleSort"
   :on-preview="handlePictureCardPreview"
   :on-remove="handleRemove">
   <div class="el-upload__picture">
@@ -171,6 +173,12 @@
       handlePictureCardPreview(file) {
         this.dialogImageUrl = file.url;
         this.dialogVisible = true;
+      },
+      handleSort({ oldIndex, newIndex, file, targetFile, files }) {
+        console.log('从', oldIndex, '移动到', newIndex);
+        console.log('被拖拽文件:', file);
+        console.log('目标位置文件:', targetFile);
+        console.log('排序后文件列表:', files);
       }
     }
   }
@@ -533,6 +541,17 @@
 | fileNameAlias | 文件名称字段别名 | string | - | name |
 | fileUrlAlias | 文件地址字段别名 | string | - | url |
 | actions | 已上传图片自定义操作按钮 | [] | array | ['preview', 'update', 'remove'] |
+| sortable | 是否开启拖拽排序（仅 list-type="picture-card" 时生效） | boolean | — | false |
+| on-sort | 拖拽排序完成后的回调 | function(sortInfo) | — | — |
+
+### on-sort 回调参数
+| 字段 | 说明 | 类型 |
+|------|------|------|
+| oldIndex | 被拖拽文件的原始索引位置 | number |
+| newIndex | 被拖拽文件的目标索引位置 | number |
+| file | 被拖拽的文件对象 | object |
+| targetFile | 目标位置的文件对象 | object |
+| files | 排序后的文件列表 | array |
 
 ### Slot
 | name | 说明 |

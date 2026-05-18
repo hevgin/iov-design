@@ -533,6 +533,24 @@
     }
   }
 
+  // 拖拽排序样式
+  @include when(sortable) {
+    .el-upload-list__item {
+      cursor: move;
+      transition: transform 0.2s, box-shadow 0.2s;
+      
+      @include when(dragging) {
+        opacity: 0.5;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: scale(1.05);
+      }
+      
+      &:hover:not(.is-dragging) {
+        border-color: $--color-primary-5;
+      }
+    }
+  }
+
   .el-image__placeholder {
     display: inline-block;
     background: $--color-fill-1 url(//obs-helf.cucloud.cn/prod-common-public/iov-design/img_placeholder.png) no-repeat center center / 20px 20px;

@@ -328,10 +328,10 @@
         this.anchorList = [];
         const headingElements = document.querySelectorAll('.content h3[id], .content h4[id]');
         headingElements.forEach(el => {
-          const text = el.textContent.replace(/[^a-zA-Z0-9\u4e00-\u9fa5_\-\. ]/g, '').trim()
+          const text = el.textContent.replace(/[^a-zA-Z0-9\u4e00-\u9fa5_\-\. ]/g, '').trim();
           this.anchorList.push({
             id: el.id,
-            level: parseInt(el.tagName.slice(1)),
+            level: parseInt(el.tagName.slice(1), 10),
             text
           });
         });
