@@ -2,21 +2,28 @@
 @import "common/var";
 
 @include b(avatar) {
-  display: inline-block;
+  display: inline-flex;
   box-sizing: border-box;
   text-align: center;
   overflow: hidden;
-  color: $--avatar-font-color;
-  background: $--avatar-background-color;
-  width: $--avatar-large-size;
-  height: $--avatar-large-size;
-  line-height: $--avatar-large-size;
-  font-size: $--avatar-text-font-size;
+  color: #fff;
+  background: $--color-fill-3;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  font-size: 20px;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
 
   >img {
+    margin: 0 auto;
     display: block;
     height: 100%;
-    vertical-align: middle;
+    &.load-fail {
+      height: 50%;
+      width: 50%;
+    }
   }
 
   @include m(circle) {
@@ -24,28 +31,33 @@
   }
 
   @include m(square) {
-    border-radius: $--avatar-border-radius;
+    border-radius: 4px;
   }
 
   @include m(icon) {
-    font-size: $--avatar-icon-font-size;
+    font-size: 20px;
   }
 
   @include m(large) {
-    width: $--avatar-large-size;
-    height: $--avatar-large-size;
-    line-height: $--avatar-large-size;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
   }
 
   @include m(medium) {
-    width: $--avatar-medium-size;
-    height: $--avatar-medium-size;
-    line-height: $--avatar-medium-size;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
   }
 
   @include m(small) {
-    width: $--avatar-small-size;
-    height: $--avatar-small-size;
-    line-height: $--avatar-small-size;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+  }
+  @include m(mini) {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
   }
 }

@@ -18,14 +18,14 @@
 
   @include e(circle) {
     border-radius: 50%;
-    @include circle-size($--avatar-medium-size);
+    @include circle-size(36px);
 
     @include m(lg) {
-      @include circle-size($--avatar-large-size);
+      @include circle-size(40px);
     }
 
     @include m(md) {
-      @include circle-size($--avatar-small-size);
+      @include circle-size(28px);
     }
   }
 

@@ -7,7 +7,7 @@ export default {
       type: [Number, String],
       validator(val) {
         if (typeof val === 'string') {
-          return ['large', 'medium', 'small'].includes(val);
+          return ['large', 'medium', 'small', 'mini'].includes(val);
         }
         return typeof val === 'number';
       }
@@ -27,6 +27,17 @@ export default {
     fit: {
       type: String,
       default: 'cover'
+    },
+    backgroundColor: String,
+    color: String,
+    fontSize: {
+      type: [Number, String],
+      validator(val) {
+        if (typeof val === 'string') {
+          return /^\d+(px|em|rem|%)$/.test(val);
+        }
+        return typeof val === 'number';
+      }
     }
   },
 
@@ -38,7 +49,7 @@ export default {
 
   computed: {
     avatarClass() {
-      const { size, icon, shape } = this;
+      const { size, icon, shape, backgroundColor, color, fontSize } = this;
       let classList = ['el-avatar'];
 
       if (size && typeof size === 'string') {
@@ -51,6 +62,18 @@ export default {
 
       if (shape) {
         classList.push(`el-avatar--${shape}`);
+      }
+
+      if (backgroundColor) {
+        classList.push('el-avatar--custom-bg');
+      }
+
+      if (color) {
+        classList.push('el-avatar--custom-color');
+      }
+
+      if (fontSize) {
+        classList.push('el-avatar--custom-font-size');
       }
 
       return classList.join(' ');
@@ -86,7 +109,7 @@ export default {
   },
 
   render() {
-    const { avatarClass, size } = this;
+    const { avatarClass, size, backgroundColor, color, fontSize } = this;
 
     const sizeStyle = typeof size === 'number' ? {
       height: `${size}px`,
@@ -94,8 +117,16 @@ export default {
       lineHeight: `${size}px`
     } : {};
 
+    const customStyle = {
+      background: backgroundColor || undefined,
+      color: color || undefined,
+      fontSize: fontSize ? (typeof fontSize === 'number' ? `${fontSize}px` : fontSize) : undefined
+    };
+
+    const mergedStyle = { ...sizeStyle, ...customStyle };
+
     return (
-      <span class={ avatarClass } style={ sizeStyle }>
+      <span class={ avatarClass } style={ mergedStyle }>
         {
           this.renderAvatar()
         }
