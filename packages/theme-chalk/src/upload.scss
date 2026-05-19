@@ -537,18 +537,22 @@
   @include when(sortable) {
     .el-upload-list__item {
       cursor: move;
-      transition: transform 0.2s, box-shadow 0.2s;
-      
       @include when(dragging) {
-        opacity: 0.5;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transform: scale(1.05);
-      }
-      
-      &:hover:not(.is-dragging) {
-        border-color: $--color-primary-5;
+        opacity: 0;
       }
     }
+  }
+  .upload-sort-move,
+  .upload-sort-enter-active,
+  .upload-sort-leave-active {
+    transition: all .2s ease;
+  }
+  .upload-sort-enter-from,
+  .upload-sort-leave-to {
+    opacity: 0;
+  }
+  .upload-sort-leave-active {
+    position: absolute;
   }
 
   .el-image__placeholder {

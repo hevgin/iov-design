@@ -1,12 +1,12 @@
 <template>
-  <ul
+  <transition-group
     tag="ul"
     :class="[
       'el-upload-list',
       'el-upload-list--' + listType,
       { 'is-disabled': disabled, 'is-sortable': sortable && listType === 'picture-card' }
     ]"
-    name="el-list"
+    name="upload-sort"
   >
     <li
       v-for="file in files"
@@ -18,6 +18,7 @@
         { 'is-dragging': dragState.draggingFile && dragState.draggingFile.uid === file.uid }
       ]"
       :key="file.uid"
+      :data-uid="file.uid"
       tabindex="0"
       :draggable="sortable && listType === 'picture-card' && file.status === 'success' && !disabled"
       @focus="focusing = true"
@@ -77,7 +78,7 @@
         </span>
       </slot>
     </li>
-  </ul>
+  </transition-group>
 </template>
 <script>
   import ElProgress from 'iov-design/packages/progress';
@@ -90,7 +91,9 @@
         iconStyle,
         dragState: {
           draggingFile: null,
-          dropFile: null
+          startX: 0,
+          swapCount: 0,
+          itemWidth: 0
         }
       };
     },
@@ -134,46 +137,81 @@
       onUpdate() {
         this.$parent.$refs['upload-inner'].handleClick();
       },
+      findLiByUid(uid) {
+        return this.$el.querySelector(`[data-uid="${uid}"]`);
+      },
       handleDragStart(event, file) {
         if (!this.sortable || this.disabled) return;
         this.dragState.draggingFile = file;
+        this.dragState.startX = event.clientX;
+        this.dragState.swapCount = 0;
+        const dragEl = this.findLiByUid(file.uid);
+        if (dragEl) {
+          this.dragState.itemWidth = dragEl.getBoundingClientRect().width;
+        }
         event.dataTransfer.effectAllowed = 'move';
         try {
-          event.dataTransfer.setData('text/plain', file.uid);
+          event.dataTransfer.setData('text/plain', '');
         } catch (e) {}
         this.$emit('drag-start', file, event);
       },
       handleDragOver(event, file) {
         if (!this.sortable || this.disabled) return;
         event.preventDefault();
-        const { draggingFile } = this.dragState;
+        const { draggingFile, startX, itemWidth } = this.dragState;
         if (!draggingFile || draggingFile.uid === file.uid) return;
         event.dataTransfer.dropEffect = 'move';
-        this.dragState.dropFile = file;
+
+        const dragIndex = this.files.findIndex(f => f.uid === draggingFile.uid);
+        if (dragIndex === -1) return;
+
+        const deltaX = event.clientX - startX;
+        const halfWidth = itemWidth / 2;
+        const targetSwapCount = Math.trunc(deltaX / halfWidth);
+
+        if (targetSwapCount === this.dragState.swapCount) return;
+
+        const diff = targetSwapCount - this.dragState.swapCount;
+        const direction = diff > 0 ? 1 : -1;
+        let currentIndex = dragIndex;
+        let actualSwaps = 0;
+
+        for (let i = 0; i < Math.abs(diff); i++) {
+          const targetIndex = currentIndex + direction;
+          if (targetIndex < 0 || targetIndex >= this.files.length) break;
+          const targetFile = this.files[targetIndex];
+          this.$emit('swap', { dragFile: draggingFile, dropFile: targetFile });
+          currentIndex = targetIndex;
+          actualSwaps++;
+        }
+
+        this.dragState.swapCount += actualSwaps * direction;
       },
       handleDragLeave(event, file) {
         if (!this.sortable || this.disabled) return;
-        if (this.dragState.dropFile && this.dragState.dropFile.uid === file.uid) {
-          this.dragState.dropFile = null;
-        }
       },
       handleDrop(event, file) {
         if (!this.sortable || this.disabled) return;
         event.preventDefault();
-        const { draggingFile } = this.dragState;
-        if (!draggingFile || draggingFile.uid === file.uid) return;
-        const oldIndex = this.files.findIndex(f => f.uid === draggingFile.uid);
-        const newIndex = this.files.findIndex(f => f.uid === file.uid);
-        if (oldIndex !== -1 && newIndex !== -1) {
-          this.$emit('sort', { oldIndex, newIndex, file: draggingFile, targetFile: file });
-        }
-        this.dragState.draggingFile = null;
-        this.dragState.dropFile = null;
       },
       handleDragEnd(event, file) {
         if (!this.sortable || this.disabled) return;
+        const { draggingFile, swapCount } = this.dragState;
+        if (draggingFile && swapCount !== 0) {
+          const currentIndex = this.files.findIndex(f => f.uid === draggingFile.uid);
+          if (currentIndex !== -1) {
+            const oldIndex = currentIndex - swapCount;
+            this.$emit('sort', {
+              oldIndex,
+              newIndex: currentIndex,
+              file: draggingFile,
+              targetFile: this.files[oldIndex],
+              files: this.files
+            });
+          }
+        }
         this.dragState.draggingFile = null;
-        this.dragState.dropFile = null;
+        this.dragState.swapCount = 0;
         this.$emit('drag-end', file, event);
       }
     }

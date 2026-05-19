@@ -288,12 +288,17 @@ export default {
         }
       };
     },
-    handleSort({ oldIndex, newIndex, file, targetFile }) {
+    handleSort({ oldIndex, newIndex, file, targetFile, files }) {
+      this.onSort({ oldIndex, newIndex, file, targetFile, files });
+    },
+    handleSwap({ dragFile, dropFile }) {
       const fileList = this.uploadFiles;
-      const movedFile = fileList[oldIndex];
-      fileList.splice(oldIndex, 1);
-      fileList.splice(newIndex, 0, movedFile);
-      this.onSort({ oldIndex, newIndex, file, targetFile, files: fileList });
+      const oldIndex = fileList.findIndex(f => f.uid === dragFile.uid);
+      const newIndex = fileList.findIndex(f => f.uid === dropFile.uid);
+      if (oldIndex === -1 || newIndex === -1 || oldIndex === newIndex) return;
+      const temp = fileList[oldIndex];
+      this.$set(fileList, oldIndex, fileList[newIndex]);
+      this.$set(fileList, newIndex, temp);
     }
   },
 
@@ -365,7 +370,8 @@ export default {
           actions={this.actions}
           handlePreview={this.onPreview}
           sortable={this.sortable}
-          on-sort={this.handleSort}>
+          on-sort={this.handleSort}
+          on-swap={this.handleSwap}>
           {
             (props) => {
               if (this.$scopedSlots.file) {
