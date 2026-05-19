@@ -15,7 +15,7 @@
         'el-upload-list__item-' + size,
         'is-' + file.status,
         focusing ? 'focusing' : '',
-        { 'is-dragging': dragState.draggingFile && dragState.draggingFile.uid === file.uid }
+        { 'is-dragging': dragState.isDragging && dragState.draggingFile && dragState.draggingFile.uid === file.uid }
       ]"
       :key="file.uid"
       :data-uid="file.uid"
@@ -91,6 +91,7 @@
         iconStyle,
         dragState: {
           draggingFile: null,
+          isDragging: false,
           startX: 0,
           swapCount: 0,
           itemWidth: 0
@@ -143,6 +144,7 @@
       handleDragStart(event, file) {
         if (!this.sortable || this.disabled) return;
         this.dragState.draggingFile = file;
+        this.dragState.isDragging = false;
         this.dragState.startX = event.clientX;
         this.dragState.swapCount = 0;
         const dragEl = this.findLiByUid(file.uid);
@@ -153,6 +155,9 @@
         try {
           event.dataTransfer.setData('text/plain', '');
         } catch (e) {}
+        requestAnimationFrame(() => {
+          this.dragState.isDragging = true;
+        });
         this.$emit('drag-start', file, event);
       },
       handleDragOver(event, file) {
@@ -211,6 +216,7 @@
           }
         }
         this.dragState.draggingFile = null;
+        this.dragState.isDragging = false;
         this.dragState.swapCount = 0;
         this.$emit('drag-end', file, event);
       }
