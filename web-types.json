@@ -227,7 +227,7 @@
             },
             {
               "name": "size",
-              "type": "'large'|'medium'|'small'|number",
+              "type": "'large'|'medium'|'small'|'mini'|number",
               "description": "Avatar size",
               "default": "'large'"
             },
@@ -245,6 +245,21 @@
               "name": "srcSet",
               "type": "string",
               "description": "A list of one or more strings separated by commas indicating a set of possible image sources for the user agent to use"
+            },
+            {
+              "name": "backgroundColor",
+              "type": "string",
+              "description": "Avatar background color, supports color values and gradients"
+            },
+            {
+              "name": "color",
+              "type": "string",
+              "description": "Avatar text color"
+            },
+            {
+              "name": "fontSize",
+              "type": "string|number",
+              "description": "Avatar font size, supports number (px) or string with unit"
             }
           ],
           "js": {
@@ -255,6 +270,42 @@
               }
             ]
           }
+        },
+        {
+          "name": "ElAvatarGroup",
+          "description": "A group of avatars with overlap display, max count limit, and hover expand support.",
+          "doc-url": "https://element.eleme.io/#/en-US/component/avatar",
+          "props": [
+            {
+              "name": "size",
+              "type": "'large'|'medium'|'small'|'mini'|number",
+              "description": "Avatar group size, will be applied to each avatar",
+              "default": "'medium'"
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "description": "Maximum number of avatars to show, excess will show as +n",
+              "default": "0"
+            },
+            {
+              "name": "overlap",
+              "type": "number",
+              "description": "Overlap distance between avatars (negative for overlap, positive for spacing)"
+            },
+            {
+              "name": "shape",
+              "type": "'circle' | 'square'",
+              "description": "Avatar shape, will be applied to each avatar",
+              "default": "'circle'"
+            },
+            {
+              "name": "hoverExpand",
+              "type": "boolean",
+              "description": "Enable hover to expand all avatars",
+              "default": "true"
+            }
+          ]
         },
         {
           "name": "ElBacktop",

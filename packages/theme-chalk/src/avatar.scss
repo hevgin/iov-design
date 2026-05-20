@@ -15,6 +15,7 @@
   font-weight: 600;
   align-items: center;
   justify-content: center;
+  white-space: nowrap;
 
   >img {
     margin: 0 auto;
@@ -42,22 +43,109 @@
     width: 60px;
     height: 60px;
     line-height: 60px;
+    font-size: 30px;
   }
 
   @include m(medium) {
     width: 40px;
     height: 40px;
     line-height: 40px;
+    font-size: 20px;
   }
 
   @include m(small) {
     width: 32px;
     height: 32px;
     line-height: 32px;
+    font-size: 16px;
   }
   @include m(mini) {
     width: 24px;
     height: 24px;
     line-height: 24px;
+    font-size: 12px;
+  }
+}
+
+.el-avatar-group__popover {
+  min-width: auto;
+}
+
+@include b(avatar-group) {
+  display: inline-flex;
+  align-items: center;
+
+  .el-avatar {
+    flex-shrink: 0;
+    border: 1.4px solid #fff;
+    box-sizing: border-box;
+    transition: margin-left 0.25s ease-in-out;
+
+    &:not(:first-child) {
+      margin-left: var(--avatar-overlap, -10px);
+    }
+  }
+  > span:not(:first-child) {
+    margin-left: var(--avatar-overlap, -10px);
+  }
+
+  @include e(more) {
+    cursor: default;
+    background: $--color-fill-3;
+    color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  @include when(custom-overlap) {
+    --avatar-overlap: 8px;
+  }
+
+  @include m(large) {
+    --avatar-overlap: -12px;
+    .el-avatar-group__more {
+      font-size: 24px;
+    }
+  }
+
+  @include m(medium) {
+    --avatar-overlap: -10px;
+    .el-avatar-group__more {
+      font-size: 18px;
+    }
+  }
+
+  @include m(small) {
+    --avatar-overlap: -8px;
+    .el-avatar-group__more {
+      font-size: 14px;
+    }
+  }
+
+  @include m(mini) {
+    --avatar-overlap: -6px;
+    border-width: 1.05px;
+    .el-avatar-group__more {
+      font-size: 10.5px;
+    }
+  }
+
+  @include m(square) {
+    .el-avatar {
+      border-radius: 4px;
+    }
+  }
+}
+
+.el-avatar-group__popover {
+  .el-avatar-group__popover-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    .el-avatar {
+      margin-left: 0 !important;
+    }
   }
 }

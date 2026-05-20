@@ -2,15 +2,16 @@
 export default {
   name: 'ElAvatar',
 
+  inject: {
+    avatarGroup: {
+      default: null
+    }
+  },
+
   props: {
     size: {
       type: [Number, String],
-      validator(val) {
-        if (typeof val === 'string') {
-          return ['large', 'medium', 'small', 'mini'].includes(val);
-        }
-        return typeof val === 'number';
-      }
+      default: 'medium'
     },
     shape: {
       type: String,
@@ -48,20 +49,29 @@ export default {
   },
 
   computed: {
+    effectiveSize() {
+      if (this.avatarGroup && this.avatarGroup.size !== undefined) return this.avatarGroup.size;
+      return this.size;
+    },
+    effectiveShape() {
+      if (this.shape !== 'circle') return this.shape;
+      if (this.avatarGroup && this.avatarGroup.shape && this.avatarGroup.shape !== 'circle') return this.avatarGroup.shape;
+      return this.shape;
+    },
     avatarClass() {
-      const { size, icon, shape, backgroundColor, color, fontSize } = this;
+      const { effectiveSize, icon, effectiveShape, backgroundColor, color, fontSize } = this;
       let classList = ['el-avatar'];
 
-      if (size && typeof size === 'string') {
-        classList.push(`el-avatar--${size}`);
+      if (effectiveSize && typeof effectiveSize === 'string') {
+        classList.push(`el-avatar--${effectiveSize}`);
       }
 
       if (icon) {
         classList.push('el-avatar--icon');
       }
 
-      if (shape) {
-        classList.push(`el-avatar--${shape}`);
+      if (effectiveShape) {
+        classList.push(`el-avatar--${effectiveShape}`);
       }
 
       if (backgroundColor) {
@@ -109,12 +119,12 @@ export default {
   },
 
   render() {
-    const { avatarClass, size, backgroundColor, color, fontSize } = this;
+    const { avatarClass, effectiveSize, backgroundColor, color, fontSize } = this;
 
-    const sizeStyle = typeof size === 'number' ? {
-      height: `${size}px`,
-      width: `${size}px`,
-      lineHeight: `${size}px`
+    const sizeStyle = typeof effectiveSize === 'number' ? {
+      height: `${effectiveSize}px`,
+      width: `${effectiveSize}px`,
+      lineHeight: `${effectiveSize}px`
     } : {};
 
     const customStyle = {

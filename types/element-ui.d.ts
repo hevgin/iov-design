@@ -77,7 +77,7 @@ import { ElImage } from './image'
 import { ElBacktop } from './backtop'
 import { ElInfiniteScroll } from './infinite-scroll'
 import { ElPageHeader } from './page-header'
-import { ElAvatar } from './avatar'
+import { ElAvatar, ElAvatarGroup } from './avatar'
 import { ElDrawer } from './drawer'
 import { ElPopconfirm } from './popconfirm'
 import { ElSkeleton } from './skeleton'
@@ -347,6 +347,9 @@ export class PageHeader extends ElPageHeader {}
 
 /** Avatar Component */
 export class Avatar extends ElAvatar {}
+
+/** AvatarGroup Component */
+export class AvatarGroup extends ElAvatarGroup {}
 
 /** Drawer Component */
 export class Drawer extends ElDrawer {}

@@ -174,6 +174,99 @@
 ```
 :::
 
+### 头像组
+
+使用 `el-avatar-group` 组件展示一组头像，支持重叠显示、最大展示数量、鼠标悬停展开等功能。
+
+:::demo
+```html
+<template>
+  <el-row :gutter="16">
+    <el-col :span="12">
+      <div class="sub-title">基本用法</div>
+      <el-avatar-group size="medium">
+        <el-avatar background-color="#52C41A">H</el-avatar>
+        <el-avatar background-color="#FAAD14" :icon="'el-icon-user'"></el-avatar>
+        <el-avatar background-color="#3F57FF">A</el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg"></el-avatar>
+      </el-avatar-group>
+    </el-col>
+    <el-col :span="12">
+      <div class="sub-title">限制显示数量</div>
+      <el-avatar-group size="medium" :max="3">
+        <el-avatar background-color="#52C41A">H</el-avatar>
+        <el-avatar background-color="#FAAD14" :icon="'el-icon-user'"></el-avatar>
+        <el-avatar background-color="#3F57FF">A</el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg"></el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+      </el-avatar-group>
+    </el-col>
+  </el-row>
+  <el-row :gutter="16">
+    <el-col :span="12">
+      <div class="sub-title">禁用悬停展开</div>
+      <el-avatar-group size="medium" :max="3" :hover-expand="false">
+        <el-avatar background-color="#52C41A">H</el-avatar>
+        <el-avatar background-color="#FAAD14" :icon="'el-icon-user'"></el-avatar>
+        <el-avatar background-color="#3F57FF">A</el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg"></el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+      </el-avatar-group>
+    </el-col>
+    <el-col :span="12">
+      <div class="sub-title">自定义重叠间距（overlap=-20）</div>
+      <el-avatar-group size="medium" :overlap="-20" :max="3">
+        <el-avatar background-color="#52C41A">H</el-avatar>
+        <el-avatar background-color="#FAAD14" :icon="'el-icon-user'"></el-avatar>
+        <el-avatar background-color="#3F57FF">A</el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg"></el-avatar>
+      </el-avatar-group>
+    </el-col>
+  </el-row>
+  <el-row :gutter="16">
+    <el-col :span="12">
+      <div class="sub-title">large</div>
+      <el-avatar-group size="large" :max="3">
+        <el-avatar background-color="#52C41A">H</el-avatar>
+        <el-avatar background-color="#FAAD14" :icon="'el-icon-user'"></el-avatar>
+        <el-avatar background-color="#3F57FF">A</el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg"></el-avatar>
+      </el-avatar-group>
+    </el-col>
+    <el-col :span="12">
+      <div class="sub-title">medium</div>
+      <el-avatar-group size="medium" :max="3">
+        <el-avatar background-color="#52C41A">H</el-avatar>
+        <el-avatar background-color="#FAAD14" :icon="'el-icon-user'"></el-avatar>
+        <el-avatar background-color="#3F57FF">A</el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg"></el-avatar>
+      </el-avatar-group>
+    </el-col>
+  </el-row>
+  <el-row :gutter="16">
+    <el-col :span="12">
+      <div class="sub-title">small</div>
+      <el-avatar-group size="small" :max="3">
+        <el-avatar background-color="#52C41A">H</el-avatar>
+        <el-avatar background-color="#FAAD14" :icon="'el-icon-user'"></el-avatar>
+        <el-avatar background-color="#3F57FF">A</el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg"></el-avatar>
+      </el-avatar-group>
+    </el-col>
+    <el-col :span="12">
+      <div class="sub-title">mini</div>
+      <el-avatar-group size="mini" :max="3">
+        <el-avatar background-color="#52C41A">H</el-avatar>
+        <el-avatar background-color="#FAAD14" :icon="'el-icon-user'"></el-avatar>
+        <el-avatar background-color="#3F57FF">A</el-avatar>
+        <el-avatar src="https://cube.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg"></el-avatar>
+      </el-avatar-group>
+    </el-col>
+  </el-row>
+</template>
+```
+:::
+
 ### Attributes
 
 | 参数              | 说明                             | 类型            | 可选值 | 默认值 |
@@ -201,3 +294,28 @@
 | 名称	 | 说明               |
 | ------ | ------------------ |
 | default  | 自定义头像展示内容 |
+
+### AvatarGroup Attributes
+
+| 参数              | 说明                             | 类型            | 可选值 | 默认值 |
+| ----------------- | -------------------------------- | --------------- | ------ | ------ |
+| size              | 设置头像组的大小，会同步到每个头像 | number/string | number / large / medium / small / mini | medium  |
+| max               | 最大显示的头像数量，超过部分显示为 +n | number |        | 0（显示全部）  |
+| overlap           | 头像之间的重叠间距（负值表示重叠，正值表示间隔） | number |        | 根据size自动设置 |
+| shape             | 设置头像的形状，会同步到每个头像 | string |    circle / square     |   circle  |
+| hover-expand      | 是否启用鼠标悬停展开所有头像 | boolean |        |   true   |
+
+**默认重叠间距（根据size）：**
+
+| size | 默认重叠间距 |
+| ---- | ----------- |
+| large | -12px |
+| medium | -10px |
+| small | -8px |
+| mini | -6px |
+
+### AvatarGroup Slot
+
+| 名称	 | 说明               |
+| ------ | ------------------ |
+| default  | 放置 el-avatar 组件 |

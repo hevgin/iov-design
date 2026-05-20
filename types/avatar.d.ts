@@ -17,4 +17,23 @@ export declare class ElAvatar extends ElementUIComponent {
   alt: string;
 
   fit: string;
+
+  backgroundColor: string;
+
+  color: string;
+
+  fontSize: string | number;
+}
+
+/** AvatarGroup Component */
+export declare class ElAvatarGroup extends ElementUIComponent {
+  size: string | number;
+
+  max: number;
+
+  overlap: number;
+
+  shape: string;
+
+  hoverExpand: boolean;
 }

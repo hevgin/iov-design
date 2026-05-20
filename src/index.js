@@ -80,6 +80,7 @@ import InfiniteScroll from '../packages/infinite-scroll/index.js';
 import PageHeader from '../packages/page-header/index.js';
 import CascaderPanel from '../packages/cascader-panel/index.js';
 import Avatar from '../packages/avatar/index.js';
+import AvatarGroup from '../packages/avatar-group/index.js';
 import Drawer from '../packages/drawer/index.js';
 import Statistic from '../packages/statistic/index.js';
 import Popconfirm from '../packages/popconfirm/index.js';
@@ -168,6 +169,7 @@ const components = [
   PageHeader,
   CascaderPanel,
   Avatar,
+  AvatarGroup,
   Drawer,
   Statistic,
   Popconfirm,
@@ -297,6 +299,7 @@ export default {
   PageHeader,
   CascaderPanel,
   Avatar,
+  AvatarGroup,
   Drawer,
   Statistic,
   Popconfirm,
