@@ -79,7 +79,7 @@
 <template>
   <div class="demo-type">
     <el-avatar :size="60" src="https://empty" @error="errorHandler">
-      <img class="load-fail" src="examples/assets/images/image-load-fail.png" />
+      <img class="el-avatar--img load-fail" src="examples/assets/images/image-load-fail.png" />
     </el-avatar>
   </div>
 </template>
@@ -171,6 +171,124 @@
     </div>
   </div>
 </template>
+```
+:::
+
+### 头像上传
+
+头像可定制交互按钮，有遮罩及按钮两种形态，通常使用遮罩样式。通过 `upload-mode` 开启上传模式，配合 `action` 使用。
+
+:::demo
+```html
+<template>
+  <el-row gutter="20">
+    <el-col :span="12" class="demo-item">
+      <div class="sub-title">遮罩默认</div>
+      <el-avatar
+        :src="src"
+        size="large"
+        upload-mode
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-success="handleSuccess">
+      </el-avatar>
+    </el-col>
+    <el-col :span="12" class="demo-item">
+      <div class="sub-title">按钮默认</div>
+      <el-avatar
+        src="https://q6.itc.cn/q_70/images03/20250306/355fba6a5cb049f5b98c2ed9f03cc5e1.jpeg"
+        size="large"
+        upload-mode
+        upload-type="button"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-success="handleSuccess">
+      </el-avatar>
+    </el-col>
+  </el-row>
+  <el-row gutter="20">
+    <el-col :span="12" class="demo-item">
+      <div class="sub-title">遮罩默认</div>
+      <el-avatar
+        :src="src"
+        size="medium"
+        upload-mode
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-success="handleSuccess">
+      </el-avatar>
+    </el-col>
+    <el-col :span="12" class="demo-item">
+      <div class="sub-title">按钮默认</div>
+      <el-avatar
+        src="https://q6.itc.cn/q_70/images03/20250306/355fba6a5cb049f5b98c2ed9f03cc5e1.jpeg"
+        size="medium"
+        upload-mode
+        upload-type="button"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-success="handleSuccess">
+      </el-avatar>
+    </el-col>
+  </el-row>
+  <el-row gutter="20">
+    <el-col :span="12" class="demo-item">
+      <div class="sub-title">遮罩默认</div>
+      <el-avatar
+        :src="src"
+        size="small"
+        upload-mode
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-success="handleSuccess">
+      </el-avatar>
+    </el-col>
+    <el-col :span="12" class="demo-item">
+      <div class="sub-title">按钮默认</div>
+      <el-avatar
+        src="https://q6.itc.cn/q_70/images03/20250306/355fba6a5cb049f5b98c2ed9f03cc5e1.jpeg"
+        size="small"
+        upload-mode
+        upload-type="button"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-success="handleSuccess">
+      </el-avatar>
+    </el-col>
+  </el-row>
+  <el-row gutter="20">
+    <el-col :span="12" class="demo-item">
+      <div class="sub-title">遮罩默认</div>
+      <el-avatar
+        :src="src"
+        size="mini"
+        upload-mode
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-success="handleSuccess">
+      </el-avatar>
+    </el-col>
+    <el-col :span="12" class="demo-item">
+      <div class="sub-title">按钮默认</div>
+      <el-avatar
+        src="https://q6.itc.cn/q_70/images03/20250306/355fba6a5cb049f5b98c2ed9f03cc5e1.jpeg"
+        size="mini"
+        upload-mode
+        upload-type="button"
+        action="https://jsonplaceholder.typicode.com/posts/"
+        :on-success="handleSuccess">
+      </el-avatar>
+    </el-col>
+  </el-row>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        src: "https://q6.itc.cn/q_70/images03/20250306/355fba6a5cb049f5b98c2ed9f03cc5e1.jpeg"
+      }
+    },
+    methods: {
+      handleSuccess(response, file) {
+        console.log('上传成功', response, file);
+        this.src='https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg'
+      }
+    }
+  }
+</script>
 ```
 :::
 
@@ -281,6 +399,16 @@
 | background-color  | 设置头像的背景颜色，支持颜色值和渐变 | string |        |        |
 | color             | 设置头像的字体颜色 | string |        |        |
 | font-size         | 设置头像的字体大小，支持数值（px）或带单位的字符串 | number/string |        |        |
+| upload-mode       | 是否开启上传模式                     | boolean         |        | false  |
+| upload-type       | 上传交互类型，遮罩或按钮             | string          | overlay / button | overlay |
+| action            | 上传地址（upload-mode 为 true 时必填） | string          |        |      |
+| headers           | 设置上传请求头                       | object          |        |      |
+| data              | 上传时附带的额外参数                 | object          |        |      |
+| accept            | 接受上传的文件类型                   | string          |        |      |
+| before-upload     | 上传前的钩子，返回 false 可取消上传   | function(file)  |        |      |
+| http-request      | 覆盖默认的上传行为                   | function(option) |        |      |
+| on-success        | 上传成功回调                         | function(response, file) |    |      |
+| on-error          | 上传失败回调                         | function(err, file) |        |      |
 
 
 ### Events
@@ -288,6 +416,8 @@
 | 事件名 | 说明               | 回调参数 |
 | ------ | ------------------ | -------- |
 | error  | 图片类头像加载失败的回调， 返回 false 会关闭组件默认的 fallback 行为 |(e: Event)  |
+| success | 上传成功回调 | (response, file) |
+| error  | 上传失败回调 | (err, file) |
 
 ### Slot
 

@@ -1,4 +1,6 @@
 <script>
+import ElUpload from 'iov-design/packages/upload';
+
 export default {
   name: 'ElAvatar',
 
@@ -6,6 +8,10 @@ export default {
     avatarGroup: {
       default: null
     }
+  },
+
+  components: {
+    ElUpload
   },
 
   props: {
@@ -39,13 +45,39 @@ export default {
         }
         return typeof val === 'number';
       }
-    }
+    },
+    uploadMode: {
+      type: Boolean,
+      default: false
+    },
+    uploadType: {
+      type: String,
+      default: 'overlay',
+      validator(val) {
+        return ['overlay', 'button'].includes(val);
+      }
+    },
+    action: String,
+    headers: Object,
+    data: Object,
+    accept: String,
+    beforeUpload: Function,
+    httpRequest: Function,
+    onSuccess: Function,
+    onError: Function
   },
 
   data() {
     return {
-      isImageExist: true
+      isImageExist: true,
+      avatarUrl: this.src
     };
+  },
+
+  watch: {
+    src(val) {
+      this.avatarUrl = val;
+    }
   },
 
   computed: {
@@ -99,11 +131,12 @@ export default {
       }
     },
     renderAvatar() {
-      const { icon, src, alt, isImageExist, srcSet, fit } = this;
+      const { icon, avatarUrl, alt, isImageExist, srcSet, fit } = this;
 
-      if (isImageExist && src) {
+      if (isImageExist && avatarUrl) {
         return <img
-          src={src}
+          class="el-avatar--img"
+          src={avatarUrl}
           onError={this.handleError}
           alt={alt}
           srcSet={srcSet}
@@ -115,11 +148,26 @@ export default {
       }
 
       return this.$slots.default;
+    },
+    handleUploadSuccess(response, file) {
+      const url = response.url || (response.data && response.data.url) || URL.createObjectURL(file.raw);
+      this.avatarUrl = url;
+      this.isImageExist = true;
+      this.onSuccess && this.onSuccess(response, file);
+    },
+    handleUploadError(err, file) {
+      this.onError && this.onError(err, file);
+    },
+    handleBeforeUpload(file) {
+      if (this.beforeUpload) {
+        return this.beforeUpload(file);
+      }
+      return true;
     }
   },
 
   render() {
-    const { avatarClass, effectiveSize, backgroundColor, color, fontSize } = this;
+    const { avatarClass, effectiveSize, backgroundColor, color, fontSize, uploadMode, action, headers, data, accept, httpRequest, uploadType } = this;
 
     const sizeStyle = typeof effectiveSize === 'number' ? {
       height: `${effectiveSize}px`,
@@ -135,12 +183,46 @@ export default {
 
     const mergedStyle = { ...sizeStyle, ...customStyle };
 
-    return (
-      <span class={ avatarClass } style={ mergedStyle }>
-        {
-          this.renderAvatar()
-        }
+    const avatarContent = (
+      <span class="el-avatar__inner">
+        {this.renderAvatar()}
       </span>
+    );
+
+    if (!uploadMode || !action) {
+      return (
+        <span class={ avatarClass } style={ mergedStyle }>
+          {avatarContent}
+        </span>
+      );
+    }
+
+    const uploadProps = {
+      props: {
+        action,
+        headers,
+        data,
+        accept,
+        showFileList: false,
+        httpRequest,
+        'before-upload': this.handleBeforeUpload,
+        'on-success': this.handleUploadSuccess,
+        'on-error': this.handleUploadError
+      }
+    };
+
+    return (
+      <ElUpload class={ [`el-avatar--upload is-upload is-upload-${uploadType}`] } {...uploadProps}>
+        <span class={ avatarClass } style={ mergedStyle }>
+          {avatarContent}
+        </span>
+        {uploadMode && uploadType === 'overlay' && <span class="el-avatar--upload-mask">
+          <i class="iov-icon-update"></i>
+        </span>}
+        {uploadMode && uploadType === 'button' && <span class="el-avatar--upload-btn">
+          <i class="iov-icon-update"></i>
+        </span>}
+      </ElUpload>
     );
   }
 
