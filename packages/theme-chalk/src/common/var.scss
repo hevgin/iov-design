@@ -273,14 +273,6 @@ $--select-dropdown-max-height: 274px !default;
 $--select-dropdown-padding: 4px !default;
 $--select-dropdown-border: solid 0.5px $--color-line-2 !default;
 
-/* Alert
--------------------------- */
-
-/* MessageBox
-
-/* Message
--------------------------- */
-
 /* Notification
 -------------------------- */
 $--notification-width: 330px !default;
@@ -372,19 +364,6 @@ $--group-option-fill-hover: rgba($--color-black, 0.06) !default;
 $--group-title-color: $--color-black !default;
 $--group-title-font-size: $--font-size-base !default;
 $--group-title-width: 66px !default;
-
-/* Tab
--------------------------- */
-$--tab-font-size: $--font-size-base !default;
-$--tab-border-line: 1px solid #e4e4e4 !default;
-$--tab-header-color-active: $--color-text-secondary !default;
-$--tab-header-color-hover: $--color-text-regular !default;
-$--tab-header-color: $--color-text-regular !default;
-$--tab-header-fill-active: rgba($--color-black, 0.06) !default;
-$--tab-header-fill-hover: rgba($--color-black, 0.06) !default;
-$--tab-vertical-header-width: 90px !default;
-$--tab-vertical-header-count-color: $--color-white !default;
-$--tab-vertical-header-count-fill: $--color-text-secondary !default;
 
 /* Button
 -------------------------- */
@@ -514,18 +493,6 @@ $--tag-padding: 0 8px !default;
 $--dropdown-menu-box-shadow: 0px 2px 8px 0px rgba(73, 75, 83, 0.12) !default;
 $--dropdown-menuItem-hover-fill: $--color-fill-1 !default;
 $--dropdown-menuItem-hover-color: $--color-text-6 !default;
-
-/* Badge
--------------------------- */
-/// color||Color|0
-$--badge-background-color: $--color-danger !default;
-$--badge-radius: 10px !default;
-/// fontSize||Font|1
-$--badge-font-size: 12px !default;
-/// padding||Spacing|3
-$--badge-padding: 6px !default;
-/// height||Other|4
-$--badge-size: 18px !default;
 
 /* Card
 --------------------------*/

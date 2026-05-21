@@ -3,14 +3,15 @@
     <slot></slot>
     <transition name="el-zoom-in-center">
       <sup
-        v-show="!hidden && (content || content === 0 || isDot)"
+        v-show="!hidden && (content || content === 0 || isDot || isSmallDot)"
         v-text="content"
         class="el-badge__content"
         :class="[
           type ? 'el-badge__content--' + type : null,
           {
             'is-fixed': $slots.default,
-            'is-dot': isDot
+            'is-dot': isDot,
+            'is-dot is-small-dot': isSmallDot
           }
         ]">
       </sup>
@@ -26,6 +27,7 @@ export default {
     value: [String, Number],
     max: Number,
     isDot: Boolean,
+    isSmallDot: Boolean,
     hidden: Boolean,
     type: {
       type: String,
@@ -37,7 +39,7 @@ export default {
 
   computed: {
     content() {
-      if (this.isDot) return;
+      if (this.isDot || this.isSmallDot) return;
 
       const value = this.value;
       const max = this.max;

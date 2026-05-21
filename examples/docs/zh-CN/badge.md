@@ -5,16 +5,16 @@
 ### 基础用法
 用于展示新消息数量、待办条数等数值型标记，通过 `value` 属性定义内容，支持 `Number` / `String` 类型；搭配 `type` 属性可快速设置主题色（`primary`/`warning`/`danger`/`success`/`info`）。
 
-:::demo 
+:::demo
 
 ```html
 <el-badge :value="12" class="item">
   <el-button size="small">评论</el-button>
 </el-badge>
-<el-badge :value="3" class="item">
+<el-badge :value="3" class="item" type="purple">
   <el-button size="small">回复</el-button>
 </el-badge>
-<el-badge :value="1" class="item" type="primary">
+<el-badge :value="1" class="item" type="info">
   <el-button size="small">评论</el-button>
 </el-badge>
 <el-badge :value="2" class="item" type="warning">
@@ -49,7 +49,7 @@
 ### 最大值
 当标记数值过大时，可通过 `max` 属性限制最大显示数字，超出部分会展示为 `${max}+`；需要注意的是，只有当`value`为`Number`时，它才会生效。
 
-:::demo 
+:::demo
 
 ```html
 <el-badge :value="200" :max="99" class="item">
@@ -71,13 +71,13 @@
 ### 自定义内容
 将 `value` 设置为字符串类型，可展示自定义文字（如 hot、new、推荐、更新等），适用于非数值型状态标记。
 
-:::demo 
+:::demo
 
 ```html
-<el-badge value="new" class="item">
+<el-badge value="NEW" class="item">
   <el-button size="small">评论</el-button>
 </el-badge>
-<el-badge value="hot" class="item">
+<el-badge value="HOT" class="item">
   <el-button size="small">回复</el-button>
 </el-badge>
 
@@ -93,10 +93,10 @@
 ### 小红点
 无需展示具体数字，仅用红点提示有未读 / 待处理内容；设置 `is-dot` 属性即可开启，适合图标、菜单、按钮的轻量提醒场景。
 
-:::demo 
+:::demo
 
 ```html
-<el-badge is-dot class="item">数据查询</el-badge>
+<el-badge is-small-dot class="item">数据查询</el-badge>
 <el-badge is-dot class="item">
   <el-button class="share-button" icon="el-icon-share" type="primary"></el-button>
 </el-badge>
@@ -116,5 +116,6 @@
 | value        | 显示值           | string, number  |          —            |    —    |
 | max          | 最大值，超过最大值会显示 '{max}+'，要求 value 是 Number 类型    | number  |         —              |     —    |
 | is-dot       | 小圆点           | boolean         |         —             |  false  |
+| is-small-dot | 小圆点（小号）   | boolean         |         —             |  false  |
 | hidden       | 隐藏 badge       | boolean         |         —             |  false  |
-| type         | 类型             | string          | primary / success / warning / danger / info |    —    |
+| type         | 类型             | string          | primary / success / warning / danger / info / gold / blue / purple / pink |    —    |
