@@ -70,14 +70,23 @@ export default {
 
 ### 单选框组
 
-使用 `el-radio-group` 包裹实现互斥单选组，统一绑定 `v-model`，支持 `change` 事件监听值变化。
+使用 `el-radio-group` 包裹实现互斥单选组，统一绑定 `v-model`，支持 `change` 事件监听值变化。可通过 `gap` 属性自定义选项间距。
 
 :::demo
 
 ```html
 <el-row :gutter="20">
   <el-col :span="12">
-    <el-radio-group v-model="radio">
+    <div class="component-content-title mgb-10">默认间距</div>
+    <el-radio-group v-model="radio1">
+      <el-radio :label="3">选项 3</el-radio>
+      <el-radio :label="6">选项 6</el-radio>
+      <el-radio :label="9">选项 9</el-radio>
+    </el-radio-group>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">自定义间距（gap=16）</div>
+    <el-radio-group v-model="radio2" :gap="16">
       <el-radio :label="3">选项 3</el-radio>
       <el-radio :label="6">选项 6</el-radio>
       <el-radio :label="9">选项 9</el-radio>
@@ -89,7 +98,8 @@ export default {
 export default {
   data() {
     return {
-      radio: 3
+      radio1: 3,
+      radio2: 3
     }
   }
 }
@@ -341,6 +351,7 @@ export default {
 | text-color  | 按钮形式的 Radio 激活时的文本颜色    | string   | — | #2F48FF   |
 | border-color  | 按钮形式的 Radio 激活时的边框色    | string   | — | #2F48FF   |
 | fill  | 按钮形式的 Radio 激活时的填充色    | string   | — | #FFFFFF   |
+| gap  | 每个 Radio 之间的间距（px）    | number   | — | 32   |
 
 ### Radio-group Events
 | 事件名称 | 说明 | 回调参数 |

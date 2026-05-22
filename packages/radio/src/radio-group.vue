@@ -2,6 +2,7 @@
   <component
     :is="_elTag"
     class="el-radio-group"
+    :style="gapStyle"
     role="radiogroup"
     @keydown="handleKeydown"
   >
@@ -39,7 +40,11 @@
       fill: String,
       textColor: String,
       borderColor: String,
-      disabled: Boolean
+      disabled: Boolean,
+      gap: {
+        type: Number,
+        default: null
+      }
     },
 
     computed: {
@@ -53,6 +58,12 @@
       },
       radioGroupSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+      gapStyle() {
+        if (this.gap !== null) {
+          return { '--radio-gap': `${this.gap}px` };
+        }
+        return {};
       }
     },
 

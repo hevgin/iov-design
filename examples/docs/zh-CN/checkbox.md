@@ -73,19 +73,28 @@ export default {
 
 ### 多选框组
 
-使用 `el-checkbox-group` 实现多选组，`v-model` 绑定数组，自动管理选中项，支持单个选项禁用。
+使用 `el-checkbox-group` 实现多选组，`v-model` 绑定数组，自动管理选中项，支持单个选项禁用。可通过 `gap` 属性自定义选项间距。
 
 :::demo
 
 ```html
 <el-row :gutter="20">
   <el-col :span="12">
-    <el-checkbox-group v-model="checkList">
+    <div class="component-content-title mgb-10">默认间距</div>
+    <el-checkbox-group v-model="checkList1">
       <el-checkbox label="选项 A"></el-checkbox>
       <el-checkbox label="选项 B"></el-checkbox>
       <el-checkbox label="选项 C"></el-checkbox>
       <el-checkbox label="禁用选项" disabled></el-checkbox>
-      <el-checkbox label="选中且禁用" disabled></el-checkbox>
+    </el-checkbox-group>
+  </el-col>
+  <el-col :span="12">
+    <div class="component-content-title mgb-10">自定义间距（gap=16）</div>
+    <el-checkbox-group v-model="checkList2" :gap="16">
+      <el-checkbox label="选项 A"></el-checkbox>
+      <el-checkbox label="选项 B"></el-checkbox>
+      <el-checkbox label="选项 C"></el-checkbox>
+      <el-checkbox label="禁用选项" disabled></el-checkbox>
     </el-checkbox-group>
   </el-col>
 </el-row>
@@ -94,7 +103,8 @@ export default {
 export default {
   data() {
     return {
-      checkList: ['选中且禁用', '选项 A']
+      checkList1: ['选项 A'],
+      checkList2: ['选项 A']
     }
   }
 }
@@ -417,6 +427,7 @@ export default {
 | text-color  | 按钮形式的 Checkbox 激活时的文本颜色    | string   | — | #2F48FF   |
 | border-color  | 按钮形式的 Checkbox 激活时的边框色    | string   | — | #2F48FF   |
 | fill  | 按钮形式的 Checkbox 激活时的填充色    | string   | — | #ffffff   |
+| gap  | 每个 Checkbox 之间的间距（px）    | number   | — | 32   |
 
 ### Checkbox-group Events
 | 事件名称      | 说明    | 回调参数      |

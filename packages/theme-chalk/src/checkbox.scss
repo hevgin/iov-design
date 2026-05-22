@@ -505,4 +505,12 @@
 
 @include b(checkbox-group) {
   font-size: 0;
+
+  .el-checkbox {
+    margin-right: var(--checkbox-gap, 32px);
+  }
+
+  .el-checkbox:last-child {
+    margin-right: 0;
+  }
 }

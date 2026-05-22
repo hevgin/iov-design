@@ -22,7 +22,11 @@
       size: String,
       fill: String,
       borderColor: String,
-      textColor: String
+      textColor: String,
+      gap: {
+        type: Number,
+        default: null
+      }
     },
 
     computed: {
@@ -31,6 +35,12 @@
       },
       checkboxGroupSize() {
         return this.size || this._elFormItemSize || (this.$ELEMENT || {}).size;
+      },
+      gapStyle() {
+        if (this.gap !== null) {
+          return { '--checkbox-gap': `${this.gap}px` };
+        }
+        return {};
       }
     },
 
@@ -43,7 +53,7 @@
 </script>
 
 <template>
-  <div class="el-checkbox-group" role="group" aria-label="checkbox-group">
+  <div class="el-checkbox-group" :style="gapStyle" role="group" aria-label="checkbox-group">
     <slot></slot>
   </div>
 </template>
