@@ -4,7 +4,10 @@
     :class="[
       'el-upload-list',
       'el-upload-list--' + listType,
-      { 'is-disabled': disabled, 'is-sortable': sortable && listType === 'picture-card' }
+      { 'is-disabled': disabled,
+      'is-sortable': sortable && listType === 'picture-card',
+      'is-sortable-dragging': dragState.isDragging
+     }
     ]"
     name="upload-sort"
   >

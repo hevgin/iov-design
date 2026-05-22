@@ -535,6 +535,13 @@
 
   // 拖拽排序样式
   @include when(sortable) {
+    &.is-sortable-dragging {
+      .el-upload-list__item:not(.is-dragging) {
+        .el-upload-list__item-actions {
+          opacity: 0;
+        }
+      }
+    }
     .el-upload-list__item {
       cursor: move;
       @include when(dragging) {
