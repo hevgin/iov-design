@@ -6,7 +6,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 最基础的表格数据展示用法，通过`data`绑定数据源，`el-table-column`的`prop`属性匹配数据字段，`label`定义列名，支持宽度设置、文本溢出悬浮、空值占位等基础能力。
 
-:::demo 
+:::demo
 ```html
   <template>
     <el-table
@@ -63,7 +63,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 通过斑马纹样式提升行数据区分度，降低阅读混淆，仅需添加`stripe`属性即可快速开启，适用于数据量较大的表格场景。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -119,7 +119,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 为表格添加全边框（含竖向边框），增强表格结构感，添加`border`属性即可启用，是常规表格的常用样式
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -175,7 +175,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 仅为表格添加外层边框，内部无竖向分隔线，满足简约设计需求，通过`outer-border`属性开启。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -231,7 +231,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 支持为指定行添加自定义样式，高亮标记警告、成功、危险等状态行，通过`row-class-name`绑定行样式方法实现状态区分。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -307,7 +307,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 表格纵向数据过多时，固定表头保证滚动时表头可见，仅需为`el-table`设置`height`固定高度即可实现。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -376,7 +376,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 横向列数过多时，固定关键列（如操作列、主键列）防止滚动丢失，通过`fixed`属性设置左 / 右固定。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -476,7 +476,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 同时固定表头与关键列，适配横纵双滚动的超大表格场景，组合`height`与`fixed`属性实现。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -581,7 +581,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 根据数据量自适应高度，超出最大高度时显示滚动条，通过`max-height`设置最大高度，适配动态数据场景。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -705,7 +705,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 复杂数据结构专用，支持列嵌套展示层级表头，通过`el-table-column`嵌套实现，清晰展示数据分类关系。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -812,7 +812,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 选择单行数据时使用色块表示。Table 组件提供了单选的支持，只需要配置`highlight-current-row`属性即可实现单选。之后由`current-change`事件来管理选中时触发的事件，它会传入`currentRow`，`oldCurrentRow`。如果需要显示索引，可以增加一列`el-table-column`，设置`type`属性为`index`即可显示从 1 开始的索引号。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -888,13 +888,15 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 选择多行数据时使用 Checkbox。实现多选非常简单: 手动添加一个`el-table-column`，设`type`属性为`selection`即可；默认情况下若内容过多会折行显示，若需要单行显示可以使用`show-overflow-tooltip`属性，它接受一个`Boolean`，为`true`时多余的内容会在 hover 时以 tooltip 的形式显示出来。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
     ref="multipleTable"
     :data="tableData"
     tooltip-effect="dark"
+    size="small"
+    border
     style="width: 100%">
     <el-table-column
       type="selection"
@@ -991,7 +993,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 跨页多选数据时el-table需增加 `cross-page-selection`、`row-key` 属性。手动添加一个`el-table-column`，设`type`属性为`selection`，`reserveSelection`值为 `true`。`selection-change` 回调2个参数`(rows, isCrossPageSelection)`, `isCrossPageSelection` 为 `true`时表示跨页选择, 此时`rows`为跨页选择时未选择的数据项
 
-:::demo 
+:::demo
 ```html
 <template>
   <div style="margin-bottom: 10px;">
@@ -1083,7 +1085,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 对表格进行排序，可快速查找或对比数据。在列中设置`sortable`属性即可实现以该列为基准的排序，接受一个`Boolean`，默认为`false`。可以通过 Table 的`default-sort`属性设置默认的排序列和排序顺序。可以使用`sort-method`或者`sort-by`使用自定义的排序规则。如果需要后端排序，需将`sortable`设置为`custom`，同时在 Table 上监听`sort-change`事件，在事件回调中可以获取当前排序的字段名和排序顺序，从而向接口请求排序后的表格数据。在本例中，我们还使用了`formatter`属性，它用于格式化指定列的值，接受一个`Function`，会传入两个参数：`row`和`column`，可以根据自己的需求进行处理。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -1148,7 +1150,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 对表格进行筛选，可快速查找到自己想看的数据。在列中设置`filters` `filter-method`属性即可开启该列的筛选，filters 是一个数组，`filter-method`是一个方法，它用于决定某些数据是否显示，会传入三个参数：`value`, `row` 和 `column`。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-button @click="resetDateFilter">清除日期过滤器</el-button>
@@ -1261,7 +1263,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 ### 自定义列模板
 
 自定义列的显示内容，可组合其他组件使用。通过 `Scoped slot` 可以获取到 row, column, $index 和 store（table 内部的状态管理）的数据，用法参考 demo。
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -1341,7 +1343,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 ### 展开行
 
 当行内容过多并且不想显示横向滚动条时，可以使用 Table 展开行功能。通过设置 type="expand" 和 `Scoped slot` 可以开启展开行功能，`el-table-column` 的模板会被渲染成为展开行的内容，展开行可访问的属性与使用自定义列模板时的 `Scoped slot` 相同。
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -1447,7 +1449,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 支持树类型的数据的显示。当 row 中包含 `children` 字段时，被视为树形数据。渲染树形数据时，必须要指定 `row-key`。支持子节点数据异步加载。设置 Table 的 `lazy` 属性为 true 与加载函数 `load` 。通过指定 row 中的 `hasChildren` 字段来指定哪些行是包含子节点。`children` 与 `hasChildren` 都可以通过 `tree-props` 配置。
 
-:::demo 
+:::demo
 
 ```html
 <template>
@@ -1590,7 +1592,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 
 表头支持自定义。通过设置 [Scoped slot](https://cn.vuejs.org/v2/guide/components-slots.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD) 来自定义表头。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -1665,7 +1667,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 ### 表尾合计行
 
 若表格展示的是各类数字，可以在表尾显示各列的合计。将`show-summary`设置为`true`就会在表格尾部展示合计行。默认情况下，对于合计行，第一列不进行数据求合操作，而是显示「合计」二字（可通过`sum-text`配置），其余列会将本列所有数值进行求合操作，并显示出来。当然，你也可以定义自己的合计逻辑。使用`summary-method`并传入一个方法，返回一个数组，这个数组中的各项就会显示在合计行的各列中，具体可以参考本例中的第二个表格。
-:::demo 
+:::demo
 ```html
 <template>
   <el-table
@@ -1803,7 +1805,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 ### 合并行或列
 
 多行或多列共用一个数据时，可以合并行或列。通过给`table`传入`span-method`方法可以实现合并行或列，方法的参数是一个对象，里面包含当前行`row`、当前列`column`、当前行号`rowIndex`、当前列号`columnIndex`四个属性。该函数可以返回一个包含两个元素的数组，第一个元素代表`rowspan`，第二个元素代表`colspan`。 也可以返回一个键名为`rowspan`和`colspan`的对象。
-:::demo 
+:::demo
 
 ```html
 <template>
@@ -1941,7 +1943,7 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 ### 自定义索引
 
 自定义 `type=index` 列的行号。通过给 `type=index` 的列传入 `index` 属性，可以自定义索引。该属性传入数字时，将作为索引的起始值。也可以传入一个方法，它提供当前行的行号（从 `0` 开始）作为参数，返回值将作为索引展示。
-:::demo 
+:::demo
 
 ```html
 <template>
