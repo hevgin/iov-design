@@ -10,6 +10,7 @@
   position: relative;
   cursor: pointer;
   display: inline-block;
+  vertical-align: middle;
   white-space: nowrap;
   outline: none;
   font-size: 0;
@@ -63,7 +64,6 @@
     border: 1px solid $--color-line-2;
     box-sizing: border-box;
     transition: border-color ease .3s;
-    overflow: hidden;
     background: #fff;
     .el-radio__input {
       float: left;

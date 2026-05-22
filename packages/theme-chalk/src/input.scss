@@ -260,6 +260,9 @@
       > .el-input__inner {
         cursor: not-allowed;
       }
+      .el-input__icon {
+        color: $--color-fill-4;
+      }
     }
     // .el-input__prefix,
     .el-input__suffix,

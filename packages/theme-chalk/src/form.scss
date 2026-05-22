@@ -3,6 +3,10 @@
 @import "common/var";
 
 @include b(form) {
+  .el-form-item__label-text {
+    display: inline-block;
+    vertical-align: middle;
+  }
   @include m(label-left) {
     & .el-form-item__label {
       text-align: left;
@@ -139,7 +143,7 @@
         content: '';
         width: 8px;
         height: 9px;
-        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAYlJREFUOE+lk79KA0EQxr+5pDB3EUEEG7HSJqiFERGj2YtJZWGhYPAZBK0sfAILKwWfQWIRECxNzF6IoBgElTRio5WFATF3WoQb2SPCaf4occuZ+X6z880u4Z+HOumrqVSfyvefnr62q+sIcITIK6Eu5UJXAFuIshIaUka7BVyAmQ3LmvkVUEsmB8O53LO/0Bai1ADM+eP+Ws+D90RCuK5bYOCemDMu82FvsVipCSEVIGxZ5tv8fEQjWmOiNAGjmqaZobMz6QE4GtUdw9gG0TKASKPbLYABlQbwAmC8Ea+AOavb9g6Vy07TFj5Mc8RlXmIgDWC6IbokIKMFAsc9+fyDf5y2a7SFyAJYBKBqTgwpV1oZ2RLgCLHBwB4TbSkRMe8SsKlLuf8T0gSwTXMKzCUCzkNSJj2ThcgxMAuimFEoXLUdwTMzHL5Tr1er1ydCpdKjB4jFht1g8AZAVa/VxpR5X5BvN3BMc4iZr4l5XbesI38nJx5fZaIDYp7ULeupJaCbj9nxM/0F+Am9YZgRY0EaYwAAAABJRU5ErkJggg==") no-repeat 0 -1px / 8px 8px;
+        background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAYlJREFUOE+lk79KA0EQxr+5pDB3EUEEG7HSJqiFERGj2YtJZWGhYPAZBK0sfAILKwWfQWIRECxNzF6IoBgElTRio5WFATF3WoQb2SPCaf4occuZ+X6z880u4Z+HOumrqVSfyvefnr62q+sIcITIK6Eu5UJXAFuIshIaUka7BVyAmQ3LmvkVUEsmB8O53LO/0Bai1ADM+eP+Ws+D90RCuK5bYOCemDMu82FvsVipCSEVIGxZ5tv8fEQjWmOiNAGjmqaZobMz6QE4GtUdw9gG0TKASKPbLYABlQbwAmC8Ea+AOavb9g6Vy07TFj5Mc8RlXmIgDWC6IbokIKMFAsc9+fyDf5y2a7SFyAJYBKBqTgwpV1oZ2RLgCLHBwB4TbSkRMe8SsKlLuf8T0gSwTXMKzCUCzkNSJj2ThcgxMAuimFEoXLUdwTMzHL5Tr1er1ydCpdKjB4jFht1g8AZAVa/VxpR5X5BvN3BMc4iZr4l5XbesI38nJx5fZaIDYp7ULeupJaCbj9nxM/0F+Am9YZgRY0EaYwAAAABJRU5ErkJggg==") no-repeat 0 1px / 8px 8px;
         display: inline-block;
         margin-right: 4px;
       }
