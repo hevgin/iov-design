@@ -1,6 +1,7 @@
 const {
   stripScript,
   stripTemplate,
+  stripStyle,
   genInlineComponentText
 } = require('./util');
 const md = require('./config');
@@ -26,7 +27,8 @@ module.exports = function(source) {
     const commentContent = content.slice(commentStart + startTagLen, commentEnd);
     const html = stripTemplate(commentContent);
     const script = stripScript(commentContent);
-    let demoComponentContent = genInlineComponentText(html, script);
+    const style = stripStyle(commentContent);
+    let demoComponentContent = genInlineComponentText(html, script, style);
     const demoComponentName = `element-demo${id}`;
     output.push(`<template slot="source"><${demoComponentName} /></template>`);
     componenetsString += `${JSON.stringify(demoComponentName)}: ${demoComponentContent},`;

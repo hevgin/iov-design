@@ -107,6 +107,9 @@
     &.el-upload--small {
       width: 68px;
       height: 68px;
+      .el-upload__icon {
+        font-size: 20px;
+      }
     }
     .el-upload__picture {
       height: 100%;
@@ -452,7 +455,7 @@
         height: 80px;
         .el-image__placeholder,
         .el-image__error {
-          background-size: 44px 44px;
+          background-size: 40px 40px;
         }
       }
       &.el-upload-list__item-small {
@@ -461,6 +464,9 @@
         .el-image__placeholder,
         .el-image__error {
           background-size: 34px 34px;
+        }
+        .el-upload-list__item-actions i {
+          font-size: 16px;
         }
       }
     }

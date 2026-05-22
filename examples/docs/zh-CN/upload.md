@@ -138,25 +138,65 @@
 
 :::demo
 ```html
-<el-upload
-  action="https://jsonplaceholder.typicode.com/posts/"
-  list-type="picture-card"
-  :fileList="fileList"
-  sortable
-  :on-sort="handleSort"
-  :on-preview="handlePictureCardPreview"
-  :on-remove="handleRemove">
-  <div class="el-upload__picture">
-    <i class="el-upload__icon iov-icon-img-default"></i>
-    <div class="el-upload__desc">点击上传</div>
-  </div>
-
-      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
-   <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-</el-upload>
-<el-dialog :visible.sync="dialogVisible">
-  <img width="100%" :src="dialogImageUrl" alt="">
-</el-dialog>
+<el-row :gutter="12">
+  <el-col :span="24" class="mb-24">
+    <el-upload
+      size="large"
+      action="https://jsonplaceholder.typicode.com/posts/"
+      list-type="picture-card"
+      :fileList="fileList"
+      sortable
+      :on-sort="handleSort"
+      :on-preview="handlePictureCardPreview"
+      :on-remove="handleRemove">
+      <div class="el-upload__picture">
+        <i class="el-upload__icon iov-icon-img-default"></i>
+        <div class="el-upload__desc">点击上传</div>
+      </div>
+          <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
+      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+  </el-col>
+  <el-col :span="24" class="mb-24">
+    <el-upload
+      size="medium"
+      action="https://jsonplaceholder.typicode.com/posts/"
+      list-type="picture-card"
+      :fileList="fileList"
+      sortable
+      :on-sort="handleSort"
+      :on-preview="handlePictureCardPreview"
+      :on-remove="handleRemove">
+      <div class="el-upload__picture">
+        <i class="el-upload__icon iov-icon-img-default"></i>
+        <div class="el-upload__desc">点击上传</div>
+      </div>
+          <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
+      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+  </el-col>
+  <el-col :span="24">
+    <el-upload
+      size="small"
+      action="https://jsonplaceholder.typicode.com/posts/"
+      list-type="picture-card"
+      :fileList="fileList"
+      sortable
+      :on-sort="handleSort"
+      :on-preview="handlePictureCardPreview"
+      :on-remove="handleRemove">
+      <div class="el-upload__picture">
+        <i class="el-upload__icon iov-icon-img-default"></i>
+        <div class="el-upload__desc">点击上传</div>
+      </div>
+          <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
+      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+  </el-col>
+  <el-dialog :visible.sync="dialogVisible">
+    <img width="100%" :src="dialogImageUrl" alt="">
+  </el-dialog>
+</el-row>
 <script>
   export default {
     data() {
@@ -183,6 +223,12 @@
     }
   }
 </script>
+
+<style>
+.mb-24 {
+  margin-bottom: 24px;
+}
+</style>
 ```
 :::
 

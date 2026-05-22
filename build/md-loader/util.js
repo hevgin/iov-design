@@ -27,21 +27,18 @@ function pad(source) {
     .join('\n');
 }
 
-function genInlineComponentText(template, script) {
-  // https://github.com/vuejs/vue-loader/blob/423b8341ab368c2117931e909e2da9af74503635/lib/loaders/templateLoader.js#L46
+function genInlineComponentText(template, script, style = '') {
   const finalOptions = {
     source: `<div>${template}</div>`,
-    filename: 'inline-component', // TODO：这里有待调整
+    filename: 'inline-component',
     compiler
   };
   const compiled = compileTemplate(finalOptions);
-  // tips
   if (compiled.tips && compiled.tips.length) {
     compiled.tips.forEach(tip => {
       console.warn(tip);
     });
   }
-  // errors
   if (compiled.errors && compiled.errors.length) {
     console.error(
       `\n  Error compiling template:\n${pad(compiled.source)}\n` +
@@ -52,16 +49,29 @@ function genInlineComponentText(template, script) {
   let demoComponentContent = `
     ${compiled.code}
   `;
-  // todo: 这里采用了硬编码有待改进
   script = script.trim();
   if (script) {
     script = script.replace(/export\s+default/, 'const democomponentExport =');
   } else {
     script = 'const democomponentExport = {}';
   }
+  let injectStyleCode = '';
+  if (style.trim()) {
+    injectStyleCode = `
+    democomponentExport.beforeCreate = function() {
+      if (!document.getElementById('demo-style-${Date.now()}')) {
+        const styleEl = document.createElement('style');
+        styleEl.id = 'demo-style-${Date.now()}';
+        styleEl.type = 'text/css';
+        styleEl.innerHTML = ${JSON.stringify(style.trim())};
+        document.head.appendChild(styleEl);
+      }
+    };`;
+  }
   demoComponentContent = `(function() {
     ${demoComponentContent}
     ${script}
+    ${injectStyleCode}
     return {
       render,
       staticRenderFns,
