@@ -16,7 +16,7 @@
       :style="imageStyle"
       :class="{ 'el-image__inner--center': alignCenter, 'el-image__preview': preview }">
     <template v-if="preview">
-      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-if="showViewer" :on-close="closeViewer" :url-list="previewSrcList"/>
+      <image-viewer :z-index="zIndex" :initial-index="imageIndex" v-if="showViewer" :on-close="closeViewer" :url-list="previewSrcList" :toolbar="toolbar"/>
     </template>
   </div>
 </template>
@@ -64,7 +64,11 @@
         default: 2000
       },
       initialIndex: Number,
-      border: Boolean
+      border: Boolean,
+      toolbar: {
+        type: Array,
+        default: () => ['clocelise', 'anticlocelise', 'zoomIn', 'zoomOut', 'toggleMode']
+      }
     },
 
     data() {

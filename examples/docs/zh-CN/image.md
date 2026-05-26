@@ -6,7 +6,7 @@
 
 可通过`fit`确定图片如何适应到容器框，同原生 [object-fit](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit)。
 
-:::demo 
+:::demo
 ```html
 <div class="demo-image">
   <div class="block" v-for="fit in fits" :key="fit">
@@ -35,7 +35,7 @@
 
 可通过`border`属性给图片增加边框
 
-:::demo 
+:::demo
 ```html
 <div class="demo-image">
   <div class="block" v-for="fit in fits" :key="fit">
@@ -65,7 +65,7 @@
 
 图片加载过程中，使用 `slot="placeholder"` 自定义加载占位 UI（加载动画、骨架屏、文字提示）。
 
-:::demo 
+:::demo
 ```html
 <div class="demo-image__placeholder">
   <div class="block">
@@ -98,7 +98,7 @@
 
 图片加载异常时，使用 `slot="error"` 自定义失败提示（图标、文字、默认图），提升用户体验。
 
-:::demo 
+:::demo
 ```html
 <div class="demo-image__error">
   <div class="block">
@@ -121,7 +121,7 @@
 
 可通过`lazy`开启懒加载功能，当图片滚动到可视范围内才会加载。可通过`scroll-container`来设置滚动容器，若未定义，则为最近一个`overflow`值为`auto`或`scroll`的父元素。
 
-:::demo 
+:::demo
 ```html
 <div class="demo-image__lazy">
   <el-image v-for="url in urls" :key="url" :src="url" lazy></el-image>
@@ -151,7 +151,7 @@
 
 可通过 `previewSrcList` 开启预览大图的功能。
 
-:::demo 
+:::demo
 ```html
 <div class="demo-image__preview">
   <el-image
@@ -159,6 +159,48 @@
     :src="url"
     :preview-src-list="srcList">
   </el-image>
+</div>
+
+<script>
+  export default {
+    data() {
+      return {
+        url: 'https://fuss10.elemecdn.com/e/5d/4a731a90594a4af544c0c25941171jpeg.jpeg',
+        srcList: [
+          'https://fuss10.elemecdn.com/8/27/f01c15bb73e1ef3793e64e6b7bbccjpeg.jpeg',
+          'https://fuss10.elemecdn.com/1/8e/aeffeb4de74e2fde4bd74fc7b4486jpeg.jpeg'
+        ]
+      }
+    }
+  }
+</script>
+```
+:::
+
+### 预览工具栏配置
+
+可通过 `toolbar` 配置大图预览的操作按钮，支持的操作包括：`clocelise`（顺时针旋转）、`anticlocelise`（逆时针旋转）、`zoomIn`（放大）、`zoomOut`（缩小）、`toggleMode`（切换模式）、`download`（下载）。默认不包含下载功能。
+
+:::demo
+```html
+<div class="demo-image__preview">
+  <div class="block">
+    <span class="demonstration">默认工具栏</span>
+    <el-image
+      style="width: 100px; height: 100px"
+      :src="url"
+      :preview-src-list="srcList">
+    </el-image>
+  </div>
+  <div class="block">
+    <span class="demonstration">自定义顺序/包含下载</span>
+    <el-image
+      style="width: 100px; height: 100px"
+      :src="url"
+      :preview-src-list="srcList"
+      :toolbar="['zoomIn', 'zoomOut', 'clocelise', 'anticlocelise', 'toggleMode', 'download']">
+    </el-image>
+  </div>
 </div>
 
 <script>
@@ -190,6 +232,7 @@
 | z-index | 设置图片预览的 z-index(弹窗默认2001) | Number | — | 2050 |
 | initial-index | 图片预览初始图片index | Number | — | - |
 | border | 图片增加边框属性 | Boolean | — | false |
+| toolbar | 大图预览工具栏配置 | Array | clocelise / anticlocelise / zoomIn / zoomOut / toggleMode / download | ['clocelise', 'anticlocelise', 'zoomIn', 'zoomOut', 'toggleMode'] |
 
 ### Events
 | 事件名称      | 说明    | 回调参数      |

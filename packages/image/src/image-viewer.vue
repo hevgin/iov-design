@@ -24,11 +24,23 @@
       <!-- ACTIONS -->
       <div class="el-image-viewer__actions">
         <div class="el-image-viewer__actions__inner">
-          <i class="iov-icon-rotate-right" @click="handleActions('clocelise')"></i>
-          <i class="iov-icon-rotate-left" @click="handleActions('anticlocelise')"></i>
-          <i class="iov-icon-zoom-in" @click="handleActions('zoomIn')"></i>
-          <i class="iov-icon-zoom-out" :class="[transform.scale <= 0.2 ? 'disabled' : '']" @click="handleActions('zoomOut')"></i>
-          <i :class="mode.icon" @click="toggleMode"></i>
+          <template v-for="actionKey in toolbar">
+            <i
+              v-if="actionKey === 'toggleMode'"
+              :key="'toggleMode'"
+              :class="mode.icon"
+              @click="toggleMode">
+            </i>
+            <i
+              v-else
+              :key="actionKey"
+              :class="[
+                ToolbarActionMap[actionKey] && ToolbarActionMap[actionKey].icon,
+                actionKey === 'zoomOut' && transform.scale <= 0.2 ? 'disabled' : ''
+              ]"
+              @click="handleToolbarAction(actionKey)">
+            </i>
+          </template>
         </div>
       </div>
       <!-- CANVAS -->
@@ -65,6 +77,15 @@ const Mode = {
   }
 };
 
+const ToolbarActionMap = {
+  clocelise: { icon: 'iov-icon-rotate-right', action: 'clocelise' },
+  anticlocelise: { icon: 'iov-icon-rotate-left', action: 'anticlocelise' },
+  zoomIn: { icon: 'iov-icon-zoom-in', action: 'zoomIn' },
+  zoomOut: { icon: 'iov-icon-zoom-out', action: 'zoomOut' },
+  toggleMode: { icon: 'dynamic', action: 'toggleMode' },
+  download: { icon: 'iov-icon-download', action: 'download' }
+};
+
 const mousewheelEventName = isFirefox() ? 'DOMMouseScroll' : 'mousewheel';
 
 export default {
@@ -98,11 +119,16 @@ export default {
     maskClosable: {
       type: Boolean,
       default: true
+    },
+    toolbar: {
+      type: Array,
+      default: () => ['toggleMode', 'clocelise', 'anticlocelise', 'zoomIn', 'zoomOut']
     }
   },
 
   data() {
     return {
+      ToolbarActionMap,
       index: this.initialIndex,
       isShow: false,
       infinite: true,
@@ -307,6 +333,36 @@ export default {
           break;
       }
       transform.enableTransition = enableTransition;
+    },
+    handleToolbarAction(actionKey) {
+      if (actionKey === 'download') {
+        this.download();
+      } else {
+        this.handleActions(actionKey);
+      }
+    },
+    download() {
+      const url = this.currentImg;
+      fetch(url)
+        .then(res => res.blob())
+        .then(blob => {
+          const objectUrl = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = objectUrl;
+          link.download = url.split('/').pop() || 'image';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(objectUrl);
+        })
+        .catch(() => {
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = url.split('/').pop() || 'image';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+        });
     }
   },
   mounted() {
