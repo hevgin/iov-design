@@ -1,4 +1,20 @@
 {
+    "iovDesignMultiColor": [
+        "excel",
+        "word",
+        "pdf",
+        "ppt",
+        "img",
+        "zip",
+        "other",
+        "img-fail",
+        "img-placeholder",
+        "clear",
+        "clear-hover",
+        "unfold",
+        "fold",
+        "flash"
+    ],
     "iovDesignLine": [
         "arrow-prev",
         "arrow-next",

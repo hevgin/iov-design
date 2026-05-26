@@ -44,6 +44,7 @@
   "slider": "./packages/slider/index.js",
   "loading": "./packages/loading/index.js",
   "icon": "./packages/icon/index.js",
+  "svg-icon": "./packages/svg-icon/index.js",
   "row": "./packages/row/index.js",
   "col": "./packages/col/index.js",
   "upload": "./packages/upload/index.js",

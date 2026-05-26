@@ -15,6 +15,7 @@ import 'packages/theme-chalk/src/index.scss';
 import './demo-styles/index.scss';
 import './assets/styles/common.css';
 import './assets/styles/fonts/style.css';
+import 'main/utils/iov-svg-icon.js';
 import icon from './icon.json';
 import iovDesignIcon from './iovDesignIcon.json';
 
@@ -40,17 +41,17 @@ Vue.mixin({
 });
 
 Vue.prototype.$icon = icon; // Icon 列表页用
-Vue.prototype.$iovDesignLine = iovDesignIcon.iovDesignLine; // Icon 列表页用
-Vue.prototype.$iovDesignTips = iovDesignIcon.iovDesignTips; // Icon 列表页用
-Vue.prototype.$iovDesignChangeBtn = iovDesignIcon.iovDesignChangeBtn; // Icon 列表页用
-Vue.prototype.$iovDesignEdit = iovDesignIcon.iovDesignEdit; // Icon 列表页用
-Vue.prototype.$iovDesignCommon = iovDesignIcon.iovDesignCommon; // Icon 列表页用
-Vue.prototype.$iovDesignOperation = iovDesignIcon.iovDesignOperation; // Icon 列表页用
-Vue.prototype.$iovDesignEntityDirection = iovDesignIcon.iovDesignEntityDirection; // Icon 列表页用
-Vue.prototype.$iovDesignEntityTips = iovDesignIcon.iovDesignEntityTips; // Icon 列表页用
-Vue.prototype.$iovDesignEntityButton = iovDesignIcon.iovDesignEntityButton; // Icon 列表页用
-Vue.prototype.$iovDesignEntityCommon = iovDesignIcon.iovDesignEntityCommon; // Icon 列表页用
-// Vue.prototype.$iovDesignMultiColorCommon = iovDesignIcon.iovDesignMultiColorCommon; // Icon 列表页用
+Vue.prototype.$iovDesignMultiColor = iovDesignIcon.iovDesignMultiColor; // 多色图标
+Vue.prototype.$iovDesignLine = iovDesignIcon.iovDesignLine; // 方向指向类
+Vue.prototype.$iovDesignTips = iovDesignIcon.iovDesignTips; // 提示建议类
+Vue.prototype.$iovDesignChangeBtn = iovDesignIcon.iovDesignChangeBtn; // 交换按钮类
+Vue.prototype.$iovDesignEdit = iovDesignIcon.iovDesignEdit; // 编辑类
+Vue.prototype.$iovDesignCommon = iovDesignIcon.iovDesignCommon; // 通用类
+Vue.prototype.$iovDesignOperation = iovDesignIcon.iovDesignOperation; // 运算符类
+Vue.prototype.$iovDesignEntityDirection = iovDesignIcon.iovDesignEntityDirection; // 实体类方向指向类
+Vue.prototype.$iovDesignEntityTips = iovDesignIcon.iovDesignEntityTips; // 实体类提示建议类
+Vue.prototype.$iovDesignEntityButton = iovDesignIcon.iovDesignEntityButton; // 实体类交换按钮类
+Vue.prototype.$iovDesignEntityCommon = iovDesignIcon.iovDesignEntityCommon; // 实体类通用类
 
 const router = new VueRouter({
   mode: 'hash',
