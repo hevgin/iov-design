@@ -223,7 +223,14 @@ Block 按钮在宽度上充满其所在的父容器（无 padding 和 margin 值
 :::demo
 
 ```html
-<el-button type="primary" :loading="true">加载中</el-button>
+<el-row>
+  <el-button :loading="true" round>加载中</el-button>
+  <el-button :loading="true" type="primary" round>加载中</el-button>
+  <el-button :loading="true" type="success" round>加载中</el-button>
+  <el-button :loading="true" type="info" round>加载中</el-button>
+  <el-button :loading="true" type="warning" round>加载中</el-button>
+  <el-button :loading="true" type="danger" round>加载中</el-button>
+</el-row>
 ```
 :::
 

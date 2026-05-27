@@ -405,21 +405,21 @@
     & > .el-button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      border-left-color: rgba($--color-white, 0.5);
+      border-left-color: rgba($--color-white, 0.2);
     }
   }
 
   @each $type in (primary, success, warning, danger, info) {
     .el-button--#{$type} {
       &:first-child {
-        border-right-color: rgba($--color-white, 0.5);
+        border-right-color: rgba($--color-white, 0.2);
       }
       &:last-child {
-        border-left-color: rgba($--color-white, 0.5);
+        border-left-color: rgba($--color-white, 0.2);
       }
       &:not(:first-child):not(:last-child) {
-        border-left-color: rgba($--color-white, 0.5);
-        border-right-color: rgba($--color-white, 0.5);
+        border-left-color: rgba($--color-white, 0.2);
+        border-right-color: rgba($--color-white, 0.2);
       }
     }
   }
