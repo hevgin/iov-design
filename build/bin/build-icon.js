@@ -77,6 +77,7 @@ if (whitelist.length > 0) {
     }).join('');
 
     var output = '(function() {\n';
+    output += ' if (typeof document === \'undefined\') return;\n';
     output += '  var svgStr = \'<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">\' + \'' + filteredSvg.replace(/'/g, "\\'") + '\' + \'</svg>\';\n';
     output += '  var div = document.createElement(\'div\');\n';
     output += '  div.innerHTML = svgStr;\n';
