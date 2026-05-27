@@ -5,7 +5,10 @@
 @import "mixins/utils";
 
 @include b(button) {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
   white-space: nowrap;
   cursor: pointer;
   background: $--button-default-background-color;
@@ -50,6 +53,10 @@
       margin-left: 4px;
       display: inline-block;
     }
+  }
+  & [class*="iov-icon-loading"],
+  & [class*="iov-icon-loading-"] {
+    font-size: 0;
   }
 
   @include when(plain) {
@@ -100,20 +107,7 @@
   }
 
   @include when(loading) {
-    position: relative;
     pointer-events: none;
-
-    &:before {
-      pointer-events: none;
-      content: '';
-      position: absolute;
-      left: -1px;
-      top: -1px;
-      right: -1px;
-      bottom: -1px;
-      border-radius: inherit;
-      background-color: rgba(255,255,255,.35);
-    }
   }
   @include when(round) {
     border-radius: 20px;

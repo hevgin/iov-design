@@ -54,12 +54,12 @@
 </el-row>
 
 <el-row>
-  <el-button icon="el-icon-search" circle></el-button>
-  <el-button type="primary" icon="el-icon-edit" circle></el-button>
-  <el-button type="success" icon="el-icon-check" circle></el-button>
-  <el-button type="info" icon="el-icon-message" circle></el-button>
-  <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-  <el-button type="danger" icon="el-icon-delete" circle></el-button>
+  <el-button icon="iov-icon-search" circle></el-button>
+  <el-button type="primary" icon="iov-icon-edit" circle></el-button>
+  <el-button type="success" icon="iov-icon-success" circle></el-button>
+  <el-button type="info" icon="iov-icon-sms" circle></el-button>
+  <el-button type="warning" icon="iov-icon-authorize" circle></el-button>
+  <el-button type="danger" icon="iov-icon-delete" circle></el-button>
 </el-row>
 ```
 :::
@@ -68,7 +68,7 @@
 
 按钮不可用状态。你可以使用`disabled`属性来定义按钮是否可用，它接受一个`Boolean`值。
 
-:::demo 
+:::demo
 
 ```html
 
@@ -118,12 +118,12 @@
 </el-row>
 
 <el-row>
-  <el-button disabled icon="el-icon-search" circle></el-button>
-  <el-button disabled type="primary" icon="el-icon-edit" circle></el-button>
-  <el-button disabled type="success" icon="el-icon-check" circle></el-button>
-  <el-button disabled type="info" icon="el-icon-message" circle></el-button>
-  <el-button disabled type="warning" icon="el-icon-star-off" circle></el-button>
-  <el-button disabled type="danger" icon="el-icon-delete" circle></el-button>
+  <el-button disabled icon="iov-icon-search" circle></el-button>
+  <el-button disabled type="primary" icon="iov-icon-edit" circle></el-button>
+  <el-button disabled type="success" icon="iov-icon-success" circle></el-button>
+  <el-button disabled type="info" icon="iov-icon-sms" circle></el-button>
+  <el-button disabled type="warning" icon="iov-icon-authorize" circle></el-button>
+  <el-button disabled type="danger" icon="iov-icon-delete" circle></el-button>
 </el-row>
 ```
 :::
@@ -162,10 +162,10 @@ Block 按钮在宽度上充满其所在的父容器（无 padding 和 margin 值
 :::demo
 ```html
 <el-row v-for="size of sizes">
-  <el-button type="text" v-for="color of colors" :color="color" :size="size">文字按钮</el-button>
+  <el-button type="text" v-for="color of colors" :key="color + size" :color="color" :size="size">文字按钮</el-button>
 </el-row>
 <el-row v-for="size of sizes">
-  <el-button type="text" disabled v-for="color of colors" :color="color" :size="size">文字按钮</el-button>
+  <el-button type="text" disabled v-for="color of colors" :key="color + size" :color="color" :size="size">文字按钮</el-button>
 </el-row>
 <script>
   export default {
@@ -184,7 +184,7 @@ Block 按钮在宽度上充满其所在的父容器（无 padding 和 margin 值
 
 带图标的按钮可增强辨识度（有文字）或节省空间（无文字）。设置`icon`属性即可，icon 的列表可以参考 Element 的 icon 组件，也可以设置在文字右边的 icon ，只要使用`i`标签即可，可以使用自定义图标。
 
-:::demo 
+:::demo
 
 ```html
 <el-button type="primary" icon="iov-icon-update"></el-button>
@@ -201,17 +201,17 @@ Block 按钮在宽度上充满其所在的父容器（无 padding 和 margin 值
 
 以按钮组的方式出现，常用于多项类似操作。使用`<el-button-group>`标签来嵌套你的按钮。
 
-:::demo 
+:::demo
 
 ```html
 <el-button-group>
-  <el-button type="primary" icon="el-icon-arrow-left">上一页</el-button>
-  <el-button type="primary">下一页<i class="el-icon-arrow-right el-icon--right"></i></el-button>
+  <el-button type="primary" icon="iov-icon-arrow-prev">上一页</el-button>
+  <el-button type="primary">下一页<i class="iov-icon-arrow-next el-icon--right"></i></el-button>
 </el-button-group>
 <el-button-group>
-  <el-button type="primary" icon="el-icon-edit"></el-button>
-  <el-button type="primary" icon="el-icon-share"></el-button>
-  <el-button type="primary" icon="el-icon-delete"></el-button>
+  <el-button type="primary" icon="iov-icon-edit"></el-button>
+  <el-button type="primary" icon="iov-icon-update"></el-button>
+  <el-button type="primary" icon="iov-icon-delete"></el-button>
 </el-button-group>
 ```
 :::
@@ -220,7 +220,7 @@ Block 按钮在宽度上充满其所在的父容器（无 padding 和 margin 值
 
 点击按钮后进行数据加载操作，在按钮上显示加载状态。要设置为 loading 状态，只要设置`loading`属性为`true`即可。
 
-:::demo 
+:::demo
 
 ```html
 <el-button type="primary" :loading="true">加载中</el-button>
@@ -231,7 +231,7 @@ Block 按钮在宽度上充满其所在的父容器（无 padding 和 margin 值
 
 Button 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的按钮尺寸。额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
 
-:::demo 
+:::demo
 
 ```html
 <el-row>
@@ -247,20 +247,20 @@ Button 组件提供除了默认值以外的三种尺寸，可以在不同场景�
   <el-button size="mini" round>超小按钮</el-button>
 </el-row>
 <el-row>
-  <el-button icon="el-icon-search" circle></el-button>
-  <el-button type="primary" icon="el-icon-edit" circle size="medium"></el-button>
-  <el-button type="success" icon="el-icon-check" circle size="small"></el-button>
-  <el-button type="info" icon="el-icon-message" circle size="small"></el-button>
-  <el-button type="warning" icon="el-icon-star-off" circle size="mini"></el-button>
-  <el-button type="danger" icon="el-icon-delete" circle size="mini"></el-button>
+  <el-button icon="iov-icon-search" circle></el-button>
+  <el-button type="primary" icon="iov-icon-edit" circle size="medium"></el-button>
+  <el-button type="success" icon="iov-icon-success" circle size="small"></el-button>
+  <el-button type="info" icon="iov-icon-sms" circle size="small"></el-button>
+  <el-button type="warning" icon="iov-icon-authorize" circle size="mini"></el-button>
+  <el-button type="danger" icon="iov-icon-delete" circle size="mini"></el-button>
 </el-row>
 <el-row>
-  <el-button icon="el-icon-search"></el-button>
-  <el-button type="primary" icon="el-icon-edit" size="medium"></el-button>
-  <el-button type="success" icon="el-icon-check" size="small"></el-button>
-  <el-button type="info" icon="el-icon-message" size="small"></el-button>
-  <el-button type="warning" icon="el-icon-star-off" size="mini"></el-button>
-  <el-button type="danger" icon="el-icon-delete" size="mini"></el-button>
+  <el-button icon="iov-icon-search"></el-button>
+  <el-button type="primary" icon="iov-icon-edit" size="medium"></el-button>
+  <el-button type="success" icon="iov-icon-success" size="small"></el-button>
+  <el-button type="info" icon="iov-icon-sms" size="small"></el-button>
+  <el-button type="warning" icon="iov-icon-authorize" size="mini"></el-button>
+  <el-button type="danger" icon="iov-icon-delete" size="mini"></el-button>
 </el-row>
 ```
 :::

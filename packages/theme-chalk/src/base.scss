@@ -24,6 +24,13 @@
     transform: rotateZ(360deg);
   }
 }
+.iov-icon-loading,
+.iov-icon-loading-white,
+.iov-icon-loading-gray,
+.iov-icon-loading-grey {
+  font-size: 0;
+}
+
 .iov-icon-loading:before,
 .iov-icon-loading-white:before,
 .iov-icon-loading-gray:before,

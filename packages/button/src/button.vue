@@ -11,8 +11,8 @@
       $slots.default ? '' : 'is-icon-only',
       buttonSize ? 'el-button--' + buttonSize : '',
       {
-        'is-disabled': buttonDisabled,
-        'is-loading': loading,
+        'is-disabled': buttonDisabled || (loading && loadingIcon),
+        'is-loading': loading && loadingIcon,
         'is-plain': plain,
         'is-round': round,
         'is-circle': circle,
@@ -22,9 +22,9 @@
       }
     ]"
   >
-    <i class="el-icon-loading" v-if="loading"></i>
+    <i :class="loadingIcon" v-if="loading && loadingIcon"></i>
     <i :class="icon" v-if="icon && !loading"></i>
-    <span v-if="$slots.default"><slot></slot></span>
+    <span class="el-button__text" v-if="$slots.default"><slot></slot></span>
   </button>
 </template>
 <script>
@@ -70,6 +70,17 @@
     },
 
     computed: {
+      loadingIcon() {
+        if (this.loading && ['primary', 'success', 'info', 'warning', 'danger'].includes(this.type) && !this.plain && !this.dashed && !this.ghost) {
+          return 'iov-icon-loading-white';
+        } else if (this.loading && (this.type === 'default' || (this.type === 'info' && (this.plain || this.dashed || this.ghost)))) {
+          return 'iov-icon-loading-gray';
+        } else if (this.loading && (this.type === 'primary' && (this.plain || this.dashed || this.ghost))) {
+          return 'iov-icon-loading';
+        } else {
+          return '';
+        }
+      },
       _elFormItemSize() {
         return (this.elFormItem || {}).elFormItemSize;
       },
