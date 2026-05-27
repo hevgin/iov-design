@@ -15,7 +15,6 @@ import 'packages/theme-chalk/src/index.scss';
 import './demo-styles/index.scss';
 import './assets/styles/common.css';
 import './assets/styles/fonts/style.css';
-import 'main/utils/iov-svg-icon.js';
 import icon from './icon.json';
 import iovDesignIcon from './iovDesignIcon.json';
 
