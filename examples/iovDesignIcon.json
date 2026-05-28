@@ -32,6 +32,7 @@
         "double-right-mini",
         "arrow-half-right",
         "switch",
+        "change",
         "move",
         "rotate-right",
         "rotate-left"
@@ -66,7 +67,9 @@
         "delisting",
         "card",
         "cdkey",
-        "sort"
+        "sort",
+        "file-preview",
+        "collapse"
     ],
     "iovDesignEdit": [
         "edit",
@@ -80,6 +83,7 @@
         "language",
         "message",
         "skin",
+        "user",
         "lock",
         "logout",
         "project",
@@ -107,6 +111,12 @@
         "contact",
         "classification",
         "chart",
+        "download-file",
+        "grouping-props",
+        "time-interval",
+        "goods",
+        "coupon",
+        "tag",
         "process",
         "history",
         "cny",
@@ -206,7 +216,7 @@
         "fill-profile",
         "fill-user",
         "target",
-        "organize",
+        "fill-organize",
         "file-excel",
         "file-word",
         "file-pdf",
@@ -217,20 +227,5 @@
         "github",
         "fill-cube",
         "fill-track"
-    ],
-    "iovDesignMultiColorCommon": [
-        "file-excel",
-        "file-word",
-        "file-word",
-        "file-ppt",
-        "file-img",
-        "file-zip",
-        "file-other",
-        "img-fail",
-        "img-placeholder",
-        "clear",
-        "clear-hover",
-        "un-fold",
-        "fold"
     ]
 }

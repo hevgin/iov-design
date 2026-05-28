@@ -69,7 +69,7 @@
 ##### 交换按钮类
 
 <ul class="icon-list">
-  <li v-for="name in $iovDesignTips" :key="name">
+  <li v-for="name in $iovDesignChangeBtn" :key="name">
     <span>
       <i :class="'iov-icon-' + name"></i>
       <span class="icon-name">{{'iov-icon-' + name}}</span>

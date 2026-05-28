@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "47703135",
+      "name": "iov-icon-fill-organize",
+      "font_class": "fill-organize",
+      "unicode": "e722",
+      "unicode_decimal": 59170
+    },
+    {
       "icon_id": "47683024",
       "name": "iov-icon-pdf",
       "font_class": "pdf",
