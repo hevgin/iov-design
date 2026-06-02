@@ -173,6 +173,7 @@
   border: 0.5px solid $--color-line-2;
   border-radius: 4px;
   box-shadow: $--dropdown-menu-box-shadow;
+  box-sizing: border-box;
 
   @include e(item) {
     list-style: none;
@@ -184,6 +185,9 @@
     color: $--color-text-6;
     cursor: pointer;
     outline: none;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
     &.selected {
       color: $--select-option-selected-font-color;
       background: $--select-option-selected-background;

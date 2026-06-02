@@ -36,17 +36,17 @@
 
 ### 菜单按钮
 
-可使用按钮触发下拉菜单。
+可使用按钮触发下拉菜单， 设置 `menu-width-align` 使菜单宽度与按钮一致。
 
 :::demo
 
 ```html
-<el-dropdown>
+<el-dropdown menu-width-align trigger="click">
   <el-button type="primary">
     更多菜单<i class="iov-icon-arrow-down"></i>
   </el-button>
   <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>黄金糕狮子头螺蛳粉双皮奶蚵仔煎</el-dropdown-item>
     <el-dropdown-item>狮子头</el-dropdown-item>
     <el-dropdown-item>螺蛳粉</el-dropdown-item>
     <el-dropdown-item>双皮奶</el-dropdown-item>
@@ -65,7 +65,7 @@
     <el-dropdown-item>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
-<el-dropdown>
+<el-dropdown trigger="click">
   <el-button>
     更多菜单<i class="iov-icon-arrow-down"></i>
   </el-button>
@@ -91,9 +91,6 @@
 </el-dropdown>
 
 <style>
-  .el-dropdown {
-    vertical-align: top;
-  }
   .el-dropdown + .el-dropdown {
     margin-left: 15px;
   }
@@ -128,10 +125,10 @@
 :::demo
 
 ```html
-<el-dropdown split-button type="primary" @click="handleClick">
+<el-dropdown trigger="click" menu-width-align split-button type="primary" @click="handleClick">
   更多菜单
   <el-dropdown-menu slot="dropdown">
-    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>黄金糕狮子头螺蛳粉双皮奶蚵仔煎</el-dropdown-item>
     <el-dropdown-item>狮子头</el-dropdown-item>
     <el-dropdown-item>螺蛳粉</el-dropdown-item>
     <el-dropdown-item>双皮奶</el-dropdown-item>
@@ -148,7 +145,7 @@
     <el-dropdown-item>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
-<el-dropdown split-button @click="handleClick">
+<el-dropdown trigger="click" split-button @click="handleClick">
   更多菜单
   <el-dropdown-menu slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
@@ -169,9 +166,6 @@
   </el-dropdown-menu>
 </el-dropdown>
 <style>
-  .el-dropdown {
-    vertical-align: top;
-  }
   .el-dropdown + .el-dropdown {
     margin-left: 15px;
   }
@@ -382,6 +376,7 @@ Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场�
 | hide-timeout  | 收起下拉菜单的延时（仅在 trigger 为 hover 时有效）| number          | — | 150 |
 | tabindex      | Dropdown 组件的 [tabindex](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/tabindex) | number | — | 0 |
 | disabled      | 是否禁用        | boolean         | —                      | false |
+| menu-width-align | 是否让下拉菜单宽度与触发容器宽度对齐 | boolean | — | false |
 
 ### Dropdown Slots
 

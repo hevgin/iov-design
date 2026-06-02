@@ -63,6 +63,10 @@
       disabled: {
         type: Boolean,
         default: false
+      },
+      menuWidthAlign: {
+        type: Boolean,
+        default: false
       }
     },
 
@@ -184,13 +188,19 @@
       },
       resetTabindex(ele) { // 下次tab时组件聚焦元素
         this.removeTabindex();
-        ele.setAttribute('tabindex', '0'); // 下次期望的聚焦元素
+        if (ele) {
+          ele.setAttribute('tabindex', '0'); // 下次期望的聚焦元素
+        }
       },
       removeTabindex() {
-        this.triggerElm.setAttribute('tabindex', '-1');
-        this.menuItemsArray.forEach((item) => {
-          item.setAttribute('tabindex', '-1');
-        });
+        if (this.triggerElm) {
+          this.triggerElm.setAttribute('tabindex', '-1');
+        }
+        if (this.menuItemsArray) {
+          this.menuItemsArray.forEach((item) => {
+            item.setAttribute('tabindex', '-1');
+          });
+        }
       },
       initAria() {
         this.dropdownElm.setAttribute('id', this.listId);
@@ -241,7 +251,9 @@
         this.$emit('command', command, instance);
       },
       triggerElmFocus() {
-        this.triggerElm.focus && this.triggerElm.focus();
+        if (this.triggerElm) {
+          this.triggerElm.focus && this.triggerElm.focus();
+        }
       },
       initDomOperation() {
         this.dropdownElm = this.popperElm;

@@ -40,6 +40,11 @@
       });
       this.$on('visible', val => {
         this.showPopper = val;
+        if (val && this.dropdown.menuWidthAlign) {
+          this.$nextTick(() => {
+            this.setMenuMinWidth();
+          });
+        }
       });
     },
 
@@ -49,6 +54,15 @@
       // compatible with 2.6 new v-slot syntax
       // issue link https://github.com/ElemeFE/element/issues/14345
       this.dropdown.initDomOperation();
+    },
+
+    methods: {
+      setMenuMinWidth() {
+        if (this.$el) {
+          const containerWidth = this.dropdown.$el.getBoundingClientRect().width;
+          this.$el.style.width = containerWidth + 'px';
+        }
+      }
     },
 
     watch: {
