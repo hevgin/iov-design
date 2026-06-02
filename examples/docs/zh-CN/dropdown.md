@@ -6,7 +6,7 @@
 
 移动到下拉菜单上，展开更多操作。通过组件`slot`来设置下拉触发的元素以及需要通过具名`slot`为`dropdown` 来设置下拉菜单。默认情况下，下拉按钮只要`hover`即可，无需点击也会显示下拉菜单。
 
-:::demo 
+:::demo
 
 ```html
 <el-dropdown>
@@ -34,11 +34,11 @@
 ```
 :::
 
-### 触发对象
+### 菜单按钮
 
-可使用按钮触发下拉菜单。设置`split-button`属性来让触发下拉元素呈现为按钮组，左边是功能按钮，右边是触发下拉菜单的按钮。
+可使用按钮触发下拉菜单。
 
-:::demo 
+:::demo
 
 ```html
 <el-dropdown>
@@ -53,9 +53,35 @@
     <el-dropdown-item>蚵仔煎</el-dropdown-item>
   </el-dropdown-menu>
 </el-dropdown>
-<el-dropdown split-button type="primary" @click="handleClick">
-  更多菜单
+<el-dropdown>
+  <el-button type="primary" :disabled="disabled">
+    更多菜单<i class="iov-icon-arrow-down"></i>
+  </el-button>
+  <el-dropdown-menu v-if="!disabled" slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<el-dropdown>
+  <el-button>
+    更多菜单<i class="iov-icon-arrow-down"></i>
+  </el-button>
   <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<el-dropdown>
+  <el-button :disabled="disabled">
+    更多菜单<i class="iov-icon-arrow-down"></i>
+  </el-button>
+  <el-dropdown-menu v-if="!disabled" slot="dropdown">
     <el-dropdown-item>黄金糕</el-dropdown-item>
     <el-dropdown-item>狮子头</el-dropdown-item>
     <el-dropdown-item>螺蛳粉</el-dropdown-item>
@@ -78,6 +104,89 @@
 
 <script>
   export default {
+    data() {
+      return {
+        disabled: true
+      }
+    },
+    methods: {
+      handleClick() {
+        alert('button click');
+      }
+    }
+  }
+</script>
+
+```
+:::
+
+
+### 功能按钮
+
+设置`split-button`属性来让触发下拉元素呈现为按钮组，左边是功能按钮，右边是触发下拉菜单的按钮。
+
+:::demo
+
+```html
+<el-dropdown split-button type="primary" @click="handleClick">
+  更多菜单
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<el-dropdown split-button disabled type="primary" @click="handleClick">
+  更多菜单
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<el-dropdown split-button @click="handleClick">
+  更多菜单
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<el-dropdown split-button disabled @click="handleClick">
+  更多菜单
+  <el-dropdown-menu slot="dropdown">
+    <el-dropdown-item>黄金糕</el-dropdown-item>
+    <el-dropdown-item>狮子头</el-dropdown-item>
+    <el-dropdown-item>螺蛳粉</el-dropdown-item>
+    <el-dropdown-item>双皮奶</el-dropdown-item>
+    <el-dropdown-item>蚵仔煎</el-dropdown-item>
+  </el-dropdown-menu>
+</el-dropdown>
+<style>
+  .el-dropdown {
+    vertical-align: top;
+  }
+  .el-dropdown + .el-dropdown {
+    margin-left: 15px;
+  }
+  .iov-icon-arrow-down {
+    font-size: 12px;
+  }
+</style>
+
+<script>
+  export default {
+    data() {
+      return {
+        disabled: true
+      }
+    },
     methods: {
       handleClick() {
         alert('button click');
@@ -93,7 +202,7 @@
 
 可以配置 `click` 激活或者 `hover` 激活。在`trigger`属性设置为`click`即可。
 
-:::demo 
+:::demo
 ```html
 <el-row class="block-col-2">
   <el-col :span="12">
@@ -143,7 +252,7 @@
 
 可以`hide-on-click`属性来配置。下拉菜单默认在点击菜单项后会被隐藏，将`hide-on-click`属性默认为`false`可以关闭此功能。
 
-:::demo 
+:::demo
 ```html
 <el-dropdown :hide-on-click="false">
   <el-link>
@@ -211,7 +320,7 @@
 
 Dropdown 组件提供除了默认值以外的三种尺寸，可以在不同场景下选择合适的尺寸。额外的尺寸：`medium`、`small`、`mini`，通过设置`size`属性来配置它们。
 
-:::demo 
+:::demo
 
 ```html
 <el-dropdown split-button type="primary">

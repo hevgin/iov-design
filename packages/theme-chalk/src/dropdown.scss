@@ -2,6 +2,7 @@
 @import "common/var";
 @import "button";
 @import "./popper";
+@import "mixins/utils";
 
 @include b(dropdown) {
   display: inline-block;
@@ -9,40 +10,135 @@
   color: $--color-text-6;
   font-size: $--font-size-base;
 
-  .el-button-group {
-    display: block;
+
+  .el-link {
+    .iov-icon-arrow-down {
+      margin-left: 4px;
+    }
+  }
+  .el-button {
+    padding-right: 8px;
+    .iov-icon-arrow-down {
+      margin-left: 8px;
+    }
+  }
+
+  .el-button-group__dropdown {
+    @include utils-clearfix;
+    display: inline-block;
+    vertical-align: middle;
+    @include m(default) {
+      position: relative;
+      // 解决默认边框拼接显示有间隔问题
+      &:before {
+        content: '';
+        border: 1px solid $--color-line-2;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border-radius: 4px;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        z-index: 1;
+        pointer-events: none;
+      }
+    }
     .el-button {
-      float: none;
+      position: relative;
+      & + .el-button {
+        margin-left: -1px;
+      }
+      &:hover {
+        z-index: 1;
+      }
+      &:first-child {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+      &:last-child {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+    .el-button--default {
+      &:first-child {
+        border-right-color: transparent;
+        &:hover {
+          border-right-color: inherit;
+        }
+        &.is-disabled {
+          border-right-color: transparent;
+          &:hover {
+            z-index: 0;
+          }
+        }
+      }
+      &:last-child {
+        border-left-color: transparent;
+        &:hover {
+          border-left-color: inherit;
+        }
+        &.is-disabled {
+          border-left-color: transparent;
+          &:before {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    @each $type in (primary, success, warning, danger, info) {
+      .el-button--#{$type} {
+        &:first-child {
+          &:hover {
+            border-right-color: transparent;
+            z-index: 0;
+          }
+          &.is-disabled {
+            border-right-color: transparent;
+          }
+        }
+        &:last-child {
+          &:hover {
+            border-left-color: transparent;
+          }
+          &.is-disabled {
+            border-left-color: transparent;
+          }
+        }
+      }
     }
   }
 
   & .el-dropdown__caret-button {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
     position: relative;
-    border-left: none;
-
-    &::before {
-      $gap: 5px;
-
+    margin-left: -1px;
+    &:before {
       content: '';
       position: absolute;
       display: block;
-      width: 1px;
-      top: $gap;
-      bottom: $gap;
-      left: 0;
-      background: mix(white, transparent, 50%);
+      width: 0.5px;
+      height: 12px;
+      top: 50%;
+      margin-top: -6px;
+      left: -1px;
+      background: rgba(255,255,255,0.2);
     }
 
-    &.el-button--default::before {
-      background: mix($--button-default-border-color, transparent, 50%);
-    }
-
-    &:hover {
-      &:not(.is-disabled)::before {
-        top: 0;
-        bottom: 0;
+    &.el-button--default {
+      &:hover {
+        &:before {
+          opacity: 0;
+        }
+      }
+      &:before {
+        transition: opacity ease .3s;
+        background: $--color-line-2;
       }
     }
 
@@ -52,7 +148,6 @@
   }
   @include e(icon) {
     font-size: 12px;
-    margin: 0 3px;
   }
 
   .el-dropdown-selfdefine { // 自定义

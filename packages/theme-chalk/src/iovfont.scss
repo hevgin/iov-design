@@ -1,11 +1,15 @@
 @font-face {
   font-family: 'iovfont'; /* Project id 4466910 */
-  src: url('./fonts/iovfont.woff2?t=1779785056962') format('woff2'),
-       url('./fonts/iovfont.woff?t=1779785056962') format('woff'),
-       url('./fonts/iovfont.ttf?t=1779785056962') format('truetype');
+  src: url('./fonts/iovfont.woff2?t=1779955083321') format('woff2'),
+       url('./fonts/iovfont.woff?t=1779955083321') format('woff'),
+       url('./fonts/iovfont.ttf?t=1779955083321') format('truetype');
 }
 
 
+
+.iov-icon-fill-organize:before {
+  content: "\e722";
+}
 
 .iov-icon-pdf:before {
   content: "\e71b";

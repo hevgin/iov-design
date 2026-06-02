@@ -263,14 +263,14 @@
 
       let triggerElm = null;
       if (splitButton) {
-        triggerElm = <el-button-group>
+        triggerElm = <div class={`el-button-group__dropdown${type ? ' el-button-group__dropdown--' + type : ' el-button-group__dropdown--default'}`}>
           <el-button type={type} size={dropdownSize} nativeOn-click={handleMainButtonClick} disabled={disabled}>
             {this.$slots.default}
           </el-button>
           <el-button ref="trigger" type={type} size={dropdownSize} class="el-dropdown__caret-button" disabled={disabled}>
-            <i class="el-dropdown__icon iov-icon-arrow-down"></i>
+            <i class="el-dropdown__icon iov-icon-vertical-more"></i>
           </el-button>
-        </el-button-group>;
+        </div>;
       } else {
         triggerElm = this.$slots.default;
         const vnodeData = triggerElm[0].data || {};
