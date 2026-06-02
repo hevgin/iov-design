@@ -78,9 +78,7 @@
 ```html
 <template>
   <div class="demo-type">
-    <el-avatar :size="60" src="https://empty" @error="errorHandler">
-      <img class="el-avatar--img load-fail" src="examples/assets/images/image-load-fail.png" />
-    </el-avatar>
+    <el-avatar :size="60" src="https://empty" @error="errorHandler"></el-avatar>
   </div>
 </template>
 <script>
@@ -416,8 +414,6 @@
 | 事件名 | 说明               | 回调参数 |
 | ------ | ------------------ | -------- |
 | error  | 图片类头像加载失败的回调， 返回 false 会关闭组件默认的 fallback 行为 |(e: Event)  |
-| success | 上传成功回调 | (response, file) |
-| error  | 上传失败回调 | (err, file) |
 
 ### Slot
 

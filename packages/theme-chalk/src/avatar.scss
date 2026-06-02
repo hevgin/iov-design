@@ -29,10 +29,13 @@
     margin: 0 auto;
     display: block;
     height: 100%;
-    &.load-fail {
-      height: 50%;
-      width: 50%;
-    }
+  }
+
+  @include e(load-fail) {
+    margin: 0 auto;
+    display: block;
+    height: 50%;
+    width: 50%;
   }
 
   @include m(circle) {

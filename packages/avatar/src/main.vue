@@ -1,5 +1,6 @@
 <script>
 import ElUpload from 'iov-design/packages/upload';
+import ElSvgIcon from 'iov-design/packages/svg-icon';
 
 export default {
   name: 'ElAvatar',
@@ -11,7 +12,8 @@ export default {
   },
 
   components: {
-    ElUpload
+    ElUpload,
+    ElSvgIcon
   },
 
   props: {
@@ -123,12 +125,9 @@ export default {
   },
 
   methods: {
-    handleError() {
-      const { error } = this;
-      const errorFlag = error ? error() : undefined;
-      if (errorFlag !== false) {
-        this.isImageExist = false;
-      }
+    handleError(e) {
+      this.isImageExist = false;
+      this.$emit('error', e);
     },
     renderAvatar() {
       const { icon, avatarUrl, alt, isImageExist, srcSet, fit } = this;
@@ -147,7 +146,7 @@ export default {
         return (<i class={icon} />);
       }
 
-      return this.$slots.default;
+      return this.$slots.default || <el-svg-icon class="el-avatar__load-fail" icon-class="img-fail" />;
     },
     handleUploadSuccess(response, file) {
       const url = response.url || (response.data && response.data.url) || URL.createObjectURL(file.raw);
