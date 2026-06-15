@@ -1,13 +1,25 @@
 @import "mixins/mixins";
 @import "common/var";
 
-@mixin genTheme($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genTheme($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   background-color: $backgroundColor;
   color: $color;
   border-color: $plainBorderColor;
   @include when(hit) {
     border: 1px solid $borderColor;
     line-height: 30px;
+  }
+  @include when(disabled) {
+    .el-tag__text {
+      color: $disabledTextColor;
+    }
+    .el-tag__close {
+      color: $disabledCloseColor;
+      &:hover {
+        color: $disabledCloseColor;
+      }
+      cursor: not-allowed;
+    }
   }
   @include when(dot) {
     .el-tag__text:before {
@@ -21,7 +33,7 @@
     }
   }
 }
-@mixin genThemePrimary($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemePrimary($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--primary {
     background-color: $backgroundColor;
     color: $color;
@@ -29,6 +41,18 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
+    }
     @include when(dot) {
       .el-tag__text:before {
         background: $color;
@@ -42,7 +66,7 @@
     }
   }
 }
-@mixin genThemeInfo($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemeInfo($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--info {
     background-color: $backgroundColor;
     color: $color;
@@ -50,6 +74,18 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
+    }
     @include when(dot) {
       .el-tag__text:before {
         background: $color;
@@ -63,7 +99,7 @@
     }
   }
 }
-@mixin genThemeSuccess($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemeSuccess($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--success {
     background-color: $backgroundColor;
     color: $color;
@@ -71,6 +107,18 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
+    }
     @include when(dot) {
       .el-tag__text:before {
         background: $color;
@@ -84,7 +132,7 @@
     }
   }
 }
-@mixin genThemeWarning($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemeWarning($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--warning {
     background-color: $backgroundColor;
     color: $color;
@@ -92,6 +140,18 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
+    }
     @include when(dot) {
       .el-tag__text:before {
         background: $color;
@@ -105,7 +165,7 @@
     }
   }
 }
-@mixin genThemeDanger($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemeDanger($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--danger {
     background-color: $backgroundColor;
     color: $color;
@@ -113,6 +173,18 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
+    }
     @include when(dot) {
       .el-tag__text:before {
         background: $color;
@@ -126,7 +198,7 @@
     }
   }
 }
-@mixin genThemeGold($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemeGold($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--gold {
     background-color: $backgroundColor;
     color: $color;
@@ -134,6 +206,18 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
+    }
     @include when(dot) {
       .el-tag__text:before {
         background: $color;
@@ -147,7 +231,7 @@
     }
   }
 }
-@mixin genThemeBlue($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemeBlue($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--blue {
     background-color: $backgroundColor;
     color: $color;
@@ -155,6 +239,18 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
+    }
     @include when(dot) {
       .el-tag__text:before {
         background: $color;
@@ -168,7 +264,7 @@
     }
   }
 }
-@mixin genThemePurple($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemePurple($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--purple {
     background-color: $backgroundColor;
     color: $color;
@@ -176,6 +272,18 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
+    }
     @include when(dot) {
       .el-tag__text:before {
         background: $color;
@@ -189,7 +297,7 @@
     }
   }
 }
-@mixin genThemePink($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemePink($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--pink {
     background-color: $backgroundColor;
     color: $color;
@@ -197,6 +305,18 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
+    }
     @include when(dot) {
       .el-tag__text:before {
         background: $color;
@@ -210,7 +330,7 @@
     }
   }
 }
-@mixin genThemeMauve($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemeMauve($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--mauve {
     background-color: $backgroundColor;
     color: $color;
@@ -218,6 +338,18 @@
     @include when(hit) {
       border-color: $borderColor;
     }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
+    }
     @include when(dot) {
       .el-tag__text:before {
         background: $color;
@@ -231,13 +363,25 @@
     }
   }
 }
-@mixin genThemeSalmon($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemeSalmon($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--salmon {
     background-color: $backgroundColor;
     color: $color;
     border-color: $plainBorderColor;
     @include when(hit) {
       border-color: $borderColor;
+    }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
     }
     @include when(dot) {
       .el-tag__text:before {
@@ -253,13 +397,25 @@
   }
 }
 
-@mixin genThemeGrey($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemeGrey($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--gray {
     background-color: $backgroundColor;
     color: $color;
     border-color: $plainBorderColor;
     @include when(hit) {
       border-color: $borderColor;
+    }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
     }
     @include when(dot) {
       .el-tag__text:before {
@@ -274,13 +430,25 @@
     }
   }
 }
-@mixin genThemeDarkblue($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor) {
+@mixin genThemeDarkblue($backgroundColor, $borderColor, $color, $hoverColor, $plainBorderColor, $disabledTextColor, $disabledCloseColor) {
   &.el-tag--darkblue {
     background-color: $backgroundColor;
     color: $color;
     border-color: $plainBorderColor;
     @include when(hit) {
       border-color: $borderColor;
+    }
+    @include when(disabled) {
+      .el-tag__text {
+        color: $disabledTextColor;
+      }
+      .el-tag__close {
+        color: $disabledCloseColor;
+        &:hover {
+          color: $disabledCloseColor;
+        }
+        cursor: not-allowed;
+      }
     }
     @include when(dot) {
       .el-tag__text:before {
@@ -306,20 +474,20 @@
   border-radius: $--tag-border-radius;
   box-sizing: border-box;
   white-space: nowrap;
-  @include genTheme($--color-fill-2, $--color-line-2, $--color-text-5, $--color-text-4, $--color-fill-2);
-  @include genThemePrimary($--color-darkblue-1, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-1);
-  @include genThemeInfo($--color-fill-2, $--color-line-2, $--color-text-3, $--color-text-4, $--color-fill-2);
-  @include genThemeSuccess($--color-success-1, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-1);
-  @include genThemeWarning($--color-warning-1, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-1);
-  @include genThemeDanger($--color-danger-1, $--color-danger-2, $--color-danger-6, $--color-danger-7, $--color-danger-1);
-  @include genThemeGold($--color-gold-1, $--color-gold-2, $--color-gold-6, $--color-gold-7, $--color-gold-1);
-  @include genThemeBlue($--color-blue-1, $--color-blue-2, $--color-blue-6, $--color-blue-7, $--color-blue-1);
-  @include genThemePurple($--color-purple-1, $--color-purple-2, $--color-purple-6, $--color-purple-7, $--color-purple-1);
-  @include genThemePink($--color-pink-1, $--color-pink-2, $--color-pink-6, $--color-pink-7, $--color-pink-1);
-  @include genThemeMauve($--color-mauve-1, $--color-mauve-2, $--color-mauve-6, $--color-mauve-7, $--color-mauve-1);
-  @include genThemeSalmon($--color-salmon-1, $--color-salmon-2, $--color-salmon-6, $--color-salmon-7, $--color-salmon-1);
-  @include genThemeGrey($--color-grey-1, $--color-grey-2, $--color-grey-6, $--color-grey-7, $--color-grey-1);
-  @include genThemeDarkblue($--color-darkblue-1, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-1);
+  @include genTheme($--color-fill-2, $--color-line-2, $--color-text-5, $--color-text-4, $--color-fill-2, $--color-text-3, $--color-fill-4);
+  @include genThemePrimary($--color-darkblue-1, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-1, $--color-darkblue-3, $--color-darkblue-4);
+  @include genThemeInfo($--color-fill-2, $--color-line-2, $--color-text-3, $--color-text-4, $--color-fill-2, $--color-text-3, $--color-fill-4);
+  @include genThemeSuccess($--color-success-1, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-1, $--color-success-3, $--color-success-4);
+  @include genThemeWarning($--color-warning-1, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-1, $--color-warning-3, $--color-warning-4);
+  @include genThemeDanger($--color-danger-1, $--color-danger-2, $--color-danger-6, $--color-danger-7, $--color-danger-1, $--color-danger-3, $--color-danger-4);
+  @include genThemeGold($--color-gold-1, $--color-gold-2, $--color-gold-6, $--color-gold-7, $--color-gold-1, $--color-gold-3, $--color-gold-4);
+  @include genThemeBlue($--color-blue-1, $--color-blue-2, $--color-blue-6, $--color-blue-7, $--color-blue-1, $--color-blue-3, $--color-blue-4);
+  @include genThemePurple($--color-purple-1, $--color-purple-2, $--color-purple-6, $--color-purple-7, $--color-purple-1, $--color-purple-3, $--color-purple-4);
+  @include genThemePink($--color-pink-1, $--color-pink-2, $--color-pink-6, $--color-pink-7, $--color-pink-1, $--color-pink-3, $--color-pink-4);
+  @include genThemeMauve($--color-mauve-1, $--color-mauve-2, $--color-mauve-6, $--color-mauve-7, $--color-mauve-1, $--color-mauve-3, $--color-mauve-4);
+  @include genThemeSalmon($--color-salmon-1, $--color-salmon-2, $--color-salmon-6, $--color-salmon-7, $--color-salmon-1, $--color-salmon-3, $--color-salmon-4);
+  @include genThemeGrey($--color-grey-1, $--color-grey-2, $--color-grey-6, $--color-grey-7, $--color-grey-1, $--color-grey-3, $--color-grey-4);
+  @include genThemeDarkblue($--color-darkblue-1, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-1, $--color-darkblue-3, $--color-darkblue-4);
 
 
   @include when(dot) {
@@ -375,40 +543,41 @@
   }
 
   @include m(dark) {
-    @include genTheme($--color-text-3, $--color-text-3, $--color-white, $--color-white, $--color-text-3);
-    @include genThemePrimary($--color-darkblue-6, $--color-darkblue-6, $--color-white, $--color-white, $--color-darkblue-6);
-    @include genThemeInfo($--color-text-3, $--color-text-3, $--color-white, $--color-white, $--color-text-3);
-    @include genThemeSuccess($--color-success-6, $--color-success-6, $--color-white, $--color-white, $--color-success-6);
-    @include genThemeWarning($--color-warning-6, $--color-warning-6, $--color-white, $--color-white, $--color-warning-6);
-    @include genThemeDanger($--color-danger-6, $--color-danger-6, $--color-white, $--color-white, $--color-danger-6);
-    @include genThemeGold($--color-gold-6, $--color-gold-6, $--color-white, $--color-white, $--color-gold-6);
-    @include genThemeBlue($--color-blue-6, $--color-blue-6, $--color-white, $--color-white, $--color-blue-6);
-    @include genThemePurple($--color-purple-6, $--color-purple-6, $--color-white, $--color-white, $--color-purple-6);
-    @include genThemePink($--color-pink-6, $--color-pink-6, $--color-white, $--color-white, $--color-pink-6);
-    @include genThemeMauve($--color-mauve-6, $--color-mauve-6, $--color-white, $--color-white, $--color-mauve-6);
-    @include genThemeSalmon($--color-salmon-6, $--color-salmon-6, $--color-white, $--color-white, $--color-salmon-6);
-    @include genThemeGrey($--color-grey-6, $--color-grey-6, $--color-white, $--color-white, $--color-grey-6);
-    @include genThemeDarkblue($--color-darkblue-6, $--color-darkblue-6, $--color-white, $--color-white, $--color-darkblue-6);
+    @include genTheme($--color-text-3, $--color-text-3, $--color-white, $--color-white, $--color-text-3, $--color-text-3, $--color-fill-4);
+    @include genThemePrimary($--color-darkblue-6, $--color-darkblue-6, $--color-white, $--color-white, $--color-darkblue-6, $--color-darkblue-3, $--color-darkblue-4);
+    @include genThemeInfo($--color-text-3, $--color-text-3, $--color-white, $--color-white, $--color-text-3, $--color-text-3, $--color-fill-4);
+    @include genThemeSuccess($--color-success-6, $--color-success-6, $--color-white, $--color-white, $--color-success-6, $--color-success-3, $--color-success-4);
+    @include genThemeWarning($--color-warning-6, $--color-warning-6, $--color-white, $--color-white, $--color-warning-6, $--color-warning-3, $--color-warning-4);
+    @include genThemeDanger($--color-danger-6, $--color-danger-6, $--color-white, $--color-white, $--color-danger-6, $--color-danger-3, $--color-danger-4);
+    @include genThemeGold($--color-gold-6, $--color-gold-6, $--color-white, $--color-white, $--color-gold-6, $--color-gold-3, $--color-gold-4);
+    @include genThemeBlue($--color-blue-6, $--color-blue-6, $--color-white, $--color-white, $--color-blue-6, $--color-blue-3, $--color-blue-4);
+    @include genThemePurple($--color-purple-6, $--color-purple-6, $--color-white, $--color-white, $--color-purple-6, $--color-purple-3, $--color-purple-4);
+    @include genThemePink($--color-pink-6, $--color-pink-6, $--color-white, $--color-white, $--color-pink-6, $--color-pink-3, $--color-pink-4);
+    @include genThemePink($--color-pink-6, $--color-pink-6, $--color-white, $--color-white, $--color-pink-6, $--color-pink-3, $--color-pink-4);
+    @include genThemeMauve($--color-mauve-6, $--color-mauve-6, $--color-white, $--color-white, $--color-mauve-6, $--color-mauve-3, $--color-mauve-4);
+    @include genThemeSalmon($--color-salmon-6, $--color-salmon-6, $--color-white, $--color-white, $--color-salmon-6, $--color-salmon-3, $--color-salmon-4);
+    @include genThemeGrey($--color-grey-6, $--color-grey-6, $--color-white, $--color-white, $--color-grey-6, $--color-grey-3, $--color-grey-4);
+    @include genThemeDarkblue($--color-darkblue-6, $--color-darkblue-6, $--color-white, $--color-white, $--color-darkblue-6, $--color-darkblue-3, $--color-darkblue-4);
   }
 
   @include m(plain) {
     border-width: 1px;
     border-style: solid;
     line-height: 30px;
-    @include genTheme($--color-white, $--color-line-2, $--color-text-3, $--color-text-4, $--color-text-3);
-    @include genThemePrimary($--color-white, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-6);
-    @include genThemeInfo($--color-white, $--color-line-2, $--color-text-3, $--color-text-4, $--color-text-3);
-    @include genThemeSuccess($--color-white, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-6);
-    @include genThemeWarning($--color-white, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-6);
-    @include genThemeDanger($--color-white, $--color-danger-2, $--color-danger-6, $--color-danger-7, $--color-danger-6);
-    @include genThemeGold($--color-white, $--color-gold-2, $--color-gold-6, $--color-gold-7, $--color-gold-6);
-    @include genThemeBlue($--color-white, $--color-blue-2, $--color-blue-6, $--color-blue-7, $--color-blue-6);
-    @include genThemePurple($--color-white, $--color-purple-2, $--color-purple-6, $--color-purple-7, $--color-purple-6);
-    @include genThemePink($--color-white, $--color-pink-2, $--color-pink-6, $--color-pink-7, $--color-pink-6);
-    @include genThemeMauve($--color-white, $--color-mauve-2, $--color-mauve-6, $--color-mauve-7, $--color-mauve-6);
-    @include genThemeSalmon($--color-white, $--color-salmon-2, $--color-salmon-6, $--color-salmon-7, $--color-salmon-6);
-    @include genThemeGrey($--color-white, $--color-grey-2, $--color-grey-6, $--color-grey-7, $--color-grey-6);
-    @include genThemeDarkblue($--color-white, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-6);
+    @include genTheme($--color-white, $--color-line-2, $--color-text-3, $--color-text-4, $--color-text-3, $--color-text-3, $--color-fill-4);
+    @include genThemePrimary($--color-white, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-6, $--color-darkblue-3, $--color-darkblue-4);
+    @include genThemeInfo($--color-white, $--color-line-2, $--color-text-3, $--color-text-4, $--color-text-3, $--color-text-3, $--color-fill-4);
+    @include genThemeSuccess($--color-white, $--color-success-2, $--color-success-6, $--color-success-7, $--color-success-6, $--color-success-3, $--color-success-4);
+    @include genThemeWarning($--color-white, $--color-warning-2, $--color-warning-6, $--color-warning-7, $--color-warning-6, $--color-warning-3, $--color-warning-4);
+    @include genThemeDanger($--color-white, $--color-danger-2, $--color-danger-6, $--color-danger-7, $--color-danger-6, $--color-danger-3, $--color-danger-4);
+    @include genThemeGold($--color-white, $--color-gold-2, $--color-gold-6, $--color-gold-7, $--color-gold-6, $--color-gold-3, $--color-gold-4);
+    @include genThemeBlue($--color-white, $--color-blue-2, $--color-blue-6, $--color-blue-7, $--color-blue-6, $--color-blue-3, $--color-blue-4);
+    @include genThemePurple($--color-white, $--color-purple-2, $--color-purple-6, $--color-purple-7, $--color-purple-6, $--color-purple-3, $--color-purple-4);
+    @include genThemePink($--color-white, $--color-pink-2, $--color-pink-6, $--color-pink-7, $--color-pink-6, $--color-pink-3, $--color-pink-4);
+    @include genThemeMauve($--color-white, $--color-mauve-2, $--color-mauve-6, $--color-mauve-7, $--color-mauve-6,$--color-mauve-3, $--color-mauve-4);
+    @include genThemeSalmon($--color-white, $--color-salmon-2, $--color-salmon-6, $--color-salmon-7, $--color-salmon-6, $--color-salmon-3, $--color-salmon-4);
+    @include genThemeGrey($--color-white, $--color-grey-2, $--color-grey-6, $--color-grey-7, $--color-grey-6, $--color-grey-3, $--color-grey-4);
+    @include genThemeDarkblue($--color-white, $--color-darkblue-2, $--color-darkblue-6, $--color-darkblue-7, $--color-darkblue-6, $--color-darkblue-3, $--color-darkblue-4);
   }
 
   @include m(medium) {

@@ -14,6 +14,10 @@
         type: String,
         default: 'none'
       },
+      disabled: {
+        type: Boolean,
+        default: false
+      },
       effect: {
         type: String,
         default: 'light',
@@ -37,14 +41,15 @@
       }
     },
     render(h) {
-      const { type, tagSize, hit, dot, effect } = this;
+      const { type, tagSize, hit, dot, effect, disabled } = this;
       const classes = [
         'el-tag',
         type ? `el-tag--${type}` : '',
         tagSize ? `el-tag--${tagSize}` : '',
         effect ? `el-tag--${effect}` : '',
         hit && 'is-hit',
-        dot && 'is-dot'
+        dot && 'is-dot',
+        disabled && 'is-disabled'
       ];
       const tagEl = (
         <span

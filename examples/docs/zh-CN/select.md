@@ -5,7 +5,7 @@
 ### 基础用法
 
 适用广泛的基础单选。`v-model`的值为当前被选中的`el-option`的 value 属性值
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="12">
@@ -46,12 +46,17 @@
 
 通过给 `el-option` 设置 `disabled` 属性，可单独禁用某一个下拉选项。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="12">
     <el-col :span="12">
-      <el-select v-model="value" placeholder="请选择" size="small">
+      <el-select v-model="value1" placeholder="请选择" size="small">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <el-select v-model="value2" placeholder="请选择" multiple filterable collapse-tags size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
       </el-select>
     </el-col>
@@ -68,7 +73,8 @@
           {value: '3',label: '蚵仔煎'},
           {value: '4',label: '龙须面'}
         ],
-        value: ''
+        value1: '',
+        value2: ['2']
       }
     }
   }
@@ -82,7 +88,7 @@
 
 给 `el-select` 直接设置 `disabled` 属性，可将整个选择器置为不可用状态。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="12">
@@ -124,7 +130,7 @@
 
 选择器支持一键清空已选内容，添加 `clearable` 属性即可显示清空按钮，仅适用于单选场景。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="12">
@@ -322,7 +328,7 @@
 
 可以自定义备选项。将自定义的 HTML 模板插入`el-option`的 slot 中即可。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="12">
@@ -361,7 +367,7 @@
 
 备选项进行分组展示。使用`el-option-group`对备选项进行分组，它的`label`属性为分组名
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="12">
@@ -419,7 +425,7 @@
 
 可以利用搜索功能快速查找选项。为`el-select`添加`filterable`属性即可启用搜索功能。默认情况下，Select 会找出所有`label`属性包含输入值的选项。如果希望使用其他的搜索逻辑，可以通过传入一个`filter-method`来实现。`filter-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="12">
@@ -453,7 +459,7 @@
 
 从服务器搜索数据，输入关键字进行查找。为了启用远程搜索，需要将`filterable`和`remote`设置为`true`，同时传入一个`remote-method`。`remote-method`为一个`Function`，它会在输入值发生变化时调用，参数为当前输入值。需要注意的是，如果`el-option`是通过`v-for`指令渲染出来的，此时需要为`el-option`添加`key`属性，且其值需具有唯一性，比如此例中的`item.value`。
 
-:::demo 
+:::demo
 ```html
 <template>
   <el-row :gutter="12">
@@ -522,7 +528,7 @@
 
 可以创建并选中选项中不存在的条目。使用`allow-create`属性即可通过在输入框中输入文字来创建新的条目。注意此时`filterable`必须为真。本例还使用了`default-first-option`属性，在该属性打开的情况下，按下回车就可以选中当前选项列表中的第一个选项，无需使用鼠标或键盘方向键进行定位。
 
-:::demo 
+:::demo
 ```html
 <template>
 <el-row :gutter="12">
