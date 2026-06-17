@@ -695,6 +695,8 @@
 
       deletePrevTag(e) {
         if (e.target.value.length <= 0 && !this.toggleLastOptionHitState()) {
+          const option = this.selected[this.selected.length - 1];
+          if (option && option.disabled) return;
           const value = this.value.slice();
           value.pop();
           this.$emit('input', value);
