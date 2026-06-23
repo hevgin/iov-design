@@ -70,6 +70,9 @@
         min-width: $--input-medium-height - 8px;
       }
     }
+    @include e(search-input) {
+      height: $--input-medium-height - 8px;
+    }
   }
 
   @include m(small) {
@@ -82,6 +85,9 @@
         min-width: $--input-small-height - 8px;
       }
     }
+    @include e(search-input) {
+      height: $--input-small-height - 8px;
+    }
   }
 
   @include m(mini) {
@@ -93,6 +99,9 @@
       &.el-cascader__tags-count-fixed {
         min-width: $--input-mini-height - 8px;
       }
+    }
+    @include e(search-input) {
+      height: $--input-mini-height - 8px;
     }
   }
 
