@@ -76,7 +76,7 @@
         <i class="iov-icon-delete" v-if="!disabled && ['text', 'picture'].includes(listType)" @click.stop="$emit('remove', file)"></i>
         <span class="el-upload-list__item-actions" v-if="listType === 'picture-card' && file.status === 'success' && actions.length > 0">
           <i v-if="handlePreview && actions.includes('preview')" @click.stop="onPreview(file)" class="el-upload-list__item-preview iov-icon-eye"></i>
-          <i v-if="!disabled && actions.includes('update')" class="el-upload-list__item-update iov-icon-update" @click.stop="onUpdate"></i>
+          <i v-if="!disabled && actions.includes('update')" class="el-upload-list__item-update iov-icon-update" @click.stop="onUpdate(file)"></i>
           <i v-if="!disabled && actions.includes('remove')" class="el-upload-list__item-delete iov-icon-delete" @click.stop="$emit('remove', file)"></i>
         </span>
       </slot>
@@ -138,8 +138,10 @@
       onPreview(file) {
         this.handlePreview && this.handlePreview(file);
       },
-      onUpdate() {
-        this.$parent.$refs['upload-inner'].handleClick();
+      // "更新"操作：调用 upload-inner 的 handleClick 强制弹出文件选择框，
+      // 并传入当前 file 标记为待替换文件，使新文件上传后替换原位置
+      onUpdate(file) {
+        this.$parent.$refs['upload-inner'].handleClick(true, file);
       },
       findLiByUid(uid) {
         return this.$el.querySelector(`[data-uid="${uid}"]`);

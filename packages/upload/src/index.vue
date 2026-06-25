@@ -182,7 +182,7 @@ export default {
   },
 
   methods: {
-    handleStart(rawFile) {
+    handleStart(rawFile, replacingIndex) {
       rawFile.uid = Date.now() + this.tempIndex++;
       let file = {
         status: 'ready',
@@ -202,7 +202,14 @@ export default {
         }
       }
 
-      this.uploadFiles.push(file);
+      // replacingIndex > -1 表示当前为"更新"操作：
+      // 新文件插入到被替换文件的原始位置，保持列表顺序不变；
+      // 否则按常规追加到列表末尾
+      if (replacingIndex > -1) {
+        this.uploadFiles.splice(replacingIndex, 0, file);
+      } else {
+        this.uploadFiles.push(file);
+      }
       this.onChange(file, this.uploadFiles);
     },
     handleProgress(ev, rawFile) {

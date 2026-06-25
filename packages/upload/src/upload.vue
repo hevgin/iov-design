@@ -53,7 +53,10 @@ export default {
   data() {
     return {
       mouseover: false,
-      reqs: {}
+      reqs: {},
+      // 记录当前"更新"操作要被替换的旧文件对象。
+      // 点击更新按钮时由 handleClick 设置，在 handleChange 中消费后置空。
+      replacingFile: null
     };
   },
 
@@ -75,12 +78,26 @@ export default {
 
       if (!files) return;
 
-      if (this.drag && this.limit === 1 || this.hideUploadInput) {
+      // 更新场景：需在原位置替换文件
+      // - 先记录旧文件在列表中的索引（用于新文件原位插入）
+      // - 中断旧文件正在进行的上传请求（如有）
+      // - 从列表中移除旧文件
+      let replacingIndex = -1;
+      if (this.replacingFile) {
+        replacingIndex = this.fileList.indexOf(this.replacingFile);
+        if (replacingIndex > -1) {
+          this.abort(this.replacingFile);
+          this.fileList.splice(replacingIndex, 1);
+        }
+        this.replacingFile = null;
+      } else if (this.drag && this.limit === 1 || this.hideUploadInput) {
+        // 单文件拖拽上传或隐藏上传框的单图场景：直接清空列表
         this.fileList.length = [];
       }
-      this.uploadFiles(files);
+      // 传入 replacingIndex，让新文件插入到原位置而非追加到末尾
+      this.uploadFiles(files, replacingIndex);
     },
-    uploadFiles(files) {
+    uploadFiles(files, replacingIndex) {
       if (this.limit && this.fileList.length + files.length > this.limit) {
         this.onExceed && this.onExceed(files, this.fileList);
         return;
@@ -92,7 +109,10 @@ export default {
       if (postFiles.length === 0) { return; }
 
       postFiles.forEach(rawFile => {
-        this.onStart(rawFile);
+        // 将 replacingIndex 传给 onStart（即 ElUpload.handleStart），
+        // 使新文件 splice 到原位置；replacingIndex 递增以支持多文件顺序替换
+        this.onStart(rawFile, replacingIndex);
+        if (replacingIndex > -1) { replacingIndex++; }
         if (this.autoUpload) this.upload(rawFile);
       });
     },
@@ -174,8 +194,15 @@ export default {
         req.then(options.onSuccess, options.onError);
       }
     },
-    handleClick() {
-      if (!this.disabled && (this.fileList.length < this.limit || !this.limit) || this.fileList.length === 0) {
+    handleClick(ev, file) {
+      // force=true 表示绕过 limit 检查强制弹出文件选择框（用于"更新"操作）
+      const force = ev === true;
+      // file 存在表示本次为"更新"操作，记录要被替换的旧文件，
+      // 供 handleChange 在选择新文件后移除旧文件并在原位插入新文件
+      if (file) {
+        this.replacingFile = file;
+      }
+      if (force || (!this.disabled && (this.fileList.length < this.limit || !this.limit)) || this.fileList.length === 0) {
         this.$refs.input.value = null;
         this.$refs.input.click();
       }

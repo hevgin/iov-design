@@ -95,7 +95,7 @@
         this.handlePreview && this.handlePreview(file);
       },
       onUpdate() {
-        this.$parent.handleClick();
+        this.$parent.handleClick(true);
       }
     }
   };
