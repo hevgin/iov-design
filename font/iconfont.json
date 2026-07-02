@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "47981423",
+      "name": "iov-icon-partnership",
+      "font_class": "partnership",
+      "unicode": "e725",
+      "unicode_decimal": 59173
+    },
+    {
+      "icon_id": "47981422",
+      "name": "iov-icon-own",
+      "font_class": "own",
+      "unicode": "e726",
+      "unicode_decimal": 59174
+    },
+    {
       "icon_id": "47857598",
       "name": "iov-icon-ars",
       "font_class": "ars",

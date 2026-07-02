@@ -64,6 +64,7 @@
 @mixin button-size($height, $padding-horizontal, $font-size, $border-radius) {
   padding: 0 $padding-horizontal;
   height: $height;
+  line-height: $height;
   font-size: $font-size;
   border-radius: $border-radius;
   .el-button__text {
