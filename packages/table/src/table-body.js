@@ -370,13 +370,22 @@ export default {
         const targetExpandedRow = tbody.children[expandedRowIndex];
         if (!targetExpandedRow) return;
 
-        const subRows = targetExpandedRow.querySelectorAll('.el-table__body > tbody > .el-table__row');
-        subRows.forEach((row, i) => {
-          if (hoverIndex !== null && i === hoverIndex) {
-            addClass(row, 'hover-row');
-          } else {
-            removeClass(row, 'hover-row');
-          }
+        // 找到展开行中的子表格，分别同步其所有 body（主体、左固定、右固定）中的行
+        const subTable = targetExpandedRow.querySelector('.el-table');
+        if (!subTable) return;
+
+        const subTbodies = subTable.querySelectorAll(
+          ':scope > .el-table__body-wrapper > table.el-table__body > tbody, :scope > .el-table__fixed > .el-table__fixed-body-wrapper > table.el-table__body > tbody, :scope > .el-table__fixed-right > .el-table__fixed-body-wrapper > table.el-table__body > tbody'
+        );
+        subTbodies.forEach(subTbody => {
+          const subRows = subTbody.querySelectorAll(':scope > .el-table__row');
+          subRows.forEach((row, i) => {
+            if (hoverIndex !== null && i === hoverIndex) {
+              addClass(row, 'hover-row');
+            } else {
+              removeClass(row, 'hover-row');
+            }
+          });
         });
       });
     },

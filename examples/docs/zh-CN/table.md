@@ -1353,7 +1353,29 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
           <el-table-column label="" pops="" width="60px" emptyValuePlaceholder=""></el-table-column>
           <el-table-column label="店铺ID" prop="shopId" width="120"></el-table-column>
           <el-table-column label="店铺名称" prop="shop" min-width="180"></el-table-column>
-          <el-table-column label="地址" prop="address" min-width="200"></el-table-column>
+          <el-table-column label="地址" prop="address" min-width="800"></el-table-column>
+          <el-table-column label="商品ID" prop="id" min-width="120" fixed="right"></el-table-column>
+        </el-table>
+      </template>
+    </el-table-column>
+    <el-table-column label="商品ID" prop="id" min-width="120"></el-table-column>
+    <el-table-column label="商品分类" prop="category" min-width="180"></el-table-column>
+    <el-table-column label="商品名称" prop="name" min-width="200"></el-table-column>
+    <el-table-column label="描述" prop="desc" min-width="280"></el-table-column>
+    <el-table-column label="地址" prop="address" min-width="200"></el-table-column>
+    <el-table-column label="店铺名称" prop="shop" min-width="120"></el-table-column>
+    <el-table-column label="店铺ID" prop="shopId" min-width="120" fixed="right"></el-table-column>
+  </el-table>
+
+  <el-table :data="tableData" outer-border style="width: 100%">
+    <el-table-column type="expand" fixed="left" width="60px">
+      <template slot-scope="props">
+        <el-table :data="tableData" outer-border style="border: 0 none;">
+          <el-table-column label="序号" type="index" width="60px" fixed="left"></el-table-column>
+          <el-table-column label="店铺ID" prop="shopId" width="120"></el-table-column>
+          <el-table-column label="店铺名称" prop="shop" min-width="180"></el-table-column>
+          <el-table-column label="地址" prop="address" min-width="800"></el-table-column>
+          <el-table-column label="商品ID" prop="id" min-width="120" fixed="right"></el-table-column>
         </el-table>
       </template>
     </el-table-column>
