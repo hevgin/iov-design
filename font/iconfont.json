@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "48039011",
+      "name": "iov-icon-diff",
+      "font_class": "diff",
+      "unicode": "e727",
+      "unicode_decimal": 59175
+    },
+    {
       "icon_id": "47981423",
       "name": "iov-icon-partnership",
       "font_class": "partnership",

@@ -92,7 +92,9 @@ export default {
         raf = (fn) => setTimeout(fn, 16);
       }
       raf(() => {
-        const rows = this.$el.querySelectorAll('.el-table__row');
+        // const rows = this.$el.querySelectorAll('.el-table__row');
+        // 使用 :scope 限定只查询当前 tbody 下的直属行，排除展开行内嵌套子表格的行
+        const rows = this.$el.querySelectorAll(':scope > tbody > .el-table__row');
         const oldRow = rows[oldVal];
         const newRow = rows[newVal];
         if (oldRow) {
@@ -325,11 +327,59 @@ export default {
 
     handleMouseEnter: debounce(30, function(index) {
       this.store.commit('setHoverRow', index);
+      this.syncNestedHoverRow(index);
     }),
 
     handleMouseLeave: debounce(30, function() {
       this.store.commit('setHoverRow', null);
+      this.syncNestedHoverRow(null);
     }),
+
+    // 当子表格嵌套在父表格的展开行中且父表格有固定列时，
+    // 主体 body 中的子表格行 hover 需要同步到固定列 body 中的子表格行
+    syncNestedHoverRow(hoverIndex) {
+      const expandedCell = this.$el.closest('.el-table__expanded-cell');
+      if (!expandedCell) return;
+
+      const expandedRow = expandedCell.closest('tr');
+      if (!expandedRow) return;
+
+      const parentBodyWrapper = expandedRow.closest('.el-table__body-wrapper, .el-table__fixed-body-wrapper');
+      if (!parentBodyWrapper) return;
+
+      const parentTableEl = parentBodyWrapper.closest('.el-table');
+      if (!parentTableEl) return;
+
+      const parentTbody = parentBodyWrapper.querySelector(':scope > .el-table__body > tbody');
+      if (!parentTbody) return;
+
+      const allParentRows = Array.from(parentTbody.children);
+      const expandedRowIndex = allParentRows.indexOf(expandedRow);
+      if (expandedRowIndex < 0) return;
+
+      const allBodyWrappers = parentTableEl.querySelectorAll(
+        ':scope > .el-table__body-wrapper, :scope > .el-table__fixed > .el-table__fixed-body-wrapper, :scope > .el-table__fixed-right > .el-table__fixed-body-wrapper'
+      );
+
+      allBodyWrappers.forEach(wrapper => {
+        if (wrapper === parentBodyWrapper) return;
+
+        const tbody = wrapper.querySelector(':scope > .el-table__body > tbody');
+        if (!tbody) return;
+
+        const targetExpandedRow = tbody.children[expandedRowIndex];
+        if (!targetExpandedRow) return;
+
+        const subRows = targetExpandedRow.querySelectorAll('.el-table__body > tbody > .el-table__row');
+        subRows.forEach((row, i) => {
+          if (hoverIndex !== null && i === hoverIndex) {
+            addClass(row, 'hover-row');
+          } else {
+            removeClass(row, 'hover-row');
+          }
+        });
+      });
+    },
 
     handleContextMenu(event, row) {
       this.handleEvent(event, row, 'contextmenu');
