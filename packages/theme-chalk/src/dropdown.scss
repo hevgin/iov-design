@@ -16,10 +16,21 @@
       margin-left: 4px;
     }
   }
+  .el-button.is-round {
+    padding-right: 8px;
+  }
   .el-button {
     padding-right: 8px;
     .iov-icon-arrow-down {
       margin-left: 8px;
+      transition: all .25s ease;
+    }
+  }
+  &.is-visible {
+    .el-button {
+      .iov-icon-arrow-down {
+        transform: rotate(180deg);
+      }
     }
   }
 
