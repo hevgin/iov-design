@@ -7,6 +7,7 @@
     @drop.prevent="onDrop"
     @dragover.prevent="onDragover"
     @dragleave.prevent="dragover = false"
+    @click="handleClick"
   >
     <slot></slot>
   </div>
@@ -31,6 +32,12 @@
       onDragover() {
         if (!this.disabled) {
           this.dragover = true;
+        }
+      },
+      handleClick(e) {
+        const uploader = this.uploader;
+        if (uploader && uploader.uploadFiles && uploader.uploadFiles.length > 0) {
+          uploader.onPreview(uploader.uploadFiles[uploader.uploadFiles.length - 1]);
         }
       },
       onDrop(e) {

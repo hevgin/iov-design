@@ -404,8 +404,7 @@
 
 :::demo
 ```html
-<el-row :gutter="12">
-  <el-col :span="12">
+<el-row :gutter="12" style="margin-bottom: 24px;">
     <el-upload
       drag
       size="medium"
@@ -421,8 +420,9 @@
         <div slot="tip" class="el-upload__tip">支持jpg/png/pdf格式，最多上传5个文件，单个文件≤5M</div>
       </template>
     </el-upload>
-  </el-col>
-  <el-col :span="12">
+  </el-row>
+
+  <el-row :gutter="12">
     <el-upload
       drag
       size="medium"
@@ -430,16 +430,15 @@
       :limit="1"
       :file-list="fileList"
       :show-file-list="false"
+      :on-preview="handlePreview"
       >
       <template>
         <i class="el-upload__icon iov-icon-file-excel"></i>
         <el-button class="el-upload__btn" round size="small">点击上传</el-button>
-
-      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
+        <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
         <div slot="tip" class="el-upload__tip">支持jpg/png/pdf格式，最多上传5个文件，单个文件≤5M</div>
       </template>
     </el-upload>
-  </el-col>
 </el-row>
 
 <script>
@@ -451,6 +450,11 @@
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
         }]
       };
+    },
+    methods: {
+      handlePreview(file) {
+        console.log(file);
+      }
     }
   }
 </script>
@@ -487,11 +491,11 @@
       :limit="1"
       :file-list="fileList"
       :show-file-list="false"
+      :on-preview="handlePreview"
       >
       <template>
         <el-link icon="iov-icon-upload">选择文件</el-link>
-
-      <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
+        <div slot="header" class="el-upload__header">请下载模板按格式进行填写后上传</div>
         <div slot="tip" class="el-upload__tip">点击或拖拽上传</div>
       </template>
     </el-upload>
@@ -507,6 +511,11 @@
           url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'
         }]
       };
+    },
+    methods: {
+      handlePreview(file) {
+        console.log(file);
+      }
     }
   }
 </script>

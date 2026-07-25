@@ -24,11 +24,11 @@
                 <i slot="error" class="el-image__error"></i>
               </el-image>
             </span>
-            <i v-else-if="['text'].includes(listType)" class="el-upload-list__icon" @click="handleClick(file)" :style="iconStyle(file[fileNameAlias])"></i>
-            <div class="el-upload-list__name" @click="handleClick(file)">
+            <i v-else-if="['text'].includes(listType)" class="el-upload-list__icon" :style="iconStyle(file[fileNameAlias])"></i>
+            <div class="el-upload-list__name">
               <span class="file-name">{{file[fileNameAlias]}}</span>
             </div>
-            <el-button v-if="size === 'medium'" class="el-upload__btn" round size="small" slot="trigger">重新上传</el-button>
+            <el-button v-if="size === 'medium'" class="el-upload__btn" round size="small" @click.stop="handleReupload(file)">重新上传</el-button>
           </div>
           <div v-if="file.status === 'uploading'" class="el-upload-list__item-status-label">
             <el-progress
@@ -61,6 +61,12 @@
     },
     components: { ElProgress },
 
+    inject: {
+      uploader: {
+        default: ''
+      }
+    },
+
     props: {
       files: {
         type: Array,
@@ -92,6 +98,9 @@
       },
       handleClick(file) {
         this.handlePreview && this.handlePreview(file);
+      },
+      handleReupload(file) {
+        this.uploader && this.uploader.$refs['upload-inner'].handleClick(true, file);
       }
     }
   };
