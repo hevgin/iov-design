@@ -11,7 +11,8 @@
       'el-table--scrollable-x': layout.scrollX,
       'el-table--scrollable-y': layout.scrollY,
       'el-table--enable-row-hover': !store.states.isComplex,
-      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100
+      'el-table--enable-row-transition': (store.states.data || []).length !== 0 && (store.states.data || []).length < 100,
+      'el-table__last-column-shadow': (border || outerBorder) && layout.scrollX && rightFixedColumns.length === 0 && scrollPosition !== 'right'
     }, tableSize ? `el-table--${ tableSize }` : '']"
     @mouseleave="handleMouseLeave($event)">
     <div class="hidden-columns" ref="hiddenColumns"><slot></slot></div>
