@@ -293,8 +293,6 @@
   .cell {
     padding: 0 16px;
     box-sizing: border-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: normal;
     font-weight: 400;
     word-break: break-all;
@@ -302,6 +300,8 @@
 
     &.el-tooltip {
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       min-width: 50px;
     }
   }
