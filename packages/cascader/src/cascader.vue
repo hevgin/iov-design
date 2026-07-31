@@ -49,7 +49,7 @@
       </template>
     </el-input>
 
-    <transition-group v-if="multiple && collapseTags && checkedNodes.length" class="el-cascader__tags" @after-leave="updateStyle">
+    <transition-group v-if="multiple && collapseTags && (checkedNodes.length || filterable)" class="el-cascader__tags" @after-leave="updateStyle">
       <template v-for="(tag, index) in presentTags">
         <el-tag
           :key="tag.key"
@@ -752,16 +752,21 @@ export default {
       if (tags) {
         const offsetHeight = Math.round(tags.getBoundingClientRect().height);
         const height = Math.max(offsetHeight + 4, inputInitialHeight) + 'px';
-        const inputPaddingLeft = Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) || 0;
+        const prefix = $el.querySelector('.el-input__prefix');
+        const inputPaddingLeft = (prefixLabel || prefix) ? Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) : 0;
         const prefixLabelWidth = prefixLabel && Math.round(prefixLabel.getBoundingClientRect().width) || 0;
         if (groupPrefix) {
           groupPrefix.style.height = height;
         } else {
           inputInner.style.height = height;
         }
-        tags.style.left = prefixLabel ? (prefixLabelWidth + inputPaddingLeft - 4) + 'px' : '0px';
-        if (this.checkedNodes.length === 0 && !prefixLabel) {
+        // 存在前置图标或前置标签时，tags 需偏移到 input 实际文本起始位置
+        if (prefixLabel || prefix) {
+          tags.style.left = (prefixLabelWidth + inputPaddingLeft) + 'px';
+        } else if (this.checkedNodes.length === 0) {
           tags.style.left = '12px';
+        } else {
+          tags.style.left = '0px';
         }
         if (this.dropDownVisible) {
           this.updatePopper();

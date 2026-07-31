@@ -6,7 +6,7 @@
 
 级联选择器支持两种触发子菜单的交互方式，核心通过 options 属性绑定层级选项数据，可通过 props.expandTrigger 自定义子菜单展开触发方式；同时支持尺寸、禁用、前缀图标 / 标签等个性化配置。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" style="width:100%;margin-bottom:20px;">
   <el-col :span="12">
@@ -15,6 +15,7 @@
       v-model="value"
       :options="options"
       @change="handleChange"
+      filterable
       clearable>
       <i slot="prefix" class="el-input__icon iov-icon-search"></i>
     </el-cascader>
@@ -26,6 +27,7 @@
       :options="options"
       :props="{ expandTrigger: 'hover' }"
       size="small"
+      filterable
       @change="handleChange">
       <template slot="prefixLabel">分类</template>
     </el-cascader>
@@ -52,6 +54,7 @@
       :options="options"
       size="mini"
       @change="handleChange"
+      filterable
       clearable>
       <i slot="prefix" class="el-input__icon iov-icon-search"></i>
       <template slot="prefixLabel">分类</template>
@@ -276,7 +279,7 @@
 
 通过在层级数据源中为指定节点配置 disabled: true，可禁用该节点的选择操作；若数据源中禁用字段非 disabled，可通过 props.disabled 自定义字段名。同时 value、label、children 等核心字段也支持自定义配置。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" style="width:100%;">
   <el-col :span="12">
@@ -713,7 +716,7 @@
 
 默认情况下输入框展示选中项的完整层级路径，通过设置 `show-all-levels="false"`，可仅显示选中项最后一级的标签，简化展示内容，适配简洁展示场景。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" style="width:100%;">
   <el-col :span="12">
@@ -930,7 +933,7 @@
 ### 多选模式
 可通过 `props.multiple = true` 开启多选模式，支持选择多个层级节点；可结合 `collapse-tags` 折叠已选标签，同时支持 `collapseTagsFixed`（固定折叠标签）、`multipleLimitShow`（指定折叠展示数量）、`multipleTagMaxWidth`（标签最大宽度）等属性自定义标签展示样式。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" style="width:100%;margin-bottom:10px;">
   <el-col :span="12">
@@ -1027,7 +1030,7 @@
 
 默认单选模式仅可选择叶子节点、多选模式勾选父节点会选中所有子节点；通过 `props.checkStrictly = true` 取消父子节点选中关联，支持选择任意一级节点，适配非叶子节点选择场景。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" style="width:100%;margin-bottom:10px;">
   <el-col :span="12">
@@ -1256,7 +1259,7 @@
 
 针对大数据量层级场景，通过 `lazy` 开启动态加载，`lazyload` 方法接收当前点击节点 `node` 和加载完成回调 `resolve`，选中某一级时异步加载该级下的子节点数据；建议为节点配置 leaf 字段标识是否为叶子节点，提升节点状态展示准确性（可通过 props.leaf 自定义字段名）。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" style="width:100%;">
   <el-col :span="12">
@@ -1297,7 +1300,7 @@
 
 支持快速搜索并定位层级选项，通过 `filterable` 属性开启搜索功能；默认匹配节点 `label` 字段，也可通过 `filter-method` 自定义搜索逻辑，满足个性化检索需求。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" style="width:100%;">
   <el-col :span="12">
@@ -1529,7 +1532,7 @@
 
 支持通过作用域插槽 `scoped slot` 自定义选项节点展示内容，插槽会注入 `node`（节点对象）和 `data`（节点数据），可灵活定制节点展示样式。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" style="width:100%;">
   <el-col :span="12">
@@ -1752,7 +1755,7 @@
 
 级联面板是级联选择器的核心展示组件，支持单选、多选、动态加载等全部功能，通过 options 绑定数据、props 配置属性，适配面板直展场景。
 
-:::demo 
+:::demo
 ```html
 <el-row :gutter="20" style="width:100%;">
   <el-col :span="12">
