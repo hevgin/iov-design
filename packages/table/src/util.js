@@ -1,4 +1,5 @@
 import { getValueByPath } from 'iov-design/src/utils/util';
+import Big from 'big.js';
 
 export const getCell = function(event) {
   let cell = event.target;
@@ -252,6 +253,111 @@ export function walkTreeNode(root, cb, childrenKey = 'children', lazyKey = 'hasC
       _walker(item, children, 0);
     }
   });
+}
+
+/**
+ * 舍入模式名称到 big.js 常量的映射
+ * big.js 原生支持 4 种舍入模式：
+ *   - roundDown     = 0  向零方向（截断）
+ *   - roundHalfUp   = 1  四舍五入（等距时远离零）—— big.js 默认
+ *   - roundHalfEven = 2  银行家舍入（等距时向偶数）
+ *   - roundUp       = 3  远离零方向
+ * 扩展两种模式（基于符号映射到 big.js 原生模式）：
+ *   - ceil          向正无穷方向（正数→roundUp，负数→roundDown）
+ *   - floor         向负无穷方向（正数→roundDown，负数→roundUp）
+ */
+const ROUNDING_MODE_MAP = {
+  roundDown: Big.roundDown,
+  roundHalfUp: Big.roundHalfUp,
+  roundHalfEven: Big.roundHalfEven,
+  roundUp: Big.roundUp,
+  ceil: Big.roundUp,
+  floor: Big.roundDown
+};
+
+function resolveRoundingMode(mode, isNegative) {
+  switch (mode) {
+    case 'ceil':
+      return isNegative ? Big.roundDown : Big.roundUp;
+    case 'floor':
+      return isNegative ? Big.roundUp : Big.roundDown;
+    default:
+      if (mode in ROUNDING_MODE_MAP) return ROUNDING_MODE_MAP[mode];
+      return Big.roundHalfUp;
+  }
+}
+
+/**
+ * 格式化数字显示（基于 big.js，避免浮点精度丢失）
+ * @param {*} value 原始值
+ * @param {Object} options 格式化选项
+ *   - thousandSeparator {Boolean|String} 千位分隔符，true=',' , false=不启用, 字符串=自定义
+ *   - precision {Number|null} 保留小数位数，null=保持原精度
+ *   - keepTrailingZero {Boolean} 是否保留小数末尾的 0
+ *   - roundingMode {String|Number} 舍入模式，见 ROUNDING_MODE_MAP；默认 'roundHalfUp'
+ * @returns {*} 格式化后的字符串；非数字原样返回
+ */
+export function formatNumber(value, options = {}) {
+  const {
+    thousandSeparator = true,
+    precision = null,
+    keepTrailingZero = true,
+    roundingMode = 'roundHalfUp'
+  } = options;
+
+  if (value === null || value === undefined || value === '') {
+    return value;
+  }
+
+  // big.js 接受 number / string / bigint；优先用字符串避免 0.1+0.2 类精度问题
+  const raw = typeof value === 'number' ? String(value) : value;
+  let big;
+  try {
+    big = new Big(raw);
+  } catch (e) {
+    return value;
+  }
+
+  const isNegative = big.lt(0);
+
+  // 获取舍入后的字符串表示
+  let numStr;
+  if (precision !== null && precision !== undefined) {
+    const rm = resolveRoundingMode(roundingMode, isNegative);
+    numStr = big.toFixed(precision, rm);
+  } else {
+    numStr = big.toString();
+    // big.js 在大数或极小数时会使用指数表示法，这里转换为普通表示
+    if (numStr.indexOf('e') !== -1) {
+      numStr = big.toFixed();
+    }
+  }
+
+  let [intPart, decPart] = numStr.split('.');
+
+  // 处理负号
+  const hasNegativeSign = intPart.startsWith('-');
+  if (hasNegativeSign) {
+    intPart = intPart.substring(1);
+  }
+
+  // 应用千位分隔符
+  if (thousandSeparator) {
+    const sep = typeof thousandSeparator === 'string' ? thousandSeparator : ',';
+    intPart = intPart.replace(/\B(?=(\d{3})+(?!\d))/g, sep);
+  }
+
+  // 处理末尾的 0
+  if (decPart && !keepTrailingZero) {
+    decPart = decPart.replace(/0+$/, '');
+  }
+
+  let result = intPart;
+  if (decPart) {
+    result += '.' + decPart;
+  }
+
+  return (hasNegativeSign ? '-' : '') + result;
 }
 
 export const objectEquals = function(objectA, objectB) {

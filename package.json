@@ -1,6 +1,6 @@
 {
   "name": "iov-design",
-  "version": "2.15.131",
+  "version": "2.15.132",
   "description": "A Component Library for Vue.js.",
   "main": "lib/iov-design.common.js",
   "files": [
@@ -68,6 +68,7 @@
     "@arco-design/color": "^0.4.0",
     "async-validator": "~1.8.1",
     "babel-helper-vue-jsx-merge-props": "^2.0.0",
+    "big.js": "^6.2.1",
     "deepmerge": "^1.2.0",
     "normalize-wheel": "^1.0.1",
     "resize-observer-polyfill": "^1.5.0",

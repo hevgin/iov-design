@@ -2008,6 +2008,60 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 ```
 :::
 
+### 数字格式化
+
+当列内容为数字时，可以通过 `number-format` 开启数字格式化。支持千位分隔符、保留小数位数、末尾 0 的保留与否、以及舍入模式。底层基于 [big.js](https://github.com/MikeMcl/big.js/) 实现，可避免 JavaScript 浮点数精度丢失（如 `0.1 + 0.2`）。
+
+:::tip
+`formatter` 优先级高于 `number-format`，若同时配置了 `formatter`，则数字格式化不生效。
+:::
+
+:::demo
+
+```html
+<template>
+  <el-table :data="tableData" style="width: 100%">
+    <el-table-column prop="name" label="商品" width="60"></el-table-column>
+    <el-table-column prop="price" label="价格(千位分隔符+2位小数)" number-format :precision="2"></el-table-column>
+    <el-table-column prop="price" label="不保留末尾0" number-format :precision="2" :keep-trailing-zero="false"></el-table-column>
+    <el-table-column prop="price" label="自定义分隔符" number-format :precision="2" thousand-separator=" " ></el-table-column>
+    <el-table-column prop="price" label="向下取整" number-format :precision="0" rounding-mode="floor"></el-table-column>
+    <el-table-column prop="price" label="银行家舍入" number-format :precision="2" rounding-mode="roundHalfEven"> </el-table-column>
+    <el-table-column prop="price" label="关闭千位分隔符" number-format :precision="2" :thousand-separator="false"></el-table-column>
+  </el-table>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [
+          { name: '苹果', price: 12345.6 },
+          { name: '香蕉', price: 123456.789 },
+          { name: '橙子', price: 1234567.5 },
+          { name: '葡萄', price: -9876543.21 },
+          { name: '西瓜', price: 100 }
+        ]
+      };
+    }
+  };
+</script>
+```
+:::
+
+#### 舍入模式说明
+
+舍入模式与 [big.js](https://github.com/MikeMcl/big.js/) 保持一致，可通过字符串名称或 big.js 数值常量传入：
+
+| 值 | big.js 常量 | 说明 | 规则 | 示例
+|----|-----------|------|-----|----|
+| `roundDown` / `0` | `Big.roundDown` | 向零舍入（截断） | 直接丢弃多余位 | `1.239 → 1.23` |
+| `roundHalfUp` / `1` | `Big.roundHalfUp` | 普通四舍五入（默认）| >= 5 进位 | `1.235 → 1.24` |
+| `roundHalfEven` / `2` | `Big.roundHalfEven` | 银行家舍入 | 保留位后如果不是5，与普通四舍五入一样，否则看保留位最后数字，偶数不进位，奇数进位  | 保留2位小数, `1.234 - 1.23`, `1.236 - 1.24`, `1.235 → 1.24`，`1.245 → 1.24` |
+| `roundUp` / `3` | `Big.roundUp` | 远离零舍入 | 有多余位就进 1 |  `1.231 → 1.24` |
+| `ceil` | — | 向正无穷方向（正数→roundUp，负数→roundDown，扩展模式） | 正数有多余位则进1，负数直接截断多余位 | `1.231 → 1.24`，`-1.239 → -1.23` |
+| `floor` | — | 向负无穷方向（正数→roundDown，负数→roundUp，扩展模式） | 正数直接截断多余位，负数有多余位则进1 | `1.239 → 1.23`，`-1.231 → -1.24` |
+
 ### Table Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -2122,6 +2176,11 @@ Table 表格组件用于**结构化展示批量同类数据**，支持排序、�
 | filter-method | 数据过滤使用的方法，如果是多选的筛选项，对每一条数据会执行多次，任意一次返回 true 就会显示。 | Function(value, row, column) | — | — |
 | filtered-value | 选中的数据过滤项，如果需要自定义表头过滤的渲染方式，可能会需要此属性。 | Array | — | — |
 | empty-value-placeholder | 空值占位符, 单元格数据如果为['', undefined, null]3个中的一种，则取此值 | String | — | — |
+| number-format | 是否开启数字格式化（基于 big.js，避免浮点精度丢失）。优先级低于 `formatter` | Boolean | — | false |
+| thousand-separator | 千位分隔符。`true` 使用默认 `,`；`false` 关闭；传入字符串则作为自定义分隔符 | Boolean / String | — | true |
+| precision | 保留小数位数。传 `null` 表示保持原始精度 | Number | — | null |
+| keep-trailing-zero | 是否保留小数末尾的 0（如 `1.50` → `1.5`） | Boolean | — | true |
+| rounding-mode | 舍入模式，与 big.js 保持一致。可用字符串名称：`roundDown` / `roundHalfUp` / `roundHalfEven` / `roundUp` / `ceil` / `floor`，或直接传 big.js 数值常量 `0` / `1` / `2` / `3` | String / Number | roundDown / roundHalfUp / roundHalfEven / roundUp / ceil / floor | roundHalfUp |
 
 ### Table-column Scoped Slot
 | name | 说明 |

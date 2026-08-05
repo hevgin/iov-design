@@ -63,7 +63,32 @@ export default {
         return val.every(order => ['ascending', 'descending', null].indexOf(order) > -1);
       }
     },
-    emptyValuePlaceholder: String
+    emptyValuePlaceholder: String,
+    // 是否开启数字格式化
+    numberFormat: {
+      type: Boolean,
+      default: false
+    },
+    // 千位分隔符
+    thousandSeparator: {
+      type: [Boolean, String],
+      default: true
+    },
+    // 保留小数位数
+    precision: {
+      type: Number,
+      default: null
+    },
+    // 是否保留小数末尾的 0
+    keepTrailingZero: {
+      type: Boolean,
+      default: true
+    },
+    // 舍入模式
+    roundingMode: {
+      type: [String, Number],
+      default: 'roundHalfUp'
+    }
   },
 
   data() {
@@ -206,7 +231,7 @@ export default {
     },
 
     registerNormalWatchers() {
-      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'searchable', 'searchPlaceholder', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip'];
+      const props = ['label', 'property', 'filters', 'filterMultiple', 'sortable', 'searchable', 'searchPlaceholder', 'index', 'formatter', 'className', 'labelClassName', 'showOverflowTooltip', 'numberFormat', 'thousandSeparator', 'precision', 'keepTrailingZero', 'roundingMode'];
       // 一些属性具有别名
       const aliases = {
         prop: 'property',
@@ -293,7 +318,13 @@ export default {
       searchPlaceholder,
       // index 列
       index: this.index,
-      emptyValuePlaceholder: this.emptyValuePlaceholder || ''
+      emptyValuePlaceholder: this.emptyValuePlaceholder || '',
+      // 数字格式化相关属性
+      numberFormat: this.numberFormat,
+      thousandSeparator: this.thousandSeparator,
+      precision: this.precision,
+      keepTrailingZero: this.keepTrailingZero,
+      roundingMode: this.roundingMode
     };
 
     const basicProps = ['columnKey', 'label', 'className', 'labelClassName', 'type', 'renderHeader', 'formatter', 'fixed', 'resizable'];

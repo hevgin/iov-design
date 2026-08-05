@@ -1,4 +1,5 @@
 import { getPropByPath } from 'iov-design/src/utils/util';
+import { formatNumber } from './util';
 
 export const cellStarts = {
   default: {
@@ -126,7 +127,22 @@ export function defaultRenderCell(h, { row, column, $index }) {
   if (column && column.formatter) {
     return column.formatter(row, column, value, $index);
   }
-  return emptyValuePlaceholder && ['', undefined, null].includes(value) ? emptyValuePlaceholder : value;
+  if (emptyValuePlaceholder && ['', undefined, null].includes(value)) {
+    return emptyValuePlaceholder;
+  }
+  // 数字格式化
+  if (column.numberFormat && value !== '' && value !== undefined && value !== null) {
+    const num = Number(value);
+    if (!isNaN(num)) {
+      return formatNumber(value, {
+        thousandSeparator: column.thousandSeparator,
+        precision: column.precision,
+        keepTrailingZero: column.keepTrailingZero,
+        roundingMode: column.roundingMode
+      });
+    }
+  }
+  return value;
 }
 
 export function treeCellPrefix(h, { row, treeNode, store }) {
