@@ -155,7 +155,9 @@
         "push",
         "sms",
         "partnership",
-        "own"
+        "own",
+        "esim02",
+        "esim32"
     ],
     "iovDesignOperation": [
         "brace-left",

@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "48338425",
+      "name": "iov-icon-esim02",
+      "font_class": "esim02",
+      "unicode": "e728",
+      "unicode_decimal": 59176
+    },
+    {
+      "icon_id": "48338424",
+      "name": "iov-icon-esim32",
+      "font_class": "esim32",
+      "unicode": "e729",
+      "unicode_decimal": 59177
+    },
+    {
       "icon_id": "48039011",
       "name": "iov-icon-diff",
       "font_class": "diff",
