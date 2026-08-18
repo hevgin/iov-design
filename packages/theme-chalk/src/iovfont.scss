@@ -1,11 +1,51 @@
 @font-face {
   font-family: 'iovfont'; /* Project id 4466910 */
-  src: url('./fonts/iovfont.woff2?t=1786946682621') format('woff2'),
-       url('./fonts/iovfont.woff?t=1786946682621') format('woff'),
-       url('./fonts/iovfont.ttf?t=1786946682621') format('truetype');
+  src: url('./fonts/iovfont.woff2?t=1787039011415') format('woff2'),
+       url('./fonts/iovfont.woff?t=1787039011415') format('woff'),
+       url('./fonts/iovfont.ttf?t=1787039011415') format('truetype');
 }
 
 
+
+.iov-icon-jpy:before {
+  content: "\e735";
+}
+
+.iov-icon-video:before {
+  content: "\e72a";
+}
+
+.iov-icon-markdown:before {
+  content: "\e72b";
+}
+
+.iov-icon-fill-dislike:before {
+  content: "\e72c";
+}
+
+.iov-icon-new-chat:before {
+  content: "\e72d";
+}
+
+.iov-icon-like:before {
+  content: "\e72e";
+}
+
+.iov-icon-chat-history:before {
+  content: "\e72f";
+}
+
+.iov-icon-dislike:before {
+  content: "\e730";
+}
+
+.iov-icon-fill-send:before {
+  content: "\e731";
+}
+
+.iov-icon-fill-like:before {
+  content: "\e733";
+}
 
 .iov-icon-esim02:before {
   content: "\e728";

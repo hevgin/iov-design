@@ -6,6 +6,8 @@
         "ppt",
         "img",
         "zip",
+        "markdown",
+        "video",
         "other",
         "img-fail",
         "img-placeholder",
@@ -69,7 +71,11 @@
         "cdkey",
         "sort",
         "file-preview",
-        "collapse"
+        "collapse",
+        "new-chat",
+        "chat-history",
+        "like",
+        "dislike"
     ],
     "iovDesignEdit": [
         "edit",
@@ -210,7 +216,10 @@
         "line-drag",
         "swap",
         "panel",
-        "sun"
+        "sun",
+        "fill-send",
+        "fill-like",
+        "fill-dislike"
     ],
     "iovDesignEntityCommon": [
         "fill-dashboard",
@@ -231,5 +240,21 @@
         "github",
         "fill-cube",
         "fill-track"
+    ],
+    "iovCurrency": [
+        "cny",
+        "usd",
+        "eur",
+        "gbp",
+        "jpy",
+        "thb",
+        "krw",
+        "cad",
+        "aud",
+        "hkd",
+        "twd",
+        "sgd",
+        "afn",
+        "ars"
     ]
 }

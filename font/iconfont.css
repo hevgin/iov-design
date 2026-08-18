@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4466910 */
-  src: url('iconfont.woff2?t=1786946682621') format('woff2'),
-       url('iconfont.woff?t=1786946682621') format('woff'),
-       url('iconfont.ttf?t=1786946682621') format('truetype');
+  src: url('iconfont.woff2?t=1787039011415') format('woff2'),
+       url('iconfont.woff?t=1787039011415') format('woff'),
+       url('iconfont.ttf?t=1787039011415') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,46 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-jpy:before {
+  content: "\e735";
+}
+
+.icon-video:before {
+  content: "\e72a";
+}
+
+.icon-markdown:before {
+  content: "\e72b";
+}
+
+.icon-fill-dislike:before {
+  content: "\e72c";
+}
+
+.icon-new-chat:before {
+  content: "\e72d";
+}
+
+.icon-like:before {
+  content: "\e72e";
+}
+
+.icon-chat-history:before {
+  content: "\e72f";
+}
+
+.icon-dislike:before {
+  content: "\e730";
+}
+
+.icon-fill-send:before {
+  content: "\e731";
+}
+
+.icon-fill-like:before {
+  content: "\e733";
 }
 
 .icon-esim02:before {

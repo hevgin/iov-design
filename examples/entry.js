@@ -51,6 +51,7 @@ Vue.prototype.$iovDesignEntityDirection = iovDesignIcon.iovDesignEntityDirection
 Vue.prototype.$iovDesignEntityTips = iovDesignIcon.iovDesignEntityTips; // 实体类提示建议类
 Vue.prototype.$iovDesignEntityButton = iovDesignIcon.iovDesignEntityButton; // 实体类交换按钮类
 Vue.prototype.$iovDesignEntityCommon = iovDesignIcon.iovDesignEntityCommon; // 实体类通用类
+Vue.prototype.$iovCurrency = iovDesignIcon.iovCurrency; // 货币符种
 
 const router = new VueRouter({
   mode: 'hash',

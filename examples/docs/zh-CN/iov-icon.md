@@ -33,6 +33,8 @@
 <el-svg-icon icon-class="ppt" />
 <el-svg-icon icon-class="img" />
 <el-svg-icon icon-class="zip" />
+<el-svg-icon icon-class="markdown" />
+<el-svg-icon icon-class="video" />
 <el-svg-icon icon-class="other" />
 <el-svg-icon icon-class="img-fail" />
 <el-svg-icon icon-class="img-placeholder" />
@@ -149,6 +151,17 @@
 
 <ul class="icon-list">
   <li v-for="name in $iovDesignEntityCommon" :key="name">
+    <span>
+      <i :class="'iov-icon-' + name"></i>
+      <span class="icon-name">{{'iov-icon-' + name}}</span>
+    </span>
+  </li>
+</ul>
+
+##### 货币符号
+
+<ul class="icon-list">
+  <li v-for="name in $iovCurrency" :key="name">
     <span>
       <i :class="'iov-icon-' + name"></i>
       <span class="icon-name">{{'iov-icon-' + name}}</span>

@@ -15,6 +15,8 @@ var whitelist = [
   'ppt',
   'img',
   'zip',
+  'markdown',
+  'video',
   'other',
   'img-fail',
   'img-placeholder',

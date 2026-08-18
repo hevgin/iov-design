@@ -6,6 +6,76 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "48345405",
+      "name": "iov-icon-jpy",
+      "font_class": "jpy",
+      "unicode": "e735",
+      "unicode_decimal": 59189
+    },
+    {
+      "icon_id": "48345337",
+      "name": "iov-icon-file-video",
+      "font_class": "video",
+      "unicode": "e72a",
+      "unicode_decimal": 59178
+    },
+    {
+      "icon_id": "48345336",
+      "name": "iov-icon-file-markdown",
+      "font_class": "markdown",
+      "unicode": "e72b",
+      "unicode_decimal": 59179
+    },
+    {
+      "icon_id": "48345332",
+      "name": "iov-icon-fill-dislike",
+      "font_class": "fill-dislike",
+      "unicode": "e72c",
+      "unicode_decimal": 59180
+    },
+    {
+      "icon_id": "48345331",
+      "name": "iov-icon-new-chat",
+      "font_class": "new-chat",
+      "unicode": "e72d",
+      "unicode_decimal": 59181
+    },
+    {
+      "icon_id": "48345329",
+      "name": "iov-icon-like",
+      "font_class": "like",
+      "unicode": "e72e",
+      "unicode_decimal": 59182
+    },
+    {
+      "icon_id": "48345328",
+      "name": "iov-icon-chat-history",
+      "font_class": "chat-history",
+      "unicode": "e72f",
+      "unicode_decimal": 59183
+    },
+    {
+      "icon_id": "48345327",
+      "name": "iov-icon-dislike",
+      "font_class": "dislike",
+      "unicode": "e730",
+      "unicode_decimal": 59184
+    },
+    {
+      "icon_id": "48345326",
+      "name": "iov-icon-fill-send",
+      "font_class": "fill-send",
+      "unicode": "e731",
+      "unicode_decimal": 59185
+    },
+    {
+      "icon_id": "48345324",
+      "name": "iov-icon-fill-like",
+      "font_class": "fill-like",
+      "unicode": "e733",
+      "unicode_decimal": 59187
+    },
+    {
       "icon_id": "48338425",
       "name": "iov-icon-esim02",
       "font_class": "esim02",
