@@ -1,11 +1,155 @@
 @font-face {
   font-family: 'iovfont'; /* Project id 4466910 */
-  src: url('./fonts/iovfont.woff2?t=1787039011415') format('woff2'),
-       url('./fonts/iovfont.woff?t=1787039011415') format('woff'),
-       url('./fonts/iovfont.ttf?t=1787039011415') format('truetype');
+  src: url('./fonts/iovfont.woff2?t=1787822417795') format('woff2'),
+       url('./fonts/iovfont.woff?t=1787822417795') format('woff'),
+       url('./fonts/iovfont.ttf?t=1787822417795') format('truetype');
 }
 
 
+
+.iov-icon-outdent:before {
+  content: "\e74a";
+}
+
+.iov-icon-exit-fullscreen:before {
+  content: "\e74b";
+}
+
+.iov-icon-horizontal-rule:before {
+  content: "\e74c";
+}
+
+.iov-icon-undo:before {
+  content: "\e74d";
+}
+
+.iov-icon-script:before {
+  content: "\e74e";
+}
+
+.iov-icon-align-right:before {
+  content: "\e74f";
+}
+
+.iov-icon-align-center:before {
+  content: "\e750";
+}
+
+.iov-icon-img-options:before {
+  content: "\e751";
+}
+
+.iov-icon-redo:before {
+  content: "\e752";
+}
+
+.iov-icon-overview:before {
+  content: "\e753";
+}
+
+.iov-icon-inlinescript:before {
+  content: "\e754";
+}
+
+.iov-icon-hyperlink:before {
+  content: "\e755";
+}
+
+.iov-icon-indent:before {
+  content: "\e756";
+}
+
+.iov-icon-code-block:before {
+  content: "\e757";
+}
+
+.iov-icon-align-justify:before {
+  content: "\e738";
+}
+
+.iov-icon-task-list:before {
+  content: "\e739";
+}
+
+.iov-icon-open-fullscreen:before {
+  content: "\e73a";
+}
+
+.iov-icon-superscript:before {
+  content: "\e73b";
+}
+
+.iov-icon-remove-formatting:before {
+  content: "\e73c";
+}
+
+.iov-icon-underline:before {
+  content: "\e73d";
+}
+
+.iov-icon-ordered-list:before {
+  content: "\e73e";
+}
+
+.iov-icon-picture:before {
+  content: "\e73f";
+}
+
+.iov-icon-line-height:before {
+  content: "\e740";
+}
+
+.iov-icon-italic:before {
+  content: "\e741";
+}
+
+.iov-icon-format-painter:before {
+  content: "\e742";
+}
+
+.iov-icon-attachment:before {
+  content: "\e743";
+}
+
+.iov-icon-table:before {
+  content: "\e744";
+}
+
+.iov-icon-subscript:before {
+  content: "\e745";
+}
+
+.iov-icon-camera:before {
+  content: "\e746";
+}
+
+.iov-icon-highlight-bg-color:before {
+  content: "\e747";
+}
+
+.iov-icon-text-color:before {
+  content: "\e748";
+}
+
+.iov-icon-align-left:before {
+  content: "\e749";
+}
+
+.iov-icon-bold:before {
+  content: "\e732";
+}
+
+.iov-icon-unordered-list:before {
+  content: "\e734";
+}
+
+.iov-icon-quote:before {
+  content: "\e736";
+}
+
+.iov-icon-strike-through:before {
+  content: "\e737";
+}
 
 .iov-icon-jpy:before {
   content: "\e735";

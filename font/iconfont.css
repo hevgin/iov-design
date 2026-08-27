@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4466910 */
-  src: url('iconfont.woff2?t=1787039011415') format('woff2'),
-       url('iconfont.woff?t=1787039011415') format('woff'),
-       url('iconfont.ttf?t=1787039011415') format('truetype');
+  src: url('iconfont.woff2?t=1787822417795') format('woff2'),
+       url('iconfont.woff?t=1787822417795') format('woff'),
+       url('iconfont.ttf?t=1787822417795') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,150 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-outdent:before {
+  content: "\e74a";
+}
+
+.icon-exit-fullscreen:before {
+  content: "\e74b";
+}
+
+.icon-horizontal-rule:before {
+  content: "\e74c";
+}
+
+.icon-undo:before {
+  content: "\e74d";
+}
+
+.icon-script:before {
+  content: "\e74e";
+}
+
+.icon-align-right:before {
+  content: "\e74f";
+}
+
+.icon-align-center:before {
+  content: "\e750";
+}
+
+.icon-img-options:before {
+  content: "\e751";
+}
+
+.icon-redo:before {
+  content: "\e752";
+}
+
+.icon-overview:before {
+  content: "\e753";
+}
+
+.icon-inlinescript:before {
+  content: "\e754";
+}
+
+.icon-hyperlink:before {
+  content: "\e755";
+}
+
+.icon-indent:before {
+  content: "\e756";
+}
+
+.icon-code-block:before {
+  content: "\e757";
+}
+
+.icon-align-justify:before {
+  content: "\e738";
+}
+
+.icon-task-list:before {
+  content: "\e739";
+}
+
+.icon-open-fullscreen:before {
+  content: "\e73a";
+}
+
+.icon-superscript:before {
+  content: "\e73b";
+}
+
+.icon-remove-formatting:before {
+  content: "\e73c";
+}
+
+.icon-underline:before {
+  content: "\e73d";
+}
+
+.icon-ordered-list:before {
+  content: "\e73e";
+}
+
+.icon-picture:before {
+  content: "\e73f";
+}
+
+.icon-line-height:before {
+  content: "\e740";
+}
+
+.icon-italic:before {
+  content: "\e741";
+}
+
+.icon-format-painter:before {
+  content: "\e742";
+}
+
+.icon-attachment:before {
+  content: "\e743";
+}
+
+.icon-table:before {
+  content: "\e744";
+}
+
+.icon-subscript:before {
+  content: "\e745";
+}
+
+.icon-camera:before {
+  content: "\e746";
+}
+
+.icon-highlight-bg-color:before {
+  content: "\e747";
+}
+
+.icon-text-color:before {
+  content: "\e748";
+}
+
+.icon-align-left:before {
+  content: "\e749";
+}
+
+.icon-bold:before {
+  content: "\e732";
+}
+
+.icon-unordered-list:before {
+  content: "\e734";
+}
+
+.icon-quote:before {
+  content: "\e736";
+}
+
+.icon-strike-through:before {
+  content: "\e737";
 }
 
 .icon-jpy:before {
