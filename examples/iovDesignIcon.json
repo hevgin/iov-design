@@ -15,7 +15,9 @@
         "clear-hover",
         "unfold",
         "fold",
-        "flash"
+        "flash",
+        "text-color",
+        "highlight-bg-color"
     ],
     "iovDesignLine": [
         "arrow-prev",

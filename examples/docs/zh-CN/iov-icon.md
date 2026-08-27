@@ -43,6 +43,8 @@
 <el-svg-icon icon-class="unfold" />
 <el-svg-icon icon-class="fold" />
 <el-svg-icon icon-class="flash" />
+<el-svg-icon icon-class="text-color" />
+<el-svg-icon icon-class="highlight-bg-color" />
 ```
 ### 线性风格
 

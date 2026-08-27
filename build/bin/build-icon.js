@@ -24,7 +24,9 @@ var whitelist = [
   'clear-hover',
   'unfold',
   'fold',
-  'flash'
+  'flash',
+  'text-color',
+  'highlight-bg-color'
 ];
 
 if (!fs.existsSync(targetFontsDir)) {
