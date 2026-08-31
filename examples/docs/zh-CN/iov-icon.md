@@ -149,6 +149,17 @@
   </li>
 </ul>
 
+##### 编辑类
+
+<ul class="icon-list">
+  <li v-for="name in $iovDesignEntityEdit" :key="name">
+    <span>
+      <i :class="'iov-icon-' + name"></i>
+      <span class="icon-name">{{'iov-icon-' + name}}</span>
+    </span>
+  </li>
+</ul>
+
 ##### 通用类
 
 <ul class="icon-list">

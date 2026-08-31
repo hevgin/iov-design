@@ -49,7 +49,8 @@ Vue.prototype.$iovDesignCommon = iovDesignIcon.iovDesignCommon; // 通用类
 Vue.prototype.$iovDesignOperation = iovDesignIcon.iovDesignOperation; // 运算符类
 Vue.prototype.$iovDesignEntityDirection = iovDesignIcon.iovDesignEntityDirection; // 实体类方向指向类
 Vue.prototype.$iovDesignEntityTips = iovDesignIcon.iovDesignEntityTips; // 实体类提示建议类
-Vue.prototype.$iovDesignEntityButton = iovDesignIcon.iovDesignEntityButton; // 实体类交换按钮类
+Vue.prototype.$iovDesignEntityButton = iovDesignIcon.iovDesignEntityButton; // 实体类按钮类
+Vue.prototype.$iovDesignEntityEdit = iovDesignIcon.iovDesignEntityEdit; // 实体编辑类
 Vue.prototype.$iovDesignEntityCommon = iovDesignIcon.iovDesignEntityCommon; // 实体类通用类
 Vue.prototype.$iovCurrency = iovDesignIcon.iovCurrency; // 货币符种
 

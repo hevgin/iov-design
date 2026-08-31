@@ -257,7 +257,12 @@
         "sun",
         "fill-send",
         "fill-like",
-        "fill-dislike"
+        "fill-dislike",
+        "or",
+        "and"
+    ],
+    "iovDesignEntityEdit": [
+        "fill-delete"
     ],
     "iovDesignEntityCommon": [
         "fill-dashboard",

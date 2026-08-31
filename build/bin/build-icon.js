@@ -7,27 +7,10 @@ var fontDir = path.resolve(__dirname, '../../font');
 var targetFontsDir = path.resolve(__dirname, '../../packages/theme-chalk/src/fonts');
 var targetScssFile = path.resolve(__dirname, '../../packages/theme-chalk/src/iovfont.scss');
 var targetSvgJsFile = path.resolve(__dirname, '../../src/utils/iov-svg-icon.js');
+var iovDesignIconJsonPath = path.resolve(__dirname, '../../examples/iovDesignIcon.json');
+var iovDesignIconJson = JSON.parse(fs.readFileSync(iovDesignIconJsonPath, 'utf8'));
 
-var whitelist = [
-  'excel',
-  'word',
-  'pdf',
-  'ppt',
-  'img',
-  'zip',
-  'markdown',
-  'video',
-  'other',
-  'img-fail',
-  'img-placeholder',
-  'clear',
-  'clear-hover',
-  'unfold',
-  'fold',
-  'flash',
-  'text-color',
-  'highlight-bg-color'
-];
+var whitelist = iovDesignIconJson.iovDesignMultiColor || [];
 
 if (!fs.existsSync(targetFontsDir)) {
   fs.mkdirSync(targetFontsDir, { recursive: true });

@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "48422880",
+      "name": "iov-icon-or",
+      "font_class": "or",
+      "unicode": "e758",
+      "unicode_decimal": 59224
+    },
+    {
+      "icon_id": "48422879",
+      "name": "iov-icon-fill-delete",
+      "font_class": "fill-delete",
+      "unicode": "e759",
+      "unicode_decimal": 59225
+    },
+    {
+      "icon_id": "48422878",
+      "name": "iov-icon-and",
+      "font_class": "and",
+      "unicode": "e75a",
+      "unicode_decimal": 59226
+    },
+    {
       "icon_id": "48371145",
       "name": "iov-icon-outdent",
       "font_class": "outdent",
