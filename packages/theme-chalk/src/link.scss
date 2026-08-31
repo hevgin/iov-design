@@ -9,7 +9,11 @@ $typeMap: (
   gold:    (default: $--color-gold-6,    hover: $--color-gold-5,    disabled: $--color-gold-3),
   blue:    (default: $--color-blue-6,    hover: $--color-blue-5,    disabled: $--color-blue-3),
   purple:  (default: $--color-purple-6,  hover: $--color-purple-5,  disabled: $--color-purple-3),
-  pink:    (default: $--color-pink-6,    hover: $--color-pink-5,    disabled: $--color-pink-3)
+  pink:    (default: $--color-pink-6,    hover: $--color-pink-5,    disabled: $--color-pink-3),
+  mauve:    (default: $--color-mauve-6,    hover: $--color-mauve-5,    disabled: $--color-mauve-3),
+  salmon:    (default: $--color-salmon-6,    hover: $--color-salmon-5,    disabled: $--color-salmon-3),
+  grey:    (default: $--color-grey-6,    hover: $--color-grey-5,    disabled: $--color-grey-3),
+  darkblue:    (default: $--color-darkblue-6,    hover: $--color-darkblue-5,    disabled: $--color-darkblue-3)
 );
 
 @include b(link) {

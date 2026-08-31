@@ -16,6 +16,10 @@
   <el-link type="blue">信息链接</el-link>
   <el-link type="purple">信息链接</el-link>
   <el-link type="pink">信息链接</el-link>
+  <el-link type="mauve">信息链接</el-link>
+  <el-link type="salmon">信息链接</el-link>
+  <el-link type="grey">信息链接</el-link>
+  <el-link type="darkblue">信息链接</el-link>
 </div>
 ```
 :::
@@ -33,6 +37,10 @@
   <el-link text type="blue">信息链接</el-link>
   <el-link text type="purple">信息链接</el-link>
   <el-link text type="pink">信息链接</el-link>
+  <el-link text type="mauve">信息链接</el-link>
+  <el-link text type="salmon">信息链接</el-link>
+  <el-link text type="grey">信息链接</el-link>
+  <el-link text type="darkblue">信息链接</el-link>
 </div>
 ```
 :::
@@ -51,6 +59,10 @@
   <el-link type="blue" disabled>信息链接</el-link>
   <el-link type="purple" disabled>信息链接</el-link>
   <el-link type="pink" disabled>信息链接</el-link>
+  <el-link type="mauve" disabled>信息链接</el-link>
+  <el-link type="salmon" disabled>信息链接</el-link>
+  <el-link type="grey" disabled>信息链接</el-link>
+  <el-link type="darkblue" disabled>信息链接</el-link>
 </div>
 ```
 :::

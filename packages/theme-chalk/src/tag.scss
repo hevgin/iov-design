@@ -553,7 +553,6 @@
     @include genThemeBlue($--color-blue-6, $--color-blue-6, $--color-white, $--color-white, $--color-blue-6, $--color-blue-3, $--color-blue-4);
     @include genThemePurple($--color-purple-6, $--color-purple-6, $--color-white, $--color-white, $--color-purple-6, $--color-purple-3, $--color-purple-4);
     @include genThemePink($--color-pink-6, $--color-pink-6, $--color-white, $--color-white, $--color-pink-6, $--color-pink-3, $--color-pink-4);
-    @include genThemePink($--color-pink-6, $--color-pink-6, $--color-white, $--color-white, $--color-pink-6, $--color-pink-3, $--color-pink-4);
     @include genThemeMauve($--color-mauve-6, $--color-mauve-6, $--color-white, $--color-white, $--color-mauve-6, $--color-mauve-3, $--color-mauve-4);
     @include genThemeSalmon($--color-salmon-6, $--color-salmon-6, $--color-white, $--color-white, $--color-salmon-6, $--color-salmon-3, $--color-salmon-4);
     @include genThemeGrey($--color-grey-6, $--color-grey-6, $--color-white, $--color-white, $--color-grey-6, $--color-grey-3, $--color-grey-4);
