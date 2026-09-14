@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "48529720",
+      "name": "iov-icon-resale",
+      "font_class": "resale",
+      "unicode": "e75b",
+      "unicode_decimal": 59227
+    },
+    {
+      "icon_id": "48529719",
+      "name": "iov-icon-horizontal-switch",
+      "font_class": "horizontal-switch",
+      "unicode": "e75c",
+      "unicode_decimal": 59228
+    },
+    {
       "icon_id": "48422880",
       "name": "iov-icon-or",
       "font_class": "or",

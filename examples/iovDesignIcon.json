@@ -39,7 +39,8 @@
         "change",
         "move",
         "rotate-right",
-        "rotate-left"
+        "rotate-left",
+        "horizontal-switch"
     ],
     "iovDesignTips": [
         "plus",
@@ -201,7 +202,8 @@
         "partnership",
         "own",
         "esim02",
-        "esim32"
+        "esim32",
+        "resale"
     ],
     "iovDesignOperation": [
         "brace-left",
