@@ -121,9 +121,14 @@ export default {
       const popperJS = this.popperJS;
       if (popperJS) {
         popperJS.update();
-        if (popperJS._popper) {
-          popperJS._popper.style.zIndex = PopupManager.nextZIndex();
-        }
+
+        // if (popperJS._popper) {
+        //   popperJS._popper.style.zIndex = PopupManager.nextZIndex();
+        // }
+        // z-index 只在 createPopper 时分配一次。
+        // 若在 update 时重新提升 zIndex，下拉框等弹出层在内容变化
+        // （如 select 移除 tag 触发 updatePopper）时会反超之后打开的
+        // $confirm 等弹窗，导致弹窗被遮挡。
       } else {
         this.createPopper();
       }
