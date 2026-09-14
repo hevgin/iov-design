@@ -534,6 +534,21 @@ export default Vue.extend({
       const keys = Object.keys(panels);
       if (!keys.length) return;
 
+      // 同步重置列上的过滤状态与面板内部数据：
+      // 1. column.filteredValue 对应面板勾选项
+      // 2. column.filterConfirmed 对应过滤图标 is-filtered 状态
+      // 3. panel.lastConfirmedValue 避免下次打开面板时旧勾选项被重新回填
+      const resetColumnFilter = (column, panel) => {
+        if (column) {
+          this.table.$set(column, 'filteredValue', []);
+          this.table.$set(column, 'filterConfirmed', false);
+        }
+        if (panel) {
+          panel.filteredValue = [];
+          panel.lastConfirmedValue = [];
+        }
+      };
+
       if (typeof columnKeys === 'string') {
         columnKeys = [columnKeys];
       }
@@ -543,8 +558,7 @@ export default Vue.extend({
         keys.forEach(key => {
           const column = columns.find(col => col.id === key);
           if (column) {
-            // TODO: 优化这里的代码
-            panels[key].filteredValue = [];
+            resetColumnFilter(column, panels[key]);
           }
         });
         this.commit('filterChange', {
@@ -555,8 +569,7 @@ export default Vue.extend({
         });
       } else {
         keys.forEach(key => {
-          // TODO: 优化这里的代码
-          panels[key].filteredValue = [];
+          resetColumnFilter(getColumnById(states, key), panels[key]);
         });
 
         states.filters = {};
