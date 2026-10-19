@@ -124,6 +124,7 @@
       <el-select-menu
         ref="popper"
         :append-to-body="popperAppendToBody"
+        :placement="placement || 'bottom-start'"
         v-show="visible && emptyText !== false">
         <el-scrollbar
           tag="ul"
@@ -351,6 +352,10 @@
       popperAppendToBody: {
         type: Boolean,
         default: true
+      },
+      placement: {
+        type: String,
+        default: ''
       },
       fill: Boolean
     },
