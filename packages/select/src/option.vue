@@ -10,8 +10,8 @@
       'hover': hover
     }">
     <slot>
-      <el-checkbox style="pointer-events: none;" v-if="this.select.multiple" :disabled="disabled" v-model="checked">{{ currentLabel }}</el-checkbox>
-      <span v-else>{{ currentLabel }}</span>
+      <el-checkbox style="pointer-events: none;" v-if="this.select.multiple" :disabled="disabled" v-model="checked"><i v-if="icon" class="el-select-dropdown__icon" :class="icon"></i>{{ currentLabel }}</el-checkbox>
+      <template v-else><i v-if="icon" class="el-select-dropdown__icon" :class="icon"></i><span>{{ currentLabel }}</span></template>
     </slot>
   </li>
 </template>
@@ -34,6 +34,7 @@
         required: true
       },
       label: [String, Number],
+      icon: String,
       created: Boolean,
       disabled: {
         type: Boolean,

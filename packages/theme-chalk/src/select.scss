@@ -90,7 +90,7 @@
 
   .el-input__inner {
     cursor: pointer;
-    padding-right: 35px;
+    padding-right: 30px;
 
     // &:focus {
     //   border-color: $--select-input-focus-border-color;
@@ -217,7 +217,22 @@
     text-overflow: ellipsis;
   }
 
+  @include e(tags-icon) {
+    margin-right: 4px;
+    font-size: inherit;
+    flex-shrink: 0;
+  }
+
+  @include e(selected-icon) {
+    margin-right: 4px;
+    flex-shrink: 0;
+    color: $--input-font-color;
+  }
+
   &.is-disabled {
+    .el-select__selected-icon {
+      color: $--input-color-disabled;
+    }
     .el-tag {
       &.el-tag--info {
         background: $--color-fill-3;

@@ -42,6 +42,76 @@
 ```
 :::
 
+### 带图标选项
+
+通过给 `el-option` 设置 `icon` 属性，可在下拉选项前显示图标；单选选中后图标同步显示在输入框内，多选选中后图标显示在 Tag 中。
+
+::::demo
+```html
+<template>
+  <el-row :gutter="12">
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">prefix</div>
+      <el-select v-model="iconValue" placeholder="请选择" size="small" clearable>
+        <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
+        <i slot="prefix" class="el-input__icon iov-icon-search"></i>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">prefix-label</div>
+      <el-select v-model="iconValue" placeholder="请选择" size="small" clearable>
+        <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
+        <template slot="prefixLabel">分类</template>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">prefix + prefix-label</div>
+      <el-select v-model="iconValue" placeholder="请选择" size="small" clearable>
+        <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
+        <i slot="prefix" class="el-input__icon iov-icon-search"></i>
+        <template slot="prefixLabel">分类</template>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">fill</div>
+      <el-select disabled v-model="iconValue" placeholder="请选择" size="small" fill clearable>
+        <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">单选</div>
+      <el-select v-model="iconValue" placeholder="请选择" size="small" clearable>
+        <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
+      </el-select>
+    </el-col>
+    <el-col :span="12">
+      <div class="component-content-title mgb-10">多选</div>
+      <el-select v-model="iconValue2" placeholder="请选择" multiple collapse-tags size="small">
+        <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
+      </el-select>
+    </el-col>
+  </el-row>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        iconOptions: [
+          {value: '1', label: '黄金糕', icon: 'iov-icon-cny'},
+          {value: '2', label: '双皮奶', icon: 'iov-icon-usd'},
+          {value: '3', label: '蚵仔煎', icon: 'iov-icon-thb'},
+          {value: '4', label: '龙须面', icon: 'iov-icon-aud'}
+        ],
+        iconValue: '',
+        iconValue2: []
+      }
+    }
+  }
+</script>
+```
+::::
+
 ### 有禁用选项
 
 通过给 `el-option` 设置 `disabled` 属性，可单独禁用某一个下拉选项。
@@ -631,6 +701,7 @@
 |---------- |-------------- |---------- |--------------------------------  |-------- |
 | value | 选项的值 | string/number/object | — | — |
 | label | 选项的标签，若不设置则默认与 `value` 相同 | string/number | — | — |
+| icon | 选项前置图标的类名，设置后下拉选项及选中态（单选输入框/多选 Tag）会显示对应图标 | string | — | — |
 | disabled | 是否禁用该选项 | boolean | — | false |
 
 ### Methods

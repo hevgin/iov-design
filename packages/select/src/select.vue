@@ -23,6 +23,7 @@
             type="info"
             @close="deleteTag($event, item)"
             disable-transitions>
+            <i v-if="item.icon" class="el-select__tags-icon" :class="item.icon"></i>
             <span class="el-select__tags-text">{{ item.currentLabel }}</span>
           </el-tag>
         </template>
@@ -50,6 +51,7 @@
           type="info"
           @close="deleteTag($event, item)"
           disable-transitions>
+          <i v-if="item.icon" class="el-select__tags-icon" :class="item.icon"></i>
           <span class="el-select__tags-text">{{ item.currentLabel }}</span>
         </el-tag>
       </transition-group>
@@ -109,8 +111,9 @@
       <template slot="prefixLabel" v-if="$slots.prefixLabel">
         <slot name="prefixLabel"></slot>
       </template>
-      <template slot="prefix" v-if="$slots.prefix">
+      <template slot="prefix" v-if="$slots.prefix || selectedIcon">
         <slot name="prefix"></slot>
+        <i v-if="selectedIcon" class="el-select__selected-icon" :class="selectedIcon"></i>
       </template>
       <template slot="suffix">
         <i v-show="!showClose" :class="['el-select__caret', 'el-input__icon', 'iov-icon-' + iconClass]"></i>
@@ -270,6 +273,11 @@
       },
       propPlaceholder() {
         return typeof this.placeholder !== 'undefined' ? this.placeholder : this.t('el.select.placeholder');
+      },
+
+      selectedIcon() {
+        if (this.multiple) return '';
+        return (this.selected && this.selected.icon) || '';
       }
     },
 
@@ -398,6 +406,10 @@
 
       propPlaceholder(val) {
         this.cachedPlaceHolder = this.currentPlaceholder = val;
+      },
+
+      selectedIcon() {
+        this.updateSelectedIconPadding();
       },
 
       value(val, oldVal) {
@@ -715,6 +727,26 @@
         }
       },
 
+      updateSelectedIconPadding() {
+        if (this.$isServer) return;
+        this.$nextTick(() => {
+          requestAnimationFrame(() => {
+            if (!this.$refs.reference) return;
+            const inputInner = this.$el.querySelector('.el-input__inner');
+            const iconEl = this.$el.querySelector('.el-select__selected-icon');
+            if (!inputInner) return;
+            if (!iconEl) {
+              inputInner.style.paddingLeft = '';
+              return;
+            }
+            // 统一保持图标与文字 4px 间距
+            const borderLeft = parseFloat(window.getComputedStyle(inputInner).borderLeftWidth) || 0;
+            const iconRight = iconEl.getBoundingClientRect().right - inputInner.getBoundingClientRect().left;
+            inputInner.style.paddingLeft = Math.round(iconRight - borderLeft + 4) + 'px';
+          });
+        });
+      },
+
       resetTagsLeft() {
         this.$nextTick(() => {
           const prefixLabel = this.$el.querySelector('.el-input-group__prefix-label');
@@ -890,6 +922,7 @@
 
       handleResize() {
         this.resetInputWidth();
+        this.updateSelectedIconPadding();
         if (this.multiple) {
           this.resetInputHeight();
           this.resetTagsLeft();
@@ -982,6 +1015,7 @@
         }
       });
       this.setSelected();
+      this.updateSelectedIconPadding();
     },
 
     beforeDestroy() {
