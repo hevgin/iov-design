@@ -107,6 +107,11 @@
 @include b(range-editor) {
   position: relative;
   .el-input-group__prefix-label {
+    /* 覆盖 input.scss 中的绝对定位：range 编辑器内 label 参与 flex 布局，避免与 start-placeholder 重叠 */
+    position: static;
+    height: auto;
+    line-height: normal;
+    flex-shrink: 0;
     padding: 0 4px 0 8px;
     font-size: $--input-font-size;
   }

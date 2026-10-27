@@ -11,7 +11,7 @@
       'el-input-group--prepend': $slots.prepend,
       'is-focus': ($slots.suffixLabel || $slots.prefixLabel) && focused,
       'el-input--prefix': $slots.prefix || prefixIcon,
-      'el-input--suffix': $slots.suffix || suffixIcon || clearable || showPassword
+      'el-input--suffix': $slots.suffix || suffixIcon || showPassword
     }
     ]"
     @mouseenter="hovering = true"
@@ -417,13 +417,15 @@
         const pendant = pendantMap[place];
         const embed = embedMap[place];
 
-        const pendantEl = this.$el.querySelector(`.el-input-group__${pendant}`);
+        // const pendantEl = this.$el.querySelector(`.el-input-group__${pendant}`);
         const embedEl = this.$el.querySelector(`.el-input-group__${place}-label`);
 
+        /* prefix 图标绝对定位的基准是 .el-input-group__inner（位于 prepend 之后），
+           因此 prepend 宽度不参与偏移计算，只需叠加内嵌 label 的宽度 */
         if (this.$slots[pendant] && this.$slots[embed]) {
-          el.style.transform = place === 'prefix' ? `translateX(${pendantEl.offsetWidth + embedEl.offsetWidth}px)` : '';
+          el.style.transform = place === 'prefix' ? `translateX(${embedEl.offsetWidth}px)` : '';
         } else if (this.$slots[pendant]) {
-          el.style.transform = place === 'prefix' ? `translateX(${pendantEl.offsetWidth}px)` : '';
+          el.removeAttribute('style');
         } else if (this.$slots[embed]) {
           el.style.transform = place === 'prefix' ? `translateX(${embedEl.offsetWidth}px)` : '';
         } else {
@@ -436,6 +438,27 @@
 
         this.calcIconOffset('prefix');
         this.calcIconOffset('suffix');
+        this.calcPrefixLabelPadding();
+      },
+      /**
+       * prefixLabel 为绝对定位 overlay，需根据其实际宽度
+       * 动态计算 input 的 padding-left，label 内容变化时自动更新
+       */
+      calcPrefixLabelPadding() {
+        if (this.$refs.input !== this.getInput()) return;
+        const input = this.$refs.input;
+        if (!input) return;
+        const labelEl = [].slice.call(this.$el.querySelectorAll('.el-input-group__prefix-label'))
+          .find(el => el.closest('.el-input') === this.$el);
+        if (this.$slots.prefixLabel && labelEl) {
+          const prefixEl = [].slice.call(this.$el.querySelectorAll('.el-input__prefix'))
+            .find(el => el.parentNode.parentNode === this.$el);
+          const gap = prefixEl ? prefixEl.offsetWidth : 8;
+          input.style.paddingLeft = `${labelEl.offsetWidth + gap}px`;
+        } else if (this._prefixLabelPaddingSet) {
+          input.style.removeProperty('padding-left');
+        }
+        this._prefixLabelPaddingSet = !!(this.$slots.prefixLabel && labelEl);
       },
       clear() {
         this.$emit('input', '');

@@ -78,7 +78,7 @@
         v-model="query"
         @input="debouncedQueryChange"
         v-if="filterable"
-        :style="{ 'flex-grow': '1', width: inputLength / (inputWidth - 32) + '%', 'max-width': inputWidth - 42 + 'px' }"
+        :style="{ 'flex-grow': '1', width: inputLength / (inputWidth - 32) + '%', 'max-width': inputWidth - 42 + 'px', 'margin-left': selected.length ? '6px' : queryOffset + 'px' }"
         ref="input">
     </div>
     <el-input
@@ -393,6 +393,7 @@
         isOnComposition: false,
         isSilentBlur: false,
         tagsLeft: 0,
+        queryOffset: 0,
         maxWidth: 'none'
       };
     },
@@ -736,7 +737,11 @@
             const iconEl = this.$el.querySelector('.el-select__selected-icon');
             if (!inputInner) return;
             if (!iconEl) {
-              inputInner.style.paddingLeft = '';
+              /* prefixLabel 场景的 padding-left 由内嵌 el-input 的 calcPrefixLabelPadding 维护，
+                 不能在此清空（否则挂载后覆盖为空，直到 focus 才恢复） */
+              if (!this.$slots.prefixLabel && !this.$scopedSlots.prefixLabel) {
+                inputInner.style.paddingLeft = '';
+              }
               return;
             }
             // 统一保持图标与文字 4px 间距
@@ -752,9 +757,16 @@
           const prefixLabel = this.$el.querySelector('.el-input-group__prefix-label');
           const prefix = this.$el.querySelector('.el-input__prefix');
           const inputInner = this.$el.querySelector('.el-input__inner');
-          const prefixLabelWidth = prefixLabel && Math.round(prefixLabel.getBoundingClientRect().width) || 0;
-          const inputPaddingLeft = prefixLabel || prefix ? Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) : 0;
-          this.tagsLeft = prefixLabel ? (prefixLabelWidth + inputPaddingLeft - 4) : 0;
+          const inputPaddingLeft = Math.round(parseFloat(window.getComputedStyle(inputInner).paddingLeft));
+          if (prefixLabel || prefix) {
+            /* 前置区域（label / 图标）为 overlay，input 的 padding-left 即文字起点
+               （prefixLabel 场景由 el-input 动态计算，prefix 图标场景为静态 30px），tags 对齐此处 */
+            this.tagsLeft = inputPaddingLeft;
+          } else {
+            this.tagsLeft = 0;
+          }
+          /* filterable 查询框光标对齐主 input 文字起点所需的补偿间距 */
+          this.queryOffset = Math.max(inputPaddingLeft - this.tagsLeft, 0);
         });
       },
 
@@ -774,12 +786,18 @@
           const tags = this.$refs.tags;
           const tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
           const sizeInMap = this.initialInputHeight || 36;
-          input.style.height = this.selected.length === 0
-            ? sizeInMap + 'px'
+          const height = this.selected.length === 0
+            ? sizeInMap
             : Math.max(
               tags ? (tagsHeight + (tagsHeight > sizeInMap ? 6 : 0)) : 0,
               sizeInMap
-            ) + 'px';
+            );
+          if (groupPrefix && inputInner) {
+            inputInner.style.height = height + 'px';
+            groupPrefix.style.height = height + 'px';
+          } else {
+            input.style.height = height + 'px';
+          }
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
           }
@@ -1008,6 +1026,14 @@
       }
       if (this.remote && this.multiple) {
         this.resetInputHeight();
+      }
+      /* 多选挂载时初始化 tags 位置与高度（含 prefixLabel 场景的 tagsLeft 计算） */
+      if (this.multiple) {
+        this.$nextTick(() => {
+          this.resetInputHeight();
+          this.resetTagsLeft();
+          this.getMaxWidth();
+        });
       }
       this.$nextTick(() => {
         if (reference && reference.$el) {

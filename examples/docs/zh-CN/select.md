@@ -52,21 +52,21 @@
   <el-row :gutter="12">
     <el-col :span="12">
       <div class="component-content-title mgb-10">prefix</div>
-      <el-select v-model="iconValue" placeholder="请选择" size="small" clearable>
+      <el-select multiple v-model="iconValue" placeholder="请选择" size="small" clearable>
         <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
         <i slot="prefix" class="el-input__icon iov-icon-search"></i>
       </el-select>
     </el-col>
     <el-col :span="12">
       <div class="component-content-title mgb-10">prefix-label</div>
-      <el-select v-model="iconValue" placeholder="请选择" size="small" clearable>
+      <el-select fill multiple v-model="iconValue" placeholder="请选择" size="small" clearable>
         <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
         <template slot="prefixLabel">分类</template>
       </el-select>
     </el-col>
     <el-col :span="12">
       <div class="component-content-title mgb-10">prefix + prefix-label</div>
-      <el-select v-model="iconValue" placeholder="请选择" size="small" clearable>
+      <el-select fill multiple v-model="iconValue" placeholder="请选择" size="small" clearable>
         <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
         <i slot="prefix" class="el-input__icon iov-icon-search"></i>
         <template slot="prefixLabel">分类</template>
@@ -74,13 +74,13 @@
     </el-col>
     <el-col :span="12">
       <div class="component-content-title mgb-10">fill</div>
-      <el-select disabled v-model="iconValue" placeholder="请选择" size="small" fill clearable>
+      <el-select fill multiple disabled v-model="iconValue" placeholder="请选择" size="small" fill clearable>
         <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
       </el-select>
     </el-col>
     <el-col :span="12">
       <div class="component-content-title mgb-10">单选</div>
-      <el-select v-model="iconValue" placeholder="请选择" size="small" clearable>
+      <el-select fill multiple v-model="iconValue" placeholder="请选择" size="small" clearable>
         <el-option v-for="item in iconOptions" :key="item.value" :label="item.label" :value="item.value" :icon="item.icon"></el-option>
       </el-select>
     </el-col>
@@ -101,9 +101,11 @@
           {value: '1', label: '黄金糕', icon: 'iov-icon-cny'},
           {value: '2', label: '双皮奶', icon: 'iov-icon-usd'},
           {value: '3', label: '蚵仔煎', icon: 'iov-icon-thb'},
-          {value: '4', label: '龙须面', icon: 'iov-icon-aud'}
+          {value: '4', label: '龙须面', icon: 'iov-icon-aud'},
+          {value: '5', label: '啤酒鸭', icon: 'iov-icon-cny'},
+          {value: '6', label: '红烧鹅', icon: 'iov-icon-aud'}
         ],
-        iconValue: '',
+        iconValue: [],
         iconValue2: []
       }
     }
@@ -243,7 +245,7 @@
       <div class="component-content-title mgb-10">前置图标</div>
       <el-select v-model="value1" placeholder="请选择" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        <i slot="prefix" class="el-input__icon iov-icon-search"></i>
       </el-select>
     </el-col>
     <el-col :span="12">
@@ -257,7 +259,7 @@
       <div class="component-content-title mgb-10">前置图标+label</div>
       <el-select v-model="value3" placeholder="请选择" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        <i slot="prefix" class="el-input__icon iov-icon-search"></i>
         <template slot="prefixLabel">分类</template>
       </el-select>
     </el-col>
@@ -265,7 +267,7 @@
       <div class="component-content-title mgb-10">前置图标+label+禁用</div>
       <el-select v-model="value4" placeholder="请选择" size="small" disabled>
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
-        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        <i slot="prefix" class="el-input__icon iov-icon-search"></i>
         <template slot="prefixLabel">分类</template>
       </el-select>
     </el-col>
@@ -280,7 +282,9 @@
           {value: '1',label: '黄金糕'},
           {value: '2',label: '双皮奶'},
           {value: '3',label: '蚵仔煎'},
-          {value: '4',label: '龙须面'}
+          {value: '4',label: '龙须面'},
+          {value: '5', label: '啤酒鸭'},
+          {value: '6', label: '红烧鹅'}
         ],
         value1: '',
         value2: '',
@@ -307,6 +311,10 @@
       <div class="component-content-title mgb-10">多选数量在右侧</div>
       <el-select v-model="value1" multiple filterable collapse-tags :collapseTagsFixed="true" placeholder="多选数量在右侧" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
+        <template slot="prefixLabel">
+          <span>分类</span>
+        </template>
+        <i slot="prefix" class="el-input__icon iov-icon-search"></i>
       </el-select>
     </el-col>
     <el-col :span="12">
@@ -329,8 +337,12 @@
     </el-col>
     <el-col :span="12">
       <div class="component-content-title mgb-10">默认多选</div>
-      <el-select v-model="value1" multiple :multiple-limit="3" placeholder="默认多选" size="small">
+      <el-select v-model="value1" multiple filterable :multiple-limit="30" placeholder="默认多选" size="small">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" :disabled="item.disabled"></el-option>
+        <template slot="prefixLabel">
+          <span>分类</span>
+        </template>
+        <i slot="prefix" class="el-input__icon iov-icon-search"></i>
       </el-select>
     </el-col>
   </el-row>

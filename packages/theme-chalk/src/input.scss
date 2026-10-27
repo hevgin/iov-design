@@ -1,6 +1,27 @@
 @import "mixins/mixins";
 @import "common/var";
 
+/* ---------------------------------------------------------- */
+/* 尺寸变量表：medium / small / mini 统一由循环生成             */
+/* ---------------------------------------------------------- */
+$input-sizes: (
+  medium: (
+    font-size: $--input-medium-font-size,
+    height: $--input-medium-height,
+  ),
+  small: (
+    font-size: $--input-small-font-size,
+    height: $--input-small-height,
+  ),
+  mini: (
+    font-size: $--input-mini-font-size,
+    height: $--input-mini-height,
+  ),
+);
+
+/* ---------------------------------------------------------- */
+/* Textarea                                                    */
+/* ---------------------------------------------------------- */
 @include b(textarea) {
   position: relative;
   display: block;
@@ -10,18 +31,18 @@
 
   @include e(inner) {
     display: block;
-    resize: vertical;
-    padding: 5px 12px;
-    line-height: 1.5;
     box-sizing: border-box;
     width: 100%;
+    padding: 5px 12px;
     font-size: inherit;
+    line-height: 1.5;
     color: $--input-font-color;
     background-color: $--input-background-color;
     background-image: none;
     border: $--input-border;
     border-radius: $--input-border-radius;
-    transition: $--border-transition-base;
+    transition: $--border-transition-base, $--box-shadow-transition-base;
+    resize: vertical;
 
     &::placeholder {
       color: $--input-placeholder-color;
@@ -39,12 +60,12 @@
   }
 
   & .el-input__count {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    font-size: 12px;
     color: $--color-text-2;
     background: $--color-white;
-    position: absolute;
-    font-size: 12px;
-    bottom: 5px;
-    right: 10px;
   }
 
   @include when(disabled) {
@@ -71,73 +92,33 @@
   }
 }
 
+/* ---------------------------------------------------------- */
+/* Input                                                       */
+/* ---------------------------------------------------------- */
 @include b(input) {
   position: relative;
-  font-size: $--font-size-base;
   display: block;
   width: 100%;
+  font-size: $--font-size-base;
   @include scroll-bar;
 
-  & .el-input__clear {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-
-    &:before {
-      margin-right: -12px;
-      color: $--input-icon-color;
-      font-size: 10px;
-      position: relative;
-      line-height: 1;
-    }
-    &:after {
-      border-radius: 100%;
-      width: 14px;
-      height: 14px;
-      background: $--color-fill-3;
-    }
-
-    &:hover {
-      &:before {
-        color: $--color-white;
-      }
-      &:after {
-        background: $--color-fill-5;
-      }
-    }
-  }
-
-  & .el-input__count {
-    height: 100%;
-    display: inline-flex;
-    align-items: center;
-    color: $--color-text-2;
-    font-size: 12px;
-
-    .el-input__count-inner {
-      background: $--color-white;
-      line-height: initial;
-      display: inline-block;
-      padding: 0 5px;
-    }
-  }
-
+  /* --- 输入框主体 --- */
   @include e(inner) {
     -webkit-appearance: none;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    height: $--input-height;
+    padding: 0 12px;
+    font-size: inherit;
+    line-height: $--input-height;
+    color: $--input-font-color;
     background-color: $--input-background-color;
     background-image: none;
-    border-radius: $--input-border-radius;
     border: $--input-border;
-    box-sizing: border-box;
-    color: $--input-font-color;
-    display: block;
-    font-size: inherit;
-    height: $--input-height;
-    line-height: $--input-height;
+    border-radius: $--input-border-radius;
     outline: none;
-    padding: 0 12px;
-    transition: $--border-transition-base;
-    width: 100%;
+    transition: $--border-transition-base, $--box-shadow-transition-base;
 
     &::-ms-reveal {
       display: none;
@@ -157,62 +138,55 @@
       box-shadow: $--input-box-shadow;
     }
   }
+
+  /* --- 前后缀区域 --- */
   @include e((prefix, suffix)) {
-    .el-input__icon {
-      line-height: $--input-height - 2px;
-      display: flex;
-      align-items: center;
-    }
-  }
-  @include e(suffix) {
-    padding-left: 8px;
     position: absolute;
-    right: 1px;
     top: 1px;
     bottom: 1px;
-    text-align: center;
-    color: $--input-icon-color;
-    border-radius: $--input-border-radius;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    background: $--input-background-color;
-    pointer-events: none;
-    z-index: 2;
     display: flex;
     align-items: center;
     box-sizing: border-box;
-  }
-
-  @include e(suffix-inner) {
-    pointer-events: all;
-    display: flex;
-    align-items: center;
+    padding-left: 8px;
+    text-align: center;
+    color: $--input-icon-color;
+    border-radius: $--input-border-radius;
+    pointer-events: none;
+    z-index: 2;
+    .el-input__icon {
+      display: flex;
+      align-items: center;
+      line-height: $--input-height - 2px;
+    }
   }
 
   @include e(prefix) {
-    padding-left: 8px;
-    position: absolute;
     left: 1px;
-    top: 1px;
-    bottom: 1px;
-    text-align: center;
-    color: $--input-icon-color;
-    border-radius: $--input-border-radius;
-    // background: $--input-background-color;
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    box-sizing: border-box;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
+  @include e(suffix) {
+    background: $--input-background-color;
+    right: 1px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  @include e(suffix-inner) {
+    display: flex;
+    align-items: center;
+    pointer-events: all;
+  }
+
+  /* --- 图标 --- */
   @include e(icon) {
-    padding-right: 8px;
     height: 100%;
     width: auto;
+    padding-right: 8px;
     font-size: 14px;
-    text-align: center;
     line-height: $--input-height;
-    // cursor: pointer;
+    text-align: center;
 
     &:after {
       content: '';
@@ -223,6 +197,55 @@
     pointer-events: none;
   }
 
+  /* --- 清除按钮 --- */
+  & .el-input__clear {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &:before {
+      position: relative;
+      margin-right: -12px;
+      font-size: 10px;
+      line-height: 1;
+      color: $--input-icon-color;
+    }
+
+    &:after {
+      width: 14px;
+      height: 14px;
+      border-radius: 100%;
+      background: $--color-fill-3;
+    }
+
+    &:hover {
+      &:before {
+        color: $--color-white;
+      }
+
+      &:after {
+        background: $--color-fill-5;
+      }
+    }
+  }
+
+  /* --- 字数统计 --- */
+  & .el-input__count {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    font-size: 12px;
+    color: $--color-text-2;
+
+    .el-input__count-inner {
+      display: inline-block;
+      padding: 0 8px 0 0;
+      line-height: initial;
+      background: $--color-white;
+    }
+  }
+
+  /* --- 状态 --- */
   @include when(active) {
     .el-input__inner {
       outline: none;
@@ -234,39 +257,129 @@
     .el-input__inner {
       background: $--color-fill-1;
       border-color: $--color-fill-1;
-      transition:  all ease-in .2s;
+      transition: background-color .2s cubic-bezier(.645,.045,.355,1), box-shadow .2s cubic-bezier(.645,.045,.355,1), ;
+
       &:hover {
         background: $--color-fill-2;
         border-color: $--color-fill-2;
       }
+
       &:focus {
         background: #fff;
         border-color: $--input-focus-border;
         box-shadow: $--input-box-shadow;
       }
     }
+
+    .el-input__suffix {
+      transition: background-color .2s cubic-bezier(.645,.045,.355,1);
+      background: $--color-fill-1;
+    }
+
+    .el-input__inner:hover ~ .el-input__suffix {
+      background: $--color-fill-2;
+    }
+
+    .el-input__inner:focus ~ .el-input__suffix {
+      background: #fff;
+    }
+
+    .el-input-group--suffix {
+      background: $--color-fill-1;
+      border-color: $--color-fill-1;
+    }
+
+    .el-input-group__inner:hover {
+      background: $--color-fill-2;
+      border-color: $--color-fill-2;
+      border-radius: $--input-border-radius;
+    }
+
+
+    &.is-disabled {
+      .el-input__inner {
+        border-color: $--color-fill-1;
+
+        /* 覆盖 when(disabled) 的 hover 边框（disabled-border 可见）及 fill hover 背景 */
+        &:hover {
+          background: $--input-disabled-fill;
+          border-color: $--color-fill-1;
+        }
+
+        &:hover ~ .el-input__suffix {
+          background: $--input-disabled-fill;
+        }
+      }
+
+      .el-input-group__inner:hover {
+        background: $--input-disabled-fill;
+        border-color: $--color-fill-1;
+      }
+
+      /* 仅禁用态：prepend/append 内嵌 select 不显示边框（正常态保留 hover 边框） */
+      .el-input-group__prepend,
+      .el-input-group__append {
+        .el-input-group__inner,
+        .el-input__inner {
+          border-color: transparent;
+
+          &:hover {
+            background: $--input-disabled-fill;
+            border-color: transparent;
+          }
+        }
+      }
+    }
+
+    &:hover,
+    &.is-focus {
+      .el-select {
+        .el-input__suffix {
+          background: none;
+        }
+      }
+    }
+    &.is-focus {
+      .el-select {
+        .el-input {
+          z-index: 0;
+        }
+      }
+    }
+    .el-select {
+      .el-input__inner {
+        background: none;
+      }
+      .el-input__inner:focus ~ .el-input__suffix {
+        background: none;
+      }
+      .el-input-group__inner:hover {
+        background: none;
+      }
+    }
   }
 
   @include when(disabled) {
-    .el-input-group__inner.is-disabled {
-      .el-input__inner {
+    .el-input__inner {
+      cursor: not-allowed;
+      background-color: $--input-disabled-fill;
+      border-color: $--input-disabled-border;
+      color: $--input-color-disabled;
+
+      &::placeholder {
+        color: $--input-disabled-placeholder-color;
+      }
+      &:hover {
         background-color: $--input-disabled-fill;
-        border-color: $--input-disabled-border;
-        color: $--input-color-disabled;
-        &::placeholder {
-          color: $--input-disabled-placeholder-color;
-        }
-      }
-      > .el-input__inner {
-        cursor: not-allowed;
-      }
-      .el-input__icon {
-        color: $--color-fill-4;
+        border-color: $--input-disabled-border
       }
     }
-    // .el-input__prefix,
+
+    .el-input__icon {
+      color: $--color-fill-4;
+    }
+
     .el-input__suffix,
-    // .el-input-group__prefix-label,
     .el-input-group__suffix-label {
       background-color: $--input-disabled-fill;
     }
@@ -284,9 +397,15 @@
     }
   }
 
+  /* --- 修饰符：前后缀留白 --- */
   @include m(suffix) {
     .el-input__inner {
       padding-right: 30px;
+    }
+    .el-select {
+      .el-input__inner {
+        padding-right: 12px;
+      }
     }
   }
 
@@ -294,137 +413,98 @@
     .el-input__inner {
       padding-left: 30px;
     }
-  }
-
-  @include m(medium) {
-    font-size: $--input-medium-font-size;
-
-    @include e(inner) {
-      height: $--input-medium-height;
-    }
-
-    .el-input__icon {
-      line-height: $--input-medium-height;
-    }
-
-    .el-input-group__prepend,
-    .el-input-group__append {
-      height: $--input-medium-height;
-      line-height: $--input-medium-height;
-    }
-    .el-input-group__prefix-label,
-    .el-input-group__suffix-label {
-      height: $--input-medium-height - 2px;
-      line-height: $--input-medium-height - 2px;
-    }
-
-    .el-input-group--prefix,
-    .el-input-group--suffix {
-      height: $--input-medium-height;
+    .el-select {
       .el-input__inner {
-        height: $--input-medium-height - 2px;
-        line-height: $--input-medium-height - 2px;
-      }
-      .el-input__icon {
-        line-height: $--input-medium-height - 2px;
+        padding-left: 12px;
       }
     }
   }
-  @include m(small) {
-    font-size: $--input-small-font-size;
 
-    @include e(inner) {
-      height: $--input-small-height;
-    }
+  /* --- 尺寸（medium / small / mini） --- */
+  @each $size, $map in $input-sizes {
+    $height: map-get($map, height);
 
-    .el-input__icon {
-      line-height: $--input-small-height;
-    }
+    @include m($size) {
+      font-size: map-get($map, font-size);
 
-    .el-input-group__prepend,
-    .el-input-group__append {
-      height: $--input-small-height;
-      line-height: $--input-small-height;
-    }
-    .el-input-group__prefix-label,
-    .el-input-group__suffix-label {
-      height: $--input-small-height - 2px;
-      line-height: $--input-small-height - 2px;
-    }
-
-    .el-input-group--prefix,
-    .el-input-group--suffix {
-      height: $--input-small-height;
-      .el-input__inner {
-        height: $--input-small-height - 2px;
-        line-height: $--input-small-height - 2px;
+      @include e(inner) {
+        height: $height;
       }
+
       .el-input__icon {
-        line-height: $--input-small-height - 2px;
+        line-height: $height;
       }
-    }
-  }
-  @include m(mini) {
-    font-size: $--input-mini-font-size;
 
-    @include e(inner) {
-      height: $--input-mini-height;
-    }
-
-    .el-input__icon {
-      line-height: $--input-mini-height;
-    }
-
-    .el-input-group__prepend,
-    .el-input-group__append {
-      height: $--input-mini-height;
-      line-height: $--input-mini-height;
-    }
-    .el-input-group__prefix-label,
-    .el-input-group__suffix-label {
-      height: $--input-mini-height - 2px;
-      line-height: $--input-mini-height - 2px;
-    }
-
-    .el-input-group--prefix,
-    .el-input-group--suffix {
-      height: $--input-mini-height;
-      .el-input__inner {
-        height: $--input-mini-height - 2px;
-        line-height: $--input-mini-height - 2px;
+      .el-input-group__prepend,
+      .el-input-group__append {
+        height: $height;
+        line-height: $height;
       }
-      .el-input__icon {
-        line-height: $--input-mini-height - 2px;
+
+      .el-input-group__prefix-label,
+      .el-input-group__suffix-label {
+        height: $height - 2px;
+        line-height: $height - 2px;
+      }
+
+      .el-input-group--prefix,
+      .el-input-group--suffix {
+        height: $height;
+
+        .el-input__inner {
+          height: $height;
+          line-height: $height;
+        }
+
+        .el-input__icon {
+          line-height: $height;
+        }
       }
     }
   }
 }
 
+/* ---------------------------------------------------------- */
+/* Input Group                                                 */
+/* ---------------------------------------------------------- */
 @include b(input-group) {
   display: flex;
   align-items: center;
   width: 100%;
 
+  /* --- 布局 --- */
   > .el-input__inner {
     display: block;
     // border-radius: 0;
   }
+
   > .el-input-group__inner {
     z-index: 1;
   }
+
   .el-input-group__inner {
-    flex: 1;
-    display: flex;
     position: relative;
+    display: flex;
     align-items: center;
+    flex: 1;
   }
+
+  /* --- 修饰符：拼接处去圆角 --- */
   @include m(append) {
     .el-input__inner,
     .el-input-group__inner {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
+    .el-input-group__suffix-label {
+      .el-input__inner,
+      .el-input-group__inner {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
   }
+
   @include m(prepend) {
     .el-input__inner,
     .el-input-group__inner {
@@ -432,70 +512,75 @@
       border-bottom-left-radius: 0;
     }
   }
+
+  /* --- 修饰符：内置 prefix / suffix 的组合框 --- */
   @include m((prefix, suffix)) {
     color: $--input-font-color;
     background-color: $--input-background-color;
     background-image: none;
-    border: $--input-border;
-    box-sizing: border-box;
-    border-radius: $--input-border-radius;
-    transition: $--border-transition-base;
     z-index: 1;
-    &:hover {
-      border-color: $--input-hover-border;
-      &.is-disabled {
-        border-color: $--input-disabled-border;
-      }
-    }
+
+
     &:focus {
       outline: none;
     }
+
     &.is-focus {
       outline: none;
-      border-color: $--input-focus-border;
-      box-shadow: $--input-box-shadow;
       z-index: 2;
     }
+
     &.is-disabled {
       background-color: $--input-disabled-fill;
     }
+
     .el-input__inner,
     &:focus {
       margin: 0 auto;
-      border: 0 none;
-      box-shadow: none;
-      padding-right: 8px;
-      height: $--input-height - 2px;
+      padding-right: 8px;      
     }
+
     .el-input-group__prepend {
       border: 0 none;
       border-right: 1px solid $--input-border-color !important;
     }
+
     .el-input-group__append {
       border: 0 none;
       border-left: 1px solid $--input-border-color !important;
     }
   }
+
+  /* --- 元素：prefix-label / suffix-label --- */
   @include e((prefix-label, suffix-label)) {
-    color: $--color-text-4;
     position: relative;
-    padding: 0 0 0 12px;
-    white-space: nowrap;
     display: flex;
     align-items: center;
-    border-radius: $--input-border-radius;
-    height: $--input-height - 2px;
-    line-height: $--input-height - 2px;
     box-sizing: border-box;
+    height: $--input-height - 2px;
+    padding: 0 0 0 12px;
+    line-height: $--input-height - 2px;
+    white-space: nowrap;
+    color: $--color-text-4;
+    border-radius: $--input-border-radius;
 
     &:focus {
       outline: none;
     }
+
     .el-select {
+      height: inherit;
+      .el-input {
+        height: inherit;
+      }
+      .el-input-group__inner {
+        height: inherit;
+      }
       .el-input__inner {
+        height: inherit;
         color: $--color-text-4;
       }
-      .el-input.is-focus .el-input__inner {
+      .el-input .el-input__inner {
         border: 0 none;
         box-shadow: none;
       }
@@ -503,31 +588,48 @@
   }
 
   @include e(prefix-label) {
+    /* 覆盖于 input 之上，input 的 padding-left 由组件动态计算 */
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    bottom: 1px;
+    z-index: 2;
+    border-radius: $--input-border-radius;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+
     .el-select {
       margin-left: -12px;
     }
   }
 
   @include e(suffix-label) {
+    border-radius: $--input-border-radius;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    flex-shrink: 0;
     padding: 0 12px 0 0;
-    display: inline;
+
     .el-select {
       margin-right: -12px;
     }
   }
 
+  /* --- 元素：append / prepend --- */
   @include e((append, prepend)) {
-    background-color: $--background-color-base;
-    color: $--color-info;
-    display: block;
     position: relative;
-    border: $--border-base;
-    border-radius: $--input-border-radius;
-    padding: 0 12px;
-    white-space: nowrap;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
+    box-sizing: border-box;
+    padding: 0 12px;
+    white-space: nowrap;
+    color: $--color-info;
+    background-color: $--background-color-base;
+    border: $--border-base;
+    border-radius: $--input-border-radius;
 
     &:focus {
       outline: none;
@@ -539,15 +641,18 @@
     &.is-button {
       border: 0 none;
       padding: 0;
+
       .el-input__suffix {
         background: none;
       }
+
       .el-input.is-focus,
       .el-input:hover,
       .el-input__inner:focus {
         z-index: 2;
       }
     }
+
     .is-focus {
       .el-input__inner {
         background: #fff;
@@ -557,20 +662,22 @@
   }
 
   @include e(prepend) {
+    height: $--input-height;
     margin-right: -1px;
+    line-height: $--input-height;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    height: $--input-height;
-    line-height: $--input-height;
+
     .el-button {
       position: relative;
       border-radius: $--input-border-radius;
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
+
     .el-input__inner {
-      padding: 0 12px;
       position: relative;
+      padding: 0 12px;
       background: $--color-fill-1;
       border-radius: $--input-border-radius;
       border-top-right-radius: 0;
@@ -579,29 +686,33 @@
   }
 
   @include e(append) {
+    height: $--input-height;
     margin-left: -1px;
+    line-height: $--input-height;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    height: $--input-height;
-    line-height: $--input-height;
+
     .el-button {
       position: relative;
       border-radius: $--input-border-radius;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
+
     .el-input__inner {
-      padding: 0 12px;
       position: relative;
-      border-radius: $--input-border-radius;
+      padding: 0 12px;
       background: $--color-fill-1;
+      border-radius: $--input-border-radius;
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
   }
 }
 
-/** disalbe default clear on IE */
+/* ---------------------------------------------------------- */
+/* IE：禁用默认清除按钮                                         */
+/* ---------------------------------------------------------- */
 .el-input__inner::-ms-clear {
   display: none;
   width: 0;
