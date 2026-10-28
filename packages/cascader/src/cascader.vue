@@ -4,7 +4,8 @@
     :class="[
       'el-cascader',
       realSize && `el-cascader--${realSize}`,
-      { 'is-disabled': isDisabled }
+      { 'is-disabled': isDisabled },
+      fill && 'is-fill'
     ]"
     v-clickoutside="() => toggleDropDownVisible(false)"
     @mouseenter="inputHover = true"
@@ -20,6 +21,7 @@
       :readonly="readonly"
       :disabled="isDisabled"
       :validate-event="false"
+      :fill="fill"
       :class="{ 'is-focus': dropDownVisible }"
       @focus="handleFocus"
       @blur="handleBlur"
@@ -258,6 +260,7 @@ export default {
     },
     disabled: Boolean,
     clearable: Boolean,
+    fill: Boolean,
     filterable: Boolean,
     filterMethod: Function,
     separator: {

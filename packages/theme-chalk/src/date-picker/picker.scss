@@ -123,6 +123,46 @@
     box-sizing: border-box;
   }
 
+  /* fill 填充态 */
+  &.is-fill {
+    background: $--color-fill-1;
+    border-color: $--color-fill-1;
+
+    /* 输入框背景透明，与编辑器填充底色保持一致（fill-1 / hover fill-2 / active #fff） */
+    .el-range-input {
+      background: transparent;
+
+      &:focus {
+        background: $--color-fill-2;
+      }
+    }
+
+    &:not(.is-disabled):hover {
+      background: $--color-fill-2;
+      border-color: $--color-fill-2;
+    }
+
+    @include when(active) {
+      background: #fff;
+      border-color: $--input-focus-border;
+      box-shadow: $--input-box-shadow;
+
+      &:hover {
+        background: #fff;
+        border-color: $--input-focus-border;
+      }
+
+      .el-range-input:focus {
+        background: $--color-fill-1;
+      }
+    }
+
+    @include when(disabled) {
+      background-color: $--input-disabled-fill;
+      border-color: $--color-fill-1;
+    }
+  }
+
   .el-range-input {
     line-height: 1;
   }

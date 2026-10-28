@@ -254,6 +254,24 @@ $input-sizes: (
   }
 
   @include when(fill) {
+    /* hover 输入框任意区域（含前置标签、清除按钮等覆盖层）时整体变色 */
+    &:not(.is-disabled):hover {
+      .el-input__inner {
+        background: $--color-fill-2;
+        border-color: $--color-fill-2;
+      }
+      .el-input__suffix {
+        background: $--color-fill-2;
+      }
+    }
+
+    /* 聚焦白底优先于 hover：同优先级(0,5,0)但声明在后 */
+    &:not(.is-disabled) .el-input__inner:focus {
+      background: #fff;
+      border-color: $--input-focus-border;
+      box-shadow: $--input-box-shadow;
+    }
+
     .el-input__inner {
       background: $--color-fill-1;
       border-color: $--color-fill-1;

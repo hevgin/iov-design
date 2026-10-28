@@ -203,6 +203,41 @@
 ```
 :::
 
+### 填充模式
+
+为日期时间选择器添加 `fill` 属性，可切换为无边框填充样式：输入框以背景色区分状态（常态 `fill-1`、hover `fill-2`、聚焦/面板展开白底），范围选择同样支持。
+
+::::demo
+```html
+<template>
+  <el-row :gutter="20">
+    <el-col :span="8">
+      <div class="component-content-title mgb-10">单选</div>
+      <el-date-picker v-model="fillValue" type="datetime" placeholder="选择日期时间" fill></el-date-picker>
+    </el-col>
+    <el-col :span="8">
+      <div class="component-content-title mgb-10">范围</div>
+      <el-date-picker v-model="fillRange" type="datetimerange" fill start-placeholder="开始日期" end-placeholder="结束日期"></el-date-picker>
+    </el-col>
+    <el-col :span="8">
+      <div class="component-content-title mgb-10">禁用</div>
+      <el-date-picker v-model="fillValue" type="datetime" placeholder="选择日期时间" fill disabled></el-date-picker>
+    </el-col>
+  </el-row>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        fillValue: '',
+        fillRange: []
+      };
+    }
+  }
+</script>
+```
+::::
+
 ### Attributes
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |
@@ -211,6 +246,7 @@
 | disabled | 禁用 | boolean | — | false |
 | editable | 文本框可输入 | boolean | — | true |
 | clearable | 是否显示清除按钮 | boolean | — | true |
+| fill | 是否使用填充样式（无边框，以背景色区分状态） | boolean | — | false |
 | size          | 输入框尺寸     | string          | large, small, mini  | — |
 | placeholder | 非范围选择时的占位内容 | string | — | — |
 | start-placeholder | 范围选择时开始日期的占位内容 | string | — | — |

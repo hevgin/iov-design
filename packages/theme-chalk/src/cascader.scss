@@ -11,10 +11,36 @@
   font-size: $--input-font-size;
   line-height: $--input-height;
 
-  &:not(.is-disabled):hover {
+  /* fill 态下边框跟随 el-input 的 fill 规则（fill-1/fill-2），hover 不再变边框色 */
+  &:not(.is-disabled):not(.is-fill):hover {
     .el-input__inner {
       cursor: pointer;
       border-color: $--input-hover-border;
+    }
+  }
+
+  /* fill 填充态（输入框样式由 el-input 的 fill 提供） */
+  @include when(fill) {
+    .el-input__inner {
+      cursor: pointer;
+    }
+
+    .el-tag.el-tag--info {
+      background: #fff;
+    }
+
+    .el-input {
+      /* (0,6,0) 稳压 fill 的 hover 规则(0,5,0)，不受样式加载顺序影响 */
+      &.is-focus:not(.is-disabled) {
+        .el-input__inner {
+          background: #fff;
+          border-color: $--input-focus-border;
+          box-shadow: $--input-box-shadow;
+        }
+        .el-input__suffix {
+          background: #fff;
+        }
+      }
     }
   }
 

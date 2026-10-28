@@ -37,6 +37,9 @@ export declare class ElCascader<V = any, D = CascaderOption> extends ElementUICo
   /** Whether selected value can be cleared */
   clearable: boolean
 
+  /** Whether to use fill style (borderless, background fill) */
+  fill: boolean
+
   /** Whether to display all levels of the selected value in the input */
   showAllLevels: boolean
 

@@ -26,6 +26,9 @@ export declare class ElTimePicker extends ElementUIComponent {
   /** Whether to show clear button */
   clearable: boolean
 
+  /** Whether to use fill style (borderless, background fill) */
+  fill: boolean
+
   /** Size of Input */
   size: ElementUIComponentSize
 

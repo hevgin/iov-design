@@ -5,6 +5,7 @@
     :readonly="!editable || readonly || type === 'dates' || type === 'week' || type === 'years' || type === 'months' || type === 'quarters'"
     :disabled="pickerDisabled"
     :size="pickerSize"
+    :fill="fill"
     :name="name"
     v-bind="firstInputId"
     v-if="!ranged"
@@ -40,7 +41,8 @@
       'el-date-editor--' + type,
       pickerSize ? `el-range-editor--${ pickerSize }` : '',
       pickerDisabled ? 'is-disabled' : '',
-      pickerVisible ? 'is-active' : ''
+      pickerVisible ? 'is-active' : '',
+      { 'is-fill': fill }
     ]"
     @click="handleRangeClick"
     @mouseenter="handleMouseEnter"
@@ -430,6 +432,7 @@ export default {
       validator
     },
     disabled: Boolean,
+    fill: Boolean,
     clearable: {
       type: Boolean,
       default: true

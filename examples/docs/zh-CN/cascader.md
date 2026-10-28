@@ -712,6 +712,77 @@
 ```
 :::
 
+### 填充模式
+
+为级联选择器添加 `fill` 属性，可切换为无边框填充样式：输入框以背景色区分（常态 `fill-1`、hover `fill-2`、聚焦白底），适配表单扁平化场景。
+
+::::demo
+```html
+<el-row :gutter="20" style="margin-bottom:20px;">
+  <el-col :span="8">
+    <div class="component-content-title mgb-10">click 触发子菜单（默认）</div>
+    <el-cascader :options="options" fill clearable size="small"></el-cascader>
+  </el-col>
+  <el-col :span="8">
+    <div class="component-content-title mgb-10">禁用</div>
+    <el-cascader :options="options" fill clearable size="small" disabled></el-cascader>
+  </el-col>
+  <el-col :span="8">
+    <div class="component-content-title mgb-10">前置标签</div>
+    <el-cascader :options="options" fill clearable size="small">
+      <template slot="prefixLabel">分类</template>
+    </el-cascader>
+  </el-col>
+</el-row>
+<el-row :gutter="20">
+  <el-col :span="8">
+    <div class="component-content-title mgb-10">前置图标</div>
+    <el-cascader :options="options" fill clearable size="small">
+      <i slot="prefix" class="el-input__icon iov-icon-search"></i>
+    </el-cascader>
+  </el-col>
+  <el-col :span="8">
+    <div class="component-content-title mgb-10">前置图标+标签</div>
+    <el-cascader :options="options" fill clearable size="small">
+      <i slot="prefix" class="el-input__icon iov-icon-search"></i>
+      <template slot="prefixLabel">分类</template>
+    </el-cascader>
+  </el-col>
+  <el-col :span="8">
+    <div class="component-content-title mgb-10">前置图标+标签+禁用</div>
+    <el-cascader :options="options" fill clearable size="small" disabled>
+      <i slot="prefix" class="el-input__icon iov-icon-search"></i>
+      <template slot="prefixLabel">分类</template>
+    </el-cascader>
+  </el-col>
+</el-row>
+
+<script>
+  export default {
+    data() {
+      return {
+        options: [{
+          value: 'zhinan',
+          label: '指南',
+          children: [{
+            value: 'shejiyuanze',
+            label: '设计原则',
+            children: [{
+              value: 'yizhi',
+              label: '一致'
+            }, {
+              value: 'fankui',
+              label: '反馈'
+            }]
+          }]
+        }]
+      }
+    }
+  }
+</script>
+```
+::::
+
 ### 仅显示最后一级
 
 默认情况下输入框展示选中项的完整层级路径，通过设置 `show-all-levels="false"`，可仅显示选中项最后一级的标签，简化展示内容，适配简洁展示场景。
@@ -1980,6 +2051,7 @@
 | placeholder | 输入框占位文本 | string | — | 请选择 |
 | disabled | 是否禁用 | boolean | — | false |
 | clearable | 是否支持清空选项 | boolean | — | false |
+| fill | 是否使用填充样式（无边框，以背景色区分状态） | boolean | — | false |
 | show-all-levels | 输入框中是否显示选中值的完整路径 | boolean | — | true |
 | collapse-tags | 多选模式下是否折叠Tag | boolean | - | false |
 | multiple-limit-show | 多选时展示tag数量 | number | — | 1 |
