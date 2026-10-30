@@ -595,7 +595,8 @@
 | value-format | 可选，绑定值的格式。不指定则绑定值为 Date 对象 | string | 见[日期格式](#/zh-CN/component/date-picker#ri-qi-ge-shi) | — |
 | name | 原生属性 | string | — | — |
 | unlink-panels | 在范围选择器里取消两个日期面板之间的联动 | boolean | — | false |
-| prefix-icon | 自定义头部图标的类名 | string | — | el-icon-date |
+| prefix-icon | 自定义头部图标的类名 | string | iov 图标类名，如 `iov-icon-search` | — |
+| suffix-icon | 自定义尾部触发图标的类名 | string | iov 图标类名，如 `iov-icon-search` | iov-icon-date |
 | clear-icon | 自定义清空图标的类名 | string | — | el-icon-circle-close |
 | validate-event | 输入时是否触发表单的校验 | boolean | - | true |
 | append-to-body | DetePicker 自身是否插入至 body 元素上。   | boolean   | — | true |

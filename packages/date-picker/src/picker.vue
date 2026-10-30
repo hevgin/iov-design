@@ -19,19 +19,15 @@
     @mouseenter.native="handleMouseEnter"
     @mouseleave.native="showClose = false"
     :validateEvent="false"
+    :prefix-icon="prefixIcon"
     ref="reference">
     <template slot="prefixLabel">
       <slot name="prefixLabel"></slot>
     </template>
-    <i v-if="!showClose" slot="prefix"
-      class="el-input__icon"
-      :class="triggerClass"
-      @click="handleFocus">
-    </i>
     <i slot="suffix"
       class="el-input__icon"
       @click="handleClickIcon"
-      :class="[showClose ? '' + clearIcon + ' el-input__clear' : '']"
+      :class="[showClose ? '' + clearIcon + ' el-input__clear' : triggerClass]"
       v-if="haveTrigger">
     </i>
   </el-input>
@@ -423,6 +419,7 @@ export default {
     startPlaceholder: String,
     endPlaceholder: String,
     prefixIcon: String,
+    suffixIcon: String,
     clearIcon: {
       type: String,
       default: 'iov-icon-close-mini'
@@ -550,7 +547,8 @@ export default {
     },
 
     triggerClass() {
-      return this.prefixIcon || (this.type.indexOf('time') !== -1 ? 'iov-icon-date' : 'iov-icon-date');
+      /* 尾部触发/清空图标：suffix-icon 定制，默认日历图标 */
+      return this.suffixIcon || 'iov-icon-date';
     },
 
     selectionMode() {

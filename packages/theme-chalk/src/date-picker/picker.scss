@@ -47,18 +47,6 @@
     cursor: pointer;
   }
 
-  &.el-input--prefix {
-    .el-input__inner {
-      padding-left: 12px;
-    }
-  }
-
-  .el-input__prefix {
-    transform: none !important;
-    left: auto;
-    right: 1px;
-  }
-
   .el-input__icon {
     padding: 0 8px 0 0;
     font-size: 14px;
@@ -67,6 +55,17 @@
     position: absolute;
     top: 0;
     right: 0;
+  }
+
+  /* 头部 prefix-icon（el-input 原生渲染）：静态参与布局、定位在头部，
+     prefixLabel 模式下由 el-input calcIconOffset 的 translateX 平移到 label 之后 */
+  .el-input__prefix .el-input__icon {
+    position: static;
+  }
+
+  /* 尾部图标（触发/清空）整个命中区域统一手型光标 */
+  .el-input__suffix .el-input__icon {
+    cursor: pointer;
   }
 
   .el-range-input {
