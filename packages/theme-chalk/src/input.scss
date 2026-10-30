@@ -241,7 +241,6 @@ $input-sizes: (
       display: inline-block;
       padding: 0 8px 0 0;
       line-height: initial;
-      background: $--color-white;
     }
   }
 
@@ -254,6 +253,34 @@ $input-sizes: (
   }
 
   @include when(fill) {
+    /* prepend/append 内嵌 select：静置 fill-1；
+       声明在根节点 hover 规则之前——hover input 时由根节点 hover(0,5,0)接管 select 背景使其与 input 一致，
+       而 select 自身 hover/展开状态(0,6,0+)优先级更高，不受影响 */
+    .el-input-group__prepend,
+    .el-input-group__append {
+      .el-select {
+        .el-input__inner {
+          background: $--color-fill-1;
+        }
+        /* suffix 背景透明，跟随 select 输入框底色（压过 when(disabled)、
+           inner:hover/:focus ~ suffix 及尾部 prefixLabel 场景的 suffix 规则） */
+        .el-input__inner ~ .el-input__suffix {
+          background: transparent;
+        }
+        .el-input:hover .el-input__inner {
+          background: $--color-fill-2;
+          border-color: $--select-border-color-hover;
+        }
+        /* 下拉展开（is-focus）背景为白色，不受 hover 影响：声明在 hover 规则之后 */
+        .el-input.is-focus .el-input__inner,
+        .el-input.is-focus:hover .el-input__inner {
+          background: #fff;
+          border-color: $--input-focus-border;
+          box-shadow: $--input-box-shadow;
+        }
+      }
+    }
+
     /* hover 输入框任意区域（含前置标签、清除按钮等覆盖层）时整体变色 */
     &:not(.is-disabled):hover {
       .el-input__inner {
@@ -307,12 +334,24 @@ $input-sizes: (
       border-color: $--color-fill-1;
     }
 
+    /* prefixLabel 场景带边框盒子（group--prefix）同样跟随填充条，
+       聚焦时与选择框一致转白底 + 焦点边框（select.scss 同款处理） */
+    .el-input-group--prefix {
+      background: $--color-fill-1;
+      border-color: $--color-fill-1;
+    }
+
+    .el-input-group--prefix.is-focus,
+    .el-input-group--suffix.is-focus {
+      background: #fff;
+      border-color: $--input-focus-border;
+    }
+
     .el-input-group__inner:hover {
       background: $--color-fill-2;
       border-color: $--color-fill-2;
       border-radius: $--input-border-radius;
     }
-
 
     &.is-disabled {
       .el-input__inner {
@@ -334,7 +373,9 @@ $input-sizes: (
         border-color: $--color-fill-1;
       }
 
-      /* 仅禁用态：prepend/append 内嵌 select 不显示边框（正常态保留 hover 边框） */
+      /* 仅禁用态：prepend/append 内嵌 select 不显示边框（正常态保留 hover 边框），
+         且各状态背景与填充条（disabled-fill）保持一致——优先级(0,6,0+)高于顶部正常态规则(0,5,0/0,6,0/0,7,0)中
+         同级的部分靠声明顺序取胜（本块在后） */
       .el-input-group__prepend,
       .el-input-group__append {
         .el-input-group__inner,
@@ -344,6 +385,15 @@ $input-sizes: (
           &:hover {
             background: $--input-disabled-fill;
             border-color: transparent;
+          }
+        }
+
+        .el-select {
+          .el-input__inner,
+          .el-input:hover .el-input__inner,
+          .el-input.is-focus .el-input__inner,
+          .el-input.is-focus:hover .el-input__inner {
+            background: $--input-disabled-fill;
           }
         }
       }
@@ -378,6 +428,11 @@ $input-sizes: (
   }
 
   @include when(disabled) {
+    /* prefixLabel/suffixLabel 模式下带边框盒子由 group__inner 承担，背景与 inner 保持一致 */
+    .el-input-group__inner {
+      background-color: $--input-disabled-fill;
+    }
+
     .el-input__inner {
       cursor: not-allowed;
       background-color: $--input-disabled-fill;
@@ -459,7 +514,8 @@ $input-sizes: (
         line-height: $height;
       }
 
-      .el-input-group__prefix-label,
+      /* prefix-label 为绝对定位（top/bottom 拉伸 + height:auto），高度随容器自适应，
+         不能在此固定，否则切换 size 后覆盖 auto 导致不再垂直居中 */
       .el-input-group__suffix-label {
         height: $height - 2px;
         line-height: $height - 2px;
@@ -536,6 +592,7 @@ $input-sizes: (
     color: $--input-font-color;
     background-color: $--input-background-color;
     background-image: none;
+    border-radius: $--input-border-radius;
     z-index: 1;
 
 
@@ -611,6 +668,8 @@ $input-sizes: (
     left: 1px;
     top: 1px;
     bottom: 1px;
+    /* 覆盖基础样式中的固定高度：随 top/bottom 拉伸，多行 tag 时垂直居中 */
+    height: auto;
     z-index: 2;
     border-radius: $--input-border-radius;
     border-top-right-radius: 0;
@@ -675,6 +734,19 @@ $input-sizes: (
       .el-input__inner {
         background: #fff;
         z-index: 2;
+      }
+    }
+
+    /* 内嵌 select：静置/hover 背景与静置保持一致（fill-1）；
+       下拉展开（is-focus）背景为白色；边框与投影由 select 自身样式提供 */
+    .el-select {
+      .el-input__inner,
+      .el-input:hover .el-input__inner {
+        background: $--color-fill-1;
+      }
+      .el-input.is-focus .el-input__inner,
+      .el-input.is-focus:hover .el-input__inner {
+        background: #fff;
       }
     }
   }

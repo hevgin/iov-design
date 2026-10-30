@@ -10,6 +10,165 @@ Input 为受控组件，它**总会显示 Vue 绑定值**。
 不支持 `v-model` 修饰符。
 :::
 
+### 动态配置
+
+通过以下开关动态切换 `el-input` 的全部能力，覆盖本文档各章节示例：类型（文本/密码框/文本域）、尺寸、可清空、字数统计（`maxlength` + `show-word-limit`）、前后置图标（`prefix-icon` / `suffix-icon` 及 `prefix` / `suffix` 插槽）、前后置标签（`prefixLabel` / `suffixLabel`）、前接/后接内容（`prepend` / `append`）、自适应高度文本域（`autosize`）、填充（`fill`）、禁用与只读。切换配置后，下方会同步生成对应代码。
+
+::::demo
+```html
+<el-row :gutter="12">
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">类型</div>
+    <el-radio-group v-model="dyn.type" size="small">
+      <el-radio-button label="text">text</el-radio-button>
+      <el-radio-button label="password">password</el-radio-button>
+      <el-radio-button label="textarea">textarea</el-radio-button>
+    </el-radio-group>
+    <el-checkbox v-model="dyn.fill" style="margin-left:8px;">填充</el-checkbox>
+    <el-checkbox v-model="dyn.disabled" style="margin-left:8px;">禁用</el-checkbox>
+    <el-checkbox v-model="dyn.readonly" style="margin-left:8px;">只读</el-checkbox>
+    <el-checkbox v-if="dyn.type === 'textarea'" v-model="dyn.autosize" style="margin-left:8px;">自适应高度</el-checkbox>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">尺寸</div>
+    <el-radio-group v-model="dyn.size" size="small">
+      <el-radio-button label="">默认</el-radio-button>
+      <el-radio-button label="medium">medium</el-radio-button>
+      <el-radio-button label="small">small</el-radio-button>
+      <el-radio-button label="mini">mini</el-radio-button>
+    </el-radio-group>
+  </el-col>
+
+  <el-col :span="24" v-if="dyn.type !== 'textarea'">
+    <div class="component-content-title mgb-10">交互能力</div>
+    <el-checkbox v-model="dyn.clearable">可清空</el-checkbox>
+    <el-checkbox v-if="dyn.type === 'text'" v-model="dyn.showPassword" style="margin-left:8px;">密码框</el-checkbox>
+    <el-checkbox v-model="dyn.showPrefixIcon" style="margin-left:8px;">prefix-icon</el-checkbox>
+    <el-checkbox v-model="dyn.showSuffixIcon" style="margin-left:8px;">suffix-icon</el-checkbox>
+    <el-checkbox v-model="dyn.showPrefixSlot" style="margin-left:8px;">prefix 插槽</el-checkbox>
+    <el-checkbox v-model="dyn.showSuffixSlot" style="margin-left:8px;">suffix 插槽</el-checkbox>
+  </el-col>
+
+  <el-col :span="24" v-if="dyn.type === 'text'">
+    <div class="component-content-title mgb-10">内嵌标签与前接/后接内容</div>
+    <el-checkbox v-model="dyn.showPrefixLabel">prefixLabel</el-checkbox>
+    <el-checkbox v-model="dyn.showSuffixLabel" style="margin-left:8px;">suffixLabel</el-checkbox>
+    <el-checkbox v-model="dyn.showPrepend" style="margin-left:8px;">prepend</el-checkbox>
+    <el-checkbox v-model="dyn.showAppend" style="margin-left:8px;">append</el-checkbox>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">输入长度限制</div>
+    <el-checkbox v-model="dyn.showWordLimit">show-word-limit</el-checkbox>
+    <el-input-number v-model="dyn.maxlength" :min="1" :max="50" size="small" style="margin-left:8px;width:120px;"></el-input-number>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">预览</div>
+    <el-input
+      v-model="dyn.input"
+      :type="dyn.type"
+      :size="dyn.size || undefined"
+      :fill="dyn.fill"
+      :disabled="dyn.disabled"
+      :readonly="dyn.readonly"
+      :clearable="dyn.clearable && dyn.type !== 'textarea'"
+      :show-password="dyn.showPassword && dyn.type === 'text'"
+      :show-word-limit="dyn.showWordLimit && !!dyn.maxlength"
+      :maxlength="dyn.showWordLimit && dyn.maxlength ? dyn.maxlength : undefined"
+      :autosize="dyn.type === 'textarea' && dyn.autosize"
+      :rows="dyn.type === 'textarea' && !dyn.autosize ? 3 : undefined"
+      :prefix-icon="dyn.showPrefixIcon ? 'el-icon-search' : undefined"
+      :suffix-icon="dyn.showSuffixIcon ? 'el-icon-date' : undefined"
+      :placeholder="dyn.type === 'textarea' ? '请输入内容（文本域）' : '请输入内容'">
+      <i v-if="dyn.showPrefixSlot && dyn.type !== 'textarea'" slot="prefix" class="el-input__icon iov-icon-search"></i>
+      <i v-if="dyn.showSuffixSlot && dyn.type !== 'textarea'" slot="suffix" class="el-input__icon iov-icon-fill-explain"></i>
+      <template v-if="dyn.showPrefixLabel && dyn.type === 'text'" slot="prefixLabel">分类</template>
+      <template v-if="dyn.showSuffixLabel && dyn.type === 'text'" slot="suffixLabel">元</template>
+      <el-select v-if="dyn.showPrepend && dyn.type === 'text'" slot="prepend" v-model="dyn.prependValue" style="width:80px;" placeholder="请选择">
+        <el-option label="http://" value="1"></el-option>
+        <el-option label="wss://" value="2"></el-option>
+      </el-select>
+      <el-select v-if="dyn.showAppend && dyn.type === 'text'" slot="append" v-model="dyn.appendValue" style="width:80px;" placeholder="请选择">
+        <el-option label="万元" value="1"></el-option>
+        <el-option label="元" value="2"></el-option>
+      </el-select>
+    </el-input>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">生成代码</div>
+    <pre style="background:#f5f7fa;padding:12px;border-radius:4px;font-size:12px;line-height:1.6;overflow:auto;margin:0;">{{ generatedCode }}</pre>
+  </el-col>
+</el-row>
+
+<script>
+  export default {
+    data() {
+      return {
+        dyn: {
+          input: '',
+          type: 'text',
+          size: '',
+          fill: false,
+          disabled: false,
+          readonly: false,
+          autosize: false,
+          clearable: true,
+          showPassword: false,
+          showWordLimit: false,
+          maxlength: 10,
+          showPrefixIcon: false,
+          showSuffixIcon: false,
+          showPrefixSlot: false,
+          showSuffixSlot: false,
+          showPrefixLabel: false,
+          showSuffixLabel: false,
+          showPrepend: false,
+          showAppend: false,
+          prependValue: '1',
+          appendValue: '1'
+        }
+      }
+    },
+    computed: {
+      generatedCode() {
+        const d = this.dyn;
+        const isText = d.type === 'text';
+        const attrs = [];
+        if (d.type !== 'text') attrs.push('type="' + d.type + '"');
+        if (d.size) attrs.push('size="' + d.size + '"');
+        if (d.fill) attrs.push('fill');
+        if (d.disabled) attrs.push('disabled');
+        if (d.readonly) attrs.push('readonly');
+        if (d.clearable && d.type !== 'textarea') attrs.push('clearable');
+        if (d.showPassword && isText) attrs.push('show-password');
+        if (d.showWordLimit && d.maxlength) attrs.push('maxlength="' + d.maxlength + '" show-word-limit');
+        if (d.showPrefixIcon) attrs.push('prefix-icon="el-icon-search"');
+        if (d.showSuffixIcon) attrs.push('suffix-icon="el-icon-date"');
+        if (d.type === 'textarea' && d.autosize) attrs.push('autosize');
+        if (d.type === 'textarea' && !d.autosize) attrs.push(':rows="3"');
+        attrs.push('placeholder="请输入内容"');
+        const slots = [];
+        if (d.showPrefixSlot && d.type !== 'textarea') slots.push('  <i slot="prefix" class="el-input__icon iov-icon-search"></i>');
+        if (d.showSuffixSlot && d.type !== 'textarea') slots.push('  <i slot="suffix" class="el-input__icon iov-icon-fill-explain"></i>');
+        if (d.showPrefixLabel && isText) slots.push('  <template slot="prefixLabel">分类</template>');
+        if (d.showSuffixLabel && isText) slots.push('  <template slot="suffixLabel">元</template>');
+        if (d.showPrepend && isText) slots.push('  <el-select slot="prepend" v-model="value" style="width:80px;" placeholder="请选择">\n    <el-option label="http://" value="1"></el-option>\n    <el-option label="wss://" value="2"></el-option>\n  </el-select>');
+        if (d.showAppend && isText) slots.push('  <el-select slot="append" v-model="value" style="width:80px;" placeholder="请选择">\n    <el-option label="万元" value="1"></el-option>\n    <el-option label="元" value="2"></el-option>\n  </el-select>');
+        const attrLines = attrs.map(a => '  ' + a).join('\n');
+        if (!slots.length) {
+          return '<el-input\n' + attrLines + '></el-input>';
+        }
+        return '<el-input\n' + attrLines + '>\n' + slots.join('\n') + '\n</el-input>';
+      }
+    }
+  }
+</script>
+```
+::::
+
 ### 基础用法
 
 基础文本输入框，支持占位提示与尺寸控制。

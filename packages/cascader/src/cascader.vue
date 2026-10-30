@@ -17,7 +17,7 @@
       ref="input"
       v-model="multiple ? presentText : inputValue"
       :size="realSize"
-      :placeholder="placeholder"
+      :placeholder="inputPlaceholder"
       :readonly="readonly"
       :disabled="isDisabled"
       :validate-event="false"
@@ -51,7 +51,7 @@
       </template>
     </el-input>
 
-    <transition-group v-if="multiple && collapseTags && (checkedNodes.length || filterable)" class="el-cascader__tags" @after-leave="updateStyle">
+    <transition-group v-if="multiple && collapseTags && (checkedNodes.length || filterable)" class="el-cascader__tags" :class="{ 'is-focus': dropDownVisible }" @after-leave="updateStyle">
       <template v-for="(tag, index) in presentTags">
         <el-tag
           :key="tag.key"
@@ -80,17 +80,16 @@
         <span class="el-cascader__tags-text">{{collapseTagsFixed ? '' : '+'}}{{ collapseTagsFixed ? checkedNodes.length : checkedNodes.length - multipleLimitShow }}{{ collapseTagsSuffix }}</span>
       </el-tag>
       <input
-        v-if="filterable && !isDisabled"
+        v-if="multiple && filterable && !isDisabled"
         key="search-input1"
         v-model.trim="inputValue"
         type="text"
         class="el-cascader__search-input"
-        :placeholder="presentTags.length ? '' : placeholder"
         @input="e => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
         @keydown.delete="handleDelete">
     </transition-group>
-    <transition-group class="el-cascader__tags" @after-leave="updateStyle" v-if="!collapseTags">
+    <transition-group class="el-cascader__tags" :class="{ 'is-focus': dropDownVisible }" @after-leave="updateStyle" v-if="!collapseTags">
       <template v-for="tag in presentTags">
         <el-tag
           :key="tag.key"
@@ -106,12 +105,11 @@
         </el-tag>
       </template>
       <input
-        v-if="filterable && !isDisabled"
+        v-if="multiple && filterable && !isDisabled"
         key="search-input2"
         v-model.trim="inputValue"
         type="text"
         class="el-cascader__search-input"
-        :placeholder="presentTags.length ? '' : placeholder"
         @input="e => handleInput(inputValue, e)"
         @click.stop="toggleDropDownVisible(true)"
         @keydown.delete="handleDelete">
@@ -323,6 +321,14 @@ export default {
       const _elFormItemSize = (this.elFormItem || {}).elFormItemSize;
       return this.size || _elFormItemSize || (this.$ELEMENT || {}).size;
     },
+    inputPlaceholder() {
+      /* 多选可搜索时输入走 tags 内的 search-input（背景透明），
+         主输入框有输入内容时需隐藏 placeholder，避免两份文本重叠 */
+      if (this.multiple && this.filterable && this.inputValue) {
+        return '';
+      }
+      return this.placeholder;
+    },
     tagSize() {
       return this.realSize;
       // return ['small', 'mini'].indexOf(this.realSize) > -1
@@ -375,6 +381,10 @@ export default {
   },
 
   watch: {
+    realSize() {
+      /* 尺寸变化时重新计算内联高度（多选 tags 场景） */
+      this.updateStyle();
+    },
     disabled() {
       this.computePresentContent();
     },
@@ -456,6 +466,12 @@ export default {
     removeResizeListener(this.$el, this.updateStyle);
   },
 
+  updated() {
+    /* prefix / prefixLabel 插槽通过 v-if 动态出现或消失时不触发任何 watcher，
+       需在重渲染后重算 tags 偏移与输入框高度，避免 tag 与前置内容重叠 */
+    this.$nextTick(this.updateStyle);
+  },
+
   methods: {
     resetInputWidth() {
       this.inputWidth = this.$refs.input.$el.getBoundingClientRect().width;
@@ -465,9 +481,9 @@ export default {
         const prefixLabel = this.$el.querySelector('.el-input-group__prefix-label');
         const prefix = this.$el.querySelector('.el-input__prefix');
         const inputInner = this.$el.querySelector('.el-input__inner');
-        const prefixLabelWidth = prefixLabel && Math.round(prefixLabel.getBoundingClientRect().width) || 0;
+        /* 同 updateStyle：input 的 padding-left 已包含 prefixLabel/prefix 宽度，直接采用 */
         const inputPaddingLeft = prefixLabel || prefix ? Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) : 0;
-        this.tagsLeft = prefixLabelWidth + inputPaddingLeft;
+        this.tagsLeft = inputPaddingLeft;
       });
     },
     getMaxWidth() {
@@ -589,6 +605,9 @@ export default {
           this.presentText = this.presentTags.length ? ' ' : null;
         } else {
           this.computePresentText();
+          /* 切回单选时清空残留 tags，否则 transition-group（v-if="!collapseTags"）
+             不区分模式，会把旧 tags 继续渲染出来 */
+          this.presentTags = [];
         }
       });
     },
@@ -734,7 +753,7 @@ export default {
       this.$emit('remove-tag', val);
     },
     updateStyle() {
-      const { $el, inputInitialHeight } = this;
+      const { $el } = this;
       if (this.$isServer || !$el) return;
 
       const { suggestionPanel } = this.$refs;
@@ -754,18 +773,30 @@ export default {
 
       if (tags) {
         const offsetHeight = Math.round(tags.getBoundingClientRect().height);
-        const height = Math.max(offsetHeight + 4, inputInitialHeight) + 'px';
+        /* 高度实时跟随 realSize 计算（InputSizeMap），避免切换 size 后仍沿用
+           mounted 时缓存的 inputInitialHeight 把输入框钉死在旧高度 */
+        const baseHeight = InputSizeMap[this.realSize] || 36;
+        const height = Math.max(offsetHeight + 4, baseHeight) + 'px';
         const prefix = $el.querySelector('.el-input__prefix');
+        /* input 的 padding-left 已由 el-input 动态计入 prefixLabel 与 prefix 图标宽度
+           （calcPrefixLabelPadding），tags 直接对齐 padding 即可，不可再叠加 label 宽度 */
         const inputPaddingLeft = (prefixLabel || prefix) ? Math.round(window.getComputedStyle(inputInner).paddingLeft.replace(/px/, '')) : 0;
-        const prefixLabelWidth = prefixLabel && Math.round(prefixLabel.getBoundingClientRect().width) || 0;
+        /* prefixLabel 模式下 group__inner 与 inputInner 同时撑高（同 el-select resetInputHeight），
+           保证 tag 回行后输入框变高、prefixLabel 垂直居中 */
         if (groupPrefix) {
           groupPrefix.style.height = height;
         } else {
-          inputInner.style.height = height;
+          /* prefixLabel 移除后，常驻渲染的 .el-input-group__inner 包裹层会残留
+             旧的内联高度（高于新尺寸的 inner），导致 tag 溢出选择框，需清除 */
+          const groupInner = $el.querySelector('.el-input-group__inner');
+          if (groupInner) {
+            groupInner.style.height = '';
+          }
         }
-        // 存在前置图标或前置标签时，tags 需偏移到 input 实际文本起始位置
+        inputInner.style.height = height;
+        // 存在前置图标或前置标签时，tags 需偏移到 input 实际文本起始位置（即 padding-left 处）
         if (prefixLabel || prefix) {
-          tags.style.left = (prefixLabelWidth + inputPaddingLeft) + 'px';
+          tags.style.left = inputPaddingLeft + 'px';
         } else if (this.checkedNodes.length === 0) {
           tags.style.left = '12px';
         } else {
@@ -773,6 +804,16 @@ export default {
         }
         if (this.dropDownVisible) {
           this.updatePopper();
+        }
+      } else {
+        /* 无 tags（单选/多选关闭）时清除内联高度，交还给尺寸 class 控制 */
+        inputInner.style.height = '';
+        const groupInner = $el.querySelector('.el-input-group__inner');
+        if (groupInner) {
+          groupInner.style.height = '';
+        }
+        if (groupPrefix) {
+          groupPrefix.style.height = '';
         }
       }
     },

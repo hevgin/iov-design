@@ -140,6 +140,12 @@ export default {
       this.syncCheckedValue();
       this.checkStrictly && this.calculateCheckedNodePaths();
     },
+    config() {
+      /* Node 在 Store 创建时固化了 config 引用，动态修改 props（如 multiple/emitPath）
+         后节点仍持有旧配置，isSameNode 会按旧模式匹配失败，导致删除单个 tag 时
+         其他勾选被全部清空。config 变化时重建 Store 并按当前 checkedValue 重新同步 */
+      this.initStore();
+    },
     options: {
       handler: function() {
         this.initStore();

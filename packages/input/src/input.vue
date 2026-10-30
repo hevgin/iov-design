@@ -441,8 +441,10 @@
         this.calcPrefixLabelPadding();
       },
       /**
-       * prefixLabel 为绝对定位 overlay，需根据其实际宽度
-       * 动态计算 input 的 padding-left，label 内容变化时自动更新
+       * 动态计算 input 的 padding-left：
+       * 1. prefixLabel 为绝对定位 overlay，padding-left = label 宽度 + prefix 区域宽度；
+       * 2. prefix 插槽与 prefix-icon 叠加（或插槽内容较宽）时，prefix 区域可能
+       *    超过 CSS 默认 30px，按实测宽度让位，避免图标与输入内容重叠
        */
       calcPrefixLabelPadding() {
         if (this.$refs.input !== this.getInput()) return;
@@ -450,15 +452,21 @@
         if (!input) return;
         const labelEl = [].slice.call(this.$el.querySelectorAll('.el-input-group__prefix-label'))
           .find(el => el.closest('.el-input') === this.$el);
+        const prefixEl = [].slice.call(this.$el.querySelectorAll('.el-input__prefix'))
+          .find(el => el.parentNode.parentNode === this.$el);
+        let padding = '';
         if (this.$slots.prefixLabel && labelEl) {
-          const prefixEl = [].slice.call(this.$el.querySelectorAll('.el-input__prefix'))
-            .find(el => el.parentNode.parentNode === this.$el);
-          const gap = prefixEl ? prefixEl.offsetWidth : 8;
-          input.style.paddingLeft = `${labelEl.offsetWidth + gap}px`;
-        } else if (this._prefixLabelPaddingSet) {
+          padding = `${labelEl.offsetWidth + (prefixEl ? prefixEl.offsetWidth : 8)}px`;
+        } else if (prefixEl && (this.$slots.prefix || this.prefixIcon)) {
+          const width = Math.round(prefixEl.getBoundingClientRect().width);
+          padding = width > 30 ? `${width}px` : '';
+        }
+        if (padding) {
+          input.style.paddingLeft = padding;
+        } else if (this._prefixPaddingSet) {
           input.style.removeProperty('padding-left');
         }
-        this._prefixLabelPaddingSet = !!(this.$slots.prefixLabel && labelEl);
+        this._prefixPaddingSet = !!padding;
       },
       clear() {
         this.$emit('input', '');

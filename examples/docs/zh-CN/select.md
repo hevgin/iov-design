@@ -2,6 +2,212 @@
 
 当选项过多时，使用下拉菜单展示并选择内容。
 
+### 动态配置
+
+通过以下开关动态切换 `el-select` 的全部能力，覆盖本文档各章节示例：单选/多选（`multiple` + `collapse-tags`）、填充（`fill`）、禁用、可清空（`clearable`）、尺寸、选项图标（`icon`）、选项禁用、分组（`el-option-group`）、可搜索（`filterable`）、创建条目（`allow-create`）、远程搜索（`remote`）及 `prefix` / `prefixLabel` 插槽。切换配置后，下方会同步生成对应代码。
+
+::::demo
+```html
+<el-row :gutter="12">
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">模式</div>
+    <el-radio-group v-model="dyn.multiple" size="small">
+      <el-radio-button :label="false">单选</el-radio-button>
+      <el-radio-button :label="true">多选</el-radio-button>
+    </el-radio-group>
+    <el-checkbox v-if="dyn.multiple" v-model="dyn.collapseTags" style="margin-left:8px;">collapse-tags</el-checkbox>
+    <el-checkbox v-model="dyn.fill" style="margin-left:8px;">填充</el-checkbox>
+    <el-checkbox v-model="dyn.disabled" style="margin-left:8px;">禁用</el-checkbox>
+    <el-checkbox v-model="dyn.clearable" style="margin-left:8px;">可清空</el-checkbox>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">尺寸</div>
+    <el-radio-group v-model="dyn.size" size="small">
+      <el-radio-button label="">默认</el-radio-button>
+      <el-radio-button label="medium">medium</el-radio-button>
+      <el-radio-button label="small">small</el-radio-button>
+      <el-radio-button label="mini">mini</el-radio-button>
+    </el-radio-group>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">选项</div>
+    <el-checkbox v-model="dyn.optionIcon">选项图标</el-checkbox>
+    <el-checkbox v-model="dyn.optionDisabled" style="margin-left:8px;">含禁用项</el-checkbox>
+    <el-checkbox v-model="dyn.group" style="margin-left:8px;">分组</el-checkbox>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">搜索与创建</div>
+    <el-checkbox v-model="dyn.filterable">可搜索</el-checkbox>
+    <el-checkbox v-model="dyn.allowCreate" style="margin-left:8px;">创建条目</el-checkbox>
+    <el-checkbox v-model="dyn.remote" style="margin-left:8px;">远程搜索</el-checkbox>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">插槽</div>
+    <el-checkbox v-model="dyn.showPrefixSlot">prefix 插槽</el-checkbox>
+    <el-checkbox v-model="dyn.showPrefixLabel" style="margin-left:8px;">prefixLabel 插槽</el-checkbox>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">预览</div>
+    <el-select
+      v-model="modelValue"
+      :size="dyn.size || undefined"
+      :fill="dyn.fill"
+      :disabled="dyn.disabled"
+      :clearable="dyn.clearable"
+      :multiple="dyn.multiple"
+      :collapse-tags="dyn.multiple && dyn.collapseTags"
+      :filterable="dyn.filterable || dyn.allowCreate || dyn.remote"
+      :allow-create="dyn.allowCreate"
+      :default-first-option="dyn.allowCreate"
+      :remote="dyn.remote"
+      :remote-method="dyn.remote ? remoteMethod : undefined"
+      :loading="dyn.loading"
+      :reserve-keyword="dyn.remote"
+      placeholder="请选择">
+      <template v-if="dyn.group">
+        <el-option-group v-for="g in groupOptions" :key="g.label" :label="g.label">
+          <el-option v-for="item in g.options" :key="item.value" :label="item.label" :value="item.value" :icon="dyn.optionIcon ? item.icon : undefined" :disabled="dyn.optionDisabled && item.disabled"></el-option>
+        </el-option-group>
+      </template>
+      <template v-else>
+        <el-option v-for="item in displayOptions" :key="item.value" :label="item.label" :value="item.value" :icon="dyn.optionIcon ? item.icon : undefined" :disabled="dyn.optionDisabled && item.disabled"></el-option>
+      </template>
+      <i v-if="dyn.showPrefixSlot" slot="prefix" class="el-input__icon iov-icon-search"></i>
+      <template v-if="dyn.showPrefixLabel" slot="prefixLabel">分类</template>
+    </el-select>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">生成代码</div>
+    <pre style="background:#f5f7fa;padding:12px;border-radius:4px;font-size:12px;line-height:1.6;overflow:auto;margin:0;">{{ generatedCode }}</pre>
+  </el-col>
+</el-row>
+
+<script>
+  export default {
+    data() {
+      return {
+        dyn: {
+          value: '',
+          valueMultiple: [],
+          multiple: false,
+          size: '',
+          fill: false,
+          disabled: false,
+          clearable: true,
+          collapseTags: false,
+          optionIcon: false,
+          optionDisabled: false,
+          group: false,
+          filterable: false,
+          allowCreate: false,
+          remote: false,
+          loading: false,
+          remoteOptions: [],
+          showPrefixSlot: false,
+          showPrefixLabel: false,
+          options: [
+            {value: '1', label: '黄金糕', icon: 'iov-icon-picture'},
+            {value: '2', label: '双皮奶', icon: 'iov-icon-table'},
+            {value: '3', label: '蚵仔煎', icon: 'iov-icon-excel', disabled: true},
+            {value: '4', label: '龙须面', icon: 'iov-icon-word'}
+          ],
+          groups: [
+            {label: '分类一', options: [
+              {value: '1', label: '黄金糕', icon: 'iov-icon-picture'},
+              {value: '2', label: '双皮奶', icon: 'iov-icon-table'}
+            ]},
+            {label: '分类二', options: [
+              {value: '3', label: '蚵仔煎', icon: 'iov-icon-excel', disabled: true},
+              {value: '4', label: '龙须面', icon: 'iov-icon-word'}
+            ]}
+          ]
+        }
+      }
+    },
+    computed: {
+      modelValue: {
+        get() {
+          return this.dyn.multiple ? this.dyn.valueMultiple : this.dyn.value;
+        },
+        set(val) {
+          if (this.dyn.multiple) {
+            this.dyn.valueMultiple = val;
+          } else {
+            this.dyn.value = val;
+          }
+        }
+      },
+      displayOptions() {
+        return this.dyn.remote ? this.dyn.remoteOptions : this.dyn.options;
+      },
+      groupOptions() {
+        return this.dyn.groups;
+      },
+      generatedCode() {
+        const d = this.dyn;
+        const attrs = [];
+        if (d.size) attrs.push('size="' + d.size + '"');
+        if (d.fill) attrs.push('fill');
+        if (d.disabled) attrs.push('disabled');
+        if (d.clearable) attrs.push('clearable');
+        if (d.multiple) attrs.push('multiple');
+        if (d.multiple && d.collapseTags) attrs.push('collapse-tags');
+        if (d.filterable || d.allowCreate || d.remote) attrs.push('filterable');
+        if (d.allowCreate) attrs.push('allow-create');
+        if (d.allowCreate) attrs.push('default-first-option');
+        if (d.remote) attrs.push('remote');
+        if (d.remote) attrs.push('reserve-keyword');
+        if (d.remote) attrs.push(':remote-method="remoteMethod"');
+        if (d.remote) attrs.push(':loading="loading"');
+        attrs.push('placeholder="请选择"');
+        const attrLines = attrs.map(a => '  ' + a).join('\n');
+        const optionAttrs = ['v-for="item in ' + (d.remote ? 'remoteOptions' : 'options') + '"', ':key="item.value"', ':label="item.label"', ':value="item.value"'];
+        if (d.optionIcon) optionAttrs.push(':icon="item.icon"');
+        if (d.optionDisabled) optionAttrs.push(':disabled="item.disabled"');
+        const optionLine = '  <el-option ' + optionAttrs.join(' ') + '></el-option>';
+        let body;
+        if (d.group) {
+          const groupOptionLine = '    <el-option ' + optionAttrs.join(' ').replace('v-for="item in ' + (d.remote ? 'remoteOptions' : 'options') + '"', 'v-for="item in g.options"') + '></el-option>';
+          body = '  <el-option-group v-for="g in groups" :key="g.label" :label="g.label">\n' + groupOptionLine + '\n  </el-option-group>';
+        } else {
+          body = optionLine;
+        }
+        const slots = [];
+        if (d.showPrefixSlot) slots.push('  <i slot="prefix" class="el-input__icon iov-icon-search"></i>');
+        if (d.showPrefixLabel) slots.push('  <template slot="prefixLabel">分类</template>');
+        if (d.remote) {
+          slots.push('  <!-- remoteMethod(query) 中根据关键字过滤并更新 remoteOptions -->');
+        }
+        if (!slots.length) {
+          return '<el-select\n' + attrLines + '>\n' + body + '\n</el-select>';
+        }
+        return '<el-select\n' + attrLines + '>\n' + body + '\n' + slots.join('\n') + '\n</el-select>';
+      }
+    },
+    methods: {
+      remoteMethod(query) {
+        if (query !== '') {
+          this.dyn.loading = true;
+          setTimeout(() => {
+            this.dyn.loading = false;
+            this.dyn.remoteOptions = this.dyn.options.filter(item => item.label.toLowerCase().indexOf(query.toLowerCase()) > -1);
+          }, 200);
+        } else {
+          this.dyn.remoteOptions = [];
+        }
+      }
+    }
+  }
+</script>
+```
+::::
+
 ### 基础用法
 
 适用广泛的基础单选。`v-model`的值为当前被选中的`el-option`的 value 属性值

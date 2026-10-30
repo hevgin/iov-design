@@ -31,6 +31,9 @@ $select-tag-sizes: (
   }
 
   &.is-disabled {
+    /* 覆盖根节点继承的 pointer 手势，多选 Tag（pointer-events: auto）随之显示 not-allowed */
+    cursor: not-allowed;
+
     .el-select__selected-icon {
       color: $--input-color-disabled;
     }
@@ -55,6 +58,12 @@ $select-tag-sizes: (
       .el-input__suffix {
         background: $--color-fill-2;
       }
+      /* prefixLabel/suffixLabel 模式下 group__inner 为带边框盒子，随填充条变色 */
+      .el-input-group--prefix,
+      .el-input-group--suffix {
+        background: $--color-fill-2;
+        border-color: $--color-fill-2;
+      }
     }
     &.is-disabled {
       &:hover {
@@ -64,7 +73,9 @@ $select-tag-sizes: (
 
     .el-input-group--prefix,
     .el-input-group--suffix {
+      background: $--color-fill-1;
       border-color: $--color-fill-1;
+      border-radius: 4px;
 
       &:hover {
         border-color: $--color-fill-2;
@@ -75,6 +86,7 @@ $select-tag-sizes: (
       }
 
       &.is-disabled {
+        background: $--input-disabled-fill;
         border-color: $--color-fill-1;
       }
     }
@@ -101,6 +113,11 @@ $select-tag-sizes: (
         }
         .el-input__suffix {
           background: #fff;
+        }
+        .el-input-group--prefix,
+        .el-input-group--suffix {
+          background: #fff;
+          border-color: $--input-focus-border;
         }
       }
       &.is-disabled {

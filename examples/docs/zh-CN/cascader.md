@@ -2,6 +2,182 @@
 
 当数据集合具备清晰的层级结构时，可通过级联选择器逐级查看并选择目标选项，满足多层级数据的选择需求。
 
+### 动态配置
+
+通过以下开关动态切换 `el-cascader` 的全部能力，覆盖本文档各章节示例：可清空、填充（`fill`）、禁用、尺寸、仅显示最后一级（`show-all-levels`）、多选（`props.multiple`）、任一级可选（`props.checkStrictly`）、可搜索（`filterable`）、动态加载（`props.lazy`）及 `prefix` / `prefixLabel` 插槽。切换配置后，下方会同步生成对应代码。
+
+::::demo
+```html
+<el-row :gutter="12">
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">基础</div>
+    <el-checkbox v-model="dyn.fill">填充</el-checkbox>
+    <el-checkbox v-model="dyn.disabled" style="margin-left:8px;">禁用</el-checkbox>
+    <el-checkbox v-model="dyn.clearable" style="margin-left:8px;">可清空</el-checkbox>
+    <el-checkbox v-model="dyn.showLastLevel" style="margin-left:8px;">仅显示最后一级</el-checkbox>
+    <el-checkbox v-model="dyn.filterable" style="margin-left:8px;">可搜索</el-checkbox>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">尺寸</div>
+    <el-radio-group v-model="dyn.size" size="small">
+      <el-radio-button label="">默认</el-radio-button>
+      <el-radio-button label="medium">medium</el-radio-button>
+      <el-radio-button label="small">small</el-radio-button>
+      <el-radio-button label="mini">mini</el-radio-button>
+    </el-radio-group>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">props 配置</div>
+    <el-checkbox v-model="dyn.multiple">多选</el-checkbox>
+    <el-checkbox v-model="dyn.checkStrictly" style="margin-left:8px;">任一级可选</el-checkbox>
+    <el-checkbox v-model="dyn.lazy" style="margin-left:8px;">动态加载</el-checkbox>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">插槽</div>
+    <el-checkbox v-model="dyn.showPrefixSlot">prefix 插槽</el-checkbox>
+    <el-checkbox v-model="dyn.showPrefixLabel" style="margin-left:8px;">prefixLabel 插槽</el-checkbox>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">预览</div>
+    <el-cascader
+      v-model="modelValue"
+      :options="dyn.lazy ? [] : dyn.options"
+      :size="dyn.size || undefined"
+      :fill="dyn.fill"
+      :disabled="dyn.disabled"
+      :clearable="dyn.clearable"
+      :show-all-levels="!dyn.showLastLevel"
+      :filterable="dyn.filterable"
+      :props="cascaderProps"
+      placeholder="请选择">
+      <i v-if="dyn.showPrefixSlot" slot="prefix" class="el-input__icon iov-icon-search"></i>
+      <template v-if="dyn.showPrefixLabel" slot="prefixLabel">分类</template>
+    </el-cascader>
+  </el-col>
+
+  <el-col :span="24">
+    <div class="component-content-title mgb-10">生成代码</div>
+    <pre style="background:#f5f7fa;padding:12px;border-radius:4px;font-size:12px;line-height:1.6;overflow:auto;margin:0;">{{ generatedCode }}</pre>
+  </el-col>
+</el-row>
+
+<script>
+  export default {
+    data() {
+      return {
+        dyn: {
+          value: '',
+          valueMultiple: [],
+          size: '',
+          fill: false,
+          disabled: false,
+          clearable: true,
+          showLastLevel: false,
+          filterable: false,
+          multiple: false,
+          checkStrictly: false,
+          lazy: false,
+          lazyId: 0,
+          showPrefixSlot: false,
+          showPrefixLabel: false,
+          options: [
+            { value: 'zhinan', label: '指南', children: [
+              { value: 'shejiyuanze', label: '设计原则', children: [
+                { value: 'yizhi', label: '一致' },
+                { value: 'fankui', label: '反馈' }
+              ]},
+              { value: 'daohang', label: '导航', children: [
+                { value: 'cebianlan', label: '侧边导航' },
+                { value: 'dingbudaohang', label: '顶部导航' }
+              ]}
+            ]},
+            { value: 'zujian', label: '组件', children: [
+              { value: 'basic', label: '基础', children: [
+                { value: 'layout', label: '布局' },
+                { value: 'color', label: '颜色' }
+              ]}
+            ]}
+          ]
+        }
+      }
+    },
+    computed: {
+      modelValue: {
+        get() {
+          return this.dyn.multiple ? this.dyn.valueMultiple : this.dyn.value;
+        },
+        set(val) {
+          if (this.dyn.multiple) {
+            this.dyn.valueMultiple = val;
+          } else {
+            this.dyn.value = val;
+          }
+        }
+      },
+      cascaderProps() {
+        const props = {};
+        if (this.dyn.multiple) props.multiple = true;
+        if (this.dyn.checkStrictly) props.checkStrictly = true;
+        if (this.dyn.lazy) props.lazy = true;
+        return props;
+      },
+      generatedCode() {
+        const d = this.dyn;
+        const attrs = [];
+        attrs.push(':options="options"');
+        attrs.push('v-model="value"');
+        if (d.size) attrs.push('size="' + d.size + '"');
+        if (d.fill) attrs.push('fill');
+        if (d.disabled) attrs.push('disabled');
+        if (d.clearable) attrs.push('clearable');
+        if (d.showLastLevel) attrs.push(':show-all-levels="false"');
+        if (d.filterable) attrs.push('filterable');
+        if (this.cascaderPropsKeys.length) attrs.push(':props="props"');
+        attrs.push('placeholder="请选择"');
+        const attrLines = attrs.map(a => '  ' + a).join('\n');
+        const slots = [];
+        if (d.showPrefixSlot) slots.push('  <i slot="prefix" class="el-input__icon iov-icon-search"></i>');
+        if (d.showPrefixLabel) slots.push('  <template slot="prefixLabel">分类</template>');
+        const notes = [];
+        if (this.cascaderPropsKeys.length) {
+          notes.push('// props: { ' + this.cascaderPropsKeys.join(', ') + ' }');
+        }
+        if (d.lazy) {
+          notes.push('// props.lazyLoad(node, resolve) 参考本文档「动态加载」示例');
+        }
+        const noteLines = notes.map(n => n).join('\n');
+        let out = '<el-cascader\n' + attrLines + '>\n</el-cascader>';
+        if (slots.length) {
+          out = '<el-cascader\n' + attrLines + '>\n' + slots.join('\n') + '\n</el-cascader>';
+        }
+        return noteLines ? noteLines + '\n' + out : out;
+      },
+      cascaderPropsKeys() {
+        return Object.keys(this.cascaderProps);
+      }
+    },
+    methods: {
+      lazyLoad(node, resolve) {
+        const level = node.level;
+        setTimeout(() => {
+          const nodes = [];
+          for (let i = 0; i <= level; i++) {
+            this.dyn.lazyId++;
+            nodes.push({ value: this.dyn.lazyId, label: '选项' + this.dyn.lazyId, leaf: level >= 2 });
+          }
+          resolve(nodes);
+        }, 500);
+      }
+    }
+  }
+</script>
+```
+::::
+
 ### 基础用法
 
 级联选择器支持两种触发子菜单的交互方式，核心通过 options 属性绑定层级选项数据，可通过 props.expandTrigger 自定义子菜单展开触发方式；同时支持尺寸、禁用、前缀图标 / 标签等个性化配置。

@@ -405,6 +405,13 @@
         });
       },
 
+      selectSize() {
+        /* 切换尺寸时重算多选高度（resetInputHeight 内部实时取 size 对应高度） */
+        this.$nextTick(() => {
+          this.resetInputHeight();
+        });
+      },
+
       propPlaceholder(val) {
         this.cachedPlaceHolder = this.currentPlaceholder = val;
       },
@@ -785,7 +792,10 @@
           const input = groupPrefix || inputInner;
           const tags = this.$refs.tags;
           const tagsHeight = tags ? Math.round(tags.getBoundingClientRect().height) : 0;
-          const sizeInMap = this.initialInputHeight || 36;
+          /* 高度实时跟随 selectSize 计算（同 cascader），避免切换 size 后仍沿用
+             mounted 时缓存的 initialInputHeight 把输入框钉死在旧高度 */
+          const sizeMap = { medium: 32, small: 30, mini: 26 };
+          const sizeInMap = sizeMap[this.selectSize] || this.initialInputHeight || 36;
           const height = this.selected.length === 0
             ? sizeInMap
             : Math.max(
@@ -797,6 +807,12 @@
             groupPrefix.style.height = height + 'px';
           } else {
             input.style.height = height + 'px';
+            /* prefixLabel 移除后，常驻渲染的 .el-input-group__inner 包裹层会残留
+               旧的内联高度（高于新尺寸的 inner），导致 tag 溢出选择框，需清除 */
+            const groupInner = this.$el.querySelector('.el-input-group__inner');
+            if (groupInner) {
+              groupInner.style.height = '';
+            }
           }
           if (this.visible && this.emptyText !== false) {
             this.broadcast('ElSelectDropdown', 'updatePopper');
@@ -830,8 +846,10 @@
           this.$emit('input', value);
           this.emitChange(value);
           if (option.created) {
-            // this.query = '';
-            // this.handleQueryChange('');
+            /* 创建条目后清空输入框，不与已创建的条目联动 */
+            this.query = '';
+            this.handleQueryChange('');
+            this.selectedLabel = '';
             this.inputLength = 20;
           }
           if (this.filterable) this.$refs.input.focus();
@@ -1046,6 +1064,17 @@
 
     beforeDestroy() {
       if (this.$el && this.handleResize) removeResizeListener(this.$el, this.handleResize);
+    },
+
+    updated() {
+      /* prefixLabel / prefix 插槽动态增减不触发任何 watcher（同 cascader），
+         需在重渲染后重算 tags 偏移与多选高度，避免 tag 与前置内容重叠或溢出 */
+      this.$nextTick(() => {
+        this.resetTagsLeft();
+        if (this.multiple) {
+          this.resetInputHeight();
+        }
+      });
     }
   };
 </script>

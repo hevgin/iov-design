@@ -29,6 +29,16 @@
       background: #fff;
     }
 
+    /* 下拉展开（is-focus）时选择框为白底，tag 需转灰底（fill-2）保持对比，
+       与 el-select 的 fill 态 tag 处理保持一致 */
+    .el-cascader__tags {
+      &.is-focus {
+        .el-tag.el-tag--info {
+          background: $--color-fill-2;
+        }
+      }
+    }
+
     .el-input {
       /* (0,6,0) 稳压 fill 的 hover 规则(0,5,0)，不受样式加载顺序影响 */
       &.is-focus:not(.is-disabled) {
@@ -276,6 +286,9 @@
     min-width: 10px;
     margin: 2px 0;
     padding: 0;
+    /* 原生 input 默认白底会压在 fill 灰底上，透明跟随外层底色
+       （fill-1 / hover fill-2 / 聚焦 #fff），与 el-select 的搜索输入保持一致 */
+    background: transparent;
     color: $--cascader-menu-font-color;
     border: none;
     outline: none;
