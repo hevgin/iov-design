@@ -99,6 +99,7 @@ import { formatDate, parseDate, isDateObject, getWeekNumber } from 'iov-design/s
 import Popper from 'iov-design/src/utils/vue-popper';
 import Emitter from 'iov-design/src/mixins/emitter';
 import ElInput from 'iov-design/packages/input';
+import { PopupManager } from 'iov-design/src/utils/popup';
 import merge from 'iov-design/src/utils/merge';
 
 const NewPopper = {
@@ -893,6 +894,10 @@ export default {
       this.picker.resetView && this.picker.resetView();
 
       this.$nextTick(() => {
+        // 每次弹出都重新分配 z-index：vue-popper 仅在 createPopper（首次）时
+        // 分配 z-index，而 dialog 每次重新打开都会获取更高的 z-index，
+        // 沿用旧值会导致面板被 dialog 覆盖
+        this.popperElm.style.zIndex = PopupManager.nextZIndex();
         this.updatePopper();
         this.picker.adjustSpinners && this.picker.adjustSpinners();
       });
