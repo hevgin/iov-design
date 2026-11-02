@@ -9,7 +9,9 @@ function compile() {
   return src('./src/*.scss')
     .pipe(sass.sync())
     .pipe(autoprefixer({
-      browsers: ['ie > 9', 'last 2 versions'],
+      // 使用 overrideBrowserslist 避免 Autoprefixer 的
+      // "Replace Autoprefixer browsers option to Browserslist config" 告警
+      overrideBrowserslist: ['ie > 9', 'last 2 versions'],
       cascade: false
     }))
     .pipe(cssmin())

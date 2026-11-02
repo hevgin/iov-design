@@ -57,6 +57,9 @@ module.exports = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
+          // 生产构建无需用 prettier 美化 render 函数，避免大量
+          // "Failed to prettify component ..." 告警
+          prettify: false,
           compilerOptions: {
             preserveWhitespace: false
           }
