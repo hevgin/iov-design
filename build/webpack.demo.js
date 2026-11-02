@@ -69,6 +69,11 @@ const webpackConfig = {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {
+          /* 关闭 prettify：templateLoader 使用本规则的 options（VueLoaderPlugin
+             将其注册为全局 ident vue-loader-options）。嵌套的 prettier@1.x 无法
+             格式化文档模板，每个 md 文档会产生一条 "Failed to prettify" 警告；
+             prettier@2 需要 Node 10+，与 dev server 的 Node 8 环境冲突 */
+          prettify: false,
           compilerOptions: {
             preserveWhitespace: false
           }

@@ -8,7 +8,7 @@
 ```html
 <template>
   <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
-    <li v-for="i in count" class="infinite-list-item">{{ i }}</li>
+    <li v-for="i in count" :key="i" class="infinite-list-item">{{ i }}</li>
   </ul>
 </template>
 
@@ -41,7 +41,7 @@
       class="list"
       v-infinite-scroll="load"
       infinite-scroll-disabled="disabled">
-      <li v-for="i in count" class="list-item">{{ i }}</li>
+      <li v-for="i in count" :key="i" class="list-item">{{ i }}</li>
     </ul>
     <p v-if="loading">加载中...</p>
     <p v-if="noMore">没有更多了</p>

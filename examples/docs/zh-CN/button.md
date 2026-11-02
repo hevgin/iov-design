@@ -161,10 +161,10 @@ Block 按钮在宽度上充满其所在的父容器（无 padding 和 margin 值
 
 :::demo
 ```html
-<el-row v-for="size of sizes">
+<el-row v-for="size of sizes" :key="size">
   <el-button type="text" v-for="color of colors" :key="color + size" :color="color" :size="size">文字按钮</el-button>
 </el-row>
-<el-row v-for="size of sizes">
+<el-row v-for="size of sizes" :key="'disabled-' + size">
   <el-button type="text" disabled v-for="color of colors" :key="color + size" :color="color" :size="size">文字按钮</el-button>
 </el-row>
 <script>
