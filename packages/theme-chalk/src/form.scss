@@ -151,21 +151,21 @@
   }
 
   @include when(error) {
-    .el-input-group__inner {
-      &.el-input-group--prefix,
-      &.el-input-group--suffix {
-        border-color: $--color-danger-6;
-        &.is-focus {
-          border-color: $--color-danger-6;
-          box-shadow: 0 0 0 2px rgba(245,63,63,0.1);
-        }
-        .el-input__inner,
-        .el-input__inner:focus {
-          border-color: transparent;
-          box-shadow: none;
-        }
-      }
-    }
+    // .el-input-group__inner {
+    //   &.el-input-group--prefix,
+    //   &.el-input-group--suffix {
+    //     border-color: $--color-danger-6;
+    //     &.is-focus {
+    //       border-color: $--color-danger-6;
+    //       box-shadow: 0 0 0 2px rgba(245,63,63,0.1);
+    //     }
+    //     .el-input__inner,
+    //     .el-input__inner:focus {
+    //       border-color: transparent;
+    //       box-shadow: none;
+    //     }
+    //   }
+    // }
     .el-input.is-fill .el-input__inner,
     .el-select.is-fill .el-input__inner,
     .el-input__inner,
