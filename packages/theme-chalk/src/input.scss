@@ -139,6 +139,15 @@ $input-sizes: (
     }
   }
 
+  /* hover 覆盖层（清除按钮/suffixLabel 位于 suffix-inner 上，pointer-events: all）
+     时 input 自身不接收 :hover，由根节点 hover 接管边框变色；
+     :not(:focus) 保证聚焦态边框/阴影优先于 hover（同 inner:focus 规则语义） */
+  &:not(.is-disabled):hover {
+    .el-input__inner:not(:focus) {
+      border-color: $--input-hover-border;
+    }
+  }
+
   /* --- 前后缀区域 --- */
   @include e((prefix, suffix)) {
     position: absolute;
