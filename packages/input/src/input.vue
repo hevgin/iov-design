@@ -113,6 +113,7 @@
   import calcTextareaHeight from './calcTextareaHeight';
   import merge from 'iov-design/src/utils/merge';
   import {isKorean} from 'iov-design/src/utils/shared';
+  import { addResizeListener, removeResizeListener } from 'iov-design/src/utils/resize-event';
 
   export default {
     name: 'ElInput',
@@ -468,6 +469,12 @@
         }
         this._prefixPaddingSet = !!padding;
       },
+      /* 页面（或父容器）由隐藏变为可见时组件不会重新渲染，
+         隐藏期间计算的 offsetWidth 为 0，padding-left 错误；
+         通过 resize-event 监听根节点尺寸变化（0 恢复为实际宽度时触发）重算 */
+      handlePrefixResize() {
+        this.calcPrefixLabelPadding();
+      },
       clear() {
         this.$emit('input', '');
         this.$emit('change', '');
@@ -501,6 +508,11 @@
       this.setNativeInputValue();
       this.resizeTextarea();
       this.updateIconOffset();
+      addResizeListener(this.$el, this.handlePrefixResize);
+    },
+
+    beforeDestroy() {
+      removeResizeListener(this.$el, this.handlePrefixResize);
     },
 
     updated() {
