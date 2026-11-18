@@ -523,8 +523,7 @@ $input-sizes: (
         line-height: $height;
       }
 
-      /* prefix-label 为绝对定位（top/bottom 拉伸 + height:auto），高度随容器自适应，
-         不能在此固定，否则切换 size 后覆盖 auto 导致不再垂直居中 */
+      .el-input-group__prefix-label,
       .el-input-group__suffix-label {
         height: $height - 2px;
         line-height: $height - 2px;

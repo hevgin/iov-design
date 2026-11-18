@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "48885026",
+      "name": "iov-icon-mop",
+      "font_class": "mop",
+      "unicode": "e75d",
+      "unicode_decimal": 59229
+    },
+    {
       "icon_id": "48529720",
       "name": "iov-icon-resale",
       "font_class": "resale",
